@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="sql.resources.mapper">
+	<select id="selectUser" parameterType="map" resultType="string">
+		select id
+		from users where id = #{userId} and password = #{password}
+	</select>
+	<!-- column 을 소문자로 작성시 대소문자 두개의 컬럼이 출력됨 -->
+	<select id="selectUserList" parameterType="string" resultType="map">
+		select ID
+		from users where 1=1 and id != #{userId}
+	</select>
+	<select id="selectRegId" parameterType="map" resultType="string">
+	    select deviceId as regId 
+	    from users where 1=1 and id = #{receiverId} 
+	</select>
+	<!-- mybatis test -->
+	<select id="selectT1" parameterType="string" resultType="string">
+		select *
+		from t1
+	</select>
+	<update id="registerId" parameterType="map">
+		update users
+		set deviceId = #{regId} where 1=1 and id = #{userId}
+	</update>
+</mapper>
