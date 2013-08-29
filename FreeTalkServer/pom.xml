@@ -34,7 +34,7 @@
 		<profile>
 			<id>real</id>
 			<properties>
-				<environment>read</environment>
+				<environment>real</environment>
 			</properties>
 		</profile>
 	</profiles>
