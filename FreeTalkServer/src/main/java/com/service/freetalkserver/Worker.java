@@ -3,12 +3,13 @@ package com.service.freetalkserver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
-
 
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
@@ -27,6 +28,31 @@ public class Worker {
 	private static final int RETRIES = 3;
 	private static final String TASK_QUEUE_NAME = "gcm.queue";
 
+	public void invoke(String url, String queueName, int maxThread)
+			throws IOException {
+		Sender sender = new Sender(APIKEY);
+
+		ApplicationContext context = new GenericXmlApplicationContext(
+				"classpath:spring/application-context.xml");
+
+		ConnectionFactory factory = context.getBean(ConnectionFactory.class);
+		ExecutorService executorService = Executors
+				.newFixedThreadPool(maxThread);
+		Connection connection = factory.newConnection(executorService);
+
+		for (int i = 0; i < maxThread; i++) {
+			Channel channel = connection.createChannel();
+
+			boolean durable = true;
+			channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
+			channel.basicQos(1);
+			channel.basicConsume(queueName, false, new GCMQueueConsumer(
+					channel, sender, RETRIES));
+		}
+
+		System.out.println("waiting for messages.");
+	}
+
 	/**
 	 * @param args
 	 * @throws IOException
@@ -37,35 +63,19 @@ public class Worker {
 	public static void main(String[] args) throws IOException,
 			ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException {
-		
+		Worker worker = new Worker();
+		worker.invoke(null, TASK_QUEUE_NAME, 1);
 
-		ApplicationContext context = new GenericXmlApplicationContext(
-				"classpath:spring/application-context.xml");
-		
-		ConnectionFactory factory = context.getBean(ConnectionFactory.class);
-
-		Connection connection = factory.newConnection();
-		Channel channel = connection.createChannel();
-
-		boolean durable = true;
-		channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
-		System.out.println("waiting for messages.");
-
-		channel.basicQos(1);
-
-		QueueingConsumer consumer = new QueueingConsumer(channel);
-		channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
-
-		while (true) {
-			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-			String message = new String(delivery.getBody());
-
-			System.out.println("Received " + message);
-			receviceMessage(message);
-			System.out.println("Done");
-
-			channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-		}
+		/*
+		 * while (true) { QueueingConsumer.Delivery delivery =
+		 * consumer.nextDelivery(); String message = new
+		 * String(delivery.getBody());
+		 * 
+		 * System.out.println("Received " + message); receviceMessage(message);
+		 * System.out.println("Done");
+		 * 
+		 * channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false); }
+		 */
 	}
 
 	private static void receviceMessage(String jsonMessage) {
