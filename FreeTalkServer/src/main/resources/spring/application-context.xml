@@ -22,7 +22,7 @@
 	 -->
 	 
 	 <context:property-placeholder
-	location="classpath:real/properties/application.properties" />
+	location="classpath:application.properties" />
 	<bean id="connectionoFactory" class="com.rabbitmq.client.ConnectionFactory">
 		<property name="host" value="${mq.host}" />
 		<property name="username" value="${mq.username}" />

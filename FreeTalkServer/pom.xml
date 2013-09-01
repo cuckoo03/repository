@@ -24,15 +24,15 @@
 	<profiles>
 		<profile>
 			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<environment>local</environment>
 			</properties>
 		</profile>
 		<profile>
 			<id>real</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<environment>real</environment>
 			</properties>
@@ -110,6 +110,19 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/${environment}</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- spring설정파일의 namespace를 찾지 못하는 에러를 해결하기 위해 shade 플러그인 사용 and transformers 
 				태그 추가 -->
