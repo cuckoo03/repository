@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.service</groupId>
@@ -123,7 +123,33 @@
 				<directory>src/main/resources/${environment}</directory>
 			</resource>
 		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 			<!-- spring설정파일의 namespace를 찾지 못하는 에러를 해결하기 위해 shade 플러그인 사용 and transformers 
 				태그 추가 -->
 			<plugin>
