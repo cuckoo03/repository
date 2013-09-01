@@ -33,7 +33,7 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<repositories>
 		<repository>
 			<id>gcm-server-repository</id>
@@ -188,19 +188,50 @@
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
 			<version>${spring.amqp.version}</version>
-		</dependency> 
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>FreeTalkService</finalName>
-		<!-- 
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<resources>
-		    <resource>
-		        <filtering>true</filtering>
-		        <directory>${project.basedir}/src/main/resources</directory>
-		    </resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/${environment}</directory>
+			</resource>
 		</resources>
-		-->
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -213,23 +244,6 @@
 					<manifest>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifest>
 				</configuration>
 			</plugin>
-			<!-- java compiler -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<!-- 
-			<plugin>
-				<groupid>com.google.appengine</groupid>
-				<artifactid>appengine-maven-plugin</artifactid>
-				<version>1.8.3</version>
-			</plugin>
-			 -->
 		</plugins>
 	</build>
 	<pluginRepositories>

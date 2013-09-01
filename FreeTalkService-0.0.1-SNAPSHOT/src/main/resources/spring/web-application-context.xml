@@ -41,7 +41,7 @@
 		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 	<context:property-placeholder
-		location="classpath:real/properties/db.properties" />
+		location="classpath:db.properties" />
 
 	<!-- datasource -->
 
