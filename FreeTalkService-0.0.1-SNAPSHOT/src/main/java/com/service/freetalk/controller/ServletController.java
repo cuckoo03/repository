@@ -27,6 +27,14 @@ public class ServletController {
 		this.userService = userService;
 	}
 
+	@RequestMapping(value = "/hello.do")
+	public ModelAndView hello() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("hello");
+		mav.addObject("hello", "hello world");
+		return mav;
+	}
+
 	@RequestMapping(value = "/user/login.do")
 	public ModelAndView login(@RequestBody String body) throws IOException {
 		Map<String, String> param = new HashMap<String, String>();
