@@ -28,12 +28,12 @@
 	<!-- viewResolver -->
 	<bean id="beanNameViewResolver"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver"
-		p:order="1">
+		p:order="0">
 
 	</bean>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:order="0">
+		p:order="1">
 		<property name="prefix" value="/view/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
