@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +21,8 @@ import com.service.freetalk.service.UserService;
 
 @Controller
 public class ServletController {
+	@Autowired
 	private UserService userService;
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
 
 	@RequestMapping(value = "/hello.do")
 	public ModelAndView hello() {
@@ -37,12 +34,14 @@ public class ServletController {
 
 	@RequestMapping(value = "/user/login.do")
 	public ModelAndView login(@RequestBody String body) throws IOException {
-		Map<String, String> param = new HashMap<String, String>();
-
-		StringTokenizer token = new StringTokenizer(body, "&");
-		while (token.hasMoreTokens()) {
-			String[] split = token.nextToken().split("=");
-			param.put(split[0], split[1]);
+		Map<String, String> param = new HashMap<>(); 
+		JSONObject json = null; 
+		try {
+			json = new JSONObject(body);
+			param.put("userId", json.getString("userId"));
+			param.put("password", json.getString("password"));
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		ModelAndView mav = new ModelAndView();

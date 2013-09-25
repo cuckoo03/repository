@@ -3,14 +3,18 @@ package com.service.freetalk.biz;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.service.freetalk.dao.UserDao;
 
 public class UserBiz {
+	@Autowired
 	private UserDao userDao;
-
+/*
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	*/
 
 	public String loginUser(Map<String, String> param) {
 		return userDao.loginUser(param);

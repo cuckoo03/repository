@@ -75,10 +75,14 @@ public class MainActivity extends Activity {
 	}
 
 	private void submitLogin(String userId, String password) {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("userId", userId);
-		params.put("password", password);
-		final String paramStr = paramToString(params);
+		JSONObject json = new JSONObject();
+		try {
+			json.put("userId", userId);
+			json.put("password", password);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		final String paramStr = json.toString();//paramToString(json);
 
 		new Thread() {
 			@Override
@@ -135,6 +139,11 @@ public class MainActivity extends Activity {
 		}.start();
 	}
 
+	/**
+	 * unused
+	 * @param params
+	 * @return
+	 */
 	protected String paramToString(Map<String, String> params) {
 		StringBuilder bodyBuilder = new StringBuilder();
 		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();

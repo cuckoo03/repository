@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.android.gcm.server.Sender;
 import com.service.freetalk.biz.UserBiz;
@@ -13,17 +14,21 @@ import com.service.freetalk.biz.UserBiz;
 public class UserService {
 	private static final String APIKEY = "AIzaSyAK4MmYHi_wMeBjaTFtvgbtA6yi4nYp1Qs";
 	private static final int RETRIES = 3;
+	@Autowired
 	private UserBiz userBiz;
 
+	@Autowired
 	private AmqpTemplate amqpTemplate;
 
+	/*
 	public void setUserBiz(UserBiz userBiz) {
 		this.userBiz = userBiz;
 	}
-
+	
 	public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
 		this.amqpTemplate = amqpTemplate;
 	}
+	*/
 
 	public String loginUser(Map<String, String> param) {
 		return userBiz.loginUser(param);
