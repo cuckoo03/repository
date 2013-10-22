@@ -16,7 +16,7 @@
 			<ref bean="serviceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
-			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
 		</jaxrs:extensionMappings>
 	</jaxrs:server>
 	<bean id="serviceImpl" class="service.ServiceImpl" />
