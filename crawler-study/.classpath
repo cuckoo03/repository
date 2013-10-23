@@ -22,6 +22,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/crawler4j-3.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
