@@ -14,6 +14,7 @@
 	</properties>
 
 	<dependencies>
+	    <!-- 
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-api</artifactId>
@@ -25,6 +26,8 @@
 			<version>2.2.4</version>
 			<optional>true</optional>
 		</dependency>
+	     -->
+	     <!-- rest service용 lib -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-bundle-jaxrs</artifactId>

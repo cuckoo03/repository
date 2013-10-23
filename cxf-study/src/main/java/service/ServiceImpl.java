@@ -44,6 +44,12 @@ public class ServiceImpl implements ServiceDefn {
 	}
 
 	@GET
+	@Path("/users/create")
+	public Response create() {
+		return Response.status(Status.CREATED).build();
+	}
+
+	@GET
 	@Path("/users/bad")
 	public Response getBadRequest() {
 		return Response.status(Status.BAD_REQUEST).build();
