@@ -19,7 +19,7 @@ public class MapActor extends UntypedActor {
 		if (message instanceof String) {
 			String work = (String) message;
 			// map the words in the sentence and send the result to MasterActor
-			getSender().tell(evaluateExpression(work));
+//			getSender().tell(evaluateExpression(work));
 		} else
 			unhandled(message);
 	}

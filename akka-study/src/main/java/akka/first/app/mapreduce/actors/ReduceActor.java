@@ -13,7 +13,7 @@ public class ReduceActor extends UntypedActor {
 	public void onReceive(Object message) throws Exception {
 		if (message instanceof MapData) {
 			MapData mapData = (MapData) message;
-			getSender().tell(reduce(mapData.getDataList()));
+//			getSender().tell(reduce(mapData.getDataList()));
 		} else
 			unhandled(message);
 	}
