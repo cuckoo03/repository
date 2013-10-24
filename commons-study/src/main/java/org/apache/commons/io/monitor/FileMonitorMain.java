@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 
 public class FileMonitorMain {
@@ -15,11 +16,16 @@ public class FileMonitorMain {
 		System.out.println("begin observer");
 
 		File directory = new File(FILE_TO_MONITOR);
+
+		IOFileFilter directories = FileFilterUtils
+				.and(FileFilterUtils.directoryFileFilter(),
+						HiddenFileFilter.VISIBLE);
 		IOFileFilter files = FileFilterUtils.and(
 				FileFilterUtils.fileFileFilter(),
-				FileFilterUtils.suffixFileFilter(". txt"));
-
-		FileAlterationObserver observer = new FileAlterationObserver(directory, files);
+				FileFilterUtils.suffixFileFilter(".java"));
+		IOFileFilter filter = FileFilterUtils.or(directories, files);
+		FileAlterationObserver observer = new FileAlterationObserver(directory,
+				filter);
 		FileAlterationMonitor monitor = new FileAlterationMonitor(INTERVAL);
 
 		observer.addListener(new FileMonitorListener(monitor));
