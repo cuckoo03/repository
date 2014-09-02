@@ -42,7 +42,7 @@ class JedisHelper {
 	public final void destroyPool() {
 		Iterator<Jedis> iter = this.connectionList.iterator()
 		while (iter.hasNext()) {
-			this.pool.returnResource(iter.hasNext())
+			this.pool.returnResource(iter.next())
 		}
 
 		this.pool.destroy()

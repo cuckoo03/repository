@@ -22,5 +22,4 @@ class LogWriterV2 {
 		
 		return rtn
 	}
-
 }
