@@ -43,6 +43,6 @@ class VisitCountOfDayV2 {
 
 	private String getToday() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd")
-		return sdf
+		return sdf.format(new Date())
 	}
 }

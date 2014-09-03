@@ -54,7 +54,7 @@ class VisitCountOfDayV2Test {
 		assertNotNull(visitCount.firstKey())
 		assertNotNull(visitCount.lastKey())
 
-		println visitCount
+		println "visitCount:$visitCount"
 
 		SortedMap<String, String> totalVisit =
 				visitCountOfDay.getVisitCountByDailyTotal()
@@ -64,6 +64,6 @@ class VisitCountOfDayV2Test {
 		assertNotNull(totalVisit.firstKey())
 		assertNotNull(totalVisit.lastKey())
 
-		println totalVisit
+		println "totalVisit:$totalVisit"
 	}
 }

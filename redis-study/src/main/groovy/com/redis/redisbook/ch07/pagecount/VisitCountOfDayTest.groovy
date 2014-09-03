@@ -35,9 +35,10 @@ class VisitCountOfDayTest {
 	
 	@Test
 	public void testGetVisitCountByDate() {
-		String[] dateList = ["20140512", "20140513", "20140514", "20140901"]
+		String[] dateList = ["20140512", "20140513", "20140901", "20140902"]
 		VisitCountOfDay visitCountOfDay = new VisitCountOfDay(helper)
 		List<String> result = visitCountOfDay.getVisitCountByDate("52", dateList)
+		println "result:$result"
 		assertNotNull(result)
 		assertTrue(result.size() == 4)
 	}
