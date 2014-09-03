@@ -9,6 +9,11 @@ import redis.clients.jedis.Jedis
 
 import com.redis.redisbook.ch07.JedisHelper
 
+/**
+ * 장바구니 정보 저장 예제
+ * @author cuckoo03
+ *
+ */
 class Cart {
 	private Jedis jedis
 	private JSONObject cartInfo
