@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<projectSuggestions/>
+<projectSuggestions>
+<declaringtype type="int">
+<property isActive="true" isStatic="false" name="index" type="java.lang.Integer">
+<doc/>
+</property>
+</declaringtype>
+</projectSuggestions>
