@@ -6,7 +6,7 @@ class ShardTestKeyMaker implements KeyMaker {
 	private static final String keyPrefix = "Sharding Test-"
 	private int index
 
-	public ShardTestKey(int index) {
+	public ShardTestKeyMaker(int index) {
 		this.index = index
 	}
 
