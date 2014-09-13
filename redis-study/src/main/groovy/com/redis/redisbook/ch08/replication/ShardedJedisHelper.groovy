@@ -14,7 +14,7 @@ class ShardedJedisHelper {
 	protected static final String SHARD2_HOST = "192.168.1.101"
 	protected static final int SHARD2_PORT = 6381
 	
-	private final Set<SharededJedis> connectionList = new HashSet<>()
+	private final Set<ShardedJedis> connectionList = new HashSet<>()
 	
 	private ShardedJedisPool shardedPool
 	
@@ -38,20 +38,20 @@ class ShardedJedisHelper {
 		return LazyHolder.INSTANCE
 	}
 	
-	public final SharededJedis getConnection() {
+	public final ShardedJedis getConnection() {
 		ShardedJedis jedis = shardedPool.getResource()
 		connectionList.add(jedis)
 		return jedis 
 	}
 	
-	public final void returnResource(SharededJedis jedis) {
+	public final void returnResource(ShardedJedis jedis) {
 		this.shardedPool.returnResource(jedis)
 	}
 	
 	public final void destroyPool() {
 		Iterator<ShardedJedis> jedisList = connectionList.iterator()
 		while (jedisList.hasNext()) {
-			SharededJedis jedis = jedisList.next()
+			ShardedJedis jedis = jedisList.next()
 			shardedPool.returnResource(jedis)
 		} 
 		
