@@ -8,7 +8,7 @@ import redis.clients.jedis.ShardedJedis
 import redis.clients.jedis.ShardedJedisPool
 import redis.clients.util.Hashing
 
-class SharededJedisHelper {
+class ShardedJedisHelper {
 	protected static final String SHARD1_HOST = "192.168.1.101"
 	protected static final int SHARD1_PORT = 6380
 	protected static final String SHARD2_HOST = "192.168.1.101"
@@ -19,10 +19,10 @@ class SharededJedisHelper {
 	private ShardedJedisPool shardedPool
 	
 	private static class LazyHolder {
-		private static final SharededJedisHelper INSTANCE = new SharededJedisHelper()
+		private static final ShardedJedisHelper INSTANCE = new ShardedJedisHelper()
 	}
 	
-	private SharededJedisHelper() {
+	private ShardedJedisHelper() {
 		Config config = new Config()
 		config.maxActive = 20
 		config.whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_BLOCK
@@ -34,7 +34,7 @@ class SharededJedisHelper {
 		shardedPool = new ShardedJedisPool(config, shards, Hashing.MURMUR_HASH)
 	}
 	
-	public static SharededJedisHelper getInstance() {
+	public static ShardedJedisHelper getInstance() {
 		return LazyHolder.INSTANCE
 	}
 	
