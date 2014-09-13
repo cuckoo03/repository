@@ -1,0 +1,18 @@
+discard
+time
+echo
+uptime
+http.snoop
+telnet
+quote of the moment
+objectecho
+portunification
+localtiime
+
+local
+factorial
+http.file
+http.tunnel
+http.websocket
+proxy
+securechat
