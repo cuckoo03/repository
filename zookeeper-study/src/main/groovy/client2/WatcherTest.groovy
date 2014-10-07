@@ -6,6 +6,11 @@ import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooKeeper
 import org.apache.zookeeper.Watcher.Event
 
+/**
+ * watcher timeout
+ * @author cuckoo03
+ *
+ */
 class WatcherTest implements Watcher {
 	private static final String ZK_HOST = "192.168.1.101:2181"
 	private static final int ZK_SESSION_TIMEOUT = 6 * 1000

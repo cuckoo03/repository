@@ -9,6 +9,11 @@ import org.apache.zookeeper.Watcher
 import org.apache.zookeeper.ZooKeeper
 import org.apache.zookeeper.ZooDefs.Ids
 
+/**
+ * 그루비 버전 락종료 exam
+ * @author cuckoo03
+ *
+ */
 class GLockTest implements Runnable, Watcher, ChildrenCallback {
 	private ZooKeeper zk
 	private static String znodeChild

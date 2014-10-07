@@ -6,6 +6,11 @@ import org.apache.zookeeper.Watcher
 import org.apache.zookeeper.ZooKeeper
 import org.apache.zookeeper.ZooDefs.Ids
 
+/**
+ * node crate sample
+ * @author cuckoo03
+ *
+ */
 class ZNodeTest implements Watcher {
 	private static final String ZK_HOST = "192.168.1.101:2181"
 	private static final int ZK_SESSION_TIMEOUT = 6 * 1000
