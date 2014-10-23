@@ -1,0 +1,10 @@
+@namespace("com.avro")
+protocol HelloService {
+	record Greeting {
+		string greetingMessage;
+	}
+	error GreetingException {
+		string message;
+	}
+	Greeting hello(string greeting) throws GreetingException;
+}
