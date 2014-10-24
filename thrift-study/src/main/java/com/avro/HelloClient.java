@@ -12,13 +12,13 @@ import org.apache.avro.util.Utf8;
 
 public class HelloClient {
 	public static void main(String[] args) throws Exception {
-//		Transceiver client = new HttpTransceiver(new URL(
-//				"http://localhost:9090"));
+		Transceiver client = new HttpTransceiver(new URL(
+				"http://localhost:9090"));
 
 //		NettyTransceiver client = new NettyTransceiver(new InetSocketAddress(9090));
 		
-		SocketTransceiver client = new SocketTransceiver(new InetSocketAddress(
-				"127.0.0.1", 9090));
+//		SocketTransceiver client = new SocketTransceiver(new InetSocketAddress(
+//				"127.0.0.1", 9090));
 		
 		HelloService proxy = SpecificRequestor.getClient(HelloService.class,
 				client);

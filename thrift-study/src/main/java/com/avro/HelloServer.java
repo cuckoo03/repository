@@ -35,6 +35,10 @@ public class HelloServer {
 		}
 	}
 
+	/**
+	 * 소켓통신은 동작이 잘 안됨.
+	 * @throws IOException
+	 */
 	private static void startSocketServer() throws IOException {
 		@SuppressWarnings("deprecation")
 		final SocketServer server = new SocketServer(new SpecificResponder(
