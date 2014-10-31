@@ -8,8 +8,8 @@ public class Job implements Runnable {
 	}
 
 	public void run() {
-		System.out.println("start:" + Thread.currentThread().getName());
+		System.out.println("start " + Thread.currentThread().getName());
 		printQueue.printJob(new Object());
-		System.out.println("end:" + Thread.currentThread().getName());
+		System.out.println("end " + Thread.currentThread().getName());
 	}
 }

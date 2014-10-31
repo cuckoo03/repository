@@ -11,9 +11,9 @@ public class PrintQueue {
 	private Lock lockPrinters;
 
 	public PrintQueue() {
-		this.semaphore = new Semaphore(3);
-		freePrinters = new boolean[3];
-		for (int i = 0; i <3; i++) {
+		this.semaphore = new Semaphore(2);
+		freePrinters = new boolean[2];
+		for (int i = 0; i <freePrinters.length; i++) {
 			freePrinters[i] = true;
 		}
 		lockPrinters = new ReentrantLock();
@@ -25,7 +25,7 @@ public class PrintQueue {
 			int assignedPrinter = getPrinter();
 			
 			long duration = (long) (Math.random() * 10);
-			System.out.println(Thread.currentThread().getName() + ", printer:"
+			System.out.println(Thread.currentThread().getName() + ", assigned printer:"
 					+ assignedPrinter + ", duration:" + duration);
 			TimeUnit.SECONDS.sleep(duration);
 			
@@ -49,6 +49,7 @@ public class PrintQueue {
 					break;
 				}
 			}
+			System.out.println("printer ready");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
