@@ -27,7 +27,7 @@ import com.thrift.HelloService;
  *
  */
 public class HelloClient implements Watcher {
-	private static final String SERVER = "/servers";
+	private static final String SERVER = "/helloserver";
 	private CountDownLatch connMonitor = new CountDownLatch(1);
 	private Object nodeMonitor = new Object();
 	private List<String> servers = new ArrayList<>();
