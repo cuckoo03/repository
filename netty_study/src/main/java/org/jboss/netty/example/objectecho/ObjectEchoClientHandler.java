@@ -17,9 +17,7 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 public class ObjectEchoClientHandler extends SimpleChannelUpstreamHandler {
 	private static final Logger logger = Logger
 			.getLogger(ObjectEchoClientHandler.class.getName());
-
 	private final List<Integer> firstMessage;
-
 	private final AtomicLong transferredMessages = new AtomicLong();
 
 	public ObjectEchoClientHandler(int firstMessageSize) {
@@ -54,10 +52,12 @@ public class ObjectEchoClientHandler extends SimpleChannelUpstreamHandler {
 	}
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
+	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) 
+			throws InterruptedException {
 		transferredMessages.incrementAndGet();
 		System.out.println("clientHandler:" + e.getMessage());
 		e.getChannel().write((List<Integer>)e.getMessage());
+		Thread.sleep(1000);
 	}
 
 	@Override

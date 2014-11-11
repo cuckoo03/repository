@@ -12,6 +12,7 @@ import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelDownstreamHandler;
+import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.example.BootstrapOptions;
 import org.jboss.netty.example.uptime.UptimeClientHandler;
@@ -19,10 +20,15 @@ import org.jboss.netty.handler.timeout.IdleStateHandler;
 import org.jboss.netty.util.HashedWheelTimer;
 import org.jboss.netty.util.Timer;
 
+/**
+ * 클라이언트의 idle 상태를 감지하는 예제
+ * 
+ * @author cuckoo03
+ *
+ */
 public class IdleClient {
-	private static final int READ_TIMEOUT = 2;
-	private static final int WRITE_TIMEOUT = 2;
-	public static final int RECONNECT_DELAY = 5;
+	private static final int READ_TIMEOUT = 8;
+	private static final int WRITE_TIMEOUT = 6;
 
 	public static void main(String[] args) {
 		ChannelFactory factory = new NioClientSocketChannelFactory(
@@ -34,7 +40,7 @@ public class IdleClient {
 
 		bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
 			private final ChannelHandler idleStateHandler = new IdleStateHandler(
-					timer,0, 2, 0);
+					timer, READ_TIMEOUT, WRITE_TIMEOUT, 0);
 			private final ChannelHandler uptimeHandler = new UptimeClientHandler(
 					bootstrap, timer);
 
@@ -47,11 +53,10 @@ public class IdleClient {
 				return p;
 			}
 		});
-
 		bootstrap.setOption(BootstrapOptions.REMOTE_ADDRESS,
-				new InetSocketAddress("127.0.0.1", 10001));
-
+				new InetSocketAddress("127.0.0.1", 9001));
 		bootstrap.connect();
+		System.err.println("Client connect");
 	}
 }
 
@@ -61,7 +66,7 @@ class UptimeClientDownHandler extends SimpleChannelDownstreamHandler {
 			throws Exception {
 		System.out.println("writeRequested");
 		// ReadTimeout, WriteTimeout exception 발생시키려 지연시킴
-		// Thread.sleep(4000);
+		Thread.sleep(7000);
 		ctx.sendDownstream(e);
 	}
 }

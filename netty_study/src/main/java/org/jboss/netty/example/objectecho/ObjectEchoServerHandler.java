@@ -12,7 +12,6 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
-import org.jboss.netty.channel.ChannelHandler.Sharable;
 
 public class ObjectEchoServerHandler extends SimpleChannelUpstreamHandler {
 	private static final Logger logger = Logger
@@ -34,7 +33,6 @@ public class ObjectEchoServerHandler extends SimpleChannelUpstreamHandler {
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		transferredMessages.incrementAndGet();
 		System.out.println("server messageReceived:" + e.getMessage());
-		List<Integer> message = (List<Integer>) e.getMessage();
 		e.getChannel().write((List<Integer>)e.getMessage());
 	}
 

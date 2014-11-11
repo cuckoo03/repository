@@ -10,7 +10,7 @@ import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 
-public class EchoClientHandler extends SimpleChannelUpstreamHandler{
+public class EchoClientHandler extends SimpleChannelUpstreamHandler {
 	private final ChannelBuffer firstMessage;
 	private final AtomicLong transferredBytes = new AtomicLong();
 
@@ -29,15 +29,10 @@ public class EchoClientHandler extends SimpleChannelUpstreamHandler{
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-		Long count = transferredBytes.addAndGet(((ChannelBuffer) e.getMessage())
-				.readableBytes());
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		e.getChannel().write(e.getMessage());
+		Long count = transferredBytes
+				.addAndGet(((ChannelBuffer) e.getMessage()).readableBytes());
 		System.out.println("client : messageReceived " + count);
+		e.getChannel().write(e.getMessage());
 	}
 
 	@Override

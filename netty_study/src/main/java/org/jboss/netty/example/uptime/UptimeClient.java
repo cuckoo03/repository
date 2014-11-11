@@ -28,8 +28,8 @@ import org.jboss.netty.util.Timer;
  * 
  */
 public class UptimeClient {
-	private static final int READ_TIMEOUT = 20;
-	private static final int WRITE_TIMEOUT = 2;
+	private static final int READ_TIMEOUT = 2;
+	private static final int WRITE_TIMEOUT = 1;
 	public static final int RECONNECT_DELAY = 5;
 
 	public static void main(String[] args) {
@@ -50,28 +50,32 @@ public class UptimeClient {
 
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline p = Channels.pipeline();
-				p.addLast("write", writeTimeoutHandler);
-				p.addLast("read", readTimeoutHandler);
-				p.addLast("handler1", new UptimeClientDownHandler());
-				p.addLast("handler2", uptimeHandler);
+//				p.addLast("readtimeout", readTimeoutHandler);
+				p.addLast("handler", uptimeHandler);
+				p.addLast("down", new SimpleChannelDownstreamHandler(){
+					public void writeRequested(ChannelHandlerContext ctx,
+							MessageEvent e) throws Exception {
+						System.out.println("writeRequested");
+						System.out.println("");
+						ctx.sendDownstream(e);
+					}
+				});
+				p.addLast("delay", new SimpleChannelDownstreamHandler(){
+					public void writeRequested(ChannelHandlerContext ctx,
+							MessageEvent e) throws Exception {
+						System.out.println("sleep");
+						Thread.sleep(4000);
+						ctx.sendDownstream(e);
+					}
+				});
+				p.addLast("writeTimeOut", writeTimeoutHandler);
 				return p;
 			}
 		});
 
 		bootstrap.setOption(BootstrapOptions.REMOTE_ADDRESS,
-				new InetSocketAddress("127.0.0.1", 10001));
+				new InetSocketAddress("127.0.0.1", 9001));
 
 		bootstrap.connect();
-	}
-}
-
-class UptimeClientDownHandler extends SimpleChannelDownstreamHandler {
-	@Override
-	public void writeRequested(ChannelHandlerContext ctx, MessageEvent e)
-			throws Exception {
-		System.out.println("writeRequested");
-		// WriteTimeout exception 발생시키려 지연시킴
-		Thread.sleep(4000);
-		ctx.sendDownstream(e);
 	}
 }

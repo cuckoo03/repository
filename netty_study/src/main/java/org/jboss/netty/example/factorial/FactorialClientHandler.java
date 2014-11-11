@@ -45,7 +45,7 @@ public class FactorialClientHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void channelInterestChanged(ChannelHandlerContext xtx,
 			ChannelStateEvent e) {
-		sendNumber(e);
+//		sendNumber(e);
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class FactorialClientHandler extends SimpleChannelUpstreamHandler {
 
 	private void sendNumber(ChannelStateEvent e) {
 		Channel channel = e.getChannel();
-		while (channel.isWritable()) {
+		while (/*channel.isWritable()*/true) {
 			if (i <= count) {
 				channel.write(Integer.valueOf(i));
 				System.out.println("sendNumber");

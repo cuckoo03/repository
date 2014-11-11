@@ -14,7 +14,7 @@ import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 public class TimeClient {
 	public static void main(String[] args) throws Exception {
 		String host = "127.0.0.1";
-		int port = Integer.parseInt("10001");
+		int port = Integer.parseInt("9001");
 
 		ChannelFactory factory = new NioClientSocketChannelFactory(
 				Executors.newCachedThreadPool(),
@@ -28,8 +28,8 @@ public class TimeClient {
 			}
 		});
 
-		bootstrap.setOption("tcpNoDelay", true);
-		bootstrap.setOption("keepAlive", true);
+//		bootstrap.setOption("tcpNoDelay", true);
+//		bootstrap.setOption("keepAlive", true);
 
 		ChannelFuture future = bootstrap.connect(new InetSocketAddress(host,
 				port));

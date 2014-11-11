@@ -13,7 +13,7 @@ import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.local.DefaultLocalClientChannelFactory;
 import org.jboss.netty.channel.local.DefaultLocalServerChannelFactory;
 import org.jboss.netty.channel.local.LocalAddress;
-import org.jboss.netty.example.echo.EchoServerHandler;
+import org.jboss.netty.codecs.json.EchoServerHandler;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
 import org.jboss.netty.handler.logging.LoggingHandler;

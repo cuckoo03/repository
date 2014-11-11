@@ -14,6 +14,7 @@ import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory;
 import org.jboss.netty.example.BootstrapOptions;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
+import org.jboss.netty.util.CharsetUtil;
 
 public class QuoteOfTheMomentClient {
 	/**
@@ -32,8 +33,8 @@ public class QuoteOfTheMomentClient {
 			public ChannelPipeline getPipeline() throws Exception {
 
 				return Channels.pipeline(
-						new StringEncoder(),
-						new StringDecoder(),
+						new StringEncoder(CharsetUtil.UTF_8),
+						new StringDecoder(CharsetUtil.UTF_8),
 						new QuoteOfTheMomentClientHandler());
 			}
 		});
@@ -47,7 +48,8 @@ public class QuoteOfTheMomentClient {
 		DatagramChannel channel = (DatagramChannel) bootstrap
 				.bind(new InetSocketAddress(0));
 
-		channel.write("QOTM?", new InetSocketAddress("255.255.255.255", 8080));
+		channel.write("QOTM?", new InetSocketAddress("255.255.255.255", 9001));
+		System.err.println("client send");
 
 		if (!channel.getCloseFuture().await(1000)) {
 			System.err.println("QOTM request timed out");

@@ -29,7 +29,8 @@ public class UptimeServer {
 			}
 		});
 
-		bootstrap.bind(new InetSocketAddress(10001));
+		bootstrap.bind(new InetSocketAddress(9001));
+		System.out.println("Server bind");
 	}
 }
 
@@ -37,6 +38,15 @@ class UptimeServerHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		System.out.println("messageReceived");
+		// readtimeout을 확인하려면 client의 readtimeout보다 sleep을 크게 주면 됨
+		/*
+		System.out.println("received sleep 3 seconds");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		*/
 		e.getChannel().write(e.getMessage());
 	}
 

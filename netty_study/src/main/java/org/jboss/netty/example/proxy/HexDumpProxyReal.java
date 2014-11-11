@@ -30,11 +30,9 @@ public class HexDumpProxyReal {
 				return Channels.pipeline(new HexDumpProxyRealHandler());
 			}
 		});
-
-		sb.bind(new InetSocketAddress(8081));
+		sb.bind(new InetSocketAddress(9002));
 	}
 }
-
 class HexDumpProxyRealHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {

@@ -17,9 +17,11 @@ public class TelnetClientPipelineFactory implements ChannelPipelineFactory {
 		pipeline.addLast("framer", new DelimiterBasedFrameDecoder(4096,
 				Delimiters.lineDelimiter())); // up
 		pipeline.addLast("decoder", new StringDecoder(CharsetUtil.UTF_8)); //down
-		pipeline.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8)); //up
+
+//		pipeline.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8)); //up
 		// 또는  StringEncoder를 직접 구현해도 된다
-//		pipeline.addLast("encoder", new CustomStringEncoder()); //up
+		pipeline.addLast("encoder", new CustomStringEncoder()); //up
+
 		pipeline.addLast("handler", new TelnetClientHandler()); // up
 		
 		return pipeline;

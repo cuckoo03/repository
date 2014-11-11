@@ -12,6 +12,7 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.example.BootstrapOptions;
 import org.jboss.netty.handler.timeout.ReadTimeoutException;
 import org.jboss.netty.handler.timeout.WriteTimeoutException;
 import org.jboss.netty.util.Timeout;
@@ -29,7 +30,8 @@ public class UptimeClientHandler extends SimpleChannelUpstreamHandler {
 	}
 
 	InetSocketAddress getRemoteAddress() {
-		return (InetSocketAddress) bootstrap.getOption("remoteAddress");
+		return (InetSocketAddress) bootstrap
+				.getOption(BootstrapOptions.REMOTE_ADDRESS);
 	}
 
 	@Override
@@ -38,6 +40,7 @@ public class UptimeClientHandler extends SimpleChannelUpstreamHandler {
 		println("Disconnected from: " + getRemoteAddress());
 	}
 
+	@Override
 	public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) {
 		println("Sleeping for: " + UptimeClient.RECONNECT_DELAY + "s");
 		timer.newTimeout(new TimerTask() {

@@ -24,12 +24,13 @@ public class HttpStaticFileServer {
 		bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline pipeline = Channels.pipeline();
-
-				// codec를 쓰거나 encoder, decoder를 쓰면 된다 
+				// 서버쪽은 HttpServerCodec을 쓰거나 encoder, decoder를 쓰면 된다 
+				// 클라이언트측은 HttpResponseEncoder, HttpRequestDecoder를 쓰면
+				// 런타임 오류 발생
 				pipeline.addLast("codec", new HttpServerCodec());
 //				pipeline.addLast("encoder", new HttpResponseEncoder());
 //				pipeline.addLast("decoder", new HttpRequestDecoder());
-//				pipeline.addLast("aggregator", new HttpChunkAggregator(65536));
+				pipeline.addLast("aggregator", new HttpChunkAggregator(65536));
 				pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
 
 				pipeline.addLast("handler", new HttpStaticFileServerHandler());
@@ -37,6 +38,7 @@ public class HttpStaticFileServer {
 			}
 		});
 
-		bootstrap.bind(new InetSocketAddress(8080));
+		bootstrap.bind(new InetSocketAddress(9001));
+		System.err.println("server bind");
 	}
 }

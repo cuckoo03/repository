@@ -24,21 +24,20 @@ public class HttpClient {
 	 * @throws URISyntaxException
 	 */
 	public static void main(String[] args) throws URISyntaxException {
-		/*
+		args = new String[]{"https://127.0.0.1"};
 		if (args.length != 1) {
 			System.err.println("Usage: " + HttpClient.class.getSimpleName()
 					+ " <URL>");
 			return;
 		}
-		*/
-		URI uri = new URI("https://127.0.0.1");
+		URI uri = new URI(args[0]);
 		String scheme = uri.getScheme() == null ? "http" : uri.getScheme();
 		String host = uri.getHost() == null ? "localhost" : uri.getHost();
 		int port = uri.getPort();
 
 		if (-1 == port) {
 			if (scheme.equalsIgnoreCase("http")) {
-				port = 10001;
+				port = 8080;
 			} else if (scheme.equalsIgnoreCase("https")) {
 				port = 443;
 			}
@@ -57,11 +56,11 @@ public class HttpClient {
 				Executors.newCachedThreadPool());
 
 		ClientBootstrap bootstrap = new ClientBootstrap(factory);
-
 		bootstrap.setPipelineFactory(new HttpClientPipelineFactory(ssl));
 
 		ChannelFuture future = bootstrap.connect(new InetSocketAddress(host,
 				port));
+		System.out.println("client connect");
 		
 		Channel channel = future.awaitUninterruptibly().getChannel();
 		if (!future.isSuccess()) {
@@ -80,8 +79,11 @@ public class HttpClient {
 
 		CookieEncoder httpCookieEncoder = new CookieEncoder(false);
 		httpCookieEncoder.addCookie("my-ccookie", "foo");
-		httpCookieEncoder.addCookie("another-cookie", "bar");
-		request.setHeader(HttpHeaders.Names.COOKIE, httpCookieEncoder.encode());
+		// 두개이상의 쿠키를 추가시에 런타임 오류 발생
+		// java.lang.IllegalStateException: encode() can encode only one cookie on server mode: 2 cookies added
+//		httpCookieEncoder.addCookie("another-cookie", "bar");
+		request.setHeader(HttpHeaders.Names.COOKIE,
+				httpCookieEncoder.encode());
 		
 		channel.write(request);
 		

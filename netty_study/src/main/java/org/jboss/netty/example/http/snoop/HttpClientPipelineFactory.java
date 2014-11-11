@@ -6,9 +6,9 @@ import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.example.securechat.SecureChatSslContextFactory;
+import org.jboss.netty.handler.codec.http.HttpClientCodec;
+import org.jboss.netty.handler.codec.http.HttpContentCompressor;
 import org.jboss.netty.handler.codec.http.HttpContentDecompressor;
-import org.jboss.netty.handler.codec.http.HttpRequestDecoder;
-import org.jboss.netty.handler.codec.http.HttpResponseEncoder;
 import org.jboss.netty.handler.ssl.SslHandler;
 
 public class HttpClientPipelineFactory implements ChannelPipelineFactory {
@@ -18,7 +18,7 @@ public class HttpClientPipelineFactory implements ChannelPipelineFactory {
 		this.ssl = ssl;
 	}
 
-	public ChannelPipeline getPipeline() throws Exception {
+	public ChannelPipeline getPipeline() {
 		ChannelPipeline pipeline = Channels.pipeline();
 
 		if (ssl) {
@@ -33,12 +33,13 @@ public class HttpClientPipelineFactory implements ChannelPipelineFactory {
 		// 다운스트림에 인코더를 업스트림에 디코더를 사용한다. 데이터를 전송할 때는 전송하기
 		// 위한 적절한 포맷으로 변환해주고 데이터를 수신할 때는 다시 그 데이터를 디코딩한다.
 		// 서버쪽에서도 동일한 구조를 가지고 있어야 정상적으로 데이터를 주고 받을 수 있다.
-		pipeline.addLast("codec",
-				new org.jboss.netty.handler.codec.http.HttpClientCodec());
+		pipeline.addLast("codec", new HttpClientCodec());
 
 		// 수신된 데이터가 압축되어 있다면 이를 풀어주는 역할을 한다.(Http 헤더를 보고 판단한다.)
+		// Remove the following line if you don't want automatic content decompression.
 		pipeline.addLast("inflater", new HttpContentDecompressor());
 
+		// http 헤더 정보와 컨텐츠를 출력해 준다.
 		pipeline.addLast("handler", new HttpClientResponseHandler());
 
 		return pipeline;

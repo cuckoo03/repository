@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.ChannelFactory;
+import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
@@ -20,9 +21,10 @@ public class ObjectEchoClient {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String host = "127.0.0.1";
-		int port = 8080;
-		final int firstMessageSize = 256;
+		args = new String[]{"127.0.01", "9001", "8"};
+		String host = args[0];
+		int port = Integer.parseInt(args[1]);
+		final int firstMessageSize = Integer.parseInt(args[2]);
 
 		if (args.length < 2 || args.length > 3) {
 			System.err.println("Usage: "
@@ -45,11 +47,22 @@ public class ObjectEchoClient {
 				return Channels.pipeline(
 						new ObjectEncoder(),
 						new ObjectDecoder(ClassResolvers
-								.weakCachingConcurrentResolver(null)),
+								.cacheDisabled(getClass().getClassLoader())),
 						new ObjectEchoClientHandler(firstMessageSize));
 			}
 		});
 
-		bootstrap.connect(new InetSocketAddress(host, port));
+		ChannelFuture future = bootstrap.connect(new InetSocketAddress(host,
+				port));
+		future.awaitUninterruptibly();
+		if (!future.isSuccess()) {
+			future.getCause().printStackTrace();
+			bootstrap.releaseExternalResources();
+			return;
+		}
+		System.err.println("client connected");
+		
+		future.getChannel().getCloseFuture().awaitUninterruptibly();
+		bootstrap.releaseExternalResources();
 	}
 }

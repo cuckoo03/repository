@@ -37,11 +37,10 @@ public class HttpServerRequestHandler extends SimpleChannelHandler {
 		if (!readingChunks) {
 			HttpRequest request = this.request = (HttpRequest) e.getMessage();
 			// netty 3.2.3에서 추가된 API
-			/*
-			 * if (HttpHeaders.is100ContinueExpected(request)) {
-			 * 
-			 * }
-			 */
+			if (HttpHeaders.is100ContinueExpected(request)) {
+				send100Continue(e);
+			}
+			 
 			buf.setLength(0);
 			buf.append("WELCOME TO THE WILD WILD WEB SERVER\r\n");
 			buf.append("===================================\r\n");
@@ -72,10 +71,12 @@ public class HttpServerRequestHandler extends SimpleChannelHandler {
 				buf.append("\r\n");
 			}
 
+			System.out.println("isChunked:" + request.isChunked());
 			if (request.isChunked()) {
 				readingChunks = true;
 			} else {
 				ChannelBuffer content = request.getContent();
+				buf.append("content buffer:" + content.toString());
 				if (content.readable()) {
 					buf.append("content:"
 							+ content.toString(CharsetUtil.UTF_8 + "\r\n"));
@@ -123,11 +124,13 @@ public class HttpServerRequestHandler extends SimpleChannelHandler {
 					.getContent().readableBytes());
 		}
 
+		//Encode the cookie
 		String cookieString = request.getHeader(HttpHeaders.Names.COOKIE);
 		if (null != cookieString) {
 			CookieDecoder cookieDecoder = new CookieDecoder();
 			Set<Cookie> cookies = cookieDecoder.decode(cookieString);
 			if (!cookies.isEmpty()) {
+				// Reset the cookies if necessary
 				CookieEncoder cookieEncoder = new CookieEncoder(true);
 				for (Cookie cookie : cookies) {
 					cookieEncoder.addCookie(cookie);
@@ -135,6 +138,14 @@ public class HttpServerRequestHandler extends SimpleChannelHandler {
 				response.addHeader(HttpHeaders.Names.SET_COOKIE,
 						cookieEncoder.encode());
 			}
+		} else {
+			CookieEncoder cookieEncoder = new CookieEncoder(true);
+			cookieEncoder.addCookie("key1", "value1");
+			response.addHeader(HttpHeaders.Names.SET_COOKIE,
+					cookieEncoder.encode());
+			cookieEncoder.addCookie("key2", "value2");
+			response.addHeader(HttpHeaders.Names.SET_COOKIE,
+					cookieEncoder.encode());
 		}
 
 		ChannelFuture future = e.getChannel().write(response);

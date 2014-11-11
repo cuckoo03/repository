@@ -24,5 +24,6 @@ public class HttpServer {
 		bootstrap.setPipelineFactory(new HttpServerPipelineFactory(isSsl));
 
 		bootstrap.bind(new InetSocketAddress(port));
+		System.err.println("Server bind");
 	}
 }

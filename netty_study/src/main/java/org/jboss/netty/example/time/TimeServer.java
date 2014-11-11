@@ -10,7 +10,6 @@ import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.group.ChannelGroup;
-import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
@@ -34,11 +33,10 @@ public class TimeServer {
 			}
 		});
 
-		Channel channel = bootstrap.bind(new InetSocketAddress(10001));
+		Channel channel = bootstrap.bind(new InetSocketAddress(9001));
 		allChannels.add(channel);
 		// 종료 신호를 대기하는 가상의 메서드
 		// waitForShutdownCommand();
-		
 		
 		try {
 			Thread.sleep(10000);

@@ -24,11 +24,12 @@ public class ObjectEchoServer {
 				return Channels.pipeline(
 						new ObjectEncoder(),
 						new ObjectDecoder(ClassResolvers
-								.weakCachingConcurrentResolver(null)),
+								.cacheDisabled(getClass().getClassLoader())),
 						new ObjectEchoServerHandler());
 			}
 		});
 
-		bootstrap.bind(new InetSocketAddress(8080));
+		bootstrap.bind(new InetSocketAddress(9001));
+		System.err.println("server bind");
 	}
 }

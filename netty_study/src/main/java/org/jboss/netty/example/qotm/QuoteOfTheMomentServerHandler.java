@@ -17,7 +17,7 @@ public class QuoteOfTheMomentServerHandler extends SimpleChannelUpstreamHandler 
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		String msg = (String) e.getMessage();
 		if (msg.equals("QOTM?")) {
-			e.getChannel().write("QOTM: " + nextQuote(), e.getRemoteAddress());
+			e.getChannel().write("QOTM: " + nextQuote() + ",ip:" + e.getRemoteAddress(), e.getRemoteAddress());
 		}
 	}
 

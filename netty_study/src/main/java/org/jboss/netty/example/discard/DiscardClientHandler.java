@@ -17,8 +17,6 @@ import org.jboss.netty.channel.SimpleChannelHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
 
 public class DiscardClientHandler extends SimpleChannelHandler {
-	private static final Logger logger = Logger
-			.getLogger(DiscardClientHandler.class.getName());
 	private final byte[] content;
 	private final AtomicLong transferredBytes = new AtomicLong();
 
@@ -33,10 +31,10 @@ public class DiscardClientHandler extends SimpleChannelHandler {
 	@Override
 	public void handleUpstream(ChannelHandlerContext ctx, ChannelEvent e)
 			throws Exception {
-		logger.info("handleUpstream");
+		System.out.println("handleUpstream");
 		if (e instanceof ChannelStateEvent) {
 			if (((ChannelStateEvent) e).getState() != ChannelState.INTEREST_OPS) {
-				logger.info(e.toString());
+				System.out.println(e.toString());
 			}
 		}
 		super.handleUpstream(ctx, e);
@@ -45,7 +43,7 @@ public class DiscardClientHandler extends SimpleChannelHandler {
 	@Override
 	public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
 		try {
-			logger.info("channelConnected");
+			System.out.println("channelConnected");
 			generateTraffic(e);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -56,7 +54,7 @@ public class DiscardClientHandler extends SimpleChannelHandler {
 	public void channelInterestChanged(ChannelHandlerContext ctx,
 			ChannelStateEvent e) {
 		try {
-			logger.info("channelInterestChanged");
+			System.out.println("channelInterestChanged");
 			generateTraffic(e);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -65,19 +63,18 @@ public class DiscardClientHandler extends SimpleChannelHandler {
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-		logger.info("messageReceived");
+		System.out.println("messageReceived");
 	}
 
 	@Override
 	public void writeComplete(ChannelHandlerContext ctx, WriteCompletionEvent e) {
-		logger.info("writecomplete");
+		System.out.println("writecomplete");
 		transferredBytes.addAndGet(e.getWrittenAmount());
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-		logger.log(Level.WARNING, "Unexpected exception from downstream.",
-				e.getCause());
+		System.out.println(e.getCause());
 		e.getChannel().close();
 	}
 
@@ -92,6 +89,7 @@ public class DiscardClientHandler extends SimpleChannelHandler {
 			Thread.sleep(2000);
 			channel.write(m);
 		}
+		System.out.println("can't writable");
 	}
 
 	private ChannelBuffer nextMessage() {

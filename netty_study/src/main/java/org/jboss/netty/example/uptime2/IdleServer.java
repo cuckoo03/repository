@@ -28,8 +28,8 @@ public class IdleServer {
 						new UptimeServerHandler());
 			}
 		});
-
-		bootstrap.bind(new InetSocketAddress(10001));
+		bootstrap.bind(new InetSocketAddress(9001));
+		System.err.println("Server bind");
 	}
 }
 
@@ -42,7 +42,6 @@ class UptimeServerHandler extends SimpleChannelUpstreamHandler {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-		System.out.println("exceptionCaught");
 		e.getCause().printStackTrace();
 		e.getChannel().close();
 	}
@@ -54,7 +53,7 @@ class UptimeServerDownHandler extends SimpleChannelDownstreamHandler {
 			throws Exception {
 		System.out.println("writeRequested");
 		// ReadTimeout, WriteTimeout exception 발생시키려 지연시킴
-		Thread.sleep(4000);
+//		Thread.sleep(2000);
 		ctx.sendDownstream(e);
 	}
 }

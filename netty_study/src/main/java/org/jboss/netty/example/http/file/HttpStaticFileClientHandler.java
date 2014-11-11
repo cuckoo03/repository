@@ -38,9 +38,9 @@ public class HttpStaticFileClientHandler extends SimpleChannelUpstreamHandler {
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
+		System.out.println("messageReceived chunks:" + readingChunks);
 		if (!readingChunks) {
 			HttpResponse response = (HttpResponse) e.getMessage();
-
 			logger.info("Status:" + response.getStatus());
 			logger.info("Version:" + response.getProtocolVersion());
 
@@ -52,14 +52,14 @@ public class HttpStaticFileClientHandler extends SimpleChannelUpstreamHandler {
 				}
 			}
 
-			if (response.getStatus().getCode() == 200 && response.isChunked()) {
+			if (response.isChunked()) {
 				readingChunks = true;
 				logger.info("chunked content {");
 			} else {
 				ChannelBuffer content = response.getContent();
 				if (content.readable()) {
 					logger.info("content {");
-					logger.info(content.toString(CharsetUtil.UTF_8));
+//					logger.info(content.toString(CharsetUtil.UTF_8));
 					logger.info("} end of content");
 					if (content.readable()) {
 						byte[] b = new byte[content.readableBytes()];
@@ -88,7 +88,7 @@ public class HttpStaticFileClientHandler extends SimpleChannelUpstreamHandler {
 				logger.info("} end of chunked content");
 			} else {
 				// keep reading chunk
-				logger.info(chunk.getContent().toString(CharsetUtil.UTF_8));
+//				logger.info(chunk.getContent().toString(CharsetUtil.UTF_8));
 				ChannelBuffer buf = chunk.getContent();
 				try {
 					if (buf.readable()) {

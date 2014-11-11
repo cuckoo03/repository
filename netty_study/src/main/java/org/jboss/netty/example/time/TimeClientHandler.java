@@ -1,6 +1,5 @@
 package org.jboss.netty.example.time;
 
-import java.nio.channels.Channels;
 import java.util.Date;
 
 import org.jboss.netty.buffer.ChannelBuffer;

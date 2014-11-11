@@ -15,6 +15,7 @@ public class TelnetServer {
 
 		bootstrap.setPipelineFactory(new TelnetServerPipelineFactory());
 
-		bootstrap.bind(new InetSocketAddress(10001));
+		bootstrap.bind(new InetSocketAddress(9001));
+		System.err.println("Server binded");
 	}
 }

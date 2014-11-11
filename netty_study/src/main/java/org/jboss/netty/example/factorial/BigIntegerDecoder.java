@@ -26,6 +26,7 @@ public class BigIntegerDecoder extends FrameDecoder {
 		}
 
 		int dataLength = buffer.readInt();
+		System.out.println("buffer readable:" + buffer.readableBytes());
 		if (buffer.readableBytes() < dataLength) {
 			buffer.resetReaderIndex();
 			return null;

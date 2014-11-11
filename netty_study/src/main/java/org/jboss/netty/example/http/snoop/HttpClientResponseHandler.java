@@ -30,7 +30,7 @@ public class HttpClientResponseHandler extends SimpleChannelUpstreamHandler {
 				System.out.println();
 			}
 
-			if (response.getStatus().getCode() == 200 && response.isChunked()) {
+			if (/*response.getStatus().getCode() == 200 && */response.isChunked()) {
 				readingChunks = true;
 				System.out.println("Chunked content {");
 			} else {

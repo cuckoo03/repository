@@ -38,9 +38,9 @@ public class HexDumpProxyServer {
 	}
 
 	public static void main(String[] args) throws Exception {
-		/*
+		args = new String[]{"9001", "127.0.0.1", "9002"};
 		if (args.length != 3) {
-			System.err.println("Usage: " + HexDumpProxy.class.getSimpleName()
+			System.err.println("Usage: " + HexDumpProxyServer.class.getSimpleName()
 					+ "<local port> <remote host> <remote port>");
 			return;
 		}
@@ -48,10 +48,6 @@ public class HexDumpProxyServer {
 		int localPort = Integer.parseInt(args[0]);
 		String remoteHost = args[1];
 		int remotePort = Integer.parseInt(args[2]);
-		*/
-		int localPort = 8080;
-		String remoteHost = "127.0.0.1";
-		int remotePort = 8081;
 
 		new HexDumpProxyServer(localPort, remoteHost, remotePort).run();
 	}

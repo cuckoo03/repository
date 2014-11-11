@@ -12,7 +12,6 @@ import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
-import org.jboss.netty.example.http.snoop.HttpClientResponseHandler;
 
 public class PortUnificationClient {
 	public static void main(String[] args) {
@@ -28,7 +27,7 @@ public class PortUnificationClient {
 		});
 		
 		ChannelFuture future = bootstrap.connect(new InetSocketAddress(
-				8080));
+				9001));
 		
 		Channel channel = future.awaitUninterruptibly().getChannel();
 		if (!future.isSuccess()) {
@@ -37,12 +36,12 @@ public class PortUnificationClient {
 			return;
 		}
 		
+		System.err.println("client connected");
 		ChannelBuffer buf = ChannelBuffers.dynamicBuffer();
 		buf.writeBytes(new String("GA").getBytes());
 		channel.write(buf);
 		
 		channel.getCloseFuture().awaitUninterruptibly();
-		
 		bootstrap.releaseExternalResources();
 	}
 }

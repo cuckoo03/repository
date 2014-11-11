@@ -27,6 +27,7 @@ public class NumberEncoder extends OneToOneEncoder {
 		int dataLength = data.length;
 
 		ChannelBuffer buf = ChannelBuffers.dynamicBuffer();
+		// define protocol 
 		buf.writeByte('F');
 		buf.writeInt(dataLength);
 		buf.writeBytes(data);

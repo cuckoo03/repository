@@ -34,7 +34,7 @@ public class HexDumpProxyClient {
 		});
 
 		ChannelFuture channelFuture = cb.connect(new InetSocketAddress(
-				"127.0.0.1", 8080));
+				"127.0.0.1", 9001));
 		channelFuture.awaitUninterruptibly();
 		if (!channelFuture.isSuccess()) {
 			channelFuture.getCause().printStackTrace();

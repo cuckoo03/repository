@@ -23,15 +23,15 @@ public class HttpStaticFileClient {
 	/**
 	 * asynchronous large file streaming in HTTP
 	 * 지정한 서버의 파일을 다운로드하는 예제
+	 * HttpChunkAggregator 사용시 실제 파일 용량이 클라이언트 측의 Aggregator maxContentLengh 보다 크면
+	 * TooLongFrameException 발생
 	 * 개선해야할 점
 	 * 1.파일서버에 파일이 존재하지 않아도 클라이언트에 빈 파일이 생김
-	 * 2.업로드 가능한 파일용량이 100M 까지는 가능하나 속도와 시간이 오래걸림.
 	 * @param args
 	 * @throws URISyntaxException
 	 */
 	public static void main(String[] args) throws URISyntaxException {
-		URI uri = new URI("http://127.0.0.1:8080/target/file100.txt");
-//		URI uri = new URI("http://127.0.0.1:8080/");
+		URI uri = new URI("http://127.0.0.1:9001/target/readme.txt");
 		String host = uri.getHost();
 		int port = uri.getPort();
 
@@ -44,7 +44,7 @@ public class HttpStaticFileClient {
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline pipeline = Channels.pipeline();
 				pipeline.addLast("codec", new HttpClientCodec());
-//				pipeline.addLast("aggregator", new HttpChunkAggregator(65536));
+				pipeline.addLast("aggregator", new HttpChunkAggregator(655360000));
 				pipeline.addLast("handler", new HttpStaticFileClientHandler());
 				return pipeline;
 			}
@@ -61,7 +61,7 @@ public class HttpStaticFileClient {
 		}
 
 		HttpRequest request = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
-				HttpMethod.GET, host + "/file100.txt");
+				HttpMethod.GET, "target/readme.pdf");
 		request.setHeader(HttpHeaders.Names.HOST, host);
 		request.setHeader(HttpHeaders.Names.CONNECTION,
 				HttpHeaders.Values.CLOSE);
