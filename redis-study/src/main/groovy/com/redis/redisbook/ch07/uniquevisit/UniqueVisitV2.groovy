@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 import com.redis.redisbook.ch07.JedisHelper;
 
-import redis.clients.jedis.BitOP;
+//import redis.clients.jedis.BitOP;
 import redis.clients.jedis.Jedis
 import redis.clients.jedis.Pipeline;
 
@@ -44,8 +44,11 @@ class UniqueVisitV2 {
 			i++
 		}
 		
-		jedis.bitop(BitOP.AND, "uv:event", keyList)
-		return jedis.bitcount("uv:event")
+		// spring data error로 인해 jedis 2.2->2.1로 변경
+		// 소스는 주석 처리함
+//		jedis.bitop(BitOP.AND, "uv:event", keyList)
+//		return jedis.bitcount("uv:event")
+		return null
 	}
 
 	private String getToday() {

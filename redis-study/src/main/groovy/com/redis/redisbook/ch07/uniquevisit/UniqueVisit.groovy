@@ -28,6 +28,11 @@ class UniqueVisit {
 		p.sync()
 	}
 
+	/**
+	 * 페이지 방문자수를 리턴한다.
+	 * @param date
+	 * @return
+	 */
 	public int getPVCount(String date) {
 		int result = 0
 		try {

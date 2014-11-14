@@ -10,6 +10,7 @@ import redis.clients.jedis.Jedis
 import com.redis.redisbook.ch07.redislogger.KeyMaker
 
 /**
+ * 복제 확인 테스트
  * 10000개 소요시간:11 sec
  * 100000개 소요시간:106 sec
  * @author cuckoo03

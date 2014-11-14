@@ -7,8 +7,8 @@ import redis.clients.jedis.Jedis
 import redis.clients.jedis.JedisPool
 
 class JedisHelper {
-	protected static final String HOST = "192.168.1.105"
-	protected static final int PORT = 6379
+	protected static final String HOST = "192.168.1.101"
+	protected static final int PORT = 6300
 	protected static final Set<Jedis> connectionList = new HashSet<Jedis>()
 	private JedisPool pool
 
@@ -17,7 +17,7 @@ class JedisHelper {
 		config.maxActive = 20
 		config.whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_BLOCK
 
-		this.pool = new JedisPool(config, HOST, PORT, 5000)
+		this.pool = new JedisPool(config, HOST, PORT, 5000, "12341234")
 	}
 
 	private static class LazyHolder {
