@@ -132,7 +132,6 @@ public class HttpUploadClient {
 				*/
 
 		bootstrap.releaseExternalResources();
-
 		factory.cleanAllHttpDatas();
 	}
 
@@ -351,15 +350,16 @@ public class HttpUploadClient {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/*
-		 * if (args.length != 2) { logger.error("Usage:" +
-		 * HttpUploadClient.class.getSimpleName() + " baseURI filePath");
-		 * return; }
-		 * 
-		 * String baseUri = args[0]; String filePath = args[1];
-		 */
-		String baseUri = "http://127.0.0.1:8080";
-		String filePath = "target/HttpFileUpload.txt";
+		args = new String[]{"http://127.0.0.1:9001", "target/upload.txt"};
+		if (args.length != 2) {
+			logger.error("Usage:" + HttpUploadClient.class.getSimpleName()
+					+ " baseURI filePath");
+			return;
+		}
+
+		String baseUri = args[0];
+		String filePath = args[1];
+		 
 		new HttpUploadClient(baseUri, filePath).run();
 	}
 

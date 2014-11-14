@@ -24,12 +24,10 @@ public class TimeClient {
 
 		bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
 			public ChannelPipeline getPipeline() throws Exception {
-				return Channels.pipeline(new TimeClientHandler());
+				return Channels.pipeline(new TimeDecoder(),
+						new TimeClientHandler());
 			}
 		});
-
-//		bootstrap.setOption("tcpNoDelay", true);
-//		bootstrap.setOption("keepAlive", true);
 
 		ChannelFuture future = bootstrap.connect(new InetSocketAddress(host,
 				port));

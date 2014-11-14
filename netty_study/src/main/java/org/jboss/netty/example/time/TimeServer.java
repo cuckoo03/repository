@@ -29,7 +29,8 @@ public class TimeServer {
 
 		bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
 			public ChannelPipeline getPipeline() throws Exception {
-				return Channels.pipeline(new TimeServerHandler());
+				return Channels.pipeline(new TimeEncoder(),
+						new TimeServerHandler());
 			}
 		});
 
@@ -37,21 +38,21 @@ public class TimeServer {
 		allChannels.add(channel);
 		// 종료 신호를 대기하는 가상의 메서드
 		// waitForShutdownCommand();
-		
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		/*
-		ChannelGroupFuture future = allChannels.close();
-		future.awaitUninterruptibly();
-		System.out.println("server channl await");
-		
-		factory.releaseExternalResources();
-		System.out.println("server resource close");
-		*/
+		 * ChannelGroupFuture future = allChannels.close();
+		 * future.awaitUninterruptibly();
+		 * System.out.println("server channl await");
+		 * 
+		 * factory.releaseExternalResources();
+		 * System.out.println("server resource close");
+		 */
 	}
 
 }
