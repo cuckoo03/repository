@@ -3,7 +3,7 @@ package com.redis.spring.data;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-public class RedisData {
+public class RedisDataTest {
 	private RegistrationBean bean;
 
 	public void test() {
@@ -18,7 +18,7 @@ public class RedisData {
 	}
 
 	public static void main(String[] args) throws Exception {
-		RedisData data = new RedisData();
+		RedisDataTest data = new RedisDataTest();
 		data.test();
 	}
 }
