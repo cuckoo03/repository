@@ -31,10 +31,12 @@ public class HandlerServer {
 					@Override
 					public void channelConnected(ChannelHandlerContext ctx,
 							ChannelStateEvent e) {
-						System.out.println("channelConnected");
+						System.out.println("channelConnected1");
 						ChannelBuffer buf = ChannelBuffers.buffer(10);
 						buf.writeBytes(new String("hi").getBytes());
 						e.getChannel().write(buf);
+						
+						ctx.sendUpstream(e);
 					}
 
 					@Override
@@ -43,10 +45,15 @@ public class HandlerServer {
 						ChannelBuffer buf = (ChannelBuffer) e.getMessage();
 						System.out.println("up1 messageReceived:" + buf.capacity());
 						
-						super.messageReceived(ctx, e);
+						ctx.sendUpstream(e);
 					}
 				});
 				p.addLast("up2", new SimpleChannelUpstreamHandler() {
+					@Override
+					public void channelConnected(ChannelHandlerContext ctx,
+							ChannelStateEvent e) {
+						System.out.println("channelConnected2");
+					}
 					@Override
 					public void messageReceived(ChannelHandlerContext ctx,
 							MessageEvent e) throws Exception {

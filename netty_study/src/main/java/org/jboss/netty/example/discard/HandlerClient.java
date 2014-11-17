@@ -40,7 +40,6 @@ public class HandlerClient {
 							MessageEvent e) throws Exception {
 						ChannelBuffer buf = (ChannelBuffer) e.getMessage();
 						System.out.println("up1 messageReceived:" + buf.capacity());
-//						super.messageReceived(ctx, e);
 						ctx.sendUpstream(e);
 					}
 				});
@@ -64,7 +63,6 @@ public class HandlerClient {
 					public void writeRequested(ChannelHandlerContext ctx,
 							MessageEvent e) throws Exception {
 						System.out.println("down2 writeRequested");
-//						super.writeRequested(ctx, e);
 						ctx.sendDownstream(e);
 					}
 				});
@@ -73,7 +71,6 @@ public class HandlerClient {
 					public void writeRequested(ChannelHandlerContext ctx,
 							MessageEvent e) throws Exception {
 						System.out.println("down1 writeRequested");
-//						super.writeRequested(ctx, e);
 						ctx.sendDownstream(e);
 					}
 				});

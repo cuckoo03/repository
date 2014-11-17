@@ -1,23 +1,27 @@
 package com.netty.common;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.handler.timeout.IdleState;
+import org.jboss.netty.handler.timeout.IdleStateAwareChannelUpstreamHandler;
+import org.jboss.netty.handler.timeout.IdleStateEvent;
 
-public class BufferServerHandler extends SimpleChannelUpstreamHandler {
+public class BufferServerHandler extends IdleStateAwareChannelUpstreamHandler {
 	private Log log = LogFactory.getLog(getClass());
-	private Map<String, Channel> channelMap = new HashMap<>();
+	private final Map<String, Channel> channelMap;
+
+	public BufferServerHandler(Map<String, Channel> channelMap) {
+		 this.channelMap = channelMap;
+	}
 
 	@Override
 	public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
@@ -35,13 +39,28 @@ public class BufferServerHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		log.info("server:messageReceived :");
-		// e.getChannel().write(e.getMessage());
-		broadcast((ChannelBuffer) e.getMessage());
+		broadcast((String) e.getMessage());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
 		e.getCause().printStackTrace();
+	}
+
+	@Override
+	public void channelIdle(ChannelHandlerContext ctx, IdleStateEvent e) {
+		if (e.getState() == IdleState.READER_IDLE) {
+			e.getChannel().close();
+		} else if (e.getState() == IdleState.WRITER_IDLE) {
+			e.getChannel().write("HeatBeat");
+		} else if (e.getState() == IdleState.ALL_IDLE) {
+		}
 	}
 
 	private void addChannel(Channel channel) {
@@ -58,7 +77,7 @@ public class BufferServerHandler extends SimpleChannelUpstreamHandler {
 		}
 	}
 
-	private void broadcast(ChannelBuffer message) {
+	private void broadcast(String message) {
 		synchronized (channelMap) {
 			Set<String> keySet = channelMap.keySet();
 			Iterator<String> iter = keySet.iterator();
@@ -66,7 +85,7 @@ public class BufferServerHandler extends SimpleChannelUpstreamHandler {
 				String id = iter.next();
 				Channel channel = channelMap.get(id);
 				if (channel.isConnected()) {
-					channel.write(message);
+					channel.write(channel.getId() + ":" + message);
 					log.info("write to [channel] " + channel);
 				} else {
 					log.info("can't write to [channel] " + channel);

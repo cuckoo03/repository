@@ -9,7 +9,7 @@ public class StringDelimiterHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		String msg = (String) e.getMessage();
-		System.out.println(msg + "," + msg.length());
+		System.out.println(msg + ",length:" + msg.length());
 
 		ctx.getChannel().close();
 	}

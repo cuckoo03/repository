@@ -12,7 +12,6 @@ public class CharToStringHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		System.out.println(e.getMessage());
-		// String msg = (String) e.getMessage();
 		ChannelBuffer buf = (ChannelBuffer) e.getMessage();
 		int nullIndex = buf.indexOf(0, 30, ChannelBufferIndexFinder.NUL);
 		@SuppressWarnings("deprecation")

@@ -1,4 +1,4 @@
-package org.jboss.netty.example.uptime2;
+package org.jboss.netty.example.idle;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;

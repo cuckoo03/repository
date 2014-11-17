@@ -75,7 +75,7 @@
                   <resource>META-INF/spring.schemas</resource>
                 </transformer>
                 <transformer>
-                  <mainClass>org.jboss.netty.example.echo.EchoClient</mainClass>
+                  <mainClass>com.netty.common.NettyServer</mainClass>
                 </transformer>
               </transformers>
             </configuration>

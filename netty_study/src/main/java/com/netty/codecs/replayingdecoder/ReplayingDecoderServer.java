@@ -43,10 +43,6 @@ public class ReplayingDecoderServer {
 
 		Map map = bootstrap.getOptions();
 
-//		bootstrap.setOption("reuseAddress", true);
-//		bootstrap.setOption("child.tcpNoDelay", true);
-//		bootstrap.setOption("child.keepAlive", true);
-
 		bootstrap.bind(new InetSocketAddress(10001));
 
 		System.out.println("server started..");
@@ -117,6 +113,8 @@ class LogCrawlerServerHandler extends SimpleChannelUpstreamHandler {
 		if (e.getMessage() instanceof Envelope) {
 			Envelope env = (Envelope) e.getMessage();
 			env.setVersion(Version.VERSION2);
+			env.setType(Type.TYPE2);
+			env.setPayload(new String("env2").getBytes());
 			log.info("env:" + env.toString());
 
 			ChannelFuture future = e.getChannel().write(env);

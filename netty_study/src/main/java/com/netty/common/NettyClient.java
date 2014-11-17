@@ -4,28 +4,27 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.netty.bootstrap.ClientBootstrap;
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.example.BootstrapOptions;
-
-import com.netty.buffer.DataObserver;
+import org.jboss.netty.util.HashedWheelTimer;
+import org.jboss.netty.util.Timer;
 
 public class NettyClient implements Bootstrap {
+	public static final int RECONNECT_DELAY = 5;
 	private final Log log = LogFactory.getLog(getClass());
 	private ClientBootstrap bootstrap;
 	private ChannelFuture future;
 	private final String host;
 	private int port;
 	private List<DataChangeEventListener> list = new ArrayList<>();
+	private Timer timer;
 
 	public NettyClient(String host, int port) {
 		this.host = host;
@@ -37,35 +36,30 @@ public class NettyClient implements Bootstrap {
 				Executors.newCachedThreadPool(),
 				Executors.newCachedThreadPool());
 		bootstrap = new ClientBootstrap(factory);
-		bootstrap.setPipelineFactory(new BufferClientPipelineFactory(list));
+
+		timer = new HashedWheelTimer();
+		bootstrap.setPipelineFactory(new BufferClientPipelineFactory(list,
+				timer, bootstrap));
 		bootstrap.setOption(BootstrapOptions.REMOTE_ADDRESS,
 				new InetSocketAddress(host, port));
 		bootstrap.setOption(BootstrapOptions.CONNECT_TIMEOUT_MILLIS, 3000);
-
+		bootstrap
+		.setOption("remoteAddress", new InetSocketAddress(host, port));
+		
 		future = bootstrap.connect().awaitUninterruptibly();
 
-		if (!future.isSuccess()) {
-			log.error("connection failed.");
-			future.getChannel().close().awaitUninterruptibly();
-			bootstrap.releaseExternalResources();
-			return;
-		}
 		log.info("connected server.");
-		
-//		future.getChannel().getCloseFuture().awaitUninterruptibly();
-//		bootstrap.releaseExternalResources();
 	}
 
 	public void stop() {
-		Channel channel = getChannel(bootstrap);
-		channel.close();
+		// Channel channel = getChannel(bootstrap);
+		// channel.close();
 		bootstrap.releaseExternalResources();
 	}
 
-	public void send() {
-		ChannelBuffer heapBuf = ChannelBuffers.buffer(1);
-		heapBuf.writeByte('a');
-		future.getChannel().write(heapBuf);
+	public void send(String msg) {
+		// ChannelBuffer heapBuf = ChannelBuffers.buffer(1);
+		future.getChannel().write(msg);
 	}
 
 	public void addEventListener(DataChangeEventListener listener) {

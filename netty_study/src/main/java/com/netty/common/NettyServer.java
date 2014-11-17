@@ -18,8 +18,9 @@ public class NettyServer implements Bootstrap {
 		this.host = host;
 		this.port = port;
 	}
-
+	
 	public static void main(String[] args) {
+		args = new String[] { "192.168.1.100", "9001" };
 		if (args.length < 1) {
 			System.out.println("please input host, ip.");
 			return;

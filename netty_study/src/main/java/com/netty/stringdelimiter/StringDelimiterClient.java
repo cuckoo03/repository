@@ -14,6 +14,7 @@ import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
+import org.jboss.netty.handler.codec.frame.Delimiters;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
 
@@ -22,8 +23,7 @@ public class StringDelimiterClient {
 			.wrappedBuffer(new byte[] { '\n' }) };
 
 	/**
-	 * 구분자로 구분된 문자열이
-	 * 한번에 여러 line으로 전송되는 데이터 처리
+	 * 구분자로 구분된 문자열이 한번에 여러 line으로 전송되는 데이터 처리
 	 * 
 	 * @param args
 	 */
@@ -39,6 +39,7 @@ public class StringDelimiterClient {
 						new DelimiterBasedFrameDecoder(8192,
 								new ChannelBuffer[] { ChannelBuffers
 										.wrappedBuffer(new byte[] { '\n' }) }),
+						// 또는 두번째 인자값에 Delimiters.lineDelimiter() 사용가능
 						new StringEncoder(), new StringDecoder(),
 						new StringDelimiterHandler());
 			}
@@ -53,9 +54,7 @@ public class StringDelimiterClient {
 		cb.setPipelineFactory(new ChannelPipelineFactory() {
 			public ChannelPipeline getPipeline() throws Exception {
 				return Channels.pipeline(
-						new DelimiterBasedFrameDecoder(8192,
-								new ChannelBuffer[] { ChannelBuffers
-										.wrappedBuffer(new byte[] { '\n' }) }),
+						new DelimiterBasedFrameDecoder(8192,Delimiters.lineDelimiter()),
 						new StringEncoder(), new StringDecoder());
 			}
 		});
@@ -71,7 +70,7 @@ public class StringDelimiterClient {
 			return;
 		}
 
-		future.getChannel().write("Success\t\n15\nabcde fghij \nklm ");
+		future.getChannel().write("Success 한글\t\n15\n한글e fa \nklm ");
 
 		future.getChannel().getCloseFuture().awaitUninterruptibly();
 

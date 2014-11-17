@@ -5,7 +5,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.jboss.netty.bootstrap.ClientBootstrap;
-import org.jboss.netty.channel.ChannelEvent;
 import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.ChannelHandler;
 import org.jboss.netty.channel.ChannelHandlerContext;
@@ -28,8 +27,10 @@ import org.jboss.netty.util.Timer;
  * 
  */
 public class UptimeClient {
-	private static final int READ_TIMEOUT = 2;
-	private static final int WRITE_TIMEOUT = 1;
+	// Reconnect when the server sends nothing for 10 seconds.
+	//  서버가 지정된 시간동안 응답을 하지 않을 겨우 read timeout발생
+	private static final int READ_TIMEOUT = 3;
+	private static final int WRITE_TIMEOUT = 3;
 	public static final int RECONNECT_DELAY = 5;
 
 	public static void main(String[] args) {
@@ -50,32 +51,24 @@ public class UptimeClient {
 
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline p = Channels.pipeline();
-//				p.addLast("readtimeout", readTimeoutHandler);
+				 p.addLast("readTimeout", readTimeoutHandler);
 				p.addLast("handler", uptimeHandler);
-				p.addLast("down", new SimpleChannelDownstreamHandler(){
+				p.addLast("down", new SimpleChannelDownstreamHandler() {
 					public void writeRequested(ChannelHandlerContext ctx,
 							MessageEvent e) throws Exception {
 						System.out.println("writeRequested");
-						System.out.println("");
+						Thread.sleep(2000);
 						ctx.sendDownstream(e);
 					}
 				});
-				p.addLast("delay", new SimpleChannelDownstreamHandler(){
-					public void writeRequested(ChannelHandlerContext ctx,
-							MessageEvent e) throws Exception {
-						System.out.println("sleep");
-						Thread.sleep(4000);
-						ctx.sendDownstream(e);
-					}
-				});
-				p.addLast("writeTimeOut", writeTimeoutHandler);
+//				p.addLast("writeTimeout", writeTimeoutHandler);
 				return p;
 			}
+
 		});
 
 		bootstrap.setOption(BootstrapOptions.REMOTE_ADDRESS,
 				new InetSocketAddress("127.0.0.1", 9001));
-
 		bootstrap.connect();
 	}
 }

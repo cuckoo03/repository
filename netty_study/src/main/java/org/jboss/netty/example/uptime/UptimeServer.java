@@ -38,21 +38,16 @@ class UptimeServerHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		System.out.println("messageReceived");
-		// readtimeout을 확인하려면 client의 readtimeout보다 sleep을 크게 주면 됨
-		/*
-		System.out.println("received sleep 3 seconds");
+		e.getChannel().write(e.getMessage());
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		*/
-		e.getChannel().write(e.getMessage());
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-		System.out.println("exceptionCaught");
 		e.getCause().printStackTrace();
 		e.getChannel().close();
 	}

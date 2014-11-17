@@ -12,6 +12,11 @@ import org.jboss.netty.channel.socket.ClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.SocketChannel;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 
+/**
+ * 소켓의 접속과 종료에 관련된 핸들러의 메서드 호출 과정을 알수 있는 예제
+ * @author cuckoo03
+ *
+ */
 public class StreamClient {
 	public static void main(String[] args) {
 		ClientBootstrap bootstrap = new ClientBootstrap(

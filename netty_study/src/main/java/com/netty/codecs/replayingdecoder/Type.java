@@ -16,7 +16,6 @@ public enum Type {
 	}
 
 	public byte getByteValue() {
-		// TODO Auto-generated method stub
 		return t;
 	}
 

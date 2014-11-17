@@ -1,4 +1,4 @@
-package org.jboss.netty.example.uptime2;
+package org.jboss.netty.example.idle;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -12,10 +12,12 @@ import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelDownstreamHandler;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.example.BootstrapOptions;
 import org.jboss.netty.example.uptime.UptimeClientHandler;
+import org.jboss.netty.handler.timeout.IdleState;
+import org.jboss.netty.handler.timeout.IdleStateAwareChannelHandler;
+import org.jboss.netty.handler.timeout.IdleStateEvent;
 import org.jboss.netty.handler.timeout.IdleStateHandler;
 import org.jboss.netty.util.HashedWheelTimer;
 import org.jboss.netty.util.Timer;
@@ -27,8 +29,8 @@ import org.jboss.netty.util.Timer;
  *
  */
 public class IdleClient {
-	private static final int READ_TIMEOUT = 8;
-	private static final int WRITE_TIMEOUT = 6;
+	private static final int READ_TIMEOUT = 4;
+	private static final int WRITE_TIMEOUT = 4;
 
 	public static void main(String[] args) {
 		ChannelFactory factory = new NioClientSocketChannelFactory(
@@ -60,13 +62,29 @@ public class IdleClient {
 	}
 }
 
+class MyIdleStateHandler extends IdleStateAwareChannelHandler {
+	@Override
+	public void channelIdle(ChannelHandlerContext ctx, IdleStateEvent e) {
+		if (e.getState() == IdleState.READER_IDLE) {
+			System.out.println("Reader idle, closing channel");
+			e.getChannel().close();
+			// e.getChannel().write("heartbeat-reader_idle");
+		} else if (e.getState() == IdleState.WRITER_IDLE) {
+			System.out.println("Writer idle, sending heartbeat");
+			// e.getChannel().write("heartbeat-writer_idle");
+		} else if (e.getState() == IdleState.ALL_IDLE) {
+			System.out.println("All idle, sending heartbeat");
+			// e.getChannel().write("heartbeat-all_idle");
+		}
+	}
+}
 class UptimeClientDownHandler extends SimpleChannelDownstreamHandler {
 	@Override
 	public void writeRequested(ChannelHandlerContext ctx, MessageEvent e)
 			throws Exception {
 		System.out.println("writeRequested");
 		// ReadTimeout, WriteTimeout exception 발생시키려 지연시킴
-		Thread.sleep(7000);
+		Thread.sleep(4000);
 		ctx.sendDownstream(e);
 	}
 }
