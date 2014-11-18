@@ -2,7 +2,7 @@ package javacan.first;
 
 import akka.actor.UntypedActor;
 
-public class PrintActor extends UntypedActor{
+public class PrintActor extends UntypedActor {
 
 	@Override
 	public void onReceive(Object message) throws Exception {
