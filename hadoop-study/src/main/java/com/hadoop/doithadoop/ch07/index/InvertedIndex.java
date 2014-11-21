@@ -57,7 +57,7 @@ public class InvertedIndex {
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		Job job = new Job(conf);
+		Job job = new Job(conf, "Inverted Index");
 
 		job.setJarByClass(InvertedIndex.class);
 		job.setOutputKeyClass(Text.class);

@@ -67,7 +67,7 @@ public class JoinIDTitle2 {
 	public static void main(String[] args) throws IOException,
 			URISyntaxException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		Job job = new Job(conf);
+		Job job = new Job(conf, "JoinIDTitle2");
 
 		String titleDocID = args[0];
 		String docIDFreq = args[1];

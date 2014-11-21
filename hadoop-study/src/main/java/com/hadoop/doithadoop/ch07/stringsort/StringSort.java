@@ -17,7 +17,7 @@ public class StringSort {
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		Job job = new Job(conf, "Stringsort");
+		Job job = new Job(conf, "StringSort");
 
 		job.setJarByClass(StringSort.class);
 		job.setMapperClass(Mapper.class);
