@@ -9,12 +9,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class ComplexWordCountMapper extends
-		Mapper<Text, Text, Text, LongWritable> {
+		Mapper<LongWritable, Text, Text, LongWritable> {
 	private static final LongWritable one = new LongWritable(1);
 
 	@Override
-	public void map(Text key, Text value, Context context) throws IOException,
-			InterruptedException {
+	public void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 		StringTokenizer tokenizer = new StringTokenizer(value.toString());
 		while (tokenizer.hasMoreTokens()) {
 			context.write(new Text(tokenizer.nextToken()), one);

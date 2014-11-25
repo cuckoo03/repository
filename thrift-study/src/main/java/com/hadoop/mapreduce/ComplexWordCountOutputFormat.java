@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 
 public class ComplexWordCountOutputFormat extends
-		OutputFormat<Text, LongWritable> {
+		OutputFormat<Text, IntWritable> {
 
 	/**
 	 * 출력 대상에 대한 검증 작업을 수행, 디렉토리에 출력할 경우 이미 해당 디렉토리가 존재하는지 여부를 확인, 이 메서드는
@@ -50,7 +50,7 @@ public class ComplexWordCountOutputFormat extends
 	 * 리듀스에서 출력하는 각 레코드를 실제 출력 대상에 저장하는 기능을 수행하는 RecordWriter 객체를 반환한다.
 	 */
 	@Override
-	public RecordWriter<Text, LongWritable> getRecordWriter(
+	public RecordWriter<Text, IntWritable> getRecordWriter(
 			TaskAttemptContext context) throws IOException,
 			InterruptedException {
 		return new ComplexWordCountRecordWriter(getOutputPath(context),

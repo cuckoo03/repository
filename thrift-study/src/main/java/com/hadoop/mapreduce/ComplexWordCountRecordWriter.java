@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.RecordWriter;
@@ -17,7 +18,7 @@ import org.apache.hadoop.mapreduce.TaskID;
  *
  */
 public class ComplexWordCountRecordWriter extends
-		RecordWriter<Text, LongWritable> {
+		RecordWriter<Text, IntWritable> {
 	private OutputStream out;
 	private byte[] keyValueSeperator;
 
@@ -50,7 +51,7 @@ public class ComplexWordCountRecordWriter extends
 	 * 레코드를 기록
 	 */
 	@Override
-	public void write(Text key, LongWritable value) throws IOException,
+	public void write(Text key, IntWritable value) throws IOException,
 			InterruptedException {
 		out.write(key.getBytes(), 0, key.getLength());
 		out.write(keyValueSeperator);
