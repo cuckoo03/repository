@@ -1,16 +1,20 @@
 package com.hadoop;
 
+import com.hadoop.cloudcomputing.ch05.HDFSClient;
+import com.hadoop.cloudcomputing.ch05.HDFSClientExample;
 import com.hadoop.doithadoop.ch04.WordCount;
 import com.hadoop.doithadoop.ch06.countcitation.CountCitation;
 import com.hadoop.doithadoop.ch06.counttrigram.CountTrigram;
 import com.hadoop.doithadoop.ch06.join.JoinIDTitle;
 import com.hadoop.doithadoop.ch06.topn.TopN;
 import com.hadoop.doithadoop.ch06.wordcount.WordCount2;
+import com.hadoop.doithadoop.ch07.index.CreateESIndex;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
+import com.hadoop.mapreducepatterens.ch02.minmaxcount.MinMaxCountDriver;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -35,7 +39,6 @@ import com.hadoop.doithadoop.ch07.stringsort.StringSort;
  * description.
  */
 public class ExecuteDriver {
-
 	public static void main(String argv[]) {
 		int exitCode = -1;
 		ProgramDriver pgd = new ProgramDriver();
@@ -51,6 +54,10 @@ public class ExecuteDriver {
 			pgd.addClass("InvertedIndex", InvertedIndex.class, "");
 			pgd.addClass("InvertedIndex2", InvertedIndex2.class, "");
 			pgd.addClass("InvertedIndex3", InvertedIndex3.class, "");
+			pgd.addClass("CreateESIndex", CreateESIndex.class, "");
+			pgd.addClass("HDFSClient", HDFSClient.class, "");
+			pgd.addClass("HDFSClientGroovy", HDFSClientExample.class, "");
+			pgd.addClass("MinMaxCount", MinMaxCountDriver.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

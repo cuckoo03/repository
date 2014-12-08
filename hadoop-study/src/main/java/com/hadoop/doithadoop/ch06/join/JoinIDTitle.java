@@ -15,6 +15,10 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class JoinIDTitle {
 	public static class MyMapper1 extends Mapper<Text, Text, Text, Text> {
+		/**
+		 * input:key 문서 타이틀, value 문서 ID 
+		 * output:key 문서 ID, value 문서 타이틀\t+1
+		 */
 		@Override
 		public void map(Text key, Text value, Context context)
 				throws IOException, InterruptedException {
@@ -24,6 +28,10 @@ public class JoinIDTitle {
 	}
 
 	public static class MyMapper2 extends Mapper<Text, Text, Text, Text> {
+		/**
+		 * input:key 문서 ID, value 인용 카운트수
+		 * output:key 문서ID, value 인용카운트수\t+2
+		 */
 		@Override
 		public void map(Text key, Text value, final Context context)
 				throws IOException, InterruptedException {
@@ -33,6 +41,9 @@ public class JoinIDTitle {
 	}
 
 	public static class MyReducer extends Reducer<Text, Text, Text, Text> {
+		/***
+		 * input:key 문서ID, value 문서 타이틀\t+1 or 인용카운트수\t+2
+		 */
 		@Override
 		public void reduce(Text key, Iterable<Text> values, Context context)
 				throws IOException, InterruptedException {
@@ -64,8 +75,8 @@ public class JoinIDTitle {
 		Configuration conf = new Configuration();
 		Job job = new Job(conf, "JoingIDTitle");
 
-		String docId = args[0];
-		String idFreq = args[1];
+		String docId = args[0]; // 2M.TITLE.ID 파일
+		String idFreq = args[1]; // CountCitation/TopN 처리결과
 		String outputDir = args[2];
 
 		if (outputDir == null || docId == null || idFreq == null) {

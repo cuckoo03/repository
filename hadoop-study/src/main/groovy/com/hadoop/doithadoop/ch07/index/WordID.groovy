@@ -2,6 +2,7 @@ package com.hadoop.doithadoop.ch07.index
 
 import org.apache.hadoop.io.WritableComparable
 import org.apache.hadoop.io.WritableUtils
+
 class WordID implements WritableComparable<WordID> {
 	private String word
 	private Long docID
@@ -39,7 +40,7 @@ class WordID implements WritableComparable<WordID> {
 	public int compareTo(WordID o) {
 		int result = word.compareTo(o.word)
 		if (0 == result) {
-			result = (int) docID - o.docID;
+			result = (int) (docID - o.docID);
 		}
 		return result;
 	}

@@ -3,6 +3,8 @@ package com.hadoop.doithadoop.ch07.index
 import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Partitioner
 
+import com.hadoop.doithadoop.ch07.index.WordID;
+
 class WordIDPartitioner extends Partitioner<WordID, Text>{
 	protected WordIDPartitioner() {
 	}
@@ -12,6 +14,6 @@ class WordIDPartitioner extends Partitioner<WordID, Text>{
 	 */
 	@Override
 	public int getPartition(WordID key, Text value, int numPartitions) {
-		return (key.word.hashCode() & Integer.MAX_VALUE) & numPartitions
+		return (key.word.hashCode() & Integer.MAX_VALUE) % numPartitions
 	}
 }

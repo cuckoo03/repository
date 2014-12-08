@@ -8,8 +8,8 @@ class WordIDGroupingComparator extends WritableComparator {
 		super(WordID.class, true)
 	}
 	@Override
-	public int compare(WritableComparable<WordID> w1,
-			WritableComparable<WordID> w2) {
+	public int compare(WritableComparable w1,
+			WritableComparable w2) {
 			WordID k1 = w1
 			WordID k2 = w2
 			return k1.word.compareTo(k2.word)

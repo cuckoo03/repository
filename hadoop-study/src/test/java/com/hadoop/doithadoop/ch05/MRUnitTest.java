@@ -36,32 +36,31 @@ public class MRUnitTest {
 
 	@Test
 	public void testMapper() throws IOException {
-//		mapDriver.withInput(new LongWritable(), new Text("cat cat dog"));
-//		mapDriver.withOutput(new Text("cat"), new LongWritable(1));
-		// mapDriver.withOutput(new Text("cat"), new LongWritable(1));
-		// mapDriver.withOutput(new Text("dog"), new LongWritable(1));
+		mapDriver.withInput(new LongWritable(), new Text("cat dog cat"));
+		mapDriver.withOutput(new Text("cat"), new LongWritable(1));
+		mapDriver.withOutput(new Text("dog"), new LongWritable(1));
+		mapDriver.withOutput(new Text("cat"), new LongWritable(1));
 
-//		mapDriver.runTest();
+		mapDriver.runTest();
 	}
 
 	@Test
 	public void testReducer() throws IOException {
-//		List<LongWritable> values = new ArrayList<LongWritable>();
-//		values.add(new LongWritable(1));
-//		values.add(new LongWritable(1));
-//		reduceDriver.withInput(new Text("cat"), values);
-//		reduceDriver.withOutput(new Text("cat"), new LongWritable(2));
+		List<LongWritable> values = new ArrayList<LongWritable>();
+		values.add(new LongWritable(1));
+		values.add(new LongWritable(1));
+		reduceDriver.withInput(new Text("cat"), values);
+		reduceDriver.withOutput(new Text("cat"), new LongWritable(2));
 
-//		reduceDriver.runTest();
+		reduceDriver.runTest();
 	}
 
 	@Test
 	public void testMapReduce() throws IOException {
-//		mapReduceDriver.withInput(new LongWritable(1), new Text("cat cat dog"));
-//		mapReduceDriver.addOutput(new Text("cat"), new LongWritable(2));
-//		mapReduceDriver.addOutput(new Text("dog"), new LongWritable(1));
+		mapReduceDriver.withInput(new LongWritable(1), new Text("cat cat dog"));
+		mapReduceDriver.addOutput(new Text("cat"), new LongWritable(2));
+		mapReduceDriver.addOutput(new Text("dog"), new LongWritable(1));
 
-//		mapReduceDriver.runTest();
+		mapReduceDriver.runTest();
 	}
-
 }
