@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterns.ch02.minmaxcount;
+package com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount;
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

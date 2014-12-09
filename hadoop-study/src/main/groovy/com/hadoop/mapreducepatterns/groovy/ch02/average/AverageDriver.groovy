@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterns.ch02.average
+package com.hadoop.mapreducepatterns.groovy.ch02.average
 
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path

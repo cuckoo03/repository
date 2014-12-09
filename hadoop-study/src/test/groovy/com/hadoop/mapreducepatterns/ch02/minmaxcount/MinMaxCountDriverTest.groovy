@@ -14,9 +14,9 @@ import org.junit.Test
 
 import com.hadoop.mapreducepatterens.MRDPUtils
 import com.hadoop.mapreducepatterns.MRDPUtilsTest
-import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountMapper
-import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountReduce
-import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountTuple
+import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountMapper;
+import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountReduce;
+import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountTuple;
 
 public class MinMaxCountDriverTest {
 	private MapDriver<Object, Text, Text, MinMaxCountTuple> mapDriver;

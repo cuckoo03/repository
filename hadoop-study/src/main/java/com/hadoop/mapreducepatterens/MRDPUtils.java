@@ -12,7 +12,7 @@ public class MRDPUtils {
 	public static Map<String, String> transformXmlToMap(String xml) {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
-			String[] tokens = xml.trim().substring(5, xml.trim().length() - 3)
+			String[] tokens = xml.trim().substring(8, xml.trim().length() - 3)
 					.split("\"");
 
 			for (int i = 0; i < tokens.length - 1; i += 2) {
@@ -22,7 +22,7 @@ public class MRDPUtils {
 				map.put(key.substring(0, key.length() - 1), val);
 			}
 		} catch (Exception e) {
-//			System.err.println(xml);
+			System.err.println(xml);
 		}
 		return map;
 	}

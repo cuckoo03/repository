@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterns.ch02.average
+package com.hadoop.mapreducepatterns.groovy.ch02.average
 
 import org.apache.hadoop.io.IntWritable
 import org.apache.hadoop.mapreduce.Reducer

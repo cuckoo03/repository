@@ -14,8 +14,10 @@ import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
-import com.hadoop.mapreducepatterns.ch02.average.AverageDriver;
-import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountDriver;
+import com.hadoop.mapreducepatterns.groovy.ch02.average.AverageDriver;
+import com.hadoop.mapreducepatterns.groovy.ch02.medianstd.MedianStdDevDriver;
+import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountDriver;
+import com.hadoop.mapreducepatterns.groovy.ch02.reversedIndex.WikipediaIndex;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -60,6 +62,9 @@ public class ExecuteDriver {
 			pgd.addClass("HDFSClientGroovy", HDFSClientExample.class, "");
 			pgd.addClass("MinMaxCount", MinMaxCountDriver.class, "");
 			pgd.addClass("AverageCount", AverageDriver.class, "");
+			pgd.addClass("MedianStdDev", MedianStdDevDriver.class, "");
+			pgd.addClass("WikipediaIndex", WikipediaIndex.class, "");
+			pgd.addClass("WikipediaIndexBook", com.hadoop.mapreducepatterns.ch02.invertedindex.WikipediaIndex.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
