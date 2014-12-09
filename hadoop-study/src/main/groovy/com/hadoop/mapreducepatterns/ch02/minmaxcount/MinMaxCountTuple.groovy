@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterens.ch02.minmaxcount;
+package com.hadoop.mapreducepatterns.ch02.minmaxcount;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -9,19 +9,19 @@ import java.util.Date;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableUtils;
 
-public class MinMaxCountTuple implements Writable {
+class MinMaxCountTuple implements Writable {
 	private Date min = new Date();
 	private Date max = new Date();
 	private long count = 0;
 
 	private static final SimpleDateFormat sdf = new SimpleDateFormat(
-			"yyyy-MM-dd'T'HH:mm:ss.SSS");
+	"yyyy-MM-dd'T'HH:mm:ss.SSS");
 
 	@Override
-	public void readFields(DataInput in) throws IOException {
-		min = new Date(WritableUtils.readVLong(in));
-		max = new Date(WritableUtils.readVLong(in));
-		count = WritableUtils.readVLong(in);
+	public void readFields(DataInput input) throws IOException {
+		min = new Date(WritableUtils.readVLong(input));
+		max = new Date(WritableUtils.readVLong(input));
+		count = WritableUtils.readVLong(input);
 	}
 
 	/**

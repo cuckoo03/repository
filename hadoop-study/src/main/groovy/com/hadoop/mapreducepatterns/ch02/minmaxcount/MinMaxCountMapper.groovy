@@ -1,26 +1,25 @@
-package com.hadoop.mapreducepatterens.ch02.minmaxcount;
+package com.hadoop.mapreducepatterns.ch02.minmaxcount;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.io.LongWritable
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.mapreduce.Mapper
+import org.apache.hadoop.mapreduce.Mapper.Context
 
-import com.hadoop.mapreducepatterens.MRDPUtils;
+import com.hadoop.mapreducepatterens.MRDPUtils
 
-public class MinMaxCountMapper extends Mapper<Object, Text, Text, MinMaxCountTuple> {
+public class MinMaxCountMapper extends Mapper<LongWritable, Text, Text, MinMaxCountTuple> {
 	private Text outUserId = new Text();
 	private MinMaxCountTuple outTuple = new MinMaxCountTuple();
 
 	private final static SimpleDateFormat sdf = new SimpleDateFormat(
-			"yyyy-MM-dd'T'HH:mm:ss.SSS");
+	"yyyy-MM-dd'T'HH:mm:ss.SSS");
 
 	@Override
-	public void map(Object key, Text value, Context context)
-			throws IOException, InterruptedException {
+	public void map(LongWritable key, Text value, Context context)
+	throws IOException, InterruptedException {
 		Map<String, String> parsed = MRDPUtils.transformXmlToMap(value
 				.toString());
 

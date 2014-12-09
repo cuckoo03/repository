@@ -1,29 +1,22 @@
-package com.hadoop.mapreducepatterns;
+package com.hadoop.mapreducepatterns.ch02.minmaxcount;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mrunit.mapreduce.MapDriver;
-import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
-import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.apache.hadoop.io.LongWritable
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.mrunit.mapreduce.MapDriver
+import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver
+import org.apache.hadoop.mrunit.mapreduce.ReduceDriver
+import org.junit.Before
+import org.junit.Ignore
+import org.junit.Test
 
-import com.hadoop.mapreducepatterens.MRDPUtils;
-import com.hadoop.mapreducepatterens.ch02.minmaxcount.MinMaxCountMapper;
-import com.hadoop.mapreducepatterens.ch02.minmaxcount.MinMaxCountReduce;
-import com.hadoop.mapreducepatterens.ch02.minmaxcount.MinMaxCountTuple;
+import com.hadoop.mapreducepatterens.MRDPUtils
+import com.hadoop.mapreducepatterns.MRDPUtilsTest
+import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountMapper
+import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountReduce
+import com.hadoop.mapreducepatterns.ch02.minmaxcount.MinMaxCountTuple
 
 public class MinMaxCountDriverTest {
 	private MapDriver<Object, Text, Text, MinMaxCountTuple> mapDriver;
@@ -31,7 +24,7 @@ public class MinMaxCountDriverTest {
 	private MapReduceDriver<LongWritable, Text, Text, LongWritable, Text, LongWritable> mapReduceDriver;
 
 	private final static SimpleDateFormat sdf = new SimpleDateFormat(
-			"yyyy-MM-dd'T'HH:mm:ss.SSS");
+	"yyyy-MM-dd'T'HH:mm:ss.SSS");
 
 	@Before
 	public void setUp() {
@@ -44,9 +37,9 @@ public class MinMaxCountDriverTest {
 	@Test
 	@Ignore
 	public void testMapper() throws IOException, ParseException {
-		InputStream in = MRDPUtilsTest.class.getClassLoader()
+		InputStream is = MRDPUtilsTest.class.getClassLoader()
 				.getResourceAsStream("ubuntu/data/comments.xml");
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String line = null;
 		if ((line = br.readLine()) != null) {
 			Map<String, String> parsed = MRDPUtils.transformXmlToMap(line);
@@ -72,7 +65,7 @@ public class MinMaxCountDriverTest {
 		tuple.setMax(sdf.parse("2010-07-28T20:52:11.217"));
 		tuple.setCount(1);
 		list.add(tuple);
-		
+
 		reduceDriver.withInput(new Text("1"), list);
 		reduceDriver.withOutput(new Text("1"), tuple);
 	}

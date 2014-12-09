@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterens.ch02.minmaxcount;
+package com.hadoop.mapreducepatterns.ch02.minmaxcount;
 
 import java.io.IOException;
 
@@ -13,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 /**
+ * 주어진 사용자 코멘트 목록에 대해 코멘트의 첫 시간과 미지막 시간 그리고 해당 사용자 코멘트의 총 개수를 출력한다.
  * input
  * <row Id="1" PostId="1" Text="I'm not sure how to hide the message, but why don't you get a new battery? That's what I did. You can generally get them relatively inexpensively on Ebay." CreationDate="2010-07-28T19:13:23.853" UserId="10" />
  * outout
@@ -26,7 +27,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
  */
 public class MinMaxCountDriver {
 	public static void main(String[] args) throws IOException,
-			ClassNotFoundException, InterruptedException {
+	ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();
