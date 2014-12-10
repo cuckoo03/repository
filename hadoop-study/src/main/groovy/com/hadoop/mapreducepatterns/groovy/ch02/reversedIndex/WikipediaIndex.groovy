@@ -12,7 +12,8 @@ import org.apache.hadoop.util.GenericOptionsParser
 
 /**
  * 사용자 코멘트에서 답변 게시물ID 집합에 대한 위키피디아 URL 역색인을 생성한다.
- * 
+ * output
+ * http://en.wikipedia.org/wiki/xming	91
  * @author cuckoo03
  *
  */

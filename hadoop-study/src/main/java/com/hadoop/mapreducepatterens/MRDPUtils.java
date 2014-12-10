@@ -3,6 +3,8 @@ package com.hadoop.mapreducepatterens;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.hadoop.fs.FileSystem;
+
 public class MRDPUtils {
 	/**
 	 * 스택오버플로우 데이터를 맵 자료 구조로 구문 분석한다.

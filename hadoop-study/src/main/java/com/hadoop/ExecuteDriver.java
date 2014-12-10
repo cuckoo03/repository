@@ -15,6 +15,7 @@ import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
 import com.hadoop.mapreducepatterns.groovy.ch02.average.AverageDriver;
+import com.hadoop.mapreducepatterns.groovy.ch02.counter.CountNumUsersByStateDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.medianstd.MedianStdDevDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.reversedIndex.WikipediaIndex;
@@ -64,7 +65,7 @@ public class ExecuteDriver {
 			pgd.addClass("AverageCount", AverageDriver.class, "");
 			pgd.addClass("MedianStdDev", MedianStdDevDriver.class, "");
 			pgd.addClass("WikipediaIndex", WikipediaIndex.class, "");
-			pgd.addClass("WikipediaIndexBook", com.hadoop.mapreducepatterns.ch02.invertedindex.WikipediaIndex.class, "");
+			pgd.addClass("CountNumUsersByState", CountNumUsersByStateDriver.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
