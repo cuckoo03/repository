@@ -12,7 +12,7 @@ import org.junit.Test
 
 import com.hadoop.mapreducepatterens.MRDPUtils
 import com.hadoop.mapreducepatterns.MRDPUtilsTest
-import com.hadoop.mapreducepatterns.groovy.ch02.counter.CountNumUsersByStateMapper
+import com.hadoop.mapreducepatterns.groovy.ch03.counter.CountNumUsersByStateMapper
 
 public class CountNumUsersByStateDriverTest {
 	private MapDriver<LongWritable, Text, NullWritable, NullWritable> mapDriver;

@@ -21,7 +21,7 @@ import org.apache.hadoop.util.GenericOptionsParser
  * @author cuckoo03
  *
  */
-class MedianStdDevDriver {
+class MedianStdDev {
 	static main(args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
@@ -31,7 +31,7 @@ class MedianStdDevDriver {
 			System.exit(2)
 		}
 		Job job = new Job(conf, "Comment length Median stddev By Hour")
-		job.setJarByClass(MedianStdDevDriver.class)
+		job.setJarByClass(MedianStdDev.class)
 		job.setInputFormatClass(TextInputFormat.class)
 		job.setMapOutputKeyClass(IntWritable.class)
 		job.setMapOutputValueClass(IntWritable.class)

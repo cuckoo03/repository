@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterns.groovy.ch02.counter
+package com.hadoop.mapreducepatterns.groovy.ch03.counter
 
 import org.apache.hadoop.io.LongWritable
 import org.apache.hadoop.io.NullWritable

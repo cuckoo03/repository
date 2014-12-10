@@ -22,7 +22,7 @@ import org.apache.hadoop.util.GenericOptionsParser
  * @author cuckoo03
  *
  */
-class AverageDriver {
+class AverageCount {
 	static main(args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
@@ -32,7 +32,7 @@ class AverageDriver {
 			System.exit(2)
 		}
 		Job job = new Job(conf, "StackOverflow Average Comment Length")
-		job.setJarByClass(AverageDriver.class)
+		job.setJarByClass(AverageCount.class)
 		job.setInputFormatClass(TextInputFormat.class)
 		job.setMapperClass(AverageMapper.class)
 		job.setCombinerClass(AverageReducer.class)

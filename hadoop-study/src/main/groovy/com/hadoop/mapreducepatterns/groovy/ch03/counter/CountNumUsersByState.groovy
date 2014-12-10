@@ -1,4 +1,4 @@
-package com.hadoop.mapreducepatterns.groovy.ch02.counter
+package com.hadoop.mapreducepatterns.groovy.ch03.counter
 
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.conf.Configuration
@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.util.GenericOptionsParser
 
-class CountNumUsersByStateDriver {
+class CountNumUsersByState {
 	static main(args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
@@ -20,7 +20,7 @@ class CountNumUsersByStateDriver {
 		}
 
 		Job job = new Job(conf, "Count Num Users By State")
-		job.setJarByClass(CountNumUsersByStateDriver.class)
+		job.setJarByClass(CountNumUsersByState.class)
 		job.setMapperClass(CountNumUsersByStateMapper.class)
 		FileInputFormat.addInputPath(job, new Path(otherArgs[0]))
 
