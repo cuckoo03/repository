@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.hadoop.mapreducepatterens.MRDPUtils;
+import com.hadoop.mapreducepatterns.MRDPUtils;
 
 public class MRDPUtilsTest {
 	private String xml;

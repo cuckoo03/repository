@@ -10,7 +10,7 @@ import org.apache.hadoop.mrunit.mapreduce.MapDriver
 import org.junit.Before
 import org.junit.Test
 
-import com.hadoop.mapreducepatterens.MRDPUtils
+import com.hadoop.mapreducepatterns.MRDPUtils
 import com.hadoop.mapreducepatterns.MRDPUtilsTest
 import com.hadoop.mapreducepatterns.groovy.ch03.counter.CountNumUsersByStateMapper
 

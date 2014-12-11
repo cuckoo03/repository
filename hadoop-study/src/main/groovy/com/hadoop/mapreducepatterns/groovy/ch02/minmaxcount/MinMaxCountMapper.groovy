@@ -8,7 +8,7 @@ import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Mapper
 import org.apache.hadoop.mapreduce.Mapper.Context
 
-import com.hadoop.mapreducepatterens.MRDPUtils
+import com.hadoop.mapreducepatterns.MRDPUtils
 
 public class MinMaxCountMapper extends Mapper<LongWritable, Text, Text, MinMaxCountTuple> {
 	private Text outUserId = new Text();

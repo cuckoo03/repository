@@ -8,7 +8,7 @@ import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Mapper
 import org.apache.hadoop.mapreduce.Mapper.Context
 
-import com.hadoop.mapreducepatterens.MRDPUtils;
+import com.hadoop.mapreducepatterns.MRDPUtils;
 
 class MedianStdDevMapper extends Mapper<LongWritable, Text, IntWritable,
 IntWritable>{

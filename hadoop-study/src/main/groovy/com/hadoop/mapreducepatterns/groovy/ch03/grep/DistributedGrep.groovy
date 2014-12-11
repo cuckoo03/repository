@@ -9,6 +9,11 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.util.GenericOptionsParser
 
+/**
+ * 파일을 줄 단위로 탐색하여 특정 패턴과 일치하는 줄만 출력한다.
+ * @author cuckoo03
+ *
+ */
 class DistributedGrep {
 	static main(args) {
 		Configuration conf = new Configuration()

@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
-import com.hadoop.mapreducepatterens.MRDPUtils
+import com.hadoop.mapreducepatterns.MRDPUtils
 import com.hadoop.mapreducepatterns.MRDPUtilsTest
 import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountMapper;
 import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountReduce;

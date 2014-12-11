@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-import com.hadoop.mapreducepatterens.MRDPUtils;
+import com.hadoop.mapreducepatterns.MRDPUtils;
 
 public class WikipediaIndex {
 	public static String getWikipediaURL(String text) {

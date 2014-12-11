@@ -19,6 +19,11 @@ import com.hadoop.mapreducepatterns.groovy.ch02.medianstd.MedianStdDev;
 import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.reversedIndex.WikipediaIndex;
 import com.hadoop.mapreducepatterns.groovy.ch03.counter.CountNumUsersByState;
+import com.hadoop.mapreducepatterns.groovy.ch03.distinct.DistinctUser;
+import com.hadoop.mapreducepatterns.groovy.ch03.floomfilter.BloomFiltering;
+import com.hadoop.mapreducepatterns.groovy.ch03.grep.DistributedGrep;
+import com.hadoop.mapreducepatterns.groovy.ch03.random.SimpleRandomSampling;
+import com.hadoop.mapreducepatterns.groovy.ch03.topn.TopTen;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -66,6 +71,12 @@ public class ExecuteDriver {
 			pgd.addClass("MedianStdDev", MedianStdDev.class, "");
 			pgd.addClass("WikipediaIndex", WikipediaIndex.class, "");
 			pgd.addClass("CountNumUsersByState", CountNumUsersByState.class, "");
+			pgd.addClass("DistributedGrep", DistributedGrep.class, "");
+			pgd.addClass("SimpleRandomSampling", SimpleRandomSampling.class, "");
+			pgd.addClass("BloomFiltering", BloomFiltering.class, "");
+			pgd.addClass("BloomFilteringJ", com.hadoop.mapreducepatterns.ch03.bloomfilter.BloomFiltering.class, "");
+			pgd.addClass("TopTen", TopTen.class, "");
+			pgd.addClass("DistinctUser", DistinctUser.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
