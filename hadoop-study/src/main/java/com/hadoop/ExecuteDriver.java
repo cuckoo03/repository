@@ -24,6 +24,9 @@ import com.hadoop.mapreducepatterns.groovy.ch03.floomfilter.BloomFiltering;
 import com.hadoop.mapreducepatterns.groovy.ch03.grep.DistributedGrep;
 import com.hadoop.mapreducepatterns.groovy.ch03.random.SimpleRandomSampling;
 import com.hadoop.mapreducepatterns.groovy.ch03.topn.TopTen;
+import com.hadoop.mapreducepatterns.groovy.ch04.hierarchy.PartitionedUsers;
+import com.hadoop.mapreducepatterns.groovy.ch04.hierarchy.PostCommentHierarchy;
+import com.hadoop.mapreducepatterns.groovy.ch04.totalordersort.TotalOrderSorting;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -77,6 +80,9 @@ public class ExecuteDriver {
 			pgd.addClass("BloomFilteringJ", com.hadoop.mapreducepatterns.ch03.bloomfilter.BloomFiltering.class, "");
 			pgd.addClass("TopTen", TopTen.class, "");
 			pgd.addClass("DistinctUser", DistinctUser.class, "");
+			pgd.addClass("PostCommentHierarchy", com.hadoop.mapreducepatterns.ch04.hierarchy.PostCommentHierarchy.class, "");
+			pgd.addClass("PartitionedUsers", PartitionedUsers.class, "");
+			pgd.addClass("TotalOrderSorting", TotalOrderSorting.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

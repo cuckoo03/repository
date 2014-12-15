@@ -14,7 +14,7 @@ public class MRDPUtils {
 		try {
 			String[] tokens = xml.trim().substring(5, xml.trim().length() - 3)
 					.split("\"");
-
+			
 			for (int i = 0; i < tokens.length - 1; i += 2) {
 				String key = tokens[i].trim();
 				String val = tokens[i + 1];

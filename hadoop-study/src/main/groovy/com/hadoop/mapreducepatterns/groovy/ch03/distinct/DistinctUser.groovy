@@ -12,19 +12,20 @@ import org.apache.hadoop.mapreduce.Mapper.Context
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.util.GenericOptionsParser
+import org.apache.hadoop.fs.FileSystem
 
 import com.hadoop.mapreducepatterns.MRDPUtils
 
 /**
  * 사용자 코멘트 목록에서 사용자 아이디를 구별한 집합을 구한다
- * 리듀스 출력에서 정렬을 되지 않는다.
+ * 맵의 출력 키를 Text로 할경우 리듀스에서 정렬이 되지 않는다.
  * @author cuckoo03
  *
  */
 class DistinctUser {
 	public static class DistinctUserMapper extends Mapper<LongWritable, Text,
-	Text, LongWritable> {
-		private Text outUserId = new Text()
+	LongWritable, NullWritable> {
+		private LongWritable outUserId = new LongWritable()
 		@Override
 		public void map(LongWritable key, Text value, Context context) {
 			Map<String, String> parsed = MRDPUtils.transformXmlToMap(
@@ -33,15 +34,15 @@ class DistinctUser {
 			if (userId == null) {
 				return
 			}
-			outUserId.set(userId)
+			outUserId.set(Long.parseLong(userId))
 
 			context.write(outUserId, NullWritable.get())
 		}
 	}
-	public static class DistinctUserReducer extends Reducer<Text, NullWritable,
-	Text, NullWritable> {
+	public static class DistinctUserReducer extends Reducer<LongWritable, NullWritable,
+	LongWritable, NullWritable> {
 		@Override
-		public void reduce(Text key, Iterable<NullWritable> values,
+		public void reduce(LongWritable key, Iterable<NullWritable> values,
 				org.apache.hadoop.mapreduce.Reducer.Context context) {
 			context.write(key, NullWritable.get())
 		}
@@ -61,10 +62,13 @@ class DistinctUser {
 		job.setCombinerClass(DistinctUserReducer.class);
 		FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
 
-		job.setOutputKeyClass(Text.class);
+		job.setOutputKeyClass(LongWritable.class);
 		job.setOutputValueClass(NullWritable.class);
 		job.setReducerClass(DistinctUserReducer.class);
-		FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
+		Path outputDir = new Path(otherArgs[1])
+		FileOutputFormat.setOutputPath(job, outputDir)
+
+		FileSystem.get(conf).delete(outputDir, true)
 
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
