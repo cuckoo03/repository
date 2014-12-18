@@ -25,8 +25,12 @@ import com.hadoop.mapreducepatterns.groovy.ch03.grep.DistributedGrep;
 import com.hadoop.mapreducepatterns.groovy.ch03.random.SimpleRandomSampling;
 import com.hadoop.mapreducepatterns.groovy.ch03.topn.TopTen;
 import com.hadoop.mapreducepatterns.groovy.ch04.hierarchy.PartitionedUsers;
-import com.hadoop.mapreducepatterns.groovy.ch04.hierarchy.PostCommentHierarchy;
 import com.hadoop.mapreducepatterns.groovy.ch04.totalordersort.TotalOrderSorting;
+import com.hadoop.mapreducepatterns.groovy.ch05.reduceside.ReduceSideJoinDriver;
+import com.hadoop.mapreducepatterns.groovy.ch05.replicatedjoin.ReplicatedJoinDriver;
+import com.hadoop.mapreducepatterns.groovy.ch06.jobchain.JobChainingDriver;
+import com.hadoop.mapreducepatterns.groovy.ch06.jobcontrol.JobControlDriver;
+import com.hadoop.mapreducepatterns.groovy.ch06.parallel.ParallelJobDriver;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -77,12 +81,23 @@ public class ExecuteDriver {
 			pgd.addClass("DistributedGrep", DistributedGrep.class, "");
 			pgd.addClass("SimpleRandomSampling", SimpleRandomSampling.class, "");
 			pgd.addClass("BloomFiltering", BloomFiltering.class, "");
-			pgd.addClass("BloomFilteringJ", com.hadoop.mapreducepatterns.ch03.bloomfilter.BloomFiltering.class, "");
+			pgd.addClass(
+					"BloomFilteringJ",
+					com.hadoop.mapreducepatterns.ch03.bloomfilter.BloomFiltering.class,
+					"");
 			pgd.addClass("TopTen", TopTen.class, "");
 			pgd.addClass("DistinctUser", DistinctUser.class, "");
-			pgd.addClass("PostCommentHierarchy", com.hadoop.mapreducepatterns.ch04.hierarchy.PostCommentHierarchy.class, "");
+			pgd.addClass(
+					"PostCommentHierarchy",
+					com.hadoop.mapreducepatterns.ch04.hierarchy.PostCommentHierarchy.class,
+					"");
 			pgd.addClass("PartitionedUsers", PartitionedUsers.class, "");
 			pgd.addClass("TotalOrderSorting", TotalOrderSorting.class, "");
+			pgd.addClass("ReduceSideJoin", ReduceSideJoinDriver.class, "");
+			pgd.addClass("ReplicatedJoin", ReplicatedJoinDriver.class, "");
+			pgd.addClass("JobChaining", JobChainingDriver.class, "");
+			pgd.addClass("ParallelJob", ParallelJobDriver.class, "");
+			pgd.addClass("JobControl", JobControlDriver.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

@@ -13,7 +13,7 @@ public class HDFSClient {
 	public static void main(String[] args) throws IOException {
 		Configuration conf = new Configuration();
 		System.out.println("fs.default.name:" + conf.get("fs.default.name"));
-		conf.set("fs.default.name", "hdfs://192.168.1.108:9000");
+		conf.set("fs.default.name", "hdfs://192.168.1.101:9000");
 		FileSystem fs = FileSystem.get(conf);
 
 		// create dir

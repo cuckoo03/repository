@@ -9,7 +9,8 @@
 
 	<name>hadoop-study</name>
 	<url>http://maven.apache.org</url>
-
+	<!-- 메이븐 터미널에서 clean후 install시 임포트 컴파일 오류가 나는 경우 -->
+	<!-- 이클립스에서 클린후에 터미널에서 install을 실행한다 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
