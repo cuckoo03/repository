@@ -14,6 +14,10 @@ import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
+import com.hadoop.mapreducepatterns.ch06.chainfolding.ChainFoldingDriver;
+import com.hadoop.mapreducepatterns.ch06.jobmerge.MergedJobDriver;
+import com.hadoop.mapreducepatterns.ch07.random.RandomDataGenerationDriver;
+import com.hadoop.mapreducepatterns.ch07.redis.RedisOutputDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.average.AverageCount;
 import com.hadoop.mapreducepatterns.groovy.ch02.medianstd.MedianStdDev;
 import com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount.MinMaxCountDriver;
@@ -98,6 +102,11 @@ public class ExecuteDriver {
 			pgd.addClass("JobChaining", JobChainingDriver.class, "");
 			pgd.addClass("ParallelJob", ParallelJobDriver.class, "");
 			pgd.addClass("JobControl", JobControlDriver.class, "");
+			pgd.addClass("ChainFolding", ChainFoldingDriver.class, "");
+			pgd.addClass("MergedJob", MergedJobDriver.class, "");
+			pgd.addClass("RandomDataGeneration",
+					RandomDataGenerationDriver.class, "");
+			pgd.addClass("RedisOutput", RedisOutputDriver.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

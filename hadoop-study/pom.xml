@@ -13,6 +13,7 @@
 	<!-- 이클립스에서 클린후에 터미널에서 install을 실행한다 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jedis.version>2.1.0</jedis.version>
 	</properties>
 
 	<dependencies>
@@ -50,6 +51,11 @@
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
 			<version>0.1.50</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
 		</dependency>
 	</dependencies>
 

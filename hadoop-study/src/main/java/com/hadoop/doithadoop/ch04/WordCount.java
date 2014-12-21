@@ -14,6 +14,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.hadoop.mapreduce.lib.reduce.LongSumReducer;
 
 public class WordCount {
 	public static class MyMapper extends
@@ -60,7 +61,8 @@ public class WordCount {
 		job.setInputFormatClass(TextInputFormat.class);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		
-		job.setReducerClass(MyReducer.class);
+//		job.setReducerClass(MyReducer.class);
+		job.setReducerClass(LongSumReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
 		job.setOutputFormatClass(TextOutputFormat.class);

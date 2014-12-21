@@ -135,6 +135,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <jedis.version>2.1.0</jedis.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
