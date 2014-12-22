@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+body {
+	margin: 20px auto;
+	padding: 0;
+	width: 500px;
+}
+
+.thumbs {
+	width: 100px;
+	float: left;
+}
+
+.thumbs img {
+	width: 100px;
+	border: solid 1px #ccc;
+	padding: 5px;
+	margin-bottom: 3px;
+	border: solid 1px #ccc;
+}
+
+.thumbs img:hover {
+	border-color: #EF4018;
+}
+
+#largeImg {
+	border: solid 1px #ccc;
+	width: 500px;
+	height: 280px;
+	padding: 5px;
+	margin-left: 110px;
+}
+
+#caption {
+	background: url(captionBg.png) repeat-y;
+	border: #CCC 1px thin;
+	padding: 10px;
+	position: relative;
+	color: #FFFFFF;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$(".thumbs em").hide();
+		$(".thumbs a").click(function() {
+			$("#caption").remove();
+			var path = $(this).attr("href");
+			$("#largeImg > img").attr({
+				src : path
+			});
+			var msg = $(this).next("em").text();
+
+			$("#largeImg").append("<div id='caption'></div>");
+			$("#largeImg #caption").text(msg);
+			console.log($("#largeImg #caption").height());
+			var posy = $("largeImg #caption").height() + 35;
+			$("#largeImg #caption").animate({
+				top : "-=" + posy + "px"
+			}, 500);
+			
+			$("#largeImg > img").css("opacity", "0").stop().animate({
+				opacity : 1
+			}, 1000);
+
+			console.log(path);
+			return false;
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="thumbs">
+		<a
+			href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic1.jpg"><img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic1.jpg" /></a>
+		<em>em1111111111111111111111111111111111111111111111</em> <a
+			href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic2.jpg"><img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic2.jpg" /></a>
+		<em>em2222222222222222222222222222222222222222222222</em> <a
+			href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic3.jpg"><img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic3.jpg" /></a>
+		<em>em3333333333333333333333333333333333333333333333</em>
+	</div>
+	<div id="largeImg">
+		<img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic1.jpg">
+		<div id="caption"></div>
+	</div>
+</body>
+</html>

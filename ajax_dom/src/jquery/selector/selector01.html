@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("div > a[target]").css("background", "blue");
+				// $("div > a[target='_blank']").css("background", "yellow");
+				// $("div > a[target!='_blank']").css("background", "red");
+			});
+		</script>
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<div>
+			<a href="www.a.com">a</a></br>
+			<a href="www.b.com" target="_parent">b</a></br>
+			<a href="www.c.com">c</a></br>
+			<a href="www.d.com" target="_blank">d</a></br>
+			<div>
+				<a href="www.e.com" target="_blank">e</a></br>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Insert title here</title>
+        <script>
+        	function on() {
+	            //var continue_button = document.getElementById('continue');
+				//var r = document.getElementsByName("agree");
+	            //continue_button.style.visibility = 'hidden';
+			}
+			
+            function toggle1(){
+				var switchElement = document.getElementsByName("agree");
+				var continue_button = document.getElementById('continue');
+				var textinput = document.getElementById("continue");
+				
+				for (var i = 0; i < switchElement.length; i++) {
+					var selectedObj = switchElement[i];
+					
+					if (true == selectedObj.checked) {
+						alert(selectedObj.value);
+						
+						continue_button.style.visibility = 'hidden';
+					} else {
+						continue_button.style.visibility = 'visible';
+					}
+				}
+            }
+        </script>
+    </head>
+    <body onload="on()">
+        <input type="radio" name="agree" value="y" onClick="toggle1()"/>Yes
+		<input type="radio" name="agree" value="n" onClick="toggle1()"/>No
+		<input type="text" id="continue"/>
+    </body>
+</html>

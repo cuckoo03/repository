@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div {
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+	$(function() {
+		$("div").click(function(e) {
+			$(this).text("helo");
+		});
+
+		var a = $("li:last-child");
+		$("div").text(a.length + ":");
+
+		var b = $("div#container li");
+		$("div").text(b.length);
+		console.log(b.length);
+
+	});
+</script>
+</head>
+<body>
+	<div id="container">
+		<ul>
+			<li>0</li>
+		</ul>
+		<ul>
+			<li>00</li>
+		</ul>
+	</div>
+</body>
+</html>

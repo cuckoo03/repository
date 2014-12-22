@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+/*
+네비게이션 css
+*/
+body {
+	margin: 20px auto;
+	padding: 0;
+	width: 600px;
+	font-size: 13px;
+	font-family: Arial;
+	background: #05184D;
+}
+
+div#slider {
+	margin: 0 auto;
+	background: #FFF;
+	width: 600px;
+	border: #FDF6DD;
+	margin-top: 100px;
+	overflow: hidden;
+	position: relative;
+}
+
+div#viewer {
+	height: 350px;
+	position: relative;
+}
+
+img {
+	position: absolute;
+}
+
+img#image1 {
+	left: 0px;
+	top: 0px;
+}
+
+img#image2 {
+	left: 600px;
+	top: 0px;
+}
+
+img#image3 {
+	left: 1200px;
+	top: 0px;
+}
+
+img#image4 {
+	left: 1800px;
+	top: 0px;
+}
+
+/**
+메뉴 버튼에 대한 css
+*/
+ul#btnGroup {
+	position: absolute;
+	bottom: 2%;
+	right: 0;
+	margin: 0;
+	padding: 0;
+}
+
+ul#btnGroup li {
+	float: left;
+	width: 16px;
+	height: 16px;
+	list-style: none;
+	margin-right: 6px;
+	background-color: #60F;
+	cursor: pointer;
+}
+
+ul#btnGroup li a {
+	text-decoration: none;
+	text-align: center;
+	background: #FDF6DD;
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #000;
+}
+
+ul#btnGroup li a:hover {
+	background: #CCFF00;
+}
+
+ul#btnGroup li a.act {
+	background: #F00;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$("ul li a").click(function() {
+			var strName = $(this).parent().attr("id");
+			slideTarget(strName.substr(3, 1));
+			$(this).addClass("act");
+			return false;
+		});
+
+		function slideTarget(n) {
+			var pos = Number(n) * -600;
+			$("#viewer").animate({
+				left : pos
+			}, 1500);
+		}
+
+	});
+</script>
+</head>
+<body>
+	<div id="slider">
+		<div id="viewer">
+			<img id="image1"
+				src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/slide1.jpg" />
+			<img id="image2"
+				src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/slide2.jpg" />
+			<img id="image3"
+				src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/slide3.jpg" />
+			<img id="image4"
+				src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/slide4.jpg" />
+		</div>
+		<ul id="btnGroup">
+			<li id="btn0"><a
+				href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/btn.png">1</a></li>
+			<li id="btn1"><a
+				href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/btn.png">2</a></li>
+			<li id="btn2"><a
+				href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/btn.png">3</a></li>
+			<li id="btn3"><a
+				href="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/btn.png">4</a></li>
+		</ul>
+	</div>
+</body>
+</html>
