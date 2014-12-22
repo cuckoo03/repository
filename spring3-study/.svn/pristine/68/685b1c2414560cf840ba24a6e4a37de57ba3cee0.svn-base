@@ -1,0 +1,20 @@
+package org.ibatis.service;
+
+import org.ibatis.dao.IBatisDao;
+
+public class IBatisService {
+	private IBatisDao ibatisDao;
+
+	public IBatisDao getIbatisDao() {
+		return ibatisDao;
+	}
+
+	public void setIbatisDao(IBatisDao dao) {
+		this.ibatisDao = dao;
+	}
+	
+	public void select() {
+		ibatisDao.selectTest();
+	}
+}
+

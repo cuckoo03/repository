@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="sql.resources.mapper">
+	<!-- 사용자 정보를 저장 -->
+	<insert id="insertUser" parameterType="UserVo">
+		insert /* [user-manager.xml][insertUser] */
+		into ow_user
+		(user_id, user_pw, user_name, auth_level, join_date, login_date)
+		values (#{userId}, password(#{userPw}), #{userName}, 1, now(), now())
+	</insert>
+	<!-- 인자로 받은 아뒤와 비번에 해당하는 사용자 정보를 가져온다 -->
+	<select id="select" parameterType="UserVo" resultType="UserVo">
+		select * from t1;
+	</select>
+	<!-- 인자로 받은 사용자 아이디에 해당하는 데이터를 삭제한다 -->
+	<delete id="deleteUser" parameterType="string">
+		delete /* [user-manager.xml][deleteUser] */
+		from ow_user
+		where user_id = #{userId}
+	</delete>
+</mapper>

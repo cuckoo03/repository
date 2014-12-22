@@ -1,0 +1,13 @@
+package org.ibatis.dao;
+
+import java.util.List;
+
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+public class IBatisDao extends SqlMapClientDaoSupport {
+	public void selectTest() {
+		List result = getSqlMapClientTemplate().queryForList("sql.resources.mapper.select");
+		System.out.println();
+	}
+
+}
