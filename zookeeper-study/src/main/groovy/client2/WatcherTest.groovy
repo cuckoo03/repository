@@ -1,5 +1,7 @@
 package client2
 
+import java.util.concurrent.CountDownLatch;
+
 import org.apache.zookeeper.WatchedEvent
 import org.apache.zookeeper.Watcher
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -13,10 +15,13 @@ import org.apache.zookeeper.Watcher.Event
  */
 class WatcherTest implements Watcher {
 	private static final String ZK_HOST = "192.168.1.101:2181"
-	private static final int ZK_SESSION_TIMEOUT = 6 * 1000
+	private static final int ZK_SESSION_TIMEOUT = 3 * 1000
 	private ZooKeeper zk
+	private CountDownLatch connMonitor = new CountDownLatch(1)
+	
 	public WatcherTest() throws Exception {
 		zk = new ZooKeeper(ZK_HOST, ZK_SESSION_TIMEOUT, this)
+		connMonitor.await()
 		SampleNodeWatcher watcher = new SampleNodeWatcher()
 		zk.exists("/servers", watcher)
 	}
@@ -27,6 +32,7 @@ class WatcherTest implements Watcher {
 		if (event.getType() == Event.EventType.None) {
 			switch (event.getState()) {
 				case KeeperState.SyncConnected:
+				connMonitor.countDown()
 					break
 				case KeeperState.Disconnected:
 					break

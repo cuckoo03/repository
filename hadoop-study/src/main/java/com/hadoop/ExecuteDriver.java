@@ -17,6 +17,7 @@ import com.hadoop.doithadoop.ch07.stringsort.StringSort;
 import com.hadoop.mapreducepatterns.ch06.chainfolding.ChainFoldingDriver;
 import com.hadoop.mapreducepatterns.ch06.jobmerge.MergedJobDriver;
 import com.hadoop.mapreducepatterns.ch07.random.RandomDataGenerationDriver;
+import com.hadoop.mapreducepatterns.ch07.redis.RedisInputDriver;
 import com.hadoop.mapreducepatterns.ch07.redis.RedisOutputDriver;
 import com.hadoop.mapreducepatterns.groovy.ch02.average.AverageCount;
 import com.hadoop.mapreducepatterns.groovy.ch02.medianstd.MedianStdDev;
@@ -107,6 +108,7 @@ public class ExecuteDriver {
 			pgd.addClass("RandomDataGeneration",
 					RandomDataGenerationDriver.class, "");
 			pgd.addClass("RedisOutput", RedisOutputDriver.class, "");
+			pgd.addClass("RedisInput", RedisInputDriver.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

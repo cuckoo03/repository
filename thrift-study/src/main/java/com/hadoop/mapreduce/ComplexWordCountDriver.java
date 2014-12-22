@@ -32,7 +32,12 @@ public class ComplexWordCountDriver {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 		job.setOutputFormatClass(ComplexWordCountOutputFormat.class);
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		
+		Path outputPath = new Path(args[1]);
+		FileOutputFormat.setOutputPath(job, outputPath);
+		
+		//디렉토리가 존재할 경우 기존 HDFS 출력 디렉토리를 삭제
+		outputPath.getFileSystem(conf).delete(outputPath, true);
 		
 		job.waitForCompletion(true);
 	}

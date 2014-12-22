@@ -1,6 +1,7 @@
 package com.hadoop.driver;
 
 import com.hadoop.mapreduce.ComplexWordCountDriver;
+import com.hadoop.mapreduce.DistributedCacheTest;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -30,6 +31,7 @@ public class ExecuteDriver {
 		ProgramDriver pgd = new ProgramDriver();
 		try {
 			pgd.addClass("ComplexWordCount", ComplexWordCountDriver.class, "");
+			pgd.addClass("DistributedCache", DistributedCacheTest.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;

@@ -76,6 +76,7 @@ public class DistributedCacheTest {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		DistributedCache.addCacheFile(new URI(args[2]), job.getConfiguration());
+		DistributedCache.setLocalFiles(job.getConfiguration(), args[0]);
 
 		job.waitForCompletion(true);
 	}
