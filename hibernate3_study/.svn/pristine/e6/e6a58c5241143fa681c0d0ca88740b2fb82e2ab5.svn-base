@@ -1,0 +1,16 @@
+package com.service.hibernate.spring;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.service.hibernate.hql.join.JoinA;
+
+public class HibernateDao extends HibernateDaoSupport {
+	public void testDao() {
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(JoinA.class, "a");
+		List lsit = criteria.list();
+	}
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2014 10:02:28 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.service.hibernate.spring.T1" table="T1">
+        <id name="col1" type="java.lang.Integer">
+            <column name="COL1" />
+            <generator class="assigned" />
+        </id>
+        <property name="col2" type="java.lang.String">
+            <column name="COL2" />
+        </property>
+        <property name="col3" type="java.lang.String">
+            <column name="COL3" />
+        </property>
+        <property name="col4" type="java.lang.String">
+            <column name="COL4" />
+        </property>
+        <property name="col5" type="java.lang.String">
+            <column name="COL5" />
+        </property>
+    </class>
+</hibernate-mapping>

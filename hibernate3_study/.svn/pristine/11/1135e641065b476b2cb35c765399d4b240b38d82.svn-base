@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2013 1:06:22 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.service.hibernate.onetoone.Board" table="BOARD">
+		<id name="boardId" type="int">
+			<column name="BOARDID" />
+			<generator class="increment" />
+		</id>
+		<property name="title" type="java.lang.String">
+			<column name="TITLE" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="writeDate" type="timestamp">
+			<column name="WRITEDATE" />
+		</property>
+		<one-to-one name="boardDetail"
+			class="com.service.hibernate.onetoone.BoardDetail" cascade="save-update, delete">
+		</one-to-one>
+	</class>
+</hibernate-mapping>

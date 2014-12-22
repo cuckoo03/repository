@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 5, 2013 6:11:19 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.service.hibernate.criteria.Emp" table="EMP">
+		<id name="empno" type="java.lang.Integer">
+			<column name="EMPNO" />
+			<generator class="identity" />
+		</id>
+		<property name="ename" type="java.lang.String">
+			<column name="ENAME" />
+		</property>
+		<property name="jbo" type="java.lang.String">
+			<column name="JBO" />
+		</property>
+		<property name="hireDate" type="java.util.Date">
+			<column name="HIREDATE" />
+		</property>
+		<property name="deptno" type="java.lang.Integer">
+			<column name="DEPTNO" />
+		</property>
+		<many-to-one name="dept" class="com.service.hibernate.criteria.Dept"
+			access="field" fetch="join">
+			<column name="DEPT" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+package com.service.hibernate.spring;
+
+import java.util.List;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.service.hibernate.hql.join.JoinA;
+
+public class HibernateDao extends HibernateDaoSupport {
+	public void testDao() {
+		JoinA a = new JoinA();
+		getHibernateTemplate().save(a);
+		
+		List list = getHibernateTemplate().find("from JoinA as joina");
+	}
+}

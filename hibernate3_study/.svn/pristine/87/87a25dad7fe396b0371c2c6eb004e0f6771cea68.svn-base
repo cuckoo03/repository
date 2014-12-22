@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+		<property name="hibernate.connection.username">user1</property>
+		<property name="hibernate.connection.password">12341234</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+	    <!-- 
+		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+		<property name="hibernate.connection.username">awsuser</property>
+		<property name="hibernate.connection.password">mypassword</property>
+		<property name="hibernate.connection.url">jdbc:mysql://mydbinstance.curism5qmfhp.ap-northeast-1.rds.amazonaws.com:3306/mydb</property>
+	     -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="hbm2ddl.auto">create</property>
+
+		<!-- Mapping -->
+		<mapping resource="com/service/hibernate/onetoone/Board.hbm.xml" />
+		<mapping resource="com/service/hibernate/onetoone/BoardDetail.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/onetoone2/Member.hbm.xml" />
+		<mapping resource="com/service/hibernate/onetoone2/MemberDetail.hbm.xml" />
+		
+		<mapping resource="com/service/hibernate/manytoone/Product.hbm.xml" />
+		<mapping resource="com/service/hibernate/manytoone/Order.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/manytoone2/Item.hbm.xml" />
+		<mapping resource="com/service/hibernate/manytoone2/ItemSeller.hbm.xml" />
+		<mapping resource="com/service/hibernate/manytoone2/Seller.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/onetomany/Customer.hbm.xml" />
+		<mapping resource="com/service/hibernate/onetomany/Support.hbm.xml" />
+		<mapping resource="com/service/hibernate/onetomany/Reply.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/manytomany/Person.hbm.xml" />
+		<mapping resource="com/service/hibernate/manytomany/Semina.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/manytomany2/Category.hbm.xml" />
+		<mapping resource="com/service/hibernate/manytomany2/Item.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/hql/model/T1.hbm.xml" />
+
+		<mapping resource="com/service/hibernate/hql/join/JoinA.hbm.xml" />
+		<mapping resource="com/service/hibernate/hql/join/JoinB.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

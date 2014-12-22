@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2013 12:11:37 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.service.hibernate.manytomany2.Item" table="ITEM">
+		<id name="id" type="java.lang.Integer">
+			<column name="ID" />
+			<generator class="increment" />
+		</id>
+		<set name="categoris" table="CATEGORY_ITEM" inverse="true" lazy="true"
+		    cascade="save-update">
+			<key>
+				<column name="ITEM_ID" />
+			</key>
+			<many-to-many class="com.service.hibernate.manytomany2.Category"
+				column="CATEGORY_ID" />
+		</set>
+	</class>
+</hibernate-mapping>

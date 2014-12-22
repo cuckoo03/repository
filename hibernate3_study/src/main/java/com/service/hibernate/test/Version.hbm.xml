@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 29, 2014 5:03:50 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.service.hibernate.test.Version" table="VERSION">
+        <id name="idx" type="int">
+            <column name="IDX" />
+            <generator class="identity" />
+        </id>
+        <property name="ios_min" type="java.lang.String">
+            <column name="IOS_MIN" />
+        </property>
+        <property name="ios_max" type="java.lang.String">
+            <column name="IOS_MAX" />
+        </property>
+        <property name="regdate" type="java.util.Date">
+            <column name="REGDATE" />
+        </property>
+        <property name="play_min" type="java.lang.String">
+            <column name="PLAY_MIN" />
+        </property>
+        <property name="play_max" type="java.lang.String">
+            <column name="PLAY_MAX" />
+        </property>
+        <property name="tstore_min" type="java.lang.String">
+            <column name="TSTORE_MIN" />
+        </property>
+        <property name="tstore_max" type="java.lang.String">
+            <column name="TSTORE_MAX" />
+        </property>
+        <property name="nstore_min" type="java.lang.String">
+            <column name="NSTORE_MIN" />
+        </property>
+        <property name="nstore_max" type="java.lang.String">
+            <column name="NSTORE_MAX" />
+        </property>
+        <property name="new_event" type="java.lang.String">
+            <column name="NEW_EVENT" />
+        </property>
+    </class>
+</hibernate-mapping>
