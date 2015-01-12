@@ -18,9 +18,11 @@ import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.NullOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
+import org.apache.log4j.Logger;
 
 import redis.clients.jedis.Jedis;
 
+import com.hadoop.doithadoop.ch04.WordCount;
 import com.hadoop.mapreducepatterns.MRDPUtils;
 
 /**
@@ -98,13 +100,15 @@ public class RedisOutputDriver {
 	 *
 	 */
 	public static class RedisHashRecordWriter extends RecordWriter<Text, Text> {
+		private static final Logger log = Logger.getLogger(WordCount.class
+				.getName());
 		private Map<Integer, Jedis> jedisMap = new HashMap<Integer, Jedis>();
 		private String hashKey = null;
 
 		public RedisHashRecordWriter(String hashKey, String hosts,
 				String password) {
 			this.hashKey = hashKey;
-
+			log.warn("hosts:" + hosts + ", hashKey:" + hashKey);
 			// 각 호스트를 레디스에 연결
 			int i = 0;
 			String[] split = null;

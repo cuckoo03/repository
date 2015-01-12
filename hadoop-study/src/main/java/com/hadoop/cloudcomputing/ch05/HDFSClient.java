@@ -3,8 +3,10 @@ package com.hadoop.cloudcomputing.ch05;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -16,6 +18,10 @@ public class HDFSClient {
 		conf.set("fs.default.name", "hdfs://192.168.1.101:9000");
 		FileSystem fs = FileSystem.get(conf);
 
+		System.out.println("support append:" + conf.get("dfs.support.append"));
+		conf.set("dfs.support.append", "true");
+		System.out.println("support append not yet?:" + conf.get("dfs.support.append"));
+		
 		// create dir
 		String dirName = "TestDirectory";
 		System.out
@@ -37,9 +43,14 @@ public class HDFSClient {
 		fs.mkdirs(src);
 		Path fileSrc = new Path(src, "/test01.dat");
 		OutputStream os = fs.create(fileSrc);
-		os.write("this is test".getBytes());
+		os.write("this is test\n".getBytes());
 		os.close();
 
+		FSDataOutputStream fsout = fs.append(fileSrc);
+//		PrintWriter writer = new PrintWriter(fsout);
+//		writer.append("append");
+//		writer.close();
+		
 		// read data
 		InputStream is = fs.open(fileSrc);
 		byte[] readBuf = new byte[1024];

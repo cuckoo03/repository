@@ -15,6 +15,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jedis.version>2.1.0</jedis.version>
 	</properties>
+	
+	<repositories>
+		<!-- dependency of oozie-2.3.2 -->
+		<repository>
+			<id>cloudera-repo-releases</id>
+			<url>https://repository.cloudera.com/artifactory/repo/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -28,10 +36,18 @@
 			<artifactId>groovy-all</artifactId>
 			<version>2.3.3</version>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>0.20.2</version>
+		</dependency>
+		-->
+		<dependency>
+		  <groupId>org.apache.hadoop</groupId>
+		  <artifactId>hadoop-core</artifactId>
+		  <version>0.20.2-cdh3u6</version>
+		  <type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.mrunit</groupId>
@@ -56,6 +72,16 @@
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>${jedis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yahoo.oozie</groupId>
+			<artifactId>oozie</artifactId>
+			<version>2.3.2-cdh3u6</version>
 		</dependency>
 	</dependencies>
 
@@ -166,8 +192,7 @@
 									classname="org.apache.tools.ant.taskdefs.optional.ssh.Scp"
 									classpathref="maven.dependency.classpath" />
 								<scp file="target/${project.artifactId}-${project.version}.jar"
-									todir="cuckoo03:12341234@192.168.1.101:/home/cuckoo03/" 
-									trust="true"/>
+									todir="cuckoo03:12341234@192.168.1.101:/home/cuckoo03/" trust="true" />
 							</tasks>
 						</configuration>
 					</execution>

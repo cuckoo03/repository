@@ -21,6 +21,9 @@ import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
+import org.apache.log4j.Logger;
+
+import com.hadoop.doithadoop.ch04.WordCount;
 
 import redis.clients.jedis.Jedis;
 
@@ -39,6 +42,8 @@ public class RedisInputDriver {
 	 */
 	public static class RedisHashInputSplit extends InputSplit implements
 			Writable {
+		private static final Logger log = org.apache.log4j.Logger
+				.getLogger(WordCount.class.getName());
 		private String location = null;
 		private String hashKey = null;
 		private String password = null;
@@ -49,6 +54,10 @@ public class RedisInputDriver {
 
 		public RedisHashInputSplit(String redisHost, String hash,
 				String password) {
+			log.warn("host:" + redisHost);
+			log.warn("hash:" + hash);
+			log.debug("password:" + password);
+
 			this.location = redisHost;
 			this.hashKey = hash;
 			this.password = password;

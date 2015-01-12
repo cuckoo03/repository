@@ -1,7 +1,9 @@
 package com.hadoop;
 
+import com.hadoop.cloudcomputing.ch05.AppendTest;
 import com.hadoop.cloudcomputing.ch05.HDFSClient;
 import com.hadoop.cloudcomputing.ch05.HDFSClientExample;
+import com.hadoop.cloudcomputing.ch05.MergeFiles;
 import com.hadoop.doithadoop.ch04.WordCount;
 import com.hadoop.doithadoop.ch06.countcitation.CountCitation;
 import com.hadoop.doithadoop.ch06.counttrigram.CountTrigram;
@@ -14,6 +16,7 @@ import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
+import com.hadoop.log.TomcatLogCount;
 import com.hadoop.mapreducepatterns.ch06.chainfolding.ChainFoldingDriver;
 import com.hadoop.mapreducepatterns.ch06.jobmerge.MergedJobDriver;
 import com.hadoop.mapreducepatterns.ch07.random.RandomDataGenerationDriver;
@@ -109,6 +112,9 @@ public class ExecuteDriver {
 					RandomDataGenerationDriver.class, "");
 			pgd.addClass("RedisOutput", RedisOutputDriver.class, "");
 			pgd.addClass("RedisInput", RedisInputDriver.class, "");
+			pgd.addClass("AppendTest", AppendTest.class, "");
+			pgd.addClass("MergeFiles", MergeFiles.class, "");
+			pgd.addClass("TomcatLogCount", TomcatLogCount.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
