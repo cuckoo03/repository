@@ -58,7 +58,7 @@ class TotalOrderSorting {
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()
 		if (otherArgs.length != 3) {
-			println "Usage:TotalOrderSorting <user data> <out> <sample>"
+			println "Usage:TotalOrderSorting <user data> <out dir> <num of sample>"
 			println" TotalOrderSorting users.xml /output 10"
 			System.exit(2)
 		}
@@ -93,7 +93,7 @@ class TotalOrderSorting {
 			Job orderJob = new Job(conf, "TotalOrderSortingStage")
 			orderJob.setJarByClass(TotalOrderSorting.class)
 
-			// FileInputFormat만 생략 가능 그외 inputformat은 설정해야함
+			// TextInputFormat만 생략 가능 그외 inputformat은 설정해야함
 			// 미설정시 
 			// java.io.IOException: wrong key class: org.apache.hadoop.io.LongWritable is not class org.apache.hadoop.io.Text
 			orderJob.setInputFormatClass(SequenceFileInputFormat.class)
@@ -127,8 +127,8 @@ class TotalOrderSorting {
 		}
 
 		// 파티션 파일과 스테이징 디렉토리 정리
-		FileSystem.get(conf).delete(partitionFile, false)
-		FileSystem.get(conf).delete(outputStage, true)
+//		FileSystem.get(conf).delete(partitionFile, false)
+//		FileSystem.get(conf).delete(outputStage, true)
 
 		System.exit(code)
 	}

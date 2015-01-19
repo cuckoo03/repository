@@ -1,6 +1,7 @@
 package com.hadoop;
 
 import com.hadoop.cloudcomputing.ch05.AppendTest;
+import com.hadoop.cloudcomputing.ch05.HAppendTest;
 import com.hadoop.cloudcomputing.ch05.HDFSClient;
 import com.hadoop.cloudcomputing.ch05.HDFSClientExample;
 import com.hadoop.cloudcomputing.ch05.MergeFiles;
@@ -113,6 +114,7 @@ public class ExecuteDriver {
 			pgd.addClass("RedisOutput", RedisOutputDriver.class, "");
 			pgd.addClass("RedisInput", RedisInputDriver.class, "");
 			pgd.addClass("AppendTest", AppendTest.class, "");
+			pgd.addClass("HAppendTest", HAppendTest.class, "");
 			pgd.addClass("MergeFiles", MergeFiles.class, "");
 			pgd.addClass("TomcatLogCount", TomcatLogCount.class, "");
 			pgd.driver(argv);

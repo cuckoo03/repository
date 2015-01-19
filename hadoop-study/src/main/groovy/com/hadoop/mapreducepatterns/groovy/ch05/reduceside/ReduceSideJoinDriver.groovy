@@ -79,6 +79,7 @@ class ReduceSideJoinDriver {
 			listB.clear()
 
 			values.each { value->
+				//사용자 셋 A는 사용자마다 유니크하므로 한건만 출력이 될 것이다
 				if (value.toString().charAt(0) == "A") {
 					listA.add(new Text(value.toString().substring(1)))
 				} else if (value.toString().charAt(0) == "B") {
@@ -128,10 +129,12 @@ class ReduceSideJoinDriver {
 								context.write(A, B)
 							}
 						} else {
-							listB.each {B->
-								context.write(EMPTY_TEXT, B)
-							}
+							context.write(A, EMPTY_TEXT)
 						}
+					}
+				} else {
+					listB.each {B->
+						context.write(EMPTY_TEXT, B)
 					}
 				}
 			} else if (joinType.equalsIgnoreCase("anti")) {
