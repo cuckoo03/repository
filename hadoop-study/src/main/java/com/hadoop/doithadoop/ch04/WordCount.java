@@ -21,10 +21,14 @@ import org.apache.log4j.Logger;
 public class WordCount {
 	public static class MyMapper extends
 			Mapper<LongWritable, Text, Text, LongWritable> {
-		private static final Logger log = org.apache.log4j.Logger.getLogger(WordCount.class
-				.getName());
+		private static final Logger log = org.apache.log4j.Logger
+				.getLogger(WordCount.class.getName());
 		private final static LongWritable one = new LongWritable(1);
 		private Text word = new Text();
+
+		enum RecordType {
+			COUNT
+		}
 
 		@Override
 		public void map(LongWritable key, Text value, Context context)
@@ -33,6 +37,11 @@ public class WordCount {
 			log.warn("***********");
 			log.fatal("*******end*");
 			String line = value.toString();
+			if (line != null) {
+				System.err.println("Record input:" + value);
+				context.setStatus("record input count");
+				context.getCounter(RecordType.COUNT).increment(1);
+			}
 			StringTokenizer tokenizer = new StringTokenizer(line,
 					"\t\r\n\f|,.()<> ");
 			while (tokenizer.hasMoreElements()) {
@@ -74,7 +83,7 @@ public class WordCount {
 		job.setOutputValueClass(LongWritable.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		
+
 		FileSystem.get(conf).delete(new Path(args[1]), true);
 		System.out.println(args[1] + " directory deleted.");
 
