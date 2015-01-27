@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+.active {
+	z-index: 1;
+}
+
+body {
+	margin: 20px auto;
+	padding: 0;
+	width: 620px;
+	background: #192839;
+}
+
+.fadeShow {
+	background: #666;
+	width: 600px;
+	height: 350px;
+	border: 2px solid #FDF6DD;
+}
+
+.fadeShow img {
+	position: absolute;
+}
+
+.fadeShow .active {
+	z-index: 1
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("img").addClass("active");
+
+		var timer = setInterval("fadeInOut()", 3000);
+		$("div.fadeShow").hover(function() {
+			clearInterval(timer);
+		}, function() {
+			timer = setInterval("fadeInOut()", 2000);
+		});
+	});
+
+	var showImg, nextImg;
+	function fadeInOut() {
+		showImg = $("div.fadeShow img:eq(0)");
+		nextImg = $("div.fadeShow img:eq(1)");
+		nextImg.addClass("active");
+		nextImg.css("opacity", "0").animate({
+			opacity : 1
+		}, 1000, function() {
+			$(".fadeShow").append(showImg);
+			showImg.removeClass("active");
+		});
+	}
+</script>
+</head>
+<body>
+	<div class="fadeShow">
+		<img class="active"
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic1.jpg" />
+		<img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic2.jpg" />
+		<img
+			src="file:///C:/Users/cuckoo03/workspace/ajax_dom/src/images/pic3.jpg" />
+	</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div {
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+	$(function() {
+		$("div").click(function(e) {
+			$(this).text("helo");
+		});
+
+		var str = "";
+
+		//var a = $("li:last-child");
+		//$("div").text("last-child:" + a.length);
+
+		//var b = $('div#container2').children('p');
+		//$("div#container2").text("children:" + b.length);
+		//str += "children:" + b.name + "\n";
+
+		//var c = $("div#container").find("ul");
+		//str += "find:" + c + "\n";
+
+		var prev = $("p");
+		str += "p length:" + prev.length +"\n";
+		
+		str += $("p, div").length + "\n";
+		
+		alert(str);
+	});
+</script>
+</head>
+<body>
+	<div id="container">
+		<ul>
+			<li>0</li>
+		</ul>
+		<ul>
+			<li>00</li>
+		</ul>
+	</div>
+	<div id="container2">
+		<div id="div2"></div>
+		<p id="part1">p1</p>
+		<p id="part2">p2</p>
+	</div>
+</body>
+</html>
