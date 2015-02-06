@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mrunit.mapreduce.MapDriver;
 import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
@@ -25,10 +24,8 @@ public class MRUnitTest {
 		WordCount.MyMapper m = new WordCount.MyMapper();
 		WordCount.MyReducer r = new WordCount.MyReducer();
 
-		mapDriver = new MapDriver<>();
-		mapDriver.setMapper(m);
-		reduceDriver = new ReduceDriver<>();
-		reduceDriver.setReducer(r);
+		mapDriver = new MapDriver<>(m);
+		reduceDriver = new ReduceDriver<>(r);
 
 		mapReduceDriver = new MapReduceDriver<>();
 		mapReduceDriver.setMapper(m);
@@ -58,9 +55,10 @@ public class MRUnitTest {
 
 	@Test
 	public void testMapReduce() throws IOException {
-		mapReduceDriver.withInput(new LongWritable(1), new Text("cat cat dog"));
-		mapReduceDriver.addOutput(new Text("cat"), new LongWritable(2));
-		mapReduceDriver.addOutput(new Text("dog"), new LongWritable(1));
+		mapReduceDriver.withInput(new LongWritable(1), new Text(
+				"cat cat cat dog dog"));
+		mapReduceDriver.addOutput(new Text("cat"), new LongWritable(3));
+		mapReduceDriver.addOutput(new Text("dog"), new LongWritable(2));
 
 		mapReduceDriver.runTest();
 	}

@@ -1,18 +1,22 @@
-package com.hadoop.doithadoop.ch07.index
+package com.hadoop.doithadoop.ch07.index;
 
-import org.apache.hadoop.io.WritableComparable
-import org.apache.hadoop.io.WritableUtils
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.WritableUtils;
 
 class WordID implements WritableComparable<WordID> {
-	private String word
-	private Long docID
+	private String word;
+	private Long docID;
 
 	public WordID() {
 	}
-	
+
 	public WordID(String word, long docID) {
-		this.word = word
-		this.docID = docID
+		this.word = word;
+		this.docID = docID;
 	}
 
 	/**
@@ -20,8 +24,8 @@ class WordID implements WritableComparable<WordID> {
 	 */
 	@Override
 	public void readFields(DataInput input) throws IOException {
-		word = WritableUtils.readString(input)
-		docID = input.readLong()
+		word = WritableUtils.readString(input);
+		docID = input.readLong();
 	}
 
 	/**
@@ -29,8 +33,8 @@ class WordID implements WritableComparable<WordID> {
 	 */
 	@Override
 	public void write(DataOutput output) throws IOException {
-		WritableUtils.writeString(output, word)
-		output.writeLong(docID)
+		WritableUtils.writeString(output, word);
+		output.writeLong(docID);
 	}
 
 	/**
@@ -38,7 +42,7 @@ class WordID implements WritableComparable<WordID> {
 	 */
 	@Override
 	public int compareTo(WordID o) {
-		int result = word.compareTo(o.word)
+		int result = word.compareTo(o.word);
 		if (0 == result) {
 			result = (int) (docID - o.docID);
 		}
@@ -47,12 +51,8 @@ class WordID implements WritableComparable<WordID> {
 
 	@Override
 	public String toString() {
-		return new StringBuilder()
-		.append('{')
-		.append(word)
-		.append(',')
-		.append(docID)
-		.append('}').toString()
+		return new StringBuilder().append('{').append(word).append(',')
+				.append(docID).append('}').toString();
 	}
 
 	public String getWord() {
