@@ -7,27 +7,33 @@ import java.util.List;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.MapDriver;
+import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TomcatLogCountTest {
-	private MapDriver<LongWritable, Text, Text, LogTuple> mapDriver;
-	private ReduceDriver<Text, LogTuple, Text, LongWritable> reduceDriver;
+	private MapDriver<LongWritable, Text, LongWritable, LogTuple> mapDriver;
+	private ReduceDriver<LongWritable, LogTuple, LongWritable, LongWritable> reduceDriver;
+	private MapReduceDriver<LongWritable, Text, LongWritable, LogTuple, LongWritable, LongWritable> mapReduceDriver;
 
 	@Before
 	public void setUp() {
 		mapDriver = new MapDriver<>(new TomcatLogCount.LogCountMapper());
 		reduceDriver = new ReduceDriver<>(new TomcatLogCount.LogCountReducer());
+		
+		mapReduceDriver = new MapReduceDriver<>();
+		mapReduceDriver.setMapper(new TomcatLogCount.LogCountMapper());
+		mapReduceDriver.setReducer(new TomcatLogCount.LogCountReducer());
 	}
 
 	@Test
 	public void testMapper() throws IOException {
-		String str = "0:0:0:0:0:0:0:1 - - [30/Jul/2014:17:34:16 +0900] GET /goodnight/common/ver_dual HTTP/1.1 200 223";
+		String str = "127.0.0.1 - - [20/Aug/2014:10:26:05 +0900] \"GET / HTTP/1.1\" 404 951";
 
 		mapDriver.withInput(new LongWritable(1), new Text(str));
-		mapDriver.withOutput(new Text("1"), new LogTuple());
-		mapDriver.runTest();
+		mapDriver.withOutput(new LongWritable(1), new LogTuple());
+//		mapDriver.runTest();
 	}
 
 	@Test
@@ -38,8 +44,17 @@ public class TomcatLogCountTest {
 		values.add(tuple);
 		tuple.setLocalhost("localhost2");
 		values.add(tuple);
-		reduceDriver.withInput(new Text("1"), values);
-		reduceDriver.withOutput(new Text("12"), new LongWritable(1));
-		reduceDriver.runTest();
+		reduceDriver.withInput(new LongWritable(1), values);
+		reduceDriver.withOutput(new LongWritable(12), new LongWritable(1));
+		// reduceDriver.runTest();
+	}
+
+	@Test
+	public void testMapReducer() throws IOException {
+		String str = "127.0.0.1 - - [20/Aug/2014:10:26:05 +0900] \"GET / HTTP/1.1\" 404 951";
+
+		mapReduceDriver.withInput(new LongWritable(1), new Text(str));
+		mapReduceDriver.runTest();
+		
 	}
 }

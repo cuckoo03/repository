@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableUtils;
@@ -13,14 +14,15 @@ import org.apache.hadoop.io.WritableUtils;
 public class LogTuple implements Writable {
 	private static final String separator = "\t";
 	private static final DateFormat sdf = new SimpleDateFormat(
-			"dd/MMM/yyyy:hh:mm:ss");
+			"dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
 
 	private String localhost;
 	private String identd;
 	private String userId;
 	private Date requestDate = new Date();
-	private String timezone;
 	private String requestInfo;
+	private int status;
+	private String size;
 
 	public String getLocalhost() {
 		return localhost;
@@ -49,17 +51,13 @@ public class LogTuple implements Writable {
 	public Date getRequestDate() {
 		return requestDate;
 	}
+	
+	public String getFormattedRequestDate() {
+		return sdf.format(requestDate);
+	}
 
 	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
-	}
-
-	public String getTimezone() {
-		return timezone;
-	}
-
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
 	}
 
 	public String getRequestInfo() {
@@ -70,15 +68,32 @@ public class LogTuple implements Writable {
 		this.requestInfo = requestInfo;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void write(DataOutput out) throws IOException {
 		WritableUtils.writeString(out, localhost);
 		WritableUtils.writeString(out, identd);
 		WritableUtils.writeString(out, userId);
-		WritableUtils.writeVInt(out, requestDate.getDate());
-		WritableUtils.writeString(out, timezone);
+		WritableUtils.writeVLong(out, requestDate.getTime());
 		WritableUtils.writeString(out, requestInfo);
+		WritableUtils.writeVInt(out, status);
+		WritableUtils.writeString(out, size);
 	}
 
 	@Override
@@ -86,14 +101,16 @@ public class LogTuple implements Writable {
 		localhost = WritableUtils.readString(in);
 		identd = WritableUtils.readString(in);
 		userId = WritableUtils.readString(in);
-		requestDate = new Date(WritableUtils.readVInt(in));
+		requestDate = new Date(WritableUtils.readVLong(in));
 		requestInfo = WritableUtils.readString(in);
+		status = WritableUtils.readVInt(in);
+		size = WritableUtils.readString(in);
 	}
 
 	@Override
 	public String toString() {
 		return localhost + separator + identd + separator + userId + separator
-				+ sdf.format(requestDate) + separator + timezone + separator
-				+ requestInfo;
+				+ sdf.format(requestDate) + separator + requestInfo + separator
+				+ status + separator + size;
 	}
 }

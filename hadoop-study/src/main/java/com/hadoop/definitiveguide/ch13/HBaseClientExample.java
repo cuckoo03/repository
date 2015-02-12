@@ -6,9 +6,12 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.client.Delete;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.HTablePool;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -38,7 +41,8 @@ public class HBaseClientExample {
 		}
 
 		// Run some operations
-		HTable table = new HTable(conf, tableName);
+		HTablePool pool = new HTablePool(conf, Integer.MAX_VALUE);
+		HTableInterface table = pool.getTable(tableName);
 		byte[] row1 = Bytes.toBytes("row1");
 		Put p1 = new Put(row1);
 		byte[] databytes = Bytes.toBytes("data");
@@ -46,6 +50,7 @@ public class HBaseClientExample {
 		table.put(p1);
 
 		Get g = new Get(row1);
+		g.addColumn(databytes, Bytes.toBytes("1"));
 		Result result = table.get(g);
 		System.out.println("Get:" + result);
 
@@ -58,9 +63,14 @@ public class HBaseClientExample {
 			}
 		} finally {
 			scanner.close();
+			pool.closeTablePool(tableName);
+			pool.close();
 		}
 
 		// drop the table
+		Delete d = new Delete(row1);
+		table.delete(d);
+		
 		admin.disableTable(tableName);
 		admin.deleteTable(tableName);
 	}

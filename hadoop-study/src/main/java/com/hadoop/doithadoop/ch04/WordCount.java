@@ -17,6 +17,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.mapreduce.lib.reduce.LongSumReducer;
 import org.apache.log4j.Logger;
+import org.mortbay.log.Log;
 
 public class WordCount {
 	public static class MyMapper extends
@@ -25,22 +26,22 @@ public class WordCount {
 				.getLogger(WordCount.class.getName());
 		private final static LongWritable one = new LongWritable(1);
 		private Text word = new Text();
+		private int successCount = 0;
 
-		enum RecordType {
-			COUNT
+		enum Counters {
+			SUCCESS_RECORDS
 		}
 
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-			log.info("*******start");
-			log.warn("***********");
-			log.fatal("*******end*");
 			String line = value.toString();
+			if (Log.isDebugEnabled()) {
+				log.debug("Input K:" + key + ", value:" + value);
+			}
 			if (line != null) {
-				System.err.println("Record input:" + value);
-				context.setStatus("record input count");
-				context.getCounter(RecordType.COUNT).increment(1);
+				context.getCounter(Counters.SUCCESS_RECORDS).increment(1);
+				processError(context, key, value);
 			}
 			StringTokenizer tokenizer = new StringTokenizer(line,
 					"\t\r\n\f|,.()<> ");
@@ -48,6 +49,14 @@ public class WordCount {
 				word.set(tokenizer.nextToken().toLowerCase());
 				context.write(word, one);
 			}
+		}
+
+		protected void processError(Context c, LongWritable k, Text v) {
+			log.error("Caught exception processing :" + k + ", " + v);
+
+			c.getCounter(Counters.SUCCESS_RECORDS).increment(1);
+
+			c.setStatus("Failures:" + (++successCount));
 		}
 	}
 

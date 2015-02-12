@@ -6,6 +6,7 @@ import com.hadoop.cloudcomputing.ch05.HDFSClient;
 import com.hadoop.cloudcomputing.ch05.MergeFiles;
 import com.hadoop.definitiveguide.ch13.HBaseClientExample;
 import com.hadoop.doithadoop.ch04.WordCount;
+import com.hadoop.doithadoop.ch05.LocalJobRunnerTest;
 import com.hadoop.doithadoop.ch06.countcitation.CountCitation;
 import com.hadoop.doithadoop.ch06.counttrigram.CountTrigram;
 import com.hadoop.doithadoop.ch06.join.JoinIDTitle;
@@ -16,6 +17,9 @@ import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
 import com.hadoop.doithadoop.ch07.join2.JoinIDTitle2;
 import com.hadoop.doithadoop.ch07.stringsort.StringSort;
+import com.hadoop.hbase.mapreduce.HTableInsertClient;
+import com.hadoop.hbase.mapreduce.HTableRowCounter;
+import com.hadoop.hbase.mapreduce.HTableUniqValueCounter;
 import com.hadoop.log.TomcatLogCount;
 import com.hadoop.mapreducepatterns.ch06.chainfolding.ChainFoldingDriver;
 import com.hadoop.mapreducepatterns.ch06.jobmerge.MergedJobDriver;
@@ -115,6 +119,11 @@ public class ExecuteDriver {
 			pgd.addClass("MergeFiles", MergeFiles.class, "");
 			pgd.addClass("TomcatLogCount", TomcatLogCount.class, "");
 			pgd.addClass("HBaseClientExample", HBaseClientExample.class, "");
+			pgd.addClass("LocalJobRunner", LocalJobRunnerTest.class, "");
+			pgd.addClass("HTableRowCounter", HTableRowCounter.class, "");
+			pgd.addClass("HTableUniqValueCounter",
+					HTableUniqValueCounter.class, "");
+			pgd.addClass("HTableInsertClient", HTableInsertClient.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
