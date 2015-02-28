@@ -55,7 +55,7 @@ public class SimpleHLConsumer {
 
 	public static void main(String[] args) {
 		SimpleHLConsumer consumer = new SimpleHLConsumer("master:2181",
-				"testgroup", "multitopic");
+				"testgroup", "threadtopic");
 		consumer.testConsumer();
 	}
 }

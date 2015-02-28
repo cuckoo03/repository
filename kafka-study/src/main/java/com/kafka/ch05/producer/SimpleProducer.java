@@ -16,9 +16,9 @@ public class SimpleProducer {
 	private final Properties props = new Properties();
 
 	public SimpleProducer() {
-		props.put("metadata.broker.list", "slave1:9092,slave2:9092");
+		props.put("metadata.broker.list", "master:9092");
 		props.put("serializer.class", "kafka.serializer.StringEncoder");
-		props.put("request.required.acks", "2");
+		props.put("request.required.acks", "1");
 		producer = new Producer<>(new ProducerConfig(props));
 	}
 
