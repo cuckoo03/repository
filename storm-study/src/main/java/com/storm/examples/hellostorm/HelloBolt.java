@@ -1,4 +1,4 @@
-package com.storm.gettingstarted;
+package com.storm.examples.hellostorm;
 
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;

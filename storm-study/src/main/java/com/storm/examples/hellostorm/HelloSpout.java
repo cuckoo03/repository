@@ -1,4 +1,4 @@
-package com.storm.gettingstarted;
+package com.storm.examples.hellostorm;
 
 import java.util.Map;
 
