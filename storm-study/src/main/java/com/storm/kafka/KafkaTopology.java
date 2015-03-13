@@ -20,7 +20,7 @@ public class KafkaTopology {
 		SpoutConfig kafkaConfig = new SpoutConfig(zkHosts, "kafkatopic", "",
 				"testgroup");
 		kafkaConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
-//		 kafkaConfig.forceFromStart = true;
+		 kafkaConfig.forceFromStart = true;
 		// 메시지를 처음부터 모두 받게 하는 옵션
 		// 이 옵션이 없으면 동작한 이후부터 온 메시지만 받는다
 

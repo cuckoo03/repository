@@ -6,11 +6,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.storm.blueprints.ch03.DiagnosisEvent;
-
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
+import backtype.storm.tuple.Values;
+
+import com.storm.blueprints.ch03.DiagnosisEvent;
 
 //33996 [Thread-24-b-2] INFO  com.storm.blueprints.ch03.function.CityAssignment - Key=NYC:320:395962
 //36110 [Thread-24-b-2] INFO  com.storm.blueprints.ch03.function.CityAssignment - Key=NYC:322:395962
@@ -31,9 +32,6 @@ public class HourAssignment extends BaseFunction {
 		String key = city + ":" + diagnosis.getDiag() + ":" + hourSinceEpoch;
 		LOG.info("Key={}", key);
 
-		List<Object> values = new ArrayList<>();
-		values.add(hourSinceEpoch);
-		values.add(key);
-		collector.emit(values);
+		collector.emit(new Values(hourSinceEpoch, key));
 	}
 }

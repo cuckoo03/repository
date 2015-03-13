@@ -22,16 +22,10 @@ public class DiagnosisEventEmitter implements Emitter<Long>, Serializable {
 			.getLogger(OutbreakTrendBackingMap.class);
 	private AtomicInteger successfulTransactions = new AtomicInteger();
 	private Random rand = new Random();
-	private boolean first = false;
 
 	@Override
 	public void emitBatch(TransactionAttempt tx, Long coordinatorMeta,
 			TridentCollector collector) {
-		if (!first) {
-			first = true;
-		} else {
-			return;
-		}
 		for (int i = 0; i < 10; i++) {
 			List<Object> events = new ArrayList<>();
 			double lat = new Double(-30 + Math.random() * 75);

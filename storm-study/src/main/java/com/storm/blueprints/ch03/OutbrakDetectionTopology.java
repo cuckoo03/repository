@@ -1,6 +1,5 @@
 package com.storm.blueprints.ch03;
 
-import storm.trident.Stream;
 import storm.trident.TridentTopology;
 import storm.trident.operation.builtin.Count;
 import backtype.storm.Config;
@@ -20,13 +19,12 @@ import com.storm.blueprints.ch03.state.OutbreakTreandFactory;
 public class OutbrakDetectionTopology {
 	public static StormTopology buildTopology() {
 		TridentTopology topology = new TridentTopology();
-		DiagnosisEventSpout spout = new DiagnosisEventSpout();
-		Stream inputStream = topology.newStream("event", spout);
+		topology.newStream("event", new DiagnosisEventSpout())
 
 		// 중요 이벤트 필터링
-		inputStream.each(new Fields("event"), new DiseaseFilter());
+		.each(new Fields("event"), new DiseaseFilter())
 		// 가장 근접도시 찾기
-		inputStream.each(new Fields("event"), new CityAssignment(), new Fields(
+		.each(new Fields("event"), new CityAssignment(), new Fields(
 				"city"))
 		// 시간대 찾기
 		.each(new Fields("event", "city"), new HourAssignment(),

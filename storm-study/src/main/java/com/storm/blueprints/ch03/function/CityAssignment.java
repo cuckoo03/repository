@@ -8,11 +8,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.storm.blueprints.ch03.DiagnosisEvent;
-
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
+import backtype.storm.tuple.Values;
+
+import com.storm.blueprints.ch03.DiagnosisEvent;
 
 public class CityAssignment extends BaseFunction {
 	private static final long serialVersionUID = 1L;
@@ -35,10 +36,8 @@ public class CityAssignment extends BaseFunction {
 		closestCity = "NYC";
 
 		// 값보내기
-		List<Object> values = new ArrayList<>();
-		values.add(closestCity);
 		LOG.debug("Closest city to lat={}, lng={}", diagnosis.getLat(),
 				diagnosis.getLng());
-		collector.emit(values);
+		collector.emit(new Values(closestCity));
 	}
 }
