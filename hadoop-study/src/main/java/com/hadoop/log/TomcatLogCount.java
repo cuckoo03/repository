@@ -123,8 +123,7 @@ public class TomcatLogCount {
 			String regex3 = " (\\S+)"; // - (공백 아님)
 			String regex4 = " \\[([\\w:/]+\\s[+\\-]\\d{4})\\]";
 			// time
-			// String regex4 = " \\[([\\w:/]+)";// Date: 대괄호나오고, 여러개의 // :, 공백,
-			// 숫자연속
+			// String regex4 = " \\[([\\w:/]+)";// 
 			// timezone
 			// String regex5 = "\\s([+\\-]\\d{4})\\]";// timezone
 			String regex6 = " \"(.+?)\""; // request method and url :

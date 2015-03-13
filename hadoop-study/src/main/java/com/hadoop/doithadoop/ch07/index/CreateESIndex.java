@@ -18,7 +18,7 @@ import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-class CreateESIndex {
+public class CreateESIndex {
 	public static class MyMap extends Mapper<Text, Text, Text, Text> {
 		private String baseUrl = "";
 
@@ -58,6 +58,11 @@ class CreateESIndex {
 				}
 
 				// response check
+				int httpResult = conn.getResponseCode();
+				if (httpResult == HttpURLConnection.HTTP_OK) {
+					
+				}
+				
 				if (inputLines.indexOf("\"ok\":true") < 0) {
 					context.getCounter("Stats", "Error Docs").increment(1);
 				} else {

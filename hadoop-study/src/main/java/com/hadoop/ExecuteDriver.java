@@ -3,6 +3,7 @@ package com.hadoop;
 import com.hadoop.cloudcomputing.ch05.AppendTest;
 import com.hadoop.cloudcomputing.ch05.HAppendTest;
 import com.hadoop.cloudcomputing.ch05.HDFSClient;
+import com.hadoop.cloudcomputing.ch05.HourlyFilesMerge;
 import com.hadoop.cloudcomputing.ch05.MergeFiles;
 import com.hadoop.definitiveguide.ch13.HBaseClientExample;
 import com.hadoop.doithadoop.ch04.WordCount;
@@ -12,6 +13,7 @@ import com.hadoop.doithadoop.ch06.counttrigram.CountTrigram;
 import com.hadoop.doithadoop.ch06.join.JoinIDTitle;
 import com.hadoop.doithadoop.ch06.topn.TopN;
 import com.hadoop.doithadoop.ch06.wordcount.WordCount2;
+import com.hadoop.doithadoop.ch07.index.CreateESIndex;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex2;
 import com.hadoop.doithadoop.ch07.index.InvertedIndex3;
@@ -20,6 +22,7 @@ import com.hadoop.doithadoop.ch07.stringsort.StringSort;
 import com.hadoop.hbase.mapreduce.HTableInsertClient;
 import com.hadoop.hbase.mapreduce.HTableRowCounter;
 import com.hadoop.hbase.mapreduce.HTableUniqValueCounter;
+import com.hadoop.log.HiveQueryClient;
 import com.hadoop.log.TomcatLogCount;
 import com.hadoop.mapreducepatterns.ch06.chainfolding.ChainFoldingDriver;
 import com.hadoop.mapreducepatterns.ch06.jobmerge.MergedJobDriver;
@@ -82,6 +85,7 @@ public class ExecuteDriver {
 			pgd.addClass("InvertedIndex", InvertedIndex.class, "");
 			pgd.addClass("InvertedIndex2", InvertedIndex2.class, "");
 			pgd.addClass("InvertedIndex3", InvertedIndex3.class, "");
+			pgd.addClass("ESIndex", CreateESIndex.class, "");
 			pgd.addClass("HDFSClient", HDFSClient.class, "");
 			pgd.addClass("MinMaxCount", MinMaxCountDriver.class, "");
 			pgd.addClass("AverageCount", AverageCount.class, "");
@@ -124,6 +128,8 @@ public class ExecuteDriver {
 			pgd.addClass("HTableUniqValueCounter",
 					HTableUniqValueCounter.class, "");
 			pgd.addClass("HTableInsertClient", HTableInsertClient.class, "");
+			pgd.addClass("HiveClient", HiveQueryClient.class, "");
+			pgd.addClass("HourlyFilesMerge", HourlyFilesMerge.class, "");
 			pgd.driver(argv);
 			// Success
 			exitCode = 0;
