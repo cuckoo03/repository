@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<context:component-scan base-package="com.apress.isf.spring" />
+	<bean id="envProp"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:data/env_dev.properties" />
+	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="classpath:data" />
+	</bean>
+	<bean id="menu" class="com.apress.isf.spring.ch06.Menu">
+		<property name="resource" value="classpath:data/menu.txt" />
+	</bean>
+	<bean id="userService" class="com.apress.isf.spring.ch06.UserService">
+		<property name="name" value="${user.name}" />
+	</bean>
+	<bean id="searchEngine" class="com.apress.isf.spring.ch08.SearchEngine" />
+	<bean id="beforeLogging" class="com.apress.isf.spring.ch08.BeforeLoggingModule" />
+	<bean id="afterLogging" class="com.apress.isf.spring.ch08.AfterLoggingModule" />
+	<bean id="aroundLogging" class="com.apress.isf.spring.ch08.AroundLoggingModule" />
+	<bean id="aopProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyTargetClass" value="true" />
+		<property name="target" value="searchEngine" />
+		<property name="interceptorNames">
+			<list>
+				<value>beforeLogging</value>
+				<value>afterLogging</value>
+				<value>aroundLogging</value>
+			</list>
+		</property>
+	</bean>
+	<beans profile="dev">
+		<bean id="engine" class="com.apress.isf.spring.ch07.SearchEngineService">
+			<property name="name" value="${user.name}" />
+		</bean>
+	</beans>
+</beans>
