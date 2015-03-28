@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:lang="http://www.springframework.org/schema/lang"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/task 
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/lang 
+	http://www.springframework.org/schema/lang/spring-lang.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<context:component-scan base-package="com.apress.isf.spring" />
-	<bean id="envProp"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:data/env_dev.properties" />
-	</bean>
+	<!-- PropertyPlaceholderConfigurere나 property-placeholder 중 둘다 사용가능 -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="location" value="classpath:data/env_dev.properties" /> </bean> -->
+	<context:property-placeholder location="data/env_dev.properties" />
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="classpath:data" />

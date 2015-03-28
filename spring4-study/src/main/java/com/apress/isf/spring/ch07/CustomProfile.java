@@ -9,6 +9,6 @@ public class CustomProfile implements ProfileValueSource {
 		if (key.equals("env")) {
 			return "dev";
 		}
-		return null;
+		return "dev";
 	}
 }

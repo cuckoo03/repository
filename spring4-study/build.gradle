@@ -1,4 +1,4 @@
 apply plugin : 'java'
-mainClassName = "com.spring4.ch01.Application"
+apply plugin : 'eclipse'
 //repositories { mavenCentral()  }
 //dependencies { compile("org.springframework:spring-context:4.0.6.RELEA5E") }

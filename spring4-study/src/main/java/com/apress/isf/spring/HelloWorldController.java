@@ -12,6 +12,11 @@ public class HelloWorldController {
 	@RequestMapping("/")
 	@ResponseBody
 	String getMessage() {
+		System.out.println("hello");
+		System.out.println("hello");
+		System.out.println("hello");
+		System.out.println("hello");
+		System.out.println("hello");
 		return "hello";
 	}
 
