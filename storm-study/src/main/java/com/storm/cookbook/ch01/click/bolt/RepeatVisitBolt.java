@@ -35,6 +35,7 @@ public class RepeatVisitBolt extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple input) {
+		input.getStringByField(FieldsConstant.CLIENT_KEY);
 		String clientKey = input.getStringByField(FieldsConstant.CLIENT_KEY);
 		String url = input.getStringByField(FieldsConstant.URL);
 		String key = url + ":" + clientKey;

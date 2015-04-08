@@ -7,10 +7,38 @@
   <version>0.1</version>
   <url>http://maven.apache.org</url>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-compiler</artifactId>
+              <version>2.9.0-01</version>
+              <exclusions>
+                <exclusion>
+                  <artifactId>groovy-eclipse-batch</artifactId>
+                  <groupId>org.codehaus.groovy</groupId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-batch</artifactId>
+              <version>2.3.4-01</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <compilerId>groovy-eclipse-compiler</compilerId>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -44,6 +72,7 @@
                 <transformer>
                   <mainClass>com.storm.ExecuteDriver</mainClass>
                 </transformer>
+                <transformer />
               </transformers>
             </configuration>
           </execution>
@@ -134,90 +163,22 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.apache.storm</groupId>
-      <artifactId>storm-core</artifactId>
-      <version>0.9.1-incubating</version>
+      <groupId>storm</groupId>
+      <artifactId>storm</artifactId>
+      <version>0.9.0</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
-          <artifactId>clojure</artifactId>
-          <groupId>org.clojure</groupId>
+          <artifactId>storm-console-logging</artifactId>
+          <groupId>storm</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>clj-time</artifactId>
-          <groupId>clj-time</groupId>
+          <artifactId>storm-core</artifactId>
+          <groupId>storm</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>compojure</artifactId>
-          <groupId>compojure</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>hiccup</artifactId>
-          <groupId>hiccup</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ring-devel</artifactId>
-          <groupId>ring</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ring-jetty-adapter</artifactId>
-          <groupId>ring</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>tools.logging</artifactId>
-          <groupId>org.clojure</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>math.numeric-tower</artifactId>
-          <groupId>org.clojure</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>tools.cli</artifactId>
-          <groupId>org.clojure</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-exec</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-lang</artifactId>
-          <groupId>commons-lang</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>carbonite</artifactId>
-          <groupId>com.twitter</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>snakeyaml</artifactId>
-          <groupId>org.yaml</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>httpclient</artifactId>
-          <groupId>org.apache.httpcomponents</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>disruptor</artifactId>
-          <groupId>com.googlecode.disruptor</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jgrapht-core</artifactId>
-          <groupId>org.jgrapht</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>logback-classic</artifactId>
-          <groupId>ch.qos.logback</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>log4j-over-slf4j</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>netty</artifactId>
-          <groupId>io.netty</groupId>
+          <artifactId>storm-netty</artifactId>
+          <groupId>storm</groupId>
         </exclusion>
       </exclusions>
     </dependency>

@@ -1,4 +1,4 @@
-package com.storm.examples.trident;
+package com.storm.examples.madvirus.trident;
 
 import storm.trident.operation.CombinerAggregator;
 import storm.trident.tuple.TridentTuple;

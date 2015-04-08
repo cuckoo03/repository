@@ -1,4 +1,4 @@
-package com.storm.examples.trident;
+package com.storm.examples.madvirus.trident;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

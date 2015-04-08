@@ -59,8 +59,9 @@ public class TestRepeatVisitBolt extends StormTestCase {
 				jedis.rpush("count", key);
 			}
 		}
-		
+
 	}
+
 	@Test
 	public void testExecute() {
 		Jedis jedis = new Jedis("192.168.1.101", 6300);
@@ -71,27 +72,28 @@ public class TestRepeatVisitBolt extends StormTestCase {
 		config.put("redis-port", "6300");
 		config.put("redis-pass", "12341234");
 		final OutputCollector collector = context.mock(OutputCollector.class);
-		bolt.prepare(config, null, (OutputCollector)collector);
+		bolt.prepare(config, null, (OutputCollector) collector);
 
 		assertEquals(true, bolt.isConnected());
 
 		final Tuple tuple = getTuple();
 		context.checking(new Expectations() {
 			{
-				oneOf(tuple).getStringByField(FieldsConstant.IP);
+				allowing(tuple).getStringByField(FieldsConstant.CLIENT_KEY);
+				will(returnValue(clientKey));
+				one(tuple).getStringByField(FieldsConstant.IP);
 				will(returnValue(ip));
-				oneOf(tuple).getStringByField(FieldsConstant.CLIENT_KEY);
-				will(returnEnumeration(clientKey));
-				oneOf(tuple).getStringByField(FieldsConstant.URL);
+				one(tuple).getStringByField(FieldsConstant.URL);
 				will(returnValue(url));
-				oneOf(collector).emit(new Values(clientKey, url, expected));
-				bolt.execute(tuple);
-				context.assertIsSatisfied();
-
-				if (jedis != null) {
-					jedis.disconnect();
-				}
+				one(collector).emit(new Values(clientKey, url, expected));
 			}
 		});
+		bolt.execute(tuple);
+		context.assertIsSatisfied();
+
+		if (jedis != null) {
+			jedis.disconnect();
+		}
+		System.out.println(tuple.getStringByField(FieldsConstant.CLIENT_KEY));
 	}
 }

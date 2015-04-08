@@ -1,12 +1,14 @@
-package com.storm.examples.trident;
+package com.storm.examples.madvirus.trident;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import backtype.storm.utils.Utils;
 import storm.trident.operation.TridentCollector;
 import storm.trident.spout.ITridentSpout.Emitter;
 import storm.trident.topology.TransactionAttempt;
@@ -25,8 +27,21 @@ public class LogEmitter implements Emitter<Long> {
 		}
 	}
 
+	private Random rand = new Random();
+	private String[] arr = new String[] { "A", "B", "C", "D", "E" };
+
 	private List<String> getLogs(Long coordinatorMeta) {
 		List<String> logs = new ArrayList<>();
+
+		int randNumber = rand.nextInt(5);
+		for (int i = 0; i < randNumber; i++) {
+			logs.add("ORDER:" + arr[i]);
+		}
+//		randNumber = rand.nextInt(5);
+//		for (int i = 0; i < randNumber; i++) {
+//			logs.add("ORDER:" + arr[i]);
+//		}
+		Utils.sleep(5000);
 		return logs;
 	}
 
