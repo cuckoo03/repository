@@ -1,0 +1,15 @@
+ INFO [2015-03-13 22:12:42,957] (Slf4j.java[main]:10) - Hello World
+ DEBUG [2015-03-13 22:12:42,960] (Slf4j.java[main]:11) - debug
+ ERROR [2015-03-13 22:12:42,960] (Slf4j.java[main]:12) - error
+  INFO [2015-03-13 22:12:47,305] (?[call]:?) - Hello World
+ DEBUG [2015-03-13 22:12:47,309] (?[call]:?) - debug
+ ERROR [2015-03-13 22:12:47,311] (?[call]:?) - error
+  INFO [2015-03-13 22:13:08,117] (?[call]:?) - Hello World
+ ERROR [2015-03-13 22:13:08,120] (?[call]:?) - error
+  INFO [2015-03-13 22:13:33,525] (?[invoke0]:?) - Hello World1a, 2b, 3c
+ ERROR [2015-03-13 22:13:33,527] (?[call]:?) - error
+  INFO [2015-03-13 22:13:51,249] (?[invoke0]:?) - Hello World1a, 2b, 3c
+ ERROR [2015-03-13 22:13:51,254] (?[call]:?) - error
+  INFO [2015-03-13 22:19:57,340] (?[invoke0]:?) - Hello World1a, 2b, 3c
+ ERROR [2015-03-13 22:19:57,344] (?[call]:?) - error
+ 
