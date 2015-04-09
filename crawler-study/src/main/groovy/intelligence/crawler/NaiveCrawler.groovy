@@ -11,7 +11,6 @@ import org.apache.commons.httpclient.methods.GetMethod
 import org.apache.commons.httpclient.params.HttpMethodParams
 import org.apache.http.HttpStatus
 
-
 @TypeChecked
 class NaiveCrawler {
 	private static final String USER_AGENT = "User-agent:"
@@ -22,16 +21,18 @@ class NaiveCrawler {
 	private int maxNumberUrls
 	private long delayBetweenUrls
 	private int maxDepth
-	private Pattern regexpSearchPattern
-	private Pattern httpRegexp
+	private Pattern regexpSearchPattern //집중 크롤링에 사용할 정규식
+	private Pattern httpRegexp // url을 추출하는 정규식
 	private Pattern relativeRegexp
-	// 방문한 url, 중복허용하지 않음
+	// 방문한 url의 목록을 유지, 중복허용하지 않음
 	private Map<String, CrawlerUrl> visitedUrls = null
+	// 크롤링 허가 여부를 관리
 	private Map<String, Collection<String>> sitePermissions = null
 	// 방문할 Url queue, 중복url을 허용하지 않음
 	private Queue<CrawlerUrl> urlQueue = null
 	private BufferedWriter crawlOutput = null
 	private BufferedWriter crawlStatistics = null
+	// 연관된 컨텐츠가 없는 url을 기록
 	private BufferedWriter crawlIgnoreOutput = null
 	private int numberItemSaved = 0
 
@@ -61,7 +62,7 @@ class NaiveCrawler {
 				printCrawlInfo()
 				String content = getContent(url)
 				if (isContentRelevant(content, this.regexpSearchPattern)) {
-					saveContent(url, content)
+					saveContent(url)
 					Collection<String> urlStrings = extractUrls(content, url)
 					addUrlsToUrlQueue(url, urlStrings)
 				} else {
@@ -133,7 +134,7 @@ class NaiveCrawler {
 		}
 		return false
 	}
-	//모든 URL의 깊이 확인
+	//URL의 깊이 확인
 	private boolean isDepthAcceptable(CrawlerUrl crawlerUrl) {
 		return crawlerUrl.getDepth() <= this.maxDepth
 	}
@@ -160,22 +161,21 @@ class NaiveCrawler {
 		Collection<String> disallowedPaths = new ArrayList<>()
 		if (robotFilePath != null) {
 			// 정규식 패턴 매칭을 통해 허용되지 않는 경로를 추출
-			// 즉 User-agent:*를 찾아낸다
+			// 즉 User-agent:*에 해당하는 disallow path를 찾아낸다
 			Pattern p = Pattern.compile(USER_AGENT)
 			String[] permissionSets = p.split(robotFilePath)
 			String permissionString = ""
+			String permissionTrim = ""
 			for (String permission : permissionSets) {
-				if (permission.replaceAll(" ", "").startsWith("*")) {
+				permissionTrim = permission.replaceAll(" ", "")
+				if (permissionTrim.startsWith("*")) {
 					// 허용되지 않는 경로에서 * 문자열을 제거
-					permissionString = permission.replaceAll(" ", "").substring(1)
+					permissionString = permissionTrim.substring(1)
 				}
 			}
 			p = Pattern.compile(DISALLOW)
 			String[] items = p.split(permissionString)
 			for (String s : items) {
-				if (s == "\n") {
-					continue
-				}
 				disallowedPaths.add(s.trim())
 			}
 		}
@@ -260,11 +260,13 @@ class NaiveCrawler {
 		URL textURL = crawlerUrl.getURL()
 		String host = textURL.getHost()
 		while (m.find()){
+			// ,구분자로 이어진 일치된 url string 
 			String url = m.group()
 			String[] terms = url.split("a href=\"")
 			for (String term : terms) {
 				// a href 태그중에서 url 값만을 잘라 낸다
 				if (term.startsWith("/")) {
+					// url에서 "으로 끝나는 위치를 찾아낸다
 					int index = term.indexOf("\"")
 					if (index > 0) {
 						term = term.substring(0, index)
@@ -284,7 +286,7 @@ class NaiveCrawler {
 		}
 	}
 	//관련 컨텐츠인지 검사
-	public static boolean isContentRelevant(String content, Pattern regexpPattern) {
+	public boolean isContentRelevant(String content, Pattern regexpPattern) {
 		boolean retValue = false
 		if (content != null) {
 			Matcher m = regexpPattern.matcher(content.toLowerCase())
@@ -292,7 +294,7 @@ class NaiveCrawler {
 		}
 		return retValue
 	}
-	private void saveContent(CrawlerUrl url, String content) {
+	private void saveContent(CrawlerUrl url) {
 		this.crawlOutput.append(url.getUrlString()).append("\n")
 		numberItemSaved++
 	}
@@ -300,10 +302,12 @@ class NaiveCrawler {
 	static main(args) {
 		Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>()
 		String url = "http://en.wikipedia.org/wiki/Collective_intelligence"
+//		String url = "http://ko.wikipedia.org/wiki/%EC%A7%91%EB%8B%A8_%EC%A7%80%EC%84%B1"
 		String regexp = "collective.*intelligence"
+//		String regexp = "집단지성"
 		urlQueue.add(new CrawlerUrl(url, 0))
 
-		NaiveCrawler crawler = new NaiveCrawler(urlQueue, 10, 5, 100L,
+		NaiveCrawler crawler = new NaiveCrawler(urlQueue, 5, 5, 10L,
 				regexp)
 		crawler.crawl()
 	}
