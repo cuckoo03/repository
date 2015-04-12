@@ -1,20 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.facebook</groupId>
-  <artifactId>facebookapi-study</artifactId>
-  <version>0.1</version>
-  <packaging>jar</packaging>
+	<groupId>com.facebook</groupId>
+	<artifactId>facebookapi-study</artifactId>
+	<version>0.1</version>
+	<packaging>jar</packaging>
 
-  <name>facebookapi-study</name>
-  <url>http://maven.apache.org</url>
+	<name>facebookapi-study</name>
+	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<slf4j.version>1.5.0</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<springframework.version>4.0.1.RELEASE</springframework.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -41,6 +43,37 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+		</dependency>
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.facebook4j</groupId>
+			<artifactId>facebook4j-core</artifactId>
+			<version>[2.2,)</version>
 		</dependency>
 	</dependencies>
 	<build>
