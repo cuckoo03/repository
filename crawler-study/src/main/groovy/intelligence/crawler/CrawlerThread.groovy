@@ -2,6 +2,9 @@ package intelligence.crawler
 
 import groovy.transform.TypeChecked
 
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -19,11 +22,11 @@ class CrawlerThread implements Runnable, ICrawler{
 	public static final String REGEXP_HTTP = "<a href=\"http://(.)*\">"
 	public static final String REGEXP_RELATIVE = "<a href=\"(.)*\">"
 
-	private Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>()
+	private BlockingQueue<CrawlerUrl> urlQueue
 	private int maxNumberUrls
-	private Map<String, CrawlerUrl> visitedUrls
+	private ConcurrentHashMap<String, CrawlerUrl> visitedUrls
 	private int maxDepth
-	private Map<String, Collection<String>> sitePermissions
+	private ConcurrentHashMap<String, Collection<String>> sitePermissions
 	private BufferedWriter crawlStatistics = null
 	private BufferedWriter crawlOutput = null
 	private AtomicInteger numberItemSaved
@@ -32,15 +35,12 @@ class CrawlerThread implements Runnable, ICrawler{
 	private Pattern regexpSearchPattern //집중 크롤링에 사용할 정규식
 	private Pattern httpRegexp // url을 추출하는 정규식
 	private Pattern relativeRegexp
-	
+
 	private long delayBetweenUrls
-	
-	public CrawlerThread(Queue urlQueue) {
-		this.urlQueue = urlQueue
-	}
-	public CrawlerThread(Queue<CrawlerUrl> urlQueue, int maxNumberUrls,
-	Map<String, CrawlerUrl> visitedUrls, int maxDepth,
-	Map<String, Collection<String>> sitePermissions,
+
+	public CrawlerThread(BlockingQueue<CrawlerUrl> urlQueue, int maxNumberUrls,
+	ConcurrentHashMap<String, CrawlerUrl> visitedUrls, int maxDepth,
+	ConcurrentHashMap<String, Collection<String>> sitePermissions,
 	BufferedWriter crawlStatistics, BufferedWriter crawlOutput,
 	AtomicInteger numberItemSaved, String regexpSearchPattern,
 	BufferedWriter crawlIgnoreOutput, long delayBetweenUrls) {
@@ -56,7 +56,7 @@ class CrawlerThread implements Runnable, ICrawler{
 		this.httpRegexp = Pattern.compile(REGEXP_HTTP)
 		this.relativeRegexp = Pattern.compile(REGEXP_RELATIVE)
 		this.regexpSearchPattern = Pattern.compile(regexpSearchPattern)
-		
+
 		this.crawlIgnoreOutput = crawlIgnoreOutput
 		this.delayBetweenUrls = delayBetweenUrls
 	}
@@ -101,7 +101,7 @@ class CrawlerThread implements Runnable, ICrawler{
 	private CrawlerUrl getNextUrl() {
 		CrawlerUrl nextUrl = null
 		while ((nextUrl == null) && (!urlQueue.isEmpty())) {
-			CrawlerUrl crawlerUrl = (intelligence.crawler.CrawlerUrl) this.urlQueue.remove()
+			CrawlerUrl crawlerUrl = (intelligence.crawler.CrawlerUrl) this.urlQueue.take()
 			if (doWeHavePermissionToVisit(crawlerUrl) &&
 			(!isUrlAlreadyVisited(crawlerUrl)) && isDepthAcceptable(crawlerUrl)) {
 				nextUrl = crawlerUrl
@@ -232,7 +232,8 @@ class CrawlerThread implements Runnable, ICrawler{
 	// 크롤러의 상세 상황 출력
 	private void printCrawlInfo() {
 		StringBuilder sb =new StringBuilder()
-		sb.append("queue length=").append(this.urlQueue.size())
+		sb.append(Thread.currentThread().getName())
+				.append(":queue length=").append(this.urlQueue.size())
 				.append(" visited url=").append(getNumberOfUrlsVisited())
 				.append(" site permissions=").append(this.sitePermissions.size())
 		crawlStatistics.flush()
@@ -304,7 +305,7 @@ class CrawlerThread implements Runnable, ICrawler{
 		int depth = url.getDepth() + 1
 		for (String urlString : urlStrings) {
 			if (!this.visitedUrls.containsKey(urlString)) {
-				this.urlQueue.add(new CrawlerUrl(urlString, depth))
+				this.urlQueue.put(new CrawlerUrl(urlString, depth))
 			}
 		}
 	}
