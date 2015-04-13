@@ -33,10 +33,7 @@ import org.apache.http.Header;
 public class BasicCrawler extends WebCrawler {
 
 	private final static Pattern FILTERS = Pattern
-			.compile(".*(\\.(css|js|bmp|gif|jpe?g"
-					+ "|png|tiff?|mid|mp2|mp3|mp4"
-					+ "|wav|avi|mov|mpeg|ram|m4v|pdf"
-					+ "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
+			.compile("collective.*intelligence");
 
 	/**
 	 * You should implement this function to specify whether the given url
@@ -46,8 +43,8 @@ public class BasicCrawler extends WebCrawler {
 	public boolean shouldVisit(WebURL url) {
 		String href = url.getURL().toLowerCase();
 		return !FILTERS.matcher(href).matches()
-//				&& href.startsWith("http://www.ics.uci.edu/");
-				&& href.startsWith("http://localhost:8080/");
+				&& href.startsWith("http://www.ics.uci.edu/");
+//				&& href.startsWith("collective.*intelligence");
 	}
 
 	/**
