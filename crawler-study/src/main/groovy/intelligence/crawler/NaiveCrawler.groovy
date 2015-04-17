@@ -122,7 +122,8 @@ class NaiveCrawler {
 			return false
 		}
 		if (!crawlerUrl.isCheckedForPermission()) {
-			crawlerUrl.setAllowedToVisit(computePermissionForVisiting(crawlerUrl))
+			crawlerUrl.setAllowedToVisit(true)
+//			crawlerUrl.setAllowedToVisit(computePermissionForVisiting(crawlerUrl))
 		}
 		return crawlerUrl.isAllowedToVisit()
 	}
@@ -301,13 +302,15 @@ class NaiveCrawler {
 
 	static main(args) {
 		Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>()
-		String url = "http://en.wikipedia.org/wiki/Collective_intelligence"
+		String url = "https://twitter.com"
+//		String url = "http://en.wikipedia.org/wiki/Collective_intelligence"
 //		String url = "http://ko.wikipedia.org/wiki/%EC%A7%91%EB%8B%A8_%EC%A7%80%EC%84%B1"
-		String regexp = "collective.*intelligence"
+//		String regexp = "collective.*intelligence"
 //		String regexp = "집단지성"
+		String regexp = "하둡"
 		urlQueue.add(new CrawlerUrl(url, 0))
 
-		NaiveCrawler crawler = new NaiveCrawler(urlQueue, 5, 5, 10L,
+		NaiveCrawler crawler = new NaiveCrawler(urlQueue, 100, 5, 10L,
 				regexp)
 		crawler.crawl()
 	}

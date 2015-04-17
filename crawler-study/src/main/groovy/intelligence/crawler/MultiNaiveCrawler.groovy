@@ -63,8 +63,8 @@ class MultiNaiveCrawler {
 		sleep(60000)
 		println "shutdown."
 		executor.shutdown()
-		if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
-			if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
+		if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+			if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
 				println "still running"
 				executor.shutdownNow()
 			}

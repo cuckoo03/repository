@@ -63,7 +63,7 @@ class CrawlerThread implements Runnable, ICrawler{
 
 	@Override
 	public void run() {
-		crawl();
+//		crawl();
 	}
 
 	@Override
