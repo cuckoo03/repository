@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="sql.resources.mapper">
+	<!-- 인자로 받은 아뒤와 비번에 해당하는 사용자 정보를 가져온다 -->
+	<select id="select" parameterType="TypesVo" resultType="TypesVo">
+		select * from types;
+	</select>
+</mapper>

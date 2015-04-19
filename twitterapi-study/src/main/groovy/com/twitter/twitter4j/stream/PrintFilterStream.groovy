@@ -32,12 +32,13 @@ class PrintFilterStream {
 		twitterStream.setOAuthAccessToken(new AccessToken(accessToken,
 				accessTokenSecret))
 
+		int count = 0
 		def listener = new StatusListener() {
 					@Override
 					public void onStatus(Status status) {
-						System.out.println("@" + status.getUser().getScreenName()
+						System.out.println(count++ + " @" + status.getUser().getScreenName()
 								+ " - " + status.getText())
-						sleep(1000)
+						sleep(100)
 					}
 					@Override
 					public void onDeletionNotice(StatusDeletionNotice
@@ -67,10 +68,11 @@ class PrintFilterStream {
 
 		twitterStream.addListener(listener)
 		long[] followArray = []
-//		long[] followArray = [3147697626]
 		def track = new ArrayList<String>()
-		track[0] = "spark"
+		track[0] = "twitter"
 		def trackArray = (String[])track.toArray()
-		twitterStream.filter(new FilterQuery(0, followArray, trackArray))
+		def lang = (String[])["ko"].toArray()
+		twitterStream.filter(new FilterQuery(0, followArray, trackArray, null,
+				lang))
 	}
 }
