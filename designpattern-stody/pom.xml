@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.designpattern</groupId>
-  <artifactId>designpattern-stody</artifactId>
+  <artifactId>designpattern-study</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
-  <name>designpattern-stody</name>
+  <name>designpattern-study</name>
   <url>http://maven.apache.org</url>
 
   <properties>
