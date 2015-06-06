@@ -9,11 +9,10 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.hibernate.vo.Types;
 
 public class HibernateDao extends HibernateDaoSupport {
-	public int addTypes() {
+	public void addTypes() {
 		Types types = new Types();
 		types.setTypeId("2");
-		int result = (int) getHibernateTemplate().save(types);
-		return result;
+		getHibernateTemplate().save(types);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Types> getTypes() {

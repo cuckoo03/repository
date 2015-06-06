@@ -6,4 +6,9 @@
 	<select id="select" parameterType="TypesVo" resultType="TypesVo">
 		select * from types;
 	</select>
+	<update id="update" parameterType="string">
+	    update types
+	    set typeId = #{value} 
+	    where 1=1
+	</update>
 </mapper>
