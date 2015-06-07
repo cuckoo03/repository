@@ -23,13 +23,10 @@
 	<context:component-scan base-package="com" />
 	<!-- annotation이 추가된 인스턴스가 생성되게 하려면 annotation-config 빈을 등록해야 한다. -->
 	<context:annotation-config />
-	<tx:annotation-driven transaction-manager="transactionManager2" />
 	<util:properties id="twitter4jprops"
 		location="classpath:local/twitter/twitter4j.properties" />
 	<util:properties id="hibernateProps"
 		location="classpath:local/db/hibernate/hibernate.properties" />
-	<util:properties id="mybatisProps"
-		location="classpath:local/db/mybatis/mybatis.properties" />
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" id="dataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -47,7 +44,7 @@
 	<!-- Hibernate config -->
 	<bean id="hibernateSessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource2" />
 		<property name="annotatedClasses">
 			<list>
 				<value>com.hibernate.vo.Types</value>
@@ -65,39 +62,39 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
+	<bean id="hibernatTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
 	<!-- transaction -->
+	<bean id="transactionManager1"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="transactionManager2"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource2" />
 	</bean>
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="hibernateSessionFactory" />
-	</bean>
 	<!-- Mybatis config -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/local/sql/mybatis-config.xml"></property>
+		<property name="configLocation" value="classpath:/local/sql/mybatis-config.xml"/>
 	</bean>
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource2" />
-		<property name="configLocation" value="classpath:/local/sql/mybatis-config.xml"></property>
+		<property name="configLocation" value="classpath:/local/sql/mybatis-config.xml"/>
 	</bean>
 	<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory2" />
 	</bean>
 	<!-- Hibernate DAO -->
-	<bean id="hibernateDao" class="com.hibernate.dao.HibernateDao">
-		<property name="sessionFactory" ref="hibernateSessionFactory" />
-	</bean>
+	<bean id="hibernateDao" class="com.hibernate.dao.HibernateDao"/>
 	<!-- Mybatis DAO -->
-	<bean id="mybatisDao" class="com.mybatis.dao.MybatisDao">
-	</bean>
-	<bean id="mybatisDao2" class="com.mybatis.dao.MybatisDao2">
-	</bean>
+	<bean id="mybatisDao" class="com.mybatis.dao.MybatisDao"/>
+	<bean id="mybatisDao2" class="com.mybatis.dao.MybatisDao2"/>
 	<!-- custom beans -->
 	<bean id="configProperty" class="com.spring.ConfigProperty" />
 </beans>  

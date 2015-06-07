@@ -6,9 +6,15 @@
 	<select id="select" parameterType="TypesVo" resultType="TypesVo">
 		select * from types;
 	</select>
-	<update id="update" parameterType="string">
+	<update id="update" parameterType="int">
 	    update types
-	    set typeId = #{value} 
-	    where 1=1
+	    set typeId = '0' 
+	    where 1=1 and typeId = #{value}
 	</update>
+	<insert id="insert" parameterType="int">
+		insert into types values(#{value})	    
+	</insert>
+	<delete id="delete" parameterType="int">
+	    delete from types where 1=1 
+	</delete>
 </mapper>

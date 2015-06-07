@@ -1,56 +1,47 @@
 package com.spring;
 
-import java.util.List;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hibernate.vo.Types;
-import com.mybatis.dao.MybatisDao;
+import com.hibernate.dao.HibernateDao;
 import com.mybatis.service.IMybatisService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:local/spring/application-context.xml")
 public class SpringTest {
 
-	// @Autowired
-	// private HibernateDao hibernateDao;
-
 	@Autowired
-	private MybatisDao mybatisDao;
+	private HibernateDao hibernateDao;
 
 	@Autowired
 	private IMybatisService mybatisService;
 
-	@BeforeClass
-	public static void before() {
-		System.out.println();
+	/**
+	 * hibernate는 transaction1,2 둘다에도 적용됨
+	 */
+	@Test
+	@Transactional("transactionManager2")
+	public void hibernateTest() {
+		mybatisService.insert();
+		hibernateDao.addTypes();
+		System.out.println(hibernateDao.getTypes().size());
 	}
 
 	@Test
-	public void test() {
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
+	@Transactional("transactionManager2")
+	public void mybatisTest() {
+		mybatisService.insert();
+		hibernateDao.addTypes();
+		System.out.println(mybatisService.select().size());
 	}
-
+	
 	@Test
-	@Transactional
-	@Rollback
-	public void daoTest() {
-		// System.out.println(hibernateDao.getTypes());
-		mybatisService.update();
-		List<Types> result = mybatisDao.select();
-		for (Types item : result) {
-			System.out.println(item.getTypeId());
-		}
+	@Transactional("transactionManager2")
+	public void deleteTest() {
+		mybatisService.delete();
 	}
 }
