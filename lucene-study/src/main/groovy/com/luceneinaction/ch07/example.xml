@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<address-book>
+	<contact type="individual">
+		<name>my name</name>
+		<value>my value</value>
+	</contact>
+</address-book>
