@@ -1,4 +1,4 @@
-package com.daum.car;
+package com.daum.car.htmlunit;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,6 +17,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
+import com.htmlunit.common.HtmlUnitFactory;
 
 /**
  * <p>
@@ -38,8 +39,7 @@ public class CarTalkParsingTest {
 	public void test() throws FailingHttpStatusCodeException,
 			MalformedURLException, IOException {
 
-		webClient = new WebClient(BrowserVersion.FIREFOX_38);
-		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient = HtmlUnitFactory.createDefaultWebClient();
 
 		// WAS 를 띄운다. 테스트 하고자 하는 페이지로 접근하여 데이타를 받아온다
 		page = webClient.getPage(CAFE_URL);
