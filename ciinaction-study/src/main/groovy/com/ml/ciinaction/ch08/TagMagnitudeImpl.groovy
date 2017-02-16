@@ -6,10 +6,18 @@ import groovy.transform.TypeChecked
 class TagMagnitudeImpl implements TagMagnitude {
 	private Tag tag
 	private double magnitude
+	private Long tagId
+	private String tagText
 
 	public TagMagnitudeImpl(Tag tag, double magnitude) {
 		this.tag = tag
 		this.magnitude = magnitude
+	}
+	
+	public TagMagnitudeImpl(double magnitude, long tagId, String tagText) {
+		this.magnitude = magnitude
+		this.tagId = tagId
+		this.tagText = tagText
 	}
 
 	@Override
@@ -52,5 +60,15 @@ class TagMagnitudeImpl implements TagMagnitude {
 	public String toString() {
 		return "[" +tag.getDisplayText() + ", " + tag.getStemmedText() + ", "+
 				getMagnitude() + "]"
+	}
+
+	@Override
+	public String getTagText() {
+		return this.tag.getDisplayText()
+	}
+
+	@Override
+	public Long getTagId() {
+		return tagId
 	}
 }

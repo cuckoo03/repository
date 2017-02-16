@@ -1,0 +1,372 @@
+https://nid.naver.com/nidlogin.login
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8"/>
+    <title>
+      Naver Sign in
+    </title>
+    <link href="https://nid.naver.com/favicon_1024.png" rel="apple-touch-icon-precomposed" sizes="1024x1024"/>
+    <link rel="stylesheet" type="text/css" href="https://nid.naver.com/login/css/we.css?14116"/>
+  </head>
+  <body class="global">
+    <div id="wrap">
+      <!-- header -->      <div id="header">
+        <h1>
+          <a href="http://www.naver.com" class="sp h_logo" tabindex="1" onclick="nclks('log.naver',this,event)">
+            NAVER
+          </a>
+        </h1>
+        <div class="lang">
+          <select id="locale_switch" name="locale_switch" title="language" tabindex="2" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen','zh-Hans_CN':'log.lancn','zh-Hant_TW':'log.lantw'},this,event);">
+            <option value="ko_KR">
+              한국어
+            </option>
+            <option value="en_US" selected="">
+              English
+            </option>
+            <option value="zh-Hans_CN">
+              中文(简体)
+            </option>
+            <option value="zh-Hant_TW">
+              中文(台灣)
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- //header -->      <!-- container -->      <div id="container">
+        <!-- content -->        <div id="content">
+          <div class="link_info">
+            <div class="u_keyboard">
+              <a href="javascript:viewKeyboard();" class="sp btn_key_down" id="view_keyboard" tabindex="4" onclick="nclks_clsnm('view_keyboard','sp btn_key_down','log.kbdopen','log.kbdclose',this,event)">
+                <span class="sp">
+                  PC Keyboard
+                </span>
+              </a>
+              <div class="key key_char" id="keyboard_img" style="display:none;">
+                <a href="javascript:switchkeyboard();" class="sp btn_char" id="keyboard_switch" tabindex="5" onclick="nclks_clsnm('keyboard_switch', 'sp btn_char', 'log.symbols', 'log.character',this,event)">
+                  Symbols
+                </a>
+                <span class="sp key_img">
+                   
+                </span>
+              </div>
+            </div>
+            <span class="link_group">
+              <a target="_blank" href="https://help.naver.com/support/contents/contents.nhn?serviceNo=532&amp;categoryNo=1577" tabindex="6" onclick="nclks('log.groupidlogin',this,event)">
+                Group ID Sign in
+              </a>
+            </span>
+          </div>
+          <form id="frmNIDLogin" name="frmNIDLogin" target="_top" autocomplete="off" action="https://nid.naver.com/nidlogin.login" method="post" onsubmit="return confirmSubmit();">
+            <input type="hidden" name="enctp" id="enctp" value="2"/>
+            <input type="hidden" name="encpw" id="encpw" value=""/>
+            <input type="hidden" name="encnm" id="encnm" value=""/>
+            <input type="hidden" name="svctype" id="svctype" value=""/>
+            <input type="hidden" name="svc" id="svc" value=""/>
+            <input type="hidden" name="viewtype" id="viewtype" value=""/>
+            <input type="hidden" name="locale" id="locale" value="en_US"/>
+            <input type="hidden" name="postDataKey" id="postDataKey" value=""/>
+            <input type="hidden" name="smart_LEVEL" id="smart_LEVEL" value="1"/>
+            <input type="hidden" name="logintp" id="logintp" value=""/>
+            <input type="hidden" name="url" id="url" value="http://cafe.naver.com/malltail.cafe?iframe_url=/ArticleList.nhn%3Fsearch.clubid=21820768%26amp;search.menuid=98%26amp;search.boardtype=L"/>
+            <input type="hidden" name="localechange" id="localechange" value=""/>
+            <input type="hidden" name="theme_mode" id="theme_mode" value=""/>
+            <input type="hidden" name="pre_id" id="pre_id" value=""/>
+            <input type="hidden" name="resp" id="resp" value=""/>
+            <input type="hidden" name="exp" id="exp" value=""/>
+            <input type="hidden" name="ru" id="ru" value=""/>
+            <fieldset class="login_form">
+              <legend class="blind">
+                Sign in
+              </legend>
+              <div class="input_row focus" id="id_area">
+                <span class="input_box">
+                  <label for="id" id="label_id_area" class="lbl" style="display: none;">
+                    Username
+                  </label>
+                  <input type="text" id="id" name="id" tabindex="7" accesskey="L" placeholder="Username" class="int" maxlength="41" value="" style="ime-mode: disabled;"/>
+                </span>
+                <button type="button" disabled="" title="delete" id="id_clear" class="wrg">
+                  delete 
+                </button>
+              </div>
+              <div id="err_empty_id" class="error" style="display:none;">
+                Enter your username!
+              </div>
+              <div class="input_row" id="pw_area">
+                <span class="input_box">
+                  <label for="pw" id="label_pw_area" class="lbl">
+                    Password
+                  </label>
+                  <input type="password" id="pw" name="pw" tabindex="8" placeholder="Password" class="int" maxlength="16" onkeypress="capslockevt(event);getKeysv2();" onkeyup="checkShiftUp(event);" onkeydown="checkShiftDown(event);"/>
+                </span>
+                <button type="button" disabled="" title="delete" id="pw_clear" class="wrg">
+                  delete 
+                </button>
+                <div id="err_capslock" class="ly_v2" style="display:none;">
+                  <div class="ly_box">
+                    <p>
+                      <strong>
+                        Caps Lock
+                      </strong>
+                       is on.
+                    </p>
+                  </div>
+                  <span class="sp ly_point">
+                  </span>
+                </div>
+              </div>
+              <div id="err_empty_pw" class="error" style="display:none;">
+                Enter your password!
+              </div>
+              <div id="err_invalid_case" class="error" style="display:none;">
+                <img src="https://nid.naver.com/login/image/bu.gif"/>
+              </div>
+              <span class="btn_login">
+                <input type="submit" title="Sign in" alt="Sign in" tabindex="12" value="Sign in" class="int_jogin" onclick="nclks('log.login',this,event)"/>
+              </span>
+              <div class="check_info">
+                <div class="login_check">
+                  <span class="login_check_box">
+                    <input type="checkbox" id="login_chk" name="nvlong" class="" tabindex="9" value="off" onchange="savedLong(this);nclks_chk('login_chk', 'log.keepon', 'log.keepoff',this,event)" onclick="msieblur(this);"/>
+                    <label for="login_chk" id="label_login_chk" class="sp">
+                      Stay Signed in
+                    </label>
+                  </span>
+                  <div class="ly_v2" id="persist_usage" style="display:none;">
+                    <div class="ly_box">
+                      Please use your own PC for keeping your account secure.
+                      <a target="_blank" href="https://help.naver.com/support/contents/contents.nhn?serviceNo=532&amp;categoryNo=1523" class="sp btn_check_help">
+                        View help
+                      </a>
+                      <p>
+                      </p>
+                    </div>
+                    <span class="sp ly_point">
+                    </span>
+                  </div>
+                </div>
+                <div class="pc_check">
+                  <span class="ip_check">
+                    <a href="/login/ext/help_ip3.html" target="_blank" onclick="window.open(this.href, 'IPGUIDE', 'titlebar=1, resizable=1, scrollbars=yes, width=537, height=750'); return false;" title="" tabindex="10">
+                      IP Security
+                    </a>
+                    <span class="ip_ch">
+                      <input type="checkbox" id="ip_on" checked="checked" tabindex="11" onchange="ipCheck(this,event);nclks_chk('ip_on', 'log.iponset', 'log.ipoffset',this,event)" onclick="msieblur(this);" class="" value="on"/>
+                      <label for="ip_on" id="label_ip_on" class="sp on">
+                        on
+                      </label>
+                    </span>
+                  </span>
+                  <span class="bar">
+                    |
+                  </span>
+                  <span class="dis_di">
+                    <a href="#" onclick="onetime(); nclks('log.otn',this,event); return false;" title="One-time Number">
+                      One-time Number
+                    </a>
+                    <a href="javascript:viewOnetime();" onclick="nclks('log.otnhelp',this,event)" title="Help" class="sp btn_help">
+                      Help
+                    </a>
+                    <div class="ly" id="onetime_usage" style="display:none;" onclick="javascript:viewOnetime()">
+                      <div class="ly_box">
+                        <p>
+                          When you enter One-time Number generated by Naver app, you can sign in easily and more secure.
+                        </p>
+                      </div>
+                      <span class="sp ly_point">
+                      </span>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+          <div class="position_a">
+            <div class="find_info">
+              <p>
+                Forgot your 
+                <a target="_blank" href="https://nid.naver.com/user/help.nhn?todo=idinquiry&amp;lang=en_US" onclick="try{nclks('log.searchid',this,event)}catch(e){}">
+                  Username
+                </a>
+                 or 
+                <a target="_blank" href="https://nid.naver.com/nidreminder.form" onclick="try{nclks('log.searchpass',this,event)}catch(e){}">
+                  Password?
+                </a>
+                <span class="bar">
+                  |
+                </span>
+                <a target="_blank" href="https://nid.naver.com/nidregister.form" onclick="try{nclks('log.registration',this,event)}catch(e){}">
+                  Sign up
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <address>
+          <em>
+            <a target="_blank" href="http://www.navercorp.com" class="logo" onclick="nclks('fot.naver',this,event)">
+              <span class="blind">
+                naver
+              </span>
+            </a>
+          </em>
+          <em class="copy">
+            Copyright
+          </em>
+          <em class="u_cri">
+            ©
+          </em>
+          <a target="_blank" href="http://www.navercorp.com" class="u_cra" onclick="nclks('fot.navercorp',this,event)">
+            NAVER Corp.
+          </a>
+          <span class="all_r">
+            All Rights Reserved.
+          </span>
+        </address>
+      </div>
+    </div>
+    <div class="theme_setting_message" id="themeCampaignLayer" style="display:none">
+      <div class="setting_message">
+        <h3 class="blind"/>
+        <a href="javascript:LoginTheme.closeThemeCampaign()" onclick="nclks('',this,event)" class="btn_closed">
+          <span class="blind">
+          </span>
+        </a>
+        <p class="blind">
+          <strong/>
+        </p>
+        <p class="blind">
+        </p>
+        <a href="https://help.naver.com/support/contents/contents.nhn?serviceNo=532&amp;categoryNo=11001" onclick="javascript:nclks('',this,event)" target="_blank" class="btn_view">
+          <span class="blind">
+          </span>
+        </a>
+        <p class="setting_message_txt">
+          <strong>
+            <span class="sp ico_error">
+            </span>
+          </strong>
+        </p>
+        <a href="javascript:LoginTheme.redirectConfigWindow()" onclick="nclks('',this,event)" class="btn_theme_setting">
+        </a>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://nid.naver.com/login/js/common.all.js?141216">
+//<![CDATA[
+ 
+//]]>
+    </script>
+    <script type="text/javascript" src="https://nid.naver.com/login/js/logintheme.js?150109">
+//<![CDATA[
+ 
+//]]>
+    </script>
+    <script type="text/javascript">
+//<![CDATA[
+
+var disp_stat = "20";
+var session_keys = "";
+var pc_keyboard_close="<span class=\"sp\">PC Keyboard</span>";
+var pc_keyboard_open="<span class=\"sp\">PC Keyboard</span>";
+var view_char="Character";
+var view_symbol="Symbols";
+
+addInputEvent('id', 'id_area');
+addInputEvent('pw', 'pw_area');
+
+initSmartLevel();
+var login_chk = $('login_chk');
+if(login_chk.attachEvent) {
+	login_chk.attachEvent("onchange", function(){persist_usage();});
+} else if (login_chk.addEventListener) {
+	login_chk.addEventListener("change", function(){persist_usage();}, false);
+}
+function persist_usage()
+{
+	var login_chk = $("login_chk");
+	if (login_chk.checked==true)
+	{
+		show("persist_usage");
+		hide('onetime_usage');
+		view_onetimeusage = false;
+	}
+	else
+	{
+		hide("persist_usage");
+	}
+}
+var view_onetimeusage = false;
+function viewOnetime()
+{
+	if (view_onetimeusage)
+	{
+		hide('onetime_usage');
+		view_onetimeusage = false;
+	}
+	else
+	{
+		hide("persist_usage");
+		show('onetime_usage');
+		view_onetimeusage = true;
+	}
+}
+try{
+	if (navigator.appVersion.toLowerCase().indexOf("win") != -1) {
+		$('id').style.imeMode = "disabled";
+		document.msCapsLockWarningOff = true;
+	}
+}catch(e) {}
+try{
+	if ( $('id').value.length == 0 )
+	{
+		$('id').focus();
+	}
+	else
+	{
+		$('pw').focus();
+	}
+}catch (e){}
+try{
+	var nid_buk = localStorage.getItem("nid_buk");
+	if (nid_buk!=null && nid_buk.length>0)
+	{
+		LoginTheme.setCookieNameValue("nid_buk", escape(nid_buk));
+	}
+	else
+	{
+		nid_nnb = getCookie('NNB');
+		if (nid_nnb!=null && nid_nnb.length>0)
+		{
+			localStorage.setItem("nid_buk", nid_nnb);
+			LoginTheme.setCookieNameValue("nid_buk", escape(nid_nnb));
+		}
+	}
+}catch(e){}
+
+
+//]]>
+    </script>
+    <script type="text/javascript" src="https://nid.naver.com/login/js/common.util.js">
+    </script>
+    <script type="text/javascript">
+//<![CDATA[
+ lcs_do(); 
+//]]>
+    </script>
+    <script type="text/javascript">
+//<![CDATA[
+
+var nsc = "nid.login_en";
+
+//]]>
+    </script>
+    <div id="nv_stat" style="display:none;">
+      20
+    </div>
+  </body>
+</html>
+

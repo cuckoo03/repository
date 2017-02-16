@@ -6,6 +6,7 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 abstract class FontSizeComputationStrategyImpl implements FontSizeComputationStrategy {
+	// double 형의 동일함을 체크하기 위핸  사용
 	private static final double PRECISION = 0.00001
 	private Integer numSizes
 	private String prefix
@@ -36,7 +37,7 @@ abstract class FontSizeComputationStrategyImpl implements FontSizeComputationStr
 			// 폰트 크기 지정
 			elements.each { tce ->
 				// 적당한 폰트 버킷을 할당한다
-				def index = Math.floor((scaleCount(tce.getWeight()) - minScaled) / diff)
+				def index = (int) Math.floor((scaleCount(tce.getWeight()) - minScaled) / diff)
 				if (Math.abs(tce.getWeight() - maxCount) < PRECISION)
 					index = this.numSizes - 1
 
@@ -53,6 +54,11 @@ abstract class FontSizeComputationStrategyImpl implements FontSizeComputationStr
 		return this.prefix
 	}
 
+	@Override
+	public String toString() {
+		return "numSize:$numSizes, prefix:$prefix"
+	}
+	
 	// 상속받는 클래스에서 구현한게끔 추상클래스의 멤버 함수로 설계한다.
 	protected abstract double scaleCount(double count)
 }

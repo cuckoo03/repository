@@ -1,5 +1,7 @@
 package com.ml.ciinaction.ch03
 
+import com.ml.ciinaction.ch04.MetaDataVector
+
 import groovy.transform.TypeChecked
 
 @TypeChecked
@@ -15,8 +17,23 @@ class TagCloudImpl implements TagCloud {
 		Collections.sort(this.elements)
 	}
 
+	public TagCloudImpl(MetaDataVector metaDataVector,
+	FontSizeComputationStrategy strategy) {
+		this(getTagCloudElements(metaDataVector), strategy)
+	}
+
 	@Override
 	public List<TagCloudElement> getTagCloudElements() {
 		return this.elements
+	}
+
+	public static List<TagCloudElement> getTagCloudElements(MetaDataVector
+			metaDataVector) {
+		def list = new ArrayList<TagCloudElement>()
+		metaDataVector.getTagMetaDataMagnitude().each { tm ->
+			list.add(new TagCloudElementImpl(tm.getTagText(), tm.getMagnitude()))
+		}
+
+		return null
 	}
 }

@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.hibernate.vo.Types;
 
+@Repository
 public class HibernateDao {
 	@Resource(name = "hibernateTemplate")
 	private HibernateTemplate template;

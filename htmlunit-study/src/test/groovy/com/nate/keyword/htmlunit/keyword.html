@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko"
+	class="unix unkown ">
+<head profile="http://a9.com/-/spec/opensearch/1.1/">
+<meta http-equiv="content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="autocomplete" content="off" />
+<meta property="og:title" content=" – 네이트 통합 검색" />
+<meta property="og:url"
+	content="http://search.daum.net/nate?w=tot&amp;q=" />
+<meta property="og:description" content="네이트 검색에서 에 대한 최신정보를 찾아보세요." />
+<meta property="og:image"
+	content="http://i1.search.daumcdn.net/s/search_all/2014/image/img_search_bn.png" />
+<title>– 네이트 통합 검색</title>
+<link href="http://www.nate.com/favicon.ico" type="image/x-icon"
+	rel="shortcut icon" />
+<link rel="search" type="application/opensearchdescription+xml"
+	href="http://top-sc.daum-img.net/w3c/OpenSearch.xml" title="Daum" />
+<link rel="stylesheet" type="text/css"
+	href="http://i1.search.daumcdn.net/s/search/2015/css/common.0922171029.css"
+	charset="utf-8" />
+<link rel="stylesheet" type="text/css"
+	href="http://i1.search.daumcdn.net/s/search/2015/css/coll_cont.1005171456.css"
+	charset="utf-8" />
+<link rel="stylesheet" type="text/css"
+	href="http://i1.search.daumcdn.net/s/search/2015/css/search_rwd.1005171456.css"
+	charset="utf-8" />
+<script type="text/javascript">
+
+var uk = "Vhsk5a97@5EAAG9eq10AAAB3";
+var mk = "Vhsk5a97@5EAAG9eq10AAAB3";
+var viewio = "o";
+var viewsite = "0002L";
+var ServerTime = "20151012121133";
+var EnQuery = "";
+var utf8Query = "";
+var topQuery = "";
+var backQuery = "";
+var login_yn = "N";
+var encodeType = "0";
+var sugLocCode = "";
+var refCode = "";
+var bucketType = "";
+var ud = "";
+var name_check = "0";
+var mobileDevice = "N";
+var param_w="tot";
+var pageLoadedTime = 0;
+var startTime = new Date().getTime();
+var usrIp = "175.193.43.214";
+var searchLog = {
+uc: 0,
+dl: "",
+url: "https://sl.search.daum.net/smartlog/click"
+};
+</script>
+<script type="text/javascript"
+	src="http://i1.search.daumcdn.net/s/search/2015/js/search_static.0908175448.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://i1.search.daumcdn.net/s/search/2015/js/search_tf.0826142733.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
+
+SF.oldTabIdx = null;
+daum.addEvent(window,"load",function() {
+var directIndex = daum.$$("#daumIndex a.link_direct");
+if (directIndex && typeof directIndex != "undefined") {
+for (var i = 0, len = directIndex.length; i < len; i++) {
+var directBtn = directIndex[i];
+daum.Event.addEvent(directBtn,"click",function(e) {
+var targetId = this.href.split("#")[1];
+var target = daum.$(targetId);
+SF.oldTabIdx = target.getAttribute('tabindex');
+target.style.outlineWidth = 0;
+target.setAttribute('tabindex',0);
+target.focus();
+if (SF.oldTabIdx == null) {
+target.removeAttribute('tabindex');
+} else {
+target.setAttribute('tabindex',SF.oldTabIdx);
+}
+});
+}
+}
+});
+</script>
+<script type="text/template" id="pagingTemplate">
+<span class="paging_inner">
+<% if(ePage<=1){ %>
+<br/><br/>
+<% } else { %>
+<% if(cPage>1){ %>
+<a href="<%=prevLink%>" class="ico_comm1 btn_page btn_prev" onclick='<%=log({rc:"", p:"", e:1, r:""})%>'>이전</a>
+<% } else { %>
+<span class="btn_page btn_prev">이전</span>
+<% } %>
+<% for(var i=sPage, j=0; i<=ePage; i++, j++){ %>
+<% if(i==cPage){ %>
+<span class="screen_out">현재페이지</span><em class="btn_page"><%=i%></em>
+<% } else { %>
+<a href="<%=linksArr[j]%>" class="btn_page" onclick='<%=log({p:i, r:(j+1), rc:(ePage-sPage+1), e:""})%>'><%=i%></a>
+<% } %>
+<% } %>
+<% if(totPage>cPage){ %>
+<a href="<%=nextLink%>" class="ico_comm1 btn_page btn_next" onclick='<%=log({rc:"", p:"", e:2, r:""})%>'><em>다음</em></a>
+<% } else { %>
+<span class="btn_page btn_next">다음</span>
+<% } %>
+<% } %>
+</span>
+</script>
+<!--[if IE]>
+<script src="http://s1.daumcdn.net/img.search/search/js/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+	<nav id="daumIndex" class="d_direct">
+		<a href="#daumBody" class="link_direct">본문 바로가기</a> <a href="#daumGnb"
+			class="link_direct">메뉴 바로가기</a> <a href="#realtimeIssueTitle"
+			class="link_direct">실시간이슈 바로가기</a>
+	</nav>
+	<div id="tooltipContent"></div>
+	<!-- TT -->
+	<div id="saq" style="display: none"></div>
+	<article id="daumWrap" class="daum_wrap">
+		<!-- MAIN_TEMPLATE_HEADER_START -->
+		<style type="text/css">
+.ico_search {
+	background:
+		url(http://i1.search.daumcdn.net/s/search_all/2013/image/search_nate.gif)
+		no-repeat
+}
+
+#daumHead {
+	height: 100px;
+	padding-top: 0;
+	font-family: 'Apple SD Gothic Neo', '돋움', dotum, sans-serif;
+	background-color: #f6f6f6
+}
+
+#daumHead h1 {
+	margin: 6px 18px 0 29px
+} /* 2014-05-29 수정 */
+#daumLogo {
+	float: left
+}
+
+#daumHead .inner_header {
+	padding-top: 42px
+}
+
+* body #daumHead {
+	min-width: 1132px
+} /* 2014-05-29 추가 */
+/* 검색창 */
+#daumSearch {
+	margin-right: 363px
+}
+
+#daumHead #daumSearch {
+	width: 660px;
+	margin-right: 0
+} /* 2013-12-30 수정 */
+#daumSearch .fld_total {
+	width: 508px
+} /* 2013-12-30 추가 */
+#daumSearch .fld_total .box_searchbar {
+	height: 39px;
+	padding-right: 70px;
+	background:
+		url(http://i1.search.daumcdn.net/s/search_all/2013/image/search_nate.gif)
+		no-repeat 0 0
+}
+
+#daumSearch .fld_total .search_on {
+	position: relative;
+	background-position: 0 0
+}
+
+#daumSearch .fld_total .tf_keyword {
+	width: 410px;
+	height: 18px;
+	margin: 11px 10px 0;
+	padding: 0;
+	border: 0 none;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 18px;
+	font-family: 'Apple SD Gothic Neo', '돋움', dotum, sans-serif;
+	background-color: transparent;
+	outline: none;
+	color: #000
+}
+
+#daumSearch .fld_total .btn_search {
+	right: 0;
+	width: 65px;
+	height: 39px;
+	border: 0 none;
+	background-position: -443px 0
+} /* 2013-12-30 수정 */
+#daumSearch .fld_total .btn_search:hover {
+	background-position: -443px 0
+}
+
+#daumHead .wrap_suggestBox {
+	margin-right: 0
+} /* 2013-12-30 수정 */
+#daumHead .suggestBox .baseBox {
+	border-top-color: #f21816
+}
+/* footer 수정 : 2015-09-24 grey */
+* body #daumFoot {
+	min-width: 1132px
+}
+
+* body #daumFoot .inner_footer {
+	width: 1132px
+}
+
+#daumFoot .fld_total {
+	width: 466px
+}
+
+#daumFoot .fld_total .box_searchbar {
+	height: 36px;
+	padding-right: 61px;
+	background-position: 0 -40px
+}
+
+#daumFoot .fld_total .tf_keyword {
+	width: 380px
+}
+
+#daumFoot .fld_total .btn_search {
+	width: 61px;
+	height: 36px;
+	right: 0;
+	background-position: -405px -40px
+}
+
+#daumFoot .fld_total .btn_search:hover {
+	background-position: -405px -40px
+}
+
+#suggestFooter {
+	width: 466px
+}
+
+#daumFoot .suggestBox .baseBox {
+	width: 466px;
+	border-bottom-color: #f21816
+}
+/* 2013-12-20 수정 시작 */
+/* nate 상단 gnb */
+.nate_gnb {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	z-index: 10;
+	width: 1100px
+}
+
+.nate_gnb .img_nate {
+	overflow: hidden;
+	font-size: 0;
+	line-height: 0;
+	background:
+		url(http://i1.search.daumcdn.net/s/search_all/2013/image/img_nate.png)
+		no-repeat 0 0;
+	text-indent: -9999px
+}
+
+.nate_gnb .link_g {
+	margin: 0 3px 0 3px;
+	font-size: 11px;
+	line-height: 13px;
+	color: #666;
+	letter-spacing: -1px
+}
+
+.nate_gnb .link_g:hover {
+	color: #f12c1b
+}
+
+.nate_gnb .direct_nate {
+	float: right;
+	padding-top: 4px
+}
+
+.nate_gnb .direct_nate .list_nate {
+	float: left;
+	padding-top: 2px
+}
+
+.nate_gnb .direct_nate li {
+	float: left
+}
+
+.nate_gnb .more_nate {
+	float: left;
+	padding-top: 2px
+}
+
+.nate_gnb .more_nate .link_g {
+	float: left
+}
+
+.nate_gnb .link_more .txt_more {
+	float: left;
+	margin: 1px 2px 0 0;
+}
+
+.nate_gnb .link_more .img_nate {
+	float: left;
+	width: 6px;
+	height: 3px;
+	margin-top: 4px;
+	background-position: 0 -40px
+}
+
+.nate_gnb .mobile_service {
+	float: left
+}
+
+.nate_gnb .mobile_service .link_mobile {
+	float: left;
+	width: 52px;
+	height: 16px;
+	background-position: 0 0
+}
+
+.nate_gnb .relate_service {
+	float: left;
+	padding-top: 6px
+}
+
+.nate_gnb .relate_service .link_g {
+	float: left
+}
+
+.nate_gnb .relate_service .txt_bar {
+	float: left;
+	padding: 0 1px 0 2px;
+	font-size: 11px;
+	line-height: 13px;
+	color: #d3d3d3
+}
+/* 더보기 레이어 */
+.layer_nate {
+	position: absolute;
+	top: 25px;
+	font-size: 11px;
+	letter-spacing: -1px
+}
+
+.layer_natemore {
+	right: 58px;
+	width: 331px;
+	height: 135px;
+	background:
+		url(http://i1.search.daumcdn.net/s/search_all/2013/image/layer_natemore.gif)
+		no-repeat 0 0
+}
+
+.layer_natemore .list_g {
+	overflow: hidden;
+	width: 100%;
+	padding-top: 8px
+}
+
+.layer_natemore li {
+	float: left;
+	margin-bottom: 4px
+}
+
+.layer_natemore .nate_list {
+	display: inline;
+	float: left;
+	width: 155px;
+	height: 100px;
+	margin: 9px 0 0 12px
+}
+
+.layer_natemore .nate_list li {
+	width: 45px
+}
+
+.layer_natemore .nate_list .fst {
+	width: 57px
+}
+
+.layer_natemore .cyworld_list {
+	display: inline;
+	float: right;
+	width: 150px;
+	height: 100px;
+	margin: 9px 10px 0 0
+}
+
+.layer_natemore .cyworld_list li {
+	width: 74px
+}
+
+.layer_natemore .tit_more {
+	overflow: hidden;
+	width: 100%
+}
+
+.layer_natemore .tit_more .txt_g {
+	float: left;
+	padding: 4px 0 0 5px;
+	color: #444
+}
+
+.layer_natemore .tit_more .ico_nate {
+	float: left;
+	width: 14px;
+	height: 16px;
+	background-position: -10px -40px
+}
+
+.layer_natemore .tit_more .ico_cyworld {
+	float: left;
+	width: 15px;
+	height: 16px;
+	background-position: -30px -40px
+}
+
+.layer_natemore .etc_list {
+	padding: 6px 14px 0 0;
+	text-align: right;
+	clear: both
+}
+
+.layer_natemore .etc_list .link_g {
+	float: none;
+	color: #838383
+}
+
+.layer_natemore .etc_list .txt_bar {
+	font-size: 8px;
+	color: #f1f1f1
+}
+
+.layer_nate .btn_close {
+	position: absolute;
+	top: 9px;
+	right: 8px;
+	width: 15px;
+	height: 15px;
+	background-position: -40px -20px
+}
+/* 모바일 레이어 */
+.layer_nateqr {
+	right: 0;
+	width: 260px;
+	height: 184px;
+	background:
+		url(http://i1.search.daumcdn.net/s/search_all/2013/image/layer_nateqr.gif)
+		no-repeat 0 0
+}
+
+.layer_nateqr .tit_mobile {
+	display: block;
+	width: 209px;
+	padding: 19px 0 7px;
+	margin: 0 auto;
+	font-size: 12px;
+	border-bottom: 1px solid #e8e8e8
+}
+
+.layer_nateqr .tit_mobile .emph_nate {
+	color: #f01c0c
+}
+
+.layer_nateqr .qr_nate {
+	display: inline;
+	width: 88px;
+	margin-top: 9px;
+	text-align: center
+}
+
+.layer_nateqr .qr_web {
+	float: left;
+	margin-left: 32px
+}
+
+.layer_nateqr .qr_app {
+	float: right;
+	margin-right: 32px
+}
+
+.layer_nateqr .thumb_img {
+	display: block
+}
+
+.layer_nateqr .txt_qr {
+	display: block;
+	padding-top: 3px
+}
+
+.layer_nateqr .qr_nate .link_intro {
+	display: block;
+	width: 40px;
+	height: 18px;
+	margin: 2px auto 0;
+	background-position: 0 -20px
+}
+
+.layer_nateqr .btn_close {
+	top: 14px
+}
+/* nate 광고 */
+#daumHead .ad_nate {
+	overflow: hidden;
+	position: absolute;
+	top: 13px;
+	right: 9px;
+	width: 191px;
+	height: 83px
+}
+/* footer nate 추가 시작 : 2015-09-25 grey */
+#Footer {
+	clear: both;
+	float: none;
+	width: 970px;
+	height: auto;
+	margin: 40px auto 0 auto;
+	padding: 19px 0 30px 0;
+	border-top: 1px solid #e4e4e4;
+	background-image: none;
+	text-align: center;
+	color: #666;
+	line-height: 1.4em
+}
+
+#Footer ul, #Footer dd, #Footer dl, #Footer p {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	font-family: '돋움', dotum, Apple SD Gothic Neo, sans-serif
+}
+
+#Footer a:link, #Footer a:visited, #Footer a:hover, #Footer a:active {
+	color: #666;
+	text-decoration: none
+}
+
+#Footer a:hover {
+	text-decoration: underline
+}
+
+#Footer dl {
+	float: none;
+	height: 23px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+#Footer dl dt {
+	display: none
+}
+
+#Footer dl dd {
+	width: 100%;
+	font-size: 12px;
+	vertical-align: top;
+	text-align: center;
+	background: none
+}
+
+#Footer dl span {
+	margin: 0 0 0 -2px;
+	color: #e5e5e5
+}
+
+#Footer address {
+	display: inline;
+	margin-right: 3px;
+	font-style: normal
+}
+
+#Footer .copyright {
+	float: left;
+	width: 100%;
+	margin-top: 13px;
+	margin-bottom: 20px;
+	font-family: Verdana, sans-serif;
+	font-size: 9px
+}
+
+#Footer .copyright a {
+	text-decoration: none;
+	color: #ff6600
+}
+
+#Footer .copyright a:hover {
+	text-decoration: underline
+}
+
+#Footer .copyright strong {
+	font-family: Verdana, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #ff6600
+}
+
+#Footer .copyright strong span.sk {
+	font-family: Verdana, serif;
+	font-size: 10px;
+	color: #ff2400
+}
+
+#Footer .info_legal {
+	padding: 7px 0 0 0;
+	font-size: 11px;
+	line-height: 1.3;
+	color: #888
+}
+/* footer nate 추가 끝 */
+</style>
+		<header id="daumHead">
+			<div id="innerHeader" class="inner_header">
+				<h1>
+					<a id="daumLogo" href="http://www.nate.com/?f=search"
+						title="NATE 메인페이지로 가기" target="_top"><img
+						src="http://i1.search.daumcdn.net/s/search_all/2013/image/logo_nate.png"
+						width="105" height="27" alt="NATE" /></a> <span id="daumServiceLogo"
+						class="screen_out">검색</span>
+				</h1>
+				<form id="daumSearch" name="search" method="get"
+					onsubmit="check_submit(); return false;">
+					<fieldset class="fld_total">
+						<legend class="screen_out"> 검색폼 </legend>
+						<input type="hidden" id="nil_suggest" name="nil_suggest"
+							value="btn" method="get" /> <input type="hidden" id="nil_ch"
+							name="nil_ch" value="" /> <input type="hidden" name="rtupcoll"
+							value="" /> <input type="hidden" name="w" value="tot" /> <input
+							type="hidden" name="m" value="" /> <input type="hidden" id="f"
+							name="f" value="" /> <input type="hidden" name="lpp" value="" />
+						<input type="hidden" name="DA" value="SBCO" /> <input
+							type="hidden" name="sug" value="" /> <input type="hidden"
+							name="sq" value="" /> <input type="hidden" name="o" value="" />
+						<input type="hidden" name="sugo" value="" />
+						<div class="box_searchbar">
+							<input type="text" class="tf_keyword" id="q" name="q"
+								title="검색어 입력" value="" autocomplete="off" spellcheck="false" />
+							<a href="#" id="vkeyboardButtonDiv"
+								class="ico_comm3 btn_keyboard hide" type="button"
+								onclick="_jsVirtualKeyboardHandle.call();smartLog(this, 's=TO&amp;a=HQGI&amp;pg=1&amp;e=1&amp;rc=1&amp;dc=BFJ',event);return false;">한글입력기</a>
+							<div id="VKILayout" style="display: none;"></div>
+							<button type="submit" id="daumBtnSearch"
+								class="ico_search btn_search">
+								<span class="ir_wa">검색</span>
+							</button>
+						</div>
+						<div id="wrap_suggestBox" class="wrap_suggestBox">
+							<div id="suggestBox" class="suggestBox box_sub"></div>
+						</div>
+					</fieldset>
+				</form>
+				<div class="cl_b"></div>
+				<div class="nate_gnb">
+					<div class="relate_service">
+						<a href="http://www.nate.com/?f=natesvc" class="link_g">네이트
+							메인가기</a>
+					</div>
+					<div class="direct_nate">
+						<div class="screen_out">네이트 서비스 바로가기</div>
+						<ul class="list_nate">
+							<li><a href="http://mail3.nate.com/" class="link_g">메일</a></li>
+							<li><a href="http://news.nate.com" class="link_g">뉴스</a></li>
+							<li><a href="http://pann.nate.com/" class="link_g">판</a></li>
+							<li><a href="http://pann.nate.com/video" class="link_g">동영상</a>
+							</li>
+						</ul>
+						<div class="screen_out">싸이월드 서비스 바로가기</div>
+						<ul class="list_nate">
+							<li><a href="http://comics.nate.com/main/" class="link_g">웹툰</a>
+							</li>
+							<li><a href="http://game.nate.com" class="link_g">게임</a></li>
+							<li><a href="http://shopping.nate.com" class="link_g">쇼핑</a>
+							</li>
+						</ul>
+						<div class="more_nate" id="daumSearchNateMoreLayer">
+							<a href="http://www.nate.com/sitemap/index.html"
+								class="link_g link_more"><span class="txt_more">더보기&gt;</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="ad_nate">
+					<iframe
+						src="http://www.nate.com/main/srv/why/whyIssueSearch.html?v=2"
+						border="0" frameborder="0" scrolling="no"></iframe>
+				</div>
+			</div>
+		</header>
+		<!-- // daumHead -->
+		<!-- 2013-12-12 header 수정 끝 -->
+		<script type="text/html" id="suggest-footer-template">
+<div>
+<span>
+<div class="fl"></div><div class="fr"><a href="http://erms.nate.com/faq/exSelfFAQA.jsp?PageNo=1&amp;nodeId=NODE0000001258&amp;parentNodeId=NODE0000001253&amp;grandParentNodeId=&amp;nodeDepth=4&amp;checkFaq=0&amp;faqId=FAQS0000012169&amp;index=9" class="isSuggest" target="_blank">서제스트란?</a></div>
+</span>
+</div>
+</script>
+		<script type="text/javascript">
+var suggestInstance = new suggest.Suggest(document.getElementById('innerHeader'), {
+inputEl: 'q',
+suggestBoxEl: 'suggestBox',
+searchButtonEl: 'daumBtnSearch',
+type: 'DEFAULT',
+autoFocus: 'WRITE',
+suggestLimit: 15,
+recentLimit: 15,
+isReverse: false,
+searchURL: '',
+APIServer: {
+host: 'http://suggest.pct.daum.net/total_search_pssuggest',
+queries: {
+'mod': 'json',
+'code': 'utf_in_out'
+}
+},
+AnswerAPIServer: 'http://instant.search.daum.net/suggest/index.daum',
+enableRecentList: false,
+enableFooter: true
+});
+suggestInstance.on('click-item', function () {
+var f = document.search;
+var clickedItemInfo = suggestInstance.getActiveItem();
+var data = clickedItemInfo.data;
+var index = clickedItemInfo.index;
+var type = clickedItemInfo.type;
+f.sug.value = "";
+f.DA.value = "";
+f.nil_suggest.value = "";
+var sgtq = null;
+var sn = null;
+var _ci = function() {
+return document.createElement('input');
+};
+if (clickedItemInfo.type === 'ANSWER') {
+f.sug.value = "totex";
+f.DA.value = "EKS";
+f.nil_suggest.value = "sugsch";
+} else {
+if (data) {
+sgtq = suggestInstance.getUserEnteredQuery();
+sn = index > -1 ? index + 1 : '';
+if (sgtq != null && sgtq != "" ) {
+if (sgtq != null && sgtq != "" && sn != null && sn != "") {
+f.sq.value = sgtq;
+f.o.value = sn;
+f.sugo.value = suggestInstance.getSuggestions().length;
+}
+}
+if (type && type === 'RECENT') {
+f.DA.value = "FFV";
+if (!f.nil_profile) {
+var input = document.createElement('input');
+input.type = 'hidden';
+input.name = 'nil_profile';
+f.appendChild(input);
+} else {
+f.nil_profile.value = '';
+}
+f.nil_profile.value = "reckwd";
+} else {
+f.DA.value = "GIQ";
+f.nil_suggest.value = "sugsch";
+}
+} else {
+f.nil_suggest.value = "btn";
+f.DA.value = "SBC";
+}
+}
+check_submit();
+});
+daum.suggest = rudolph;
+try{
+document.search.w.value = daum.getParam("w") || "tot";
+document.search.m.value = daum.getParam("m") || "";
+document.search.f.value = daum.getParam("f") || "";
+}catch(e){}
+</script>
+		<!-- MAIN_TEMPLATE_HEADER_END -->
+		<style type="text/css">
+#bingHead .suggestBox {
+	top: 36px;
+	left: 166px;
+	width: 353px;
+	border: 0 none;
+	font-family: '맑은고딕', Malgun Gothic;
+	clear: both
+} /* 2014-05-29 수정 */
+#bingHead .suggestBox .baseBox {
+	width: 353px;
+	border-top-color: #b4b4b4
+}
+</style>
+		<article id="daumContent">
+			<div id="cMain">
+				<script type="text/javascript">
+
+_jsSetCookieNonEscape = function(name,value){
+document.cookie = name+"="+value+"; path=/;";
+};
+daum.Browser.setCookie("ODT", "IIMZ_VO2Z_NNSZ_BR1Z_CCBZ_FGKZ_WSAZ_");
+daum.Browser.setCookie("DDT", "NKSZ_BRDZ_IVRZ_DICZ_GG1Z_1DVZ_SNPZ_");
+_jsSetCookieNonEscape("DTQUERY", "" );
+
+</script>
+				<hr />
+				<form name="cUccForm" method="get">
+					<input type="hidden" name="kword" /> <input type="hidden"
+						name="colid" /> <input type="hidden" name="docid" /> <input
+						type="hidden" name="backurl" />
+				</form>
+				<form name="urForm" method="get">
+					<input type="hidden" name="q" />
+				</form>
+				<div class="clr"></div>
+				<!-- // daumGnb -->
+				<div name="searchData" id="searchData" class="skiptonavi"></div>
+				<!-- End Header -->
+				<!-- DELIMITER_LINE_FEED -->
+				<script type="text/javascript">
+
+/* base data sa */
+var uk = "Vhsk5a97@5EAAG9eq10AAAB3";
+var mk = "Vhsk5a97@5EAAG9eq10AAAB3";
+var viewio = "o";
+var viewsite = "0002L";
+var ServerTime = "20151012121133";
+var EnQuery = "";
+var utf8Query = "";
+var topQuery = "";
+var backQuery = "";
+var login_yn = "N";
+var encodeType = "0";
+/* plus */
+var sugLocCode = "";
+var refCode = "";
+var bucketType = "";
+var ud = "";
+var name_check = "0";
+var pageLoadedTime = 0;
+var startTime = new Date().getTime();
+var searchLog = {
+uc: 0,
+dl: "",
+url: "https://sl.search.daum.net/smartlog/click"
+};
+/* end plus */
+
+var ref_code = "";
+</script>
+				<nav id="mNav">
+					<div id="daumGnb">
+						<ul class="gnb_comm">
+							<li class="on"><span class="screen_out">선택된 항목</span> <a
+								href="?w=tot&amp;q=&amp;DA=NTB" class="tab tab_total"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=1&amp;rc=1&amp;e=0&amp;e1=TO&amp;e2=TOTZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">통합검색</span></a></li>
+							<li class=""><a
+								href="?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q="
+								class="tab tab_img"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=1&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=IIMZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">이미지</span></a></li>
+							<li class=""><a
+								href="?w=vclip&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q="
+								class="tab tab_vclip"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=2&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=VO2Z&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">동영상</span></a></li>
+							<li class=""><a
+								href="?w=news&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;cluster=y&amp;cluster_page=1&amp;q="
+								class="tab tab_news"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=3&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=NNSZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">뉴스</span></a></li>
+							<li class=""><a
+								href="?w=blog&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q="
+								class="tab tab_blog"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=4&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=BR1Z&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">블로그</span></a></li>
+							<li class=""><a
+								href="?w=cafe&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;ASearchType=1&amp;lpp=10&amp;rlang=0&amp;q="
+								class="tab tab_cafe"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=5&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=CCBZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">카페</span></a></li>
+							<li class=""><a
+								href="?w=social&amp;m=web&amp;sort_type=socialweb&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q="
+								class="tab tab_social"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=6&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=FGKZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">트위터</span></a></li>
+							<li class=""><a
+								href="?w=web&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;lpp=10&amp;q="
+								class="tab tab_webdoc"
+								onclick="smartLog(this, &quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=7&amp;rc=1&amp;e=2&amp;e1=TO&amp;e2=WSAZ&amp;dc=NTB&quot;, event);"><span
+									class="txt_tab">웹문서</span></a></li>
+							<li class="deffence "><a
+								href="?w=knowledge&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q="
+								class="tab tab_knowledge"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=1&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=NKSZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">팁</span></a></li>
+							<li class="deffence "><a
+								href="?w=board&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;lpp=10&amp;q="
+								class="tab tab_board"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=2&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=BRDZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">게시판</span></a></li>
+							<li class="deffence "><a
+								href="?w=site&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;lpp=10&amp;q="
+								class="tab tab_site"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=3&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=IVRZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">사이트</span></a></li>
+							<li class="deffence "><a target="_blank"
+								href="http://dic.daum.net/search.do?q=" class="tab tab_dic"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=4&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=DICZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">어학사전</span></a></li>
+							<li class="deffence "><a target="_blank"
+								href="http://map.daum.net/?from=total&amp;nil_suggest=btn&amp;tab=place&amp;q="
+								class="tab tab_map"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=5&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=GG1Z&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">지도</span></a></li>
+							<li class="deffence "><a target="_blank"
+								href="http://100.daum.net/search/entry?q="
+								class="tab tab_dic100"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=6&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=1DVZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">백과사전</span></a></li>
+							<li class="deffence "><a target="_blank"
+								href="http://shopping.daum.net/in/search?srchhow=Cexpo&amp;q="
+								class="tab tab_shop"
+								onclick="smartLog(this,&quot;s=TO&amp;a=TATO&amp;pg=1&amp;r=1&amp;p=7&amp;rc=1&amp;e=3&amp;e1=TO&amp;e2=SNPZ&amp;dc=NTB&quot;,event);"><span
+									class="txt_tab">쇼핑</span></a></li>
+						</ul>
+						<a id="gnbToggleBtn" href="javascript:;" class="btn_tab btn_open">
+							<span class="txt_btn">더보기</span>
+						</a>
+					</div>
+					<script type="text/javascript">
+(function(){
+var gnbToggleBtn = daum.$E("gnbToggleBtn");
+if(gnbToggleBtn){
+daum.Event.addEvent(gnbToggleBtn, 'click', daum.Function.bind(function(e) {
+var deffenceLists = daum.$$("#daumGnb .deffence");
+if(daum.Element.hasClassName(this, "btn_open")){
+
+daum.Element.removeClassName(this, "btn_open");
+daum.Element.addClassName(this, "btn_close");
+this.innerHTML = '<span class="txt_btn">접기</span>';
+daum.Array.each(deffenceLists, function(el, idx){
+el.style.display = "block";
+});
+}else{
+
+daum.Element.removeClassName(this, "btn_close");
+daum.Element.addClassName(this, "btn_open");
+this.innerHTML = '<span class="txt_btn">더보기</span>';
+daum.Array.each(deffenceLists, function(el, idx){
+if(!daum.Element.hasClassName(el, "on")){
+el.style.display = "none";
+}
+});
+}
+daum.Event.stopEvent(e);
+}, gnbToggleBtn));
+}
+})();
+</script>
+					<div class="option_comm clear">
+						<div id="gnbLeftOptions"></div>
+					</div>
+					<div id="leftSearchSnsShare" style="margin-top: 15px;"></div>
+				</nav>
+				<!-- //mNav -->
+				<script type="text/tempalte" id="optionsByTerm">
+<dl id="termOption" class="list_option">
+<dt class="screen_out">기간</dt>
+<dd class="option">
+<a href="<%=a%>" class="<% if(selected=="" || selected=="a") { %>txt<% } else { %>link<% } %>" onclick='smartLog(this, "s=TO&a=STCF&pg=1&r=1&p=1&rc=1&dc=STC", event);'>기간전체</a>
+</dd>
+<dd class="option">
+<a href="<%=d%>" class="<% if(selected=="d") { %>txt<% } else { %>link<% } %>" onclick='smartLog(this, "s=TO&a=STCF&pg=1&r=2&p=1&rc=1&dc=STC", event);'>최근 1일</a>
+</dd>
+<dd class="option">
+<a href="<%=w%>" class="<% if(selected=="w") { %>txt<% } else { %>link<% } %>" onclick='smartLog(this, "s=TO&a=STCF&pg=1&r=3&p=1&rc=1&dc=STC", event);'>최근 1주</a>
+</dd>
+<dd class="option">
+<a href="<%=m%>" class="<% if(selected=="m") { %>txt<% } else { %>link<% } %>" onclick='smartLog(this, "s=TO&a=STCF&pg=1&r=4&p=1&rc=1&dc=STC", event);'>최근 1개월</a>
+</dd>
+</dl>
+</script>
+				<script type="text/javascript">
+
+(function(){
+var PeriodOption = function(o){
+this.time = null;
+this.today = null;
+this.now = null;
+this.sd = null;
+this.ed = null;
+this.init();
+};
+PeriodOption.prototype = {
+setNow: function(t){
+this.time = t ? t : ServerTime;
+this.today = {
+y : this.time.substr(0,4)*1,
+m : this.time.substr(4,2)*1,
+d : this.time.substr(6,2)*1,
+extra: this.time.substr(8,6)
+};
+this.now = new Date(this.today.y, this.today.m-1, this.today.d);
+},
+calcDate: function(diff){
+var sDate = new Date(this.today.y, this.today.m-1, this.today.d-diff);
+var eDate = new Date(this.today.y, this.today.m-1, this.today.d);
+this.sd = daum.Number.fillZero(sDate.getFullYear(),4) + daum.Number.fillZero(sDate.getMonth()+1,2) + daum.Number.fillZero(sDate.getDate(),2) + this.today.extra;
+this.ed = daum.Number.fillZero(eDate.getFullYear(),4) + daum.Number.fillZero(eDate.getMonth()+1,2) + daum.Number.fillZero(eDate.getDate(),2) + this.today.extra;
+},
+proccess : function(){
+var url = {};
+url.a = SF.changeUrlParam({period:"", sd:"", ed:"", DA:"STC"});
+this.calcDate(1);
+url.d = SF.changeUrlParam({period:"d", sd:this.sd, ed:this.ed, DA:"STC"});
+this.calcDate(7);
+url.w = SF.changeUrlParam({period:"w", sd:this.sd, ed:this.ed, DA:"STC"});
+this.calcDate(31);
+url.m = SF.changeUrlParam({period:"m", sd:this.sd, ed:this.ed, DA:"STC"});
+return url;
+},
+init: function(){
+this.setNow(this.time); /* 현재시각 */
+}
+};
+var periodOption = new PeriodOption();
+var templateData = periodOption.proccess();
+/* 검색 옵션 기본 객체 구성 */
+var so = {
+options: [],
+relatedElems: [],
+urlParams: {
+term: {sd: '', ed: '', period: ''}
+}
+};
+var termConfig = {
+template: {
+id: 'optionsByTerm',
+data: templateData
+},
+label: {
+d: '최근 1일',
+w: '최근 1주',
+m: '최근 1개월',
+u: '기간 직접입력'
+},
+dataType: 'term'
+};
+termConfig.template.data.selected = ['' || 'a'];
+so.options.push(termConfig);
+new SF.M.searchOption(so);
+})();
+
+
+
+daum.addEvent(window,"load",function(){
+if(daum.$("gnbLeftOptions").childNodes.length == 0) {
+daum.$$("#mNav .option_comm")[0].className = "hide";
+}
+});
+
+</script>
+				<hr />
+				<script type="text/javascript">
+searchLog.dl = 'NNN1_1TH1_LEI1';	/* ISM DISPLAY_RESULT */
+var smDisCode = "";
+var smClickCode = "";
+var smCateCode = "";
+var totCollCount = "0";
+var sPageLoadedTime = "0.018";
+var requestTime = "1444619493778";
+</script>
+				<article id="mArticle">
+					<div class="inner_article">
+						<span id="daumBody" class="screen_out">검색 본문</span>
+						<script type="text/javascript">
+/* 고급검색 */
+var detailSearchResult = { A : [], O : [], N : [] };
+
+
+
+</script>
+						<!-- 통합검색결과 -->
+						<!-- 결과없음 -->
+						<div id="noResult">
+							<div class="mg_cont">
+								<strong class="f_eb_b tit"><b>''</b> 에 대한 검색결과가 없습니다.</strong>
+								<ul class="list_cont">
+									<li>ㆍ검색어의 단어 수를 줄이거나, 보다 일반적인 단어로 검색해 보세요.</li>
+									<li>ㆍ두 단어 이상의 키워드로 검색 하신 경우, 정확하게 띄어쓰기를 한 후 검색해 보세요.</li>
+									<li>ㆍ키워드에 있는 특수문자를 뺀 후에 검색해 보세요.</li>
+								</ul>
+								<div class="search_tip">
+									<strong class="ico_comm3 tit_tip">찾는 답이 없다면, T!P에 질문하기</strong>
+									<div class="wrap_search">
+										<form method="get" action="http://tip.daum.net/ask"
+											id="nResultTipForm" target="_blank">
+											<fieldset class="fld_search">
+												<legend class="screen_out">팁에 질문하기 폼</legend>
+												<input type="hidden" id="nResultTipParam" name="q" value="" />
+												<input type="search" id="nResultTipInp" class="tf_keyword"
+													title="팁에 질문하기" value="" autocomplete="off"
+													spellcheck="false" />
+												<button type="submit" class="btn_type btn_tip"
+													onclick="smartLog(this, 's=TO&amp;a=NNNN&amp;e=1&amp;dc=NNN', event);">
+													<span class="ir_wa">검색</span>
+												</button>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+								<script type="text/javascript">
+var noResultInp = jq("#nResultTipInp");
+var nResultTipParam = jq("#nResultTipParam");
+var nResultTipForm = jq("#nResultTipForm");
+noResultInp.on("focus",function(event){
+noResultInp.addClass("on");
+event.target.value = "";
+nResultTipParam.attr("value", "");
+});
+noResultInp.on("blur",function(event){
+noResultInp.removeClass("on");
+});
+noResultInp.on("change",function(event){
+var nResultInpValue =  event.target.value;
+nResultTipParam.attr("value", nResultInpValue);
+});
+</script>
+							</div>
+						</div>
+						<!-- end 결과없음 -->
+						<div class="flex_cont">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+					</div>
+					<!-- // inner_article -->
+				</article>
+				<!-- // mArticle -->
+				<aside id="mAside">
+					<div class="wing_issue_rank">
+						<div class="wing_tit no_line">
+							<h2 id="realtimeIssueTitle" class="tit_wing tit_live">실시간 이슈
+								검색어</h2>
+							<span id="issueRealtimeUpdate" class="time"></span>
+						</div>
+						<div class="wing_cont">
+							<ol id="issueRealtimeList" class="list_rank"></ol>
+						</div>
+					</div>
+					<script type="text/javascript"> SF.M.realtimeIssueKeyword = function(data, options) { this.options = { list_id : "issueRealtimeList", time_id : "issueRealtimeUpdate", sectionCode : "TO", clickCode : "RSTO", dispCode : "1TH", aniTime : 500, aniFrame : 50, aniRepeat : 3, query : "" }; this.info = { playRolling : 0, startTime : null, startPx : 0, endPx : 18, maxCnt : 10, rollingIdx: 0 }; this.flagReloadData = false; this.flagResetData = true; this.rollingObj = new Array(); this.timeoutID = null; this.rtupcate = daum.getParam("rtupcate"); daum.extend(this.options, options || {}); this.tempRealtime = new String.Buffer(); this.tempRealtime.append("<span class='num_comm num_rank@#realtimeIssueRank#@'></span>"); this.tempRealtime.append("<span class='txt_link'><a href='@#realtimeIssueLink#@' class='f_elink wsn f_l' title='@#realtimeIssueTitle#@' onclick='@#realtimeIssueSmartLog#@'>@#realtimeIssueText#@</a></span>"); this.tempRealtime.append("<span class='change'>@#realtimeIssueChangeHtml#@<span class='ico_comm1 @#realtimeIssueClass#@'>@#realtimeIssueInfo#@</span></span>"); this.init(data); }; SF.M.realtimeIssueKeyword.prototype = { init: function (data) { /* if(typeof(dtime) != "undefined") { this.response("", data, dtime); } else { this.response("", data); } */ this.response("", data); }, response : function(tab, data, reloadTime) { /* tab not used */ var tmpLiChild = this.tempRealtime.toString(); var tmpInfo = null; var tmpHtml = new String.Buffer(); for(var i=0, cnt = data.length; i<cnt; i++) { tmpInfo = this.getTypeIcon(data[i].S); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueRank#@", (i+1) ); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueLink#@", this.makeLink(data[i].K, data[i].P)); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueTitle#@", daum.String.escapeHTML(data[i].K)); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueSmartLog#@", this.makeSmartLog(i+1)); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueText#@", this.queryCheck(data[i].K) ); if(tmpInfo.strClass == "ico_stay" | tmpInfo.strClass == "ico_new") { tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueChangeHtml#@", "" ); } else { /* var vc = ( Math.abs(v) < 999 ) ? vc = Math.abs(v) : vc = 999; 이거 로직이 필요한지 확인 필요함. */ var vc = ( Math.abs(data[i].V) < 999 ) ? vc = Math.abs(data[i].V) : vc = 999; tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueChangeHtml#@", "<span class='num'>" + vc + "</span>" ); } tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueClass#@", tmpInfo.strClass); tmpLiChild = daum.String.replaceAll(tmpLiChild, "@#realtimeIssueInfo#@", tmpInfo.text); tmpHtml.append("<li>"); tmpHtml.append("<div id='realtimeIssueRoll_" + (i+1) + "' class='rank_roll'>"); tmpHtml.append("<div>" + tmpLiChild + "</div>"); tmpHtml.append("<div>" + tmpLiChild + "</div>"); tmpHtml.append("</div>"); tmpHtml.append("</li>"); tmpLiChild = this.tempRealtime.toString(); } $(this.options.list_id).innerHTML = tmpHtml.toString(); $(this.options.time_id).innerHTML = this.getDateTime(reloadTime); if(this.flagReloadData) { this.flagReloadData = false; this.settingRolling(); } else { daum.Event.addEvent(window, "load", daum.Function.bind( function(){this.settingRolling.timeout(2000, this);}, this) ); } }, settingRolling : function() { if(this.flagResetData) { for(var i=0; i < 10; i++) { this.rollingObj[i] = $("realtimeIssueRoll_" + (i+1) ); } this.flagResetData = false; } this.info.startTime = (new Date() - 0); this.runRolling(); }, runRolling : function() { var t = (new Date() - this.info.startTime); var d = this.options.aniTime; if( t < d ) { var a = this.easeInOutQuad(t, this.info.startPx, this.info.endPx - this.info.startPx, d); this.rollingObj[this.info.rollingIdx].style.top = (a*-1) + "px"; this.timeoutID = this.runRolling.timeout(1000 / this.options.aniFrame, this); } else { /* li 한개만 롤링이 끝난 상태, */ this.rollingObj[this.info.rollingIdx].style.top = "0px"; this.info.rollingIdx++; /* 한바퀴 다 롤링한 상태*/ if(this.info.rollingIdx >= this.info.maxCnt) { this.info.rollingIdx = 0; /* 한바퀴 롤링 횟수 증가. */ this.info.playRolling++; if(this.info.playRolling >= this.options.aniRepeat) { /* 제한된 롤링 전체 회전수 후 데이터 다시 로딩 */ this.info.playRolling = 0; window.clearTimeout(this.timeoutID); this.timeoutID = null; /* this.flagResetData = true; this.flagReloadData = true; this.reload.timeout(20000, this); */ } else { /* 다음 한바퀴 로딩 시작. */ this.timeoutID = this.settingRolling.timeout(1000, this); } } else { /* 시간 초기화, 다음 li 롤링시작. */ this.timeoutID = this.settingRolling.timeout(1000, this); } } }, easeInOutQuad : function(t, b, c, d) { if((t/=d/2) < 1) return c/2*t*t + b; return -c/2 *((--t)*(t-2) - 1) + b; }, getDummy : function () { return (new Date().getTime() + Math.round(Math.random() * 987654321)); }, reload : function(){ var url = 'http://issue.search.daum-img.net/jumpkeyword/TOTAL_ISSUE_TOP15_UTF8.js?t=' + this.getDummy(); SF.M.jsCallScript("issueRealtimeKeywordDataCallBack", url, {charset:"utf-8",defer:true}); }, getTypeIcon : function(rankType) { var tmpObj = {strClass : "", text : ""}; switch(rankType){ case "++" : tmpObj = {strClass : "ico_up", text : "순위급상승"}; break; case "0" : tmpObj = {strClass : "ico_stay", text : "변동없음"}; break; case "+": tmpObj = {strClass : "ico_up", text : "순위상승"}; break; case "--": tmpObj = {strClass : "ico_down", text : "순위급하락"}; break; case "-": tmpObj = {strClass : "ico_down", text : "순위하락"}; break; case "new": tmpObj = {strClass : "ico_new", text : "신규진입"}; break; } return tmpObj; }, makeLink : function(query, p) { var tmpUrl = "?w=tot&nil_profile=rtupkwd&rtupcate=issue&DA=1TH"; if(p != "") { tmpUrl = tmpUrl + "&" + p; } return tmpUrl + "&q=" + encodeURIComponent(query).replace(/%2520/g,"%20").replace(/%2526/g,"%26").replace(/\'/g, "%27"); }, makeSmartLog : function(p) { return "smartLog(this, \"s=" + this.options.sectionCode + "&a="+ this.options.clickCode + "&dc="+ this.options.dispCode + "&pg=1&hi=0&rc=10&r=1&p="+ p +"\", event);"; }, queryCheck : function(r_query){ var r_query_t = r_query.replace(/ /g,""); r_query_t = r_query_t.replace(/[`~!@#$%^*()-+{}\|;:,<>/?&=]/g,""); r_query_t = r_query_t.toLowerCase(); var thisQuery = this.options.query; thisQuery = thisQuery.replace(/ /g,""); thisQuery = thisQuery.replace(/[`~!@#$%^*()-+{}\|;:,<>/?&=]/g,""); thisQuery = thisQuery.toLowerCase(); var noEscapeQuery = " " + daum.String.trim(this.options.query) + " "; /* 단어별 볼드처리 안하게 되면 이부분으로 살림. if(r_query_t == thisQuery) { return "<b>" + daum.String.escapeHTML(r_query) + "</b>"; } else { return daum.String.escapeHTML(r_query); } */ if(r_query_t == thisQuery || daum.String.escapeHTML(r_query_t) == this.options.query.replace(/ /g,"")) { return "<b>" + daum.String.escapeHTML(r_query) + "</b>"; } else { var tmp_thisQuery = " " + thisQuery + " "; var tmp_r_query = " " + daum.String.escapeHTML(r_query) + " "; if(tmp_r_query.indexOf(tmp_thisQuery) > -1 ) { tmp_r_query = daum.String.replaceAll(tmp_r_query, tmp_thisQuery, " <b>"+daum.String.trim(tmp_thisQuery) +"</b> "); } else if ( tmp_r_query.indexOf(noEscapeQuery) > -1) { tmp_r_query = daum.String.replaceAll(tmp_r_query, noEscapeQuery, " <b>"+daum.String.trim(this.options.query) +"</b> "); } else if(tmp_r_query.indexOf(tmp_thisQuery.toUpperCase()) > -1 ) { tmp_r_query = daum.String.replaceAll(tmp_r_query, tmp_thisQuery.toUpperCase(), " <b>"+daum.String.trim(tmp_thisQuery.toUpperCase()) +"</b> "); } tmp_r_query = daum.String.trim(tmp_r_query); return tmp_r_query; } }, getDateTime : function(date) { var chkSyear, chkSmonth, chkSdate, chkShours, chkSminutes, chkSseconds; if(!date) { var chkDate=new Date(); chkSyear = ServerTime.substr(0,4); chkSmonth = ServerTime.substr(4,2); chkSdate = ServerTime.substr(6,2); chkShours = ServerTime.substr(8,2); chkSminutes = ServerTime.substr(10,2); chkSseconds = ServerTime.substr(12,2); chkDate.setYear(chkSyear); chkDate.setMonth(chkSmonth); chkDate.setDate(chkSdate); chkDate.setHours(chkShours); chkDate.setMinutes(chkSminutes); chkDate.setSeconds(chkSseconds); date = chkDate; } else { chkSmonth = daum.Number.fillZero(date.getMonth()+1,2); chkSdate = daum.Number.fillZero(date.getDate(),2); chkShours = daum.Number.fillZero(date.getHours(),2); chkSminutes = daum.Number.fillZero(date.getMinutes(),2); chkSseconds = daum.Number.fillZero(date.getSeconds(),2); } var nhour = date.getHours(); return chkSmonth + "." + chkSdate + "&nbsp;&nbsp;" + nhour + ":" + String(date.getMinutes()+100).slice(1); } } </script>
+					<script type="text/javascript"> SF.M.makeRightDate = function(lastModified) { if(typeof(lastModified) == "undefined" || lastModified == null || lastModified == "") { return new Date(); } this.dateStr = lastModified.split(","); if( (this.dateStr[1] - 1) <= 9 ) { this.dateStr[1] = "0" + (this.dateStr[1] - 1); } else { this.dateStr[1] = this.dateStr[1] - 1; } return new Date(this.dateStr[0], this.dateStr[1], this.dateStr[2], this.dateStr[3], this.dateStr[4]); }; try{ var if_query = daum.String.escapeHTML(daum.String.toHTML(daum.$("saq").innerHTML)); }catch(e){ var if_query = daum.String.escapeHTML(daum.String.toHTML(document.search.q.value)); }; var realTimeIssueObj = [ { K:"오재원", S:"+", V:"13", U:"", P:"rtupcoll=DQP,NNS" } , { K:"박기량", S:"+", V:"13", U:"", P:"rtupcoll=DQP,NNS" } , { K:"심학봉", S:"+", V:"9", U:"", P:"rtupcoll=DQP,NNS" } , { K:"캣맘", S:"+", V:"9", U:"", P:"rtupcoll=DQP,NNS" } , { K:"홍은희", S:"+", V:"8", U:"", P:"rtupcoll=DQP,NNS" } , { K:"국정화", S:"+", V:"5", U:"", P:"rtupcoll=DQP,NNS" } , { K:"박정아", S:"+", V:"4", U:"", P:"rtupcoll=DQP,NNS" } , { K:"김남주", S:"+", V:"6", U:"", P:"rtupcoll=DQP,NNS" } , { K:"한그루", S:"+", V:"6", U:"", P:"rtupcoll=DQP,NNS" } , { K:"김윤석", S:"new", V:"81", U:"", P:"rtupcoll=DQP,NNS" } ]; var dtime = ServerTime; try { var _jsRealtimeIssue_Rank = new SF.M.realtimeIssueKeyword(realTimeIssueObj, { aniRepeat : 3, query : if_query, sectionCode: "TO" }); } catch(e) {} </script>
+					<div
+						style="display: block; overflow: hidden; height: 0; clear: both; font-size: 0; line-height: 0; visibility: hidden;">
+						\00f0</div>
+				</aside>
+			</div>
+			<!-- end cMain -->
+			<a class="btn_comm aside_quick" href="#"
+				onclick="daum.Fx.scrollTo(daum.$E(&quot;daumHead&quot;), {duration:100, offset:-10});return false;">맨위로</a>
+		</article>
+		<!-- end daumContent -->
+		<!-- SA 삭제 -->
+		<!-- end SA 삭제 -->
+		<!-- MAIN_TEMPLATE_FOOTER_START -->
+		<style type="text/css">
+#daumFoot .suggestBox .baseBox {
+	width: 466px;
+	border-bottom-color: #f21816
+} /* 2014-02-10 수정 */
+</style>
+		<footer id="daumFoot">
+			<div id="innerFooter" class="inner_footer">
+				<div id="suggestFooter">
+					<form name="search1" method="get"
+						onsubmit="check_submit2(); return false;" id="daumSearch">
+						<fieldset class="fld_total">
+							<legend class="screen_out"> 검색폼 </legend>
+							<input type="hidden" id="nil_ch" name="nil_ch" value="" /> <input
+								type="hidden" name="rtupcoll" value="" /> <input type="hidden"
+								name="nil_suggest" value="btn" /> <input type="hidden"
+								name="DA" value="STCO" /> <input type="hidden" name="w"
+								value="tot" /> <input type="hidden" name="sq" value="" /> <input
+								type="hidden" name="o" value="" /> <input type="hidden"
+								name="sugo" value="" />
+							<div class="box_searchbar">
+								<input type="text" id="q1" name="q" class="tf_keyword"
+									onclick="cleanKwd(this);" autocomplete="off" title="검색어 입력"
+									value="" />
+								<button type="submit" id="daumBtnSearch2"
+									class="ico_search btn_search">
+									<span class="ir_wa">검색</span>
+								</button>
+							</div>
+						</fieldset>
+					</form>
+					<div id="suggestBox2" class="suggestBox box_sub reverseType"></div>
+				</div>
+				<div id="Footer">
+					<dl id="FooterMenu">
+						<dt>Footer 메뉴</dt>
+						<dd>
+							<a target="_top"
+								href="http://www.nate.com/footer/legal/index.html">서비스 이용약관</a>
+							<span>|</span> <a target="_top"
+								href="http://www.nate.com/footer/privacy/index.html"><strong>개인정보취급방침</strong></a>
+							<span>|</span> <a target="_top"
+								href="http://www.nate.com/policy/youthpolicy.html">청소년보호정책</a> <span>|</span>
+							<a target="_blank" href="http://keywordshop.nate.com/">광고문의</a> <span>|</span>
+							<a target="_top" href="http://helpdesk.nate.com/">고객센터</a>
+						</dd>
+					</dl>
+					<p class="info_legal">상기 정보에 대한 법적 권리 및 책임은 정보제공업체 또는 정보제공자에게
+						있습니다.</p>
+					<div class="copyright">
+						Copyright &copy; <a target="_blank"
+							href="http://www.skcomms.co.kr"><strong><span
+								class="sk">SK</span> Communications.</strong></a> All rights reserved.
+					</div>
+				</div>
+			</div>
+		</footer>
+	</article>
+	<script type="text/javascript">
+try{
+
+daum.addEvent($("q1"),"focus",function(){
+daum.Element.addClassName($$("#daumFoot .box_searchbar")[0],"search_on");
+});
+daum.addEvent($("q1"),"blur",function(){
+daum.Element.removeClassName($$("#daumFoot .box_searchbar")[0],"search_on");
+});
+document.onmousedown = setSelBox;
+document.onkeydown = setFocusQBox;
+var footerSuggestInstance = new suggest.Suggest(document.getElementById('suggestFooter'), {
+inputEl: 'q1',
+suggestBoxEl: 'suggestBox2',
+searchButtonEl: 'daumBtnSearch2',
+type: 'DEFAULT',
+autoFocus: 'NORMAL',
+isReverse: true,
+suggestLimit: 15,
+enableFooter: true
+});
+footerSuggestInstance.on('click-item', function () {
+var f = document.search1;
+var clickedItemInfo = footerSuggestInstance.getActiveItem();
+var data = clickedItemInfo.data;
+var index = clickedItemInfo.index;
+var type = clickedItemInfo.type;
+var sgtq = null;
+var sn = null;
+f.DA.value = "";
+f.nil_suggest.value = "";
+if (data) {
+sgtq = footerSuggestInstance.getUserEnteredQuery();
+sn = index + 1;
+if (sgtq != null && sgtq != "" ) {
+if (sgtq != null && sgtq != "" && sn != null && sn != "") {
+f.sq.value = sgtq;
+f.o.value = sn;
+f.sugo.value = footerSuggestInstance.getSuggestions().length;
+}
+}
+f.DA.value = "FKB";
+f.nil_suggest.value = "sugsch";
+} else {
+f.nil_suggest.value = "btn";
+f.DA.value = "MEK";
+}
+check_submit_base(document.search1);
+});
+}catch(e){}
+try{
+document.search1.w.value = daum.getParam("w") || "tot";
+document.search1.m.value = daum.getParam("m") || "";
+document.search1.f.value = daum.getParam("f") || "";
+}catch(e){}
+try{
+document.onmousedown = setSelBox;
+document.onkeydown = setFocusQBox;
+}catch(e){}
+(function(){
+_jsLoadImg = function (u) {
+var i = new Image(1,1);
+i.onload = function () {};
+i.src = u;
+};
+if (typeof (mk) != 'undefined') {
+_jsLoadImg('https://sl.search.daum.net/sl/ps?mk=' + mk);
+}
+}());
+</script>
+	<script charset="utf-8" type="text/javascript"
+		src="http://m1.daumcdn.net/tiara/js/td.min.js"></script>
+	<script type="text/javascript">
+window.__pageTracker = {};
+if (typeof __Tiara !== 'undefined' && typeof __Tiara.__getTracker !== 'undefined') {
+__pageTracker = __Tiara.__getTracker();
+} else {
+__pageTracker.__trackPageview = function() {};
+__pageTracker.__addParam = function() {};
+}
+__pageTracker.__addParam("svcdomain","nate.search.daum.net");
+window.setTimeout(function() { try { window.__pageTracker.__trackPageview(); } catch(e) {} }, 1);
+daum.Event.addEvent(window, "load", function() {
+new Image(1,1).src = "https://logins.daum.net/accounts/auth.gif";
+/* 네이트 통계용 iframe */
+var url = "http://search.nate.com/search/stat.html" + location.search + "&t=" + ServerTime;
+document.body.appendChild(daum.createElement('<iframe frameborder="0" width="0" height="0" border="0" marginheight="0" marginwidth="0" src="'+url+'"></iframe>'));
+});
+</script>
+	<!-- End Footer -->
+</body>
+</html>

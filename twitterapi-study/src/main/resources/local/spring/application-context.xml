@@ -55,7 +55,7 @@
 				<prop key="hibernate.dialect">${hibernate.mysql.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.hbm2ddl.auto">invalidate</prop>
 			</props>
 		</property>
 	</bean>
@@ -90,11 +90,6 @@
 	<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory2" />
 	</bean>
-	<!-- Hibernate DAO -->
-	<bean id="hibernateDao" class="com.hibernate.dao.HibernateDao"/>
-	<!-- Mybatis DAO -->
-	<bean id="mybatisDao" class="com.mybatis.dao.MybatisDao"/>
-	<bean id="mybatisDao2" class="com.mybatis.dao.MybatisDao2"/>
 	<!-- custom beans -->
 	<bean id="configProperty" class="com.spring.ConfigProperty" />
 </beans>  

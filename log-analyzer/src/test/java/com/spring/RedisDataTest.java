@@ -14,16 +14,16 @@ public class RedisDataTest {
 		ApplicationContext context = new GenericXmlApplicationContext(
 				"classpath:spring/application-context.xml");
 
+		ConfigProperty p = context.getBean("configProperty",
+				ConfigProperty.class);
+		System.out.println(p.get("kafka.host"));
+		
 		redisTemplateBean = context.getBean("redisTemplateBean",
 				RedisTemplateBean.class);
 		System.out.println("------" + redisTemplateBean.getRedisTemplate());
 		System.out.println("------" + redisTemplateBean.getValueOps());
 		redisTemplateBean.getValueOps().set("key1", "value1");
 		System.out.println(redisTemplateBean.getValueOps().get("key1"));
-
-		ConfigProperty p = context.getBean("configProperty",
-				ConfigProperty.class);
-		System.out.println(p.get("kafka.host"));
 	}
 
 	public static void main(String[] args) throws Exception {

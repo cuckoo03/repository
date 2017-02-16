@@ -26,12 +26,12 @@ public class WordCountTopology {
 		TopologyBuilder builder = new TopologyBuilder();
 
 		builder.setSpout(SENTENCE_SPOUT_ID, spout);
-		builder.setBolt(SPLIT_BOLT_ID, splitBolt).shuffleGrouping(
-				SENTENCE_SPOUT_ID);
-		builder.setBolt(COUNT_BOLT_ID, countBolt).fieldsGrouping(SPLIT_BOLT_ID,
-				new Fields("word"));
-		builder.setBolt(REPORT_BOLT_ID, reportBolt).globalGrouping(
-				COUNT_BOLT_ID);
+//		builder.setBolt(SPLIT_BOLT_ID, splitBolt).shuffleGrouping(
+//				SENTENCE_SPOUT_ID);
+//		builder.setBolt(COUNT_BOLT_ID, countBolt).fieldsGrouping(SPLIT_BOLT_ID,
+//				new Fields("word"));
+//		builder.setBolt(REPORT_BOLT_ID, reportBolt).globalGrouping(
+//				COUNT_BOLT_ID);
 
 		Config config = new Config();
 
@@ -39,7 +39,7 @@ public class WordCountTopology {
 			LocalCluster cluster = new LocalCluster();
 			cluster.submitTopology(TOPOLOGY_NAME, config,
 					builder.createTopology());
-			Utils.sleep(10000);
+			Utils.sleep(1000 * 60 * 10);
 			cluster.killTopology(TOPOLOGY_NAME);
 			cluster.shutdown();
 		} else {

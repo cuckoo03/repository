@@ -1,0 +1,2079 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>아이폰 검색결과 : 네이버 카페</title>
+<meta name="decorator" content="section_search" />
+<meta name="jsfooter" content="/jsp/search/include/ScriptSearch.jsp" />
+<meta name="lcsdo" content="true" />
+<meta name="ssc" content="svc.cafe.text" />
+<meta name="robots" content="noindex, nofollow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?1" />
+<link rel="stylesheet"
+	href="/static/css/section/Layout-1456159056000-244869.css"
+	type="text/css" />
+<script type="text/javascript"
+	src="/static/js/section/CommonTopScript-1449048655000-9002.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
+
+
+var cafe_terms = ["%EC%95%84%EC%9D%B4%ED%8F%B0"];
+
+</script>
+</head>
+<body>
+	<div id="u_skip">
+		<a href="#gnbMenu"
+			onclick="var t=document.getElementById('gnbMenu');t.tabIndex=-1;t.focus();return false;"
+			class="skip">메뉴 바로가기</a> <a href="#container"
+			onclick="var t=document.getElementById('container');t.tabIndex=-1;t.focus();return false;"
+			class="skip">본문 바로가기</a>
+	</div>
+	<div id="wrap">
+		<div id="header">
+			<div class="cafe_gnb_wrap">
+				<div id="gnb">
+					<script charset="utf-8" type="text/javascript"
+						src="http://static.gn.naver.net/template/gnb_utf8.nhn?2016030321"></script>
+				</div>
+			</div>
+			<div class="snb_wrap">
+				<h1>
+					<a href="http://www.naver.com" class="N=a:STA.naverlogo"><img
+						src="http://static.naver.net/header/h1/bi_naver.gif" width="85"
+						height="25" alt="NAVER" /></a> <a
+						href="http://section.cafe.naver.com" class="N=a:STA.cafe"><img
+						src="http://cafeimgs.naver.net/img/section/h_cafe.gif" width="45"
+						height="25" alt="카페" /></a>
+				</h1>
+				<div class="blind">
+					<a href="#start">본문 바로가기</a>
+				</div>
+				<form id="frmSearch" name="frmSearch" action="/ArticleSearch.nhn"
+					method="get" class="_submit(CafeSection|CafeSearch|query)">
+					<fieldset>
+						<legend class="blind">검색</legend>
+						<div class="snb_search_box">
+							<div class="snb_search_bsub">
+								<div id="searchOptionBox" class="search_option_box off">
+									<div class="search_option">
+										<a href="#" id="displaySearchLabel"
+											class="_click(CafeSection|ToggleSearchType)">카페글</a>
+									</div>
+									<ul class="search_option_layer" id="searchOptionLayer">
+										<li
+											class="_click(CafeSection|SelectSearchType|all) _SearchOptionNode"><a
+											href="#">전체</a></li>
+										<li
+											class="_click(CafeSection|SelectSearchType|cafe) _SearchOptionNode"><a
+											href="#">카페</a></li>
+										<li
+											class="_click(CafeSection|SelectSearchType|article) _SearchOptionNode"><a
+											href="#">카페글</a></li>
+										<li
+											class="_click(CafeSection|SelectSearchType|manager) _SearchOptionNode"><a
+											href="#">매니저</a></li>
+									</ul>
+								</div>
+								<input type="text" title="검색" name="query" value="아이폰"
+									accesskey="s" class="snb_search_text" maxlength="255"
+									id="query" style="ime-mode: active" /> <input type="hidden"
+									name="where" />
+								<div id="nautocomplete" style="display: inline-block;">
+									<a href="#" class="btn_arrow _stopDefault"> <img
+										src="http://static.naver.net/common/snb/090513/bu_arrow_down.gif"
+										width="21" height="19" title="자동완성 펼치기" alt="자동완성 펼치기"
+										class="triangleImg" />
+									</a>
+								</div>
+								<div
+									style="position: absolute; left: 3px; top: 25px; z-index: 100;">
+									<iframe scrolling="no" height="0" frameborder="0" width="299"
+										style="display: none;" marginheight="0" marginwidth="0" src=""
+										title="자동완성" id="autoFrame"></iframe>
+								</div>
+							</div>
+							<input
+								src="http://static.naver.net/common/snb/090513/btn_srch.gif"
+								onmouseover="this.src='http://static.naver.net/common/snb/090513/btn_srch_over.gif'"
+								onmousedown="this.src='http://static.naver.net/common/snb/090513/btn_srch_down.gif'"
+								onmouseout="this.src='http://static.naver.net/common/snb/090513/btn_srch.gif'"
+								alt="검색" type="image" class="btn_search N=a:STA.search" /> <a
+								href="http://search.naver.com/search.naver" target="_blank"
+								class="btn_search _click(CafeSection|Nexearch)"><img
+								src="http://static.naver.net/common/snb/090513/btn_union_srch.gif"
+								width="56" height="25" alt="통합검색"
+								onmouseover="this.src='http://static.naver.net/common/snb/090513/btn_union_srch_over.gif'"
+								onmousedown="this.src='http://static.naver.net/common/snb/090513/btn_union_srch_down.gif'"
+								onmouseout="this.src='http://static.naver.net/common/snb/090513/btn_union_srch.gif'" /></a>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div id="gnbMenu" class="menu">
+				<ul>
+					<li class="lnb1 "><a href="http://section.cafe.naver.com"
+						class="N=a:LNB.home">카페홈</a></li>
+					<li class="lnb2 "><a href="/SectionCafeStoryList.nhn"
+						class="N=a:LNB.sto">카페스토리</a></li>
+					<li class="lnb3 "><a href="RandomPowerCafeList.nhn"
+						class="N=a:LNB.top">대표카페</a></li>
+					<li class="lnb4 "><a href="/CafeRankingList.nhn"
+						class="N=a:LNB.rnk">랭킹</a></li>
+					<li class="lnb8 "><a href="/StarCafeList.nhn"
+						class="N=a:LNB.star">인기팬카페</a></li>
+					<li class="lnb9 "><a href="/GameCafeList.nhn"
+						class="N=a:LNB.game">공식게임카페</a></li>
+					<li class="lnb11 "><a href="/EducationCafeList.nhn"
+						class="N=a:LNB.wiu">WIU지식나눔카페</a></li>
+					<li class="lnb10"><a href="/CafeSupport.nhn"
+						class="N=a:LNB.spt">카페지원센터</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="container" class="srch_container">
+			<div class="srch_top">
+				<p>
+					<strong>'아이폰'</strong>에 대한 검색결과입니다.
+				</p>
+				<ul class="srch_cate">
+					<li class="tx_depth1"><a title="전체"
+						href="/CombinationSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0"
+						class="srch_spr N=a:tab.all"><span>전체</span></a></li>
+					<li class="tx_depth2"><a title="카페"
+						href="/CafeSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0"
+						class="srch_spr N=a:tab.name"><span>카페</span></a></li>
+					<li class="tx_depth3"><strong><a title="카페글"
+							href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0"
+							class="srch_spr N=a:tab.text"><span>카페글</span></a></strong></li>
+					<li class="tx_depth4"><a title="매니저"
+						href="/ManagerSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0"
+						class="srch_spr N=a:tab.manager"><span>매니저</span></a></li>
+				</ul>
+				<div class="srch_rel">
+					<dl>
+						<dt class="srch_spr">
+							<span>연관검색어</span>
+						</dt>
+						<dd>
+							<ul id="SearchKeywordArea">
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B07"
+									class="N=a:rlk.keyword,r:1">아이폰7</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B06S"
+									class="N=a:rlk.keyword,r:2">아이폰6S</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B07+%EC%B6%9C%EC%8B%9C"
+									class="N=a:rlk.keyword,r:3">아이폰7 출시</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B06"
+									class="N=a:rlk.keyword,r:4">아이폰6</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B06s+%ED%94%8C%EB%9F%AC%EC%8A%A4"
+									class="N=a:rlk.keyword,r:5">아이폰6s 플러스</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B05se"
+									class="N=a:rlk.keyword,r:6">아이폰5se</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C+fbi"
+									class="N=a:rlk.keyword,r:7">애플 fbi</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0+fbi"
+									class="N=a:rlk.keyword,r:8">아이폰 fbi</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C+%ED%85%8C%EB%9F%AC%EB%B2%94+%EC%95%84%EC%9D%B4%ED%8F%B0+%EC%9E%A0%EA%B8%88%ED%95%B4%EC%A0%9C+%EA%B1%B0%EB%B6%80"
+									class="N=a:rlk.keyword,r:9">애플 테러범 아이폰 잠금해제 거부</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C+%EC%95%84%EC%9D%B4%ED%8F%B07"
+									class="N=a:rlk.keyword,r:10">애플 아이폰7</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8A%A0%EC%A6%88"
+									class="N=a:rlk.keyword,r:11">아이튠즈</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B05s"
+									class="N=a:rlk.keyword,r:12">아이폰5s</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C+%EC%8B%A0%EC%A0%9C%ED%92%88+%EB%B0%9C%ED%91%9C"
+									class="N=a:rlk.keyword,r:13">애플 신제품 발표</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C"
+									class="N=a:rlk.keyword,r:14">애플</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B05"
+									class="N=a:rlk.keyword,r:15">아이폰5</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%A0%ED%94%8C+4%EC%9D%B8%EC%B9%98"
+									class="N=a:rlk.keyword,r:16">애플 4인치</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0+%ED%85%8C%EB%9F%AC"
+									class="N=a:rlk.keyword,r:17">아이폰 테러</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B07+%ED%94%8C%EB%9F%AC%EC%8A%A4"
+									class="N=a:rlk.keyword,r:18">아이폰7 플러스</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=kt+%EC%95%84%EC%9D%B4%ED%8F%B0"
+									class="N=a:rlk.keyword,r:19">kt 아이폰</a></li>
+								<li><a
+									href="http://section.cafe.naver.com/ArticleSearch.nhn?query=%EC%82%BC%EC%84%B1+%EC%95%84%EC%9D%B4%ED%8F%B0"
+									class="N=a:rlk.keyword,r:20">삼성 아이폰</a></li>
+							</ul>
+						</dd>
+					</dl>
+					<a href="#" id="SearchKeywordBtn"
+						class="list_more _click(CafeSearch|ToggleMoreView) _stopDefault N=a:rlk.more"
+						style="display: none;">더보기<span class="ico srch_spr">▼</span></a>
+				</div>
+			</div>
+			<div class="srch_bg_wrap">
+				<!-- aside -->
+				<div id="aside" class="aside_srch">
+					<a name="aside" class="blind">옵션선택 및 검색순위 시작</a>
+					<div id="search_option_area" class="tab_option">
+						<form action="" id="option_sort_form" class="first_child">
+							<fieldset>
+								<legend>
+									<img width="20" height="12"
+										src="http://sstatic.naver.net/search/img2/tit_option.gif"
+										alt="정렬" />
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img width="11" height="24" alt="접기" title="접기"
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									id="option_sort_img" />
+								</a>
+								<ul class="sorting N=a:opt.sort _OptionArea "
+									id="ARTICLESEARCH_SORTBY">
+									<li class="selected _click(CafeSearch|SortType|0)"
+										id="ARTICLESEARCH_SORTBY_0">
+										<button type="button">
+											<span>정확도</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|SortType|1)"
+										id="ARTICLESEARCH_SORTBY_1">
+										<button type="button">
+											<span>최신순</span>
+										</button>
+									</li>
+								</ul>
+							</fieldset>
+						</form>
+						<form id="option_period_form">
+							<fieldset>
+								<legend>
+									<img width="21" height="12"
+										src="http://sstatic.naver.net/search/img2/tit_option2.gif"
+										alt="기간" />
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img width="11" height="24" alt="접기" title="접기"
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									id="option_period_img" />
+								</a>
+								<div class="_OptionArea ">
+									<div id="option_period_slide">
+										<div
+											style="background-image: url(http://sstatic.naver.net/search/img2/option/bg_option_blog_all_a.gif);"
+											class="slide community">
+											<input type="hidden" id="txt_slider" value="6" /> <span
+												style="width: 150px; background-image: url(http://sstatic.naver.net/search/img2/option/bg_option_blog.gif);"
+												class="on"></span> <span
+												style="left: 134px; cursor: pointer; top: 0px;"
+												class="point slider-thumb"></span>
+										</div>
+										<div class="btn_area">
+											<a
+												class="button2 _direct_insert _click(CafeSearch|TogglePeriodDirect) _stopDefault"
+												href="#"><img
+												src="http://cafeimgs.naver.net/img/section/btn_wrt_person.gif"
+												width="52" height="20" alt="직접입력" /></a>
+										</div>
+									</div>
+									<div id="option_period_direct" style="display: none;">
+										<div class="input_area2">
+											<input type="text" style="ime-mode: disabled;" maxlength="10"
+												id="date_from" autocomplete="off"
+												class="box_input _keydown(CafeSearch|SubmitCustomPeriod)" />
+											<img width="11" height="22"
+												src="http://sstatic.naver.net/search/img2/bg_option13.gif"
+												alt="" /> <input type="text" style="ime-mode: disabled;"
+												maxlength="10" id="date_to" autocomplete="off"
+												class="box_input _keydown(CafeSearch|SubmitCustomPeriod)" />
+											<div style="display: none; top: -17px;" class="ly_alert"
+												id="UnvalidDateLayer">
+												잘못된 날짜형식입니다. <br /> <em>(yyyy.mm.dd)</em> <span
+													style="left: 10px;" class="arw"></span>
+											</div>
+										</div>
+										<div class="btn_area">
+											<span>예) <em>2008.02.07</em></span> <input type="image"
+												src="http://cafeimgs.naver.net/img/section/btn_smit2.gif"
+												alt="적용"
+												class="_click(CafeSearch|SubmitCustomPeriod) _stopDefault" />
+											<a href="#"
+												class="button2 _click(CafeSearch|TogglePeriodDirect) _stopDefault"><img
+												src="http://cafeimgs.naver.net/img/section/btn_clse.gif"
+												width="31" height="20" alt="닫기" /></a>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<form action="" id="option_board_form">
+							<fieldset>
+								<legend>
+									<img
+										src="http://cafeimgs.naver.net/img/section/h_aside_board.gif"
+										width="32" height="12" alt="게시판" />
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									width="11" height="24" alt="접기" title="접기" />
+								</a>
+								<ul class="sorting N=a:opt.post _OptionArea "
+									id="ARTICLESEARCH_MENUTYPE">
+									<li class="selected _click(CafeSearch|ArticleType|0)"
+										id="ARTICLESEARCH_MENUTYPE_0">
+										<button type="button">
+											<span>전체</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|ArticleType|1)"
+										id="ARTICLESEARCH_MENUTYPE_1">
+										<button type="button">
+											<span>질문답변게시판</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|ArticleType|2)"
+										id="ARTICLESEARCH_MENUTYPE_2">
+										<button type="button">
+											<span>상품등록게시판</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|ArticleType|3)"
+										id="ARTICLESEARCH_MENUTYPE_3">
+										<button type="button">
+											<span>카페북</span>
+										</button>
+									</li>
+								</ul>
+							</fieldset>
+						</form>
+						<form action="" id="option_srchby_form">
+							<fieldset>
+								<legend>
+									<img width="20" height="12" alt="영역"
+										src="http://sstatic.naver.net/search/img2/tit_option3.gif" />
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault">
+									<img width="11" height="24" alt="접기" title="접기"
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									id="option_srchby_img" />
+								</a>
+								<ul class="sorting N=a:opt.area _OptionArea"
+									id="ARTICLESEARCH_SEARCHBY">
+									<li
+										class="first_selected selected _click(CafeSearch|AreaType|0)"
+										id="ARTICLESEARCH_SEARCHBY_0">
+										<button type="button">
+											<span>제목+본문</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|AreaType|1)"
+										id="ARTICLESEARCH_SEARCHBY_1">
+										<button type="button">
+											<span>제목</span>
+										</button>
+									</li>
+								</ul>
+							</fieldset>
+						</form>
+						<form action="" id="option_dupl_form">
+							<fieldset>
+								<legend>
+									<img
+										src="http://cafeimgs.naver.net/img/section/h_aside_dupl.gif"
+										width="21" height="12" alt="중복" />
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									width="11" height="24" alt="접기" title="접기" />
+								</a>
+								<ul class="sorting N=a:opt.duplicated _OptionArea "
+									id="ARTICLESEARCH_DUPLICATE">
+									<li class="selected _click(CafeSearch|DuplType|false)"
+										id="ARTICLESEARCH_DUPLICATE_false">
+										<button type="button">
+											<span>중복제외</span>
+										</button>
+									</li>
+									<li class="_click(CafeSearch|DuplType|true)"
+										id="ARTICLESEARCH_DUPLICATE_true">
+										<button type="button">
+											<span>중복포함</span>
+										</button>
+									</li>
+								</ul>
+							</fieldset>
+						</form>
+						<form id="option_src_form" style="z-index: 10">
+							<fieldset>
+								<legend>
+									<img
+										src="http://cafeimgs.naver.net/img/section/h_aside_src.gif"
+										width="21" height="12" alt="출처" /> <a href="#"
+										class="help _click(CafeSearch|ToggleHelpLayer|ARTICLESEARCH_SOURCE_LAYER) _stopDefault) _stopDefault">
+										<img src="http://sstatic.naver.net/search/img2/btn_help.gif"
+										width="12" height="12" alt="도움말" />
+									</a>
+								</legend>
+								<a href="#"
+									class="clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									width="11" height="24" alt="접기" title="접기" />
+								</a>
+								<div style="display: none; top: 30px;"
+									class="ly_alert ly_alert_v1" id="ARTICLESEARCH_SOURCE_LAYER">
+									제한해서 보고 싶거나 <br />결과에서 빼고 싶은 카페의 전체 url <br />(cafe.naver.com/카페ID)혹은
+									<br />카페ID를 입력하세요. <a
+										class="btn_clse2 _click(LayerManager|CloseLayer|ARTICLESEARCH_SOURCE_LAYER) _stopDefault"
+										href="#">닫기</a>
+								</div>
+								<div class="_OptionArea ">
+									<ul class="sorting N=a:opt.from">
+										<li class="selected _click(CafeSearch|WithinType)"
+											id="ARTICLESEARCH_SOURCE_0">
+											<button type="button">
+												<span>전체</span>
+											</button>
+										</li>
+										<li class="_click(CafeSearch|ToggleWithinDetailArea)"
+											id="ARTICLESEARCH_SOURCE_1">
+											<button type="button">
+												<span>출처선택</span>
+											</button>
+										</li>
+									</ul>
+									<div style="display: none;" id="ARTICLESEARCH_SOURCE_DETAIL">
+										<ul class="authentic">
+											<li><input type="radio" id="authentic_yes"
+												value="inCafe" name="origin_input" checked="checked"
+												class="_click(CafeSearch|FocusSourceInput)" /> <label
+												for="authentic_yes">특정출처에서만 검색</label></li>
+											<li><input type="radio" id="authentic_no"
+												value="withOutCafe" name="origin_input"
+												class="_click(CafeSearch|FocusSourceInput)" /> <label
+												for="authentic_no">특정출처를 제외하고 검색</label></li>
+										</ul>
+										<div class="input_area">
+											<input type="text" value="cafe.naver.com/" maxlength="80"
+												class="box_input _keydown(CafeSearch|SubmitWithinDetail)"
+												name="origin" autocomplete="off" />
+										</div>
+										<div class="btn_area">
+											<input type="image"
+												src="http://cafeimgs.naver.net/img/section/btn_smit2.gif"
+												alt="적용"
+												class="_click(CafeSearch|SubmitWithinDetail) _stopDefault" />
+										</div>
+										<div style="display: none; top: 64px;" class="ly_alert"
+											id="EmptySourceLayer">
+											주소를 입력해 주세요. <span style="left: 10px;" class="arw"></span>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<form id="option_detail_form">
+							<fieldset>
+								<legend>
+									<img width="42" height="12"
+										src="http://sstatic.naver.net/search/img2/tit_option10.gif"
+										alt="상세검색" />
+								</legend>
+								<a href="#"
+									class="close clo_op _click(CafeSearch|ToggleOption) _stopDefault ">
+									<img width="11" height="24" alt="펼치기" title="펼치기"
+									src="http://sstatic.naver.net/search/img2/btn_option14.gif"
+									id="option_detail_img" />
+								</a>
+								<div class="_OptionArea " style="display: none;">
+									<p class="txt_area">
+										다음 단어 모두 포함 <a
+											class="btn_help _click(CafeSearch|ToggleHelpLayer|ARTICLESEARCH_INCLUDEALL_LAYER) _stopDefault"><img
+											width="12" height="12" alt="도움말"
+											src="http://sstatic.naver.net/search/img2/btn_help.gif" /></a>
+									</p>
+									<div class="input_area">
+										<input type="text" maxlength="80" name="includeAll"
+											class="box_input _keydown(CafeSearch|SubmitDetail)" />
+									</div>
+									<p class="txt_area">
+										다음 단어 제외 <a
+											class="btn_help _click(CafeSearch|ToggleHelpLayer|ARTICLESEARCH_EXCLUDE_LAYER) _stopDefault"><img
+											width="12" height="12" alt="도움말"
+											src="http://sstatic.naver.net/search/img2/btn_help.gif" /></a>
+									</p>
+									<div class="input_area">
+										<input type="text" maxlength="80" name="exclude"
+											class="box_input _keydown(CafeSearch|SubmitDetail)" />
+									</div>
+									<p class="txt_area">
+										다음 단어 중 1개 이상 포함 <a
+											class="btn_help _click(CafeSearch|ToggleHelpLayer|ARTICLESEARCH_INCLUDE_LAYER) _stopDefault"><img
+											width="12" height="12" alt="도움말"
+											src="http://sstatic.naver.net/search/img2/btn_help.gif" /></a>
+									</p>
+									<div class="input_area">
+										<input type="text" maxlength="80" name="include"
+											class="box_input _keydown(CafeSearch|SubmitDetail)" />
+									</div>
+									<p class="txt_area">
+										다음 어절&middot;어구 정확히 일치 <a
+											class="btn_help _click(CafeSearch|ToggleHelpLayer|ARTICLESEARCH_EXACT_LAYER) _stopDefault"><img
+											width="12" height="12" alt="도움말"
+											src="http://sstatic.naver.net/search/img2/btn_help.gif" /></a>
+									</p>
+									<div class="input_area">
+										<input type="text" maxlength="80" name="exact"
+											class="box_input _keydown(CafeSearch|SubmitDetail)" />
+									</div>
+									<div class="btn_area">
+										<a href="#"
+											class="_click(CafeSearch|ResetDetail) _stopDefault"><img
+											width="20" height="20" alt="재입력"
+											src="http://sstatic.naver.net/search/img2/btn_option7.gif" /></a>
+										<input type="image"
+											src="http://cafeimgs.naver.net/img/section/btn_smit2.gif"
+											alt="적용" class="_click(CafeSearch|SubmitDetail) _stopDefault" />
+									</div>
+									<div style="display: none;" class="ly_alert ly_alert_v1"
+										id="ARTICLESEARCH_INCLUDEALL_LAYER">
+										입력한 단어를 모두 포함한 <br />카페를 검색합니다. &amp; 연산자를 <br />이용하면 검색창에서
+										동일 기능을 <br />사용할 수 있습니다. <a
+											class="btn_clse2 _click(LayerManager|CloseLayer|ARTICLESEARCH_INCLUDEALL_LAYER) _stopDefault"
+											href="#">닫기</a>
+									</div>
+									<div style="display: none;" class="ly_alert ly_alert_v2"
+										id="ARTICLESEARCH_EXCLUDE_LAYER">
+										입력한 단어를 포함한 카페를 <br />제외하고 검색합니다. ! 연산자를 <br />이용하면 검색창에서 동일
+										기능을 <br />사용할 수 있습니다. <a
+											class="btn_clse2 _click(LayerManager|CloseLayer|ARTICLESEARCH_EXCLUDE_LAYER) _stopDefault"
+											href="#">닫기</a>
+									</div>
+									<div style="display: none;" class="ly_alert ly_alert_v3"
+										id="ARTICLESEARCH_INCLUDE_LAYER">
+										입력한 단어들 중 하나 이상을 <br />포함한 모든 카페를 검색합니다. <br />| 연산자를 이용하면
+										검색창에서 <br />동일 기능을 사용할 수 있습니다. <a
+											class="btn_clse2 _click(LayerManager|CloseLayer|ARTICLESEARCH_INCLUDE_LAYER) _stopDefault"
+											href="#">닫기</a>
+									</div>
+									<div style="display: none;" class="ly_alert ly_alert_v4"
+										id="ARTICLESEARCH_EXACT_LAYER">
+										입력한 어절&middot;어구와 정확히 <br />일치하는 부분을 포함한 카페만을 <br />검색합니다.
+										큰따옴표(&quot;&quot;) 연산자를 <br />이용하면 검색창에서 동일 기능을 <br />사용할 수
+										있습니다. <a
+											class="btn_clse2 _click(LayerManager|CloseLayer|ARTICLESEARCH_EXACT_LAYER) _stopDefault"
+											href="#">닫기</a>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<!-- //aside -->
+				<!-- content -->
+				<div id="content_srch_wrap">
+					<a name="start" class="blind">본문시작</a>
+					<div id="content_srch">
+						<h2 class="blind">전체검색결과</h2>
+						<div style="display: block; top: 125px; left: 468px"
+							class="ly_loading" id="SearchLoadingLayer">
+							<div class="ly_cont">
+								<!-- Layer Content -->
+								<div class="ly_body">
+									<p class="dsc_loading">문서를 불러오는 중...</p>
+									<img height="13" width="150" alt="로딩중"
+										src="http://static.naver.net/common/loading/load_b01_01.gif" />
+								</div>
+								<!-- //Layer Content -->
+							</div>
+							<span class="shadow shadow2"></span> <span class="shadow shadow3"></span>
+							<span class="shadow shadow4"></span>
+						</div>
+						<div class="sp_cafeartc section" id="HideArea"
+							style="visibility: hidden">
+							<div class="srch_section_hd">
+								<h3>
+									<img
+										src="http://cafeimgs.naver.net/img/section/h_srch_artc.gif"
+										width="41" height="15" alt="카페글" /> <span class="num">(<em
+										id="SearchTotalCount">3287684</em>건)
+									</span>
+								</h3>
+								<div class="sp_no_result sp_no_result_v1 section"
+									id="EmptySearchResult" style="display: none">
+									<p class="no_result">
+										<strong>'아이폰'</strong>에 대한 검색결과가 없습니다.
+									</p>
+									<p class="dsc_dir" id="EmptySearchResultByDirectory"
+										style="display: none">
+										선택한 디렉토리 검색결과 외에 <a href="#"
+											class="_click(CafeSearch|SelectDirectoryAll) _stopDefault">전체
+											디렉토리</a>를 대상으로 검색결과를 확인해보세요.
+									</p>
+									<ul>
+										<li>단어의 철자가 정확한지 확인해 주세요.</li>
+										<li>검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.</li>
+										<li>보다 일반적인 검색어로 다시 검색해 보세요.</li>
+									</ul>
+									<div>
+										<p>
+											<strong>만족스러운 검색결과를 찾지 못하셨다면 아래 기능도 이용해 보세요.</strong>
+										</p>
+										<a
+											href="http://search.naver.com/search.naver?where=nexearch&amp;query=%EC%95%84%EC%9D%B4%ED%8F%B0"
+											target="_blank">통합검색 결과보기</a> <span class="bar">|</span> <a
+											href="http://kin.naver.com/static/searchToQuestion.html?title=%EC%95%84%EC%9D%B4%ED%8F%B0"
+											target="_blank">지식iN에 질문하기</a> <span class="bar">|</span> <a
+											href="http://help.naver.com/" target="_blank">검색 도움말 보기</a>
+									</div>
+								</div>
+							</div>
+							&nbsp;
+							<ul class="basic1 clearfix" id="ArticleSearchResultArea">
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/torrentist/2956"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_109/audwnrkwk_1456889489849WKUFL_PNG/%BE%C6%C0%CC%C6%F9%C1%DF%B0%ED%BD%C3%BC%BC1.PNG#481x264"
+											alt="카페글 썸네일" width="100" height="55"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">6</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/torrentist/2956"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:2956,r:1"><b>아이폰</b>5s
+												중고시세 좋을때 팔아요</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											<b>아이폰</b>5s 중고시세 좋을때 팔아요 날씨가 점점 풀리는거 같죠~ 이제 봄이 오는거 같아요제 주변에
+											<b>아이폰</b>5s 에서 <b>아이폰</b>6s로 교체하는 경우가 많이 있더라구요 판매하기전에꼭...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/torrentist/2956"
+												target="_blank" class="url N=a:art.url,i:25626825,r:1">http://cafe.naver.com/torrentist/2956
+												</a>
+											카페명 : <a href="http://cafe.naver.com/torrentist"
+												target="_blank" class="cafe_name N=art.name,i:25626825,r:1">★
+												모이고폰-중고폰 매입,선,후불유심 개통 및 알뜰폰 판매</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/power2junecafe/63"> <img
+											src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_164/g9fyxxjux_1456985604488yuiIb_JPEG/2016-03-03_14%3B38%3B59.jpg#650x863"
+											alt="카페글 썸네일" width="75" height="100"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">8</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/power2junecafe/63"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:63,r:2">대구<b>아이폰</b>수리
+												정품만고집하다!
+											</a>
+										</dt>
+										<dd class="tit_sub txt_block">3시간 전</dd>
+										<dd>
+											요즘 <b>아이폰</b> 참 많이들 사용하시지요?저도 <b>아이폰</b> 유자랍니다 ㅎㅎ이 <b>아이폰</b>이
+											다 좋은데 액정이 정말 약하잖아요.저도 얼마전에 액정을 아주 보기 좋게 아작을 냈던 적이...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/power2junecafe/63"
+												target="_blank" class="url N=a:art.url,i:20692188,r:2">http://cafe.naver.com/power2junecafe/63</a>
+											카페명 : <a href="http://cafe.naver.com/power2junecafe"
+												target="_blank" class="cafe_name N=art.name,i:20692188,r:2">네이버카운터스트라이크커뮤니티카페-NCSCC</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/puppy2puppy/4656"> <img
+											src="http://image.nmv.naver.net/cafeucc15/2016/03/03/1632/b8bcb6288467ca9a82fc270d59ed737e384b_ugcvideo_480P_01_16x9_s152.jpg#152x114#m"
+											alt="카페글 썸네일" width="100" height="100"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">7</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/puppy2puppy/4656"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:4656,r:3">서현
+												<b>아이폰</b>수리 이렇게 빨리?
+											</a>
+										</dt>
+										<dd class="tit_sub txt_block">9시간 전</dd>
+										<dd>
+											서현 <b>아이폰</b>수리 이렇게 빨리? 핸드폰 없이는 못 사는 한국인들 손에는 항상 핸드폰이... 그런데
+											<b>아이폰</b> 유저들은 그 흔한 일을 겪게 되면 엄청난 스트레스가 따라오죠. 그래서...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/puppy2puppy/4656"
+												target="_blank" class="url N=a:art.url,i:24130485,r:3">http://cafe.naver.com/puppy2puppy/4656</a>
+											카페명 : <a href="http://cafe.naver.com/puppy2puppy"
+												target="_blank" class="cafe_name N=art.name,i:24130485,r:3">Puppy!
+												Puppy! 퍼피!퍼피!</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/je61/13355"> <img
+											src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_131/xqif164836_1456993450387OLBGW_JPEG/tistory_com_20160303_172351.jpg#480x406"
+											alt="카페글 썸네일" width="100" height="85"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">6</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank" href="http://cafe.naver.com/je61/13355"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:13355,r:4"><b>아이폰</b>6s
+												스펙, 개봉기, 장/단점 입니다!!</a>
+										</dt>
+										<dd class="tit_sub txt_block">3시간 전</dd>
+										<dd>
+											<b>아이폰</b>6s 스펙 입니다! ▼ <b>아이폰</b>6s 개봉기 입니다. ▼ <b>아이폰</b>6s
+											리뷰 입니다. ▼ &lt;장점&gt; 1. 지문인식 속도 최고!!2. 3D 터치기능(터치를 누르는 세기에 따라
+											반응이 틀려지는 기능)...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/je61/13355" target="_blank"
+												class="url N=a:art.url,i:22721948,r:4">http://cafe.naver.com/je61/13355</a>
+											카페명 : <a href="http://cafe.naver.com/je61" target="_blank"
+												class="cafe_name N=art.name,i:22721948,r:4">★더싼폰★ 스마트폰
+												최저가 공구, 정보공유 카페</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/canlo/3925"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_241/kumoy_14569749481547kfM9_JPEG/1394.JPG#697x523"
+											alt="카페글 썸네일" width="100" height="75"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">9</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank" href="http://cafe.naver.com/canlo/3925"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:3925,r:5"><b>아이폰</b>6플러스
+												액정파손 기억도안나</a>
+										</dt>
+										<dd class="tit_sub txt_block">9시간 전</dd>
+										<dd>
+											<b>아이폰</b>6플러스 액정파손 기억도안나 어째 이번에 쓰는 <b>아이폰</b>은 .. <b>아이폰</b>6플러스
+											액정 이라 그런지커서 불안불안하디만.. 결국은 액정을 깨트리는 불상사가 발생을...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/canlo/3925" target="_blank"
+												class="url N=a:art.url,i:13702632,r:5">http://cafe.naver.com/canlo/3925</a>
+											카페명 : <a href="http://cafe.naver.com/canlo" target="_blank"
+												class="cafe_name N=art.name,i:13702632,r:5">고치고 ◈ 아이폰수리
+												5s액정수리 수리비 중고시세가격 수리센터</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/ecogreenphone/5748"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_77/magpiekwak_1456884630964qJhuC_JPEG/077.JPG#695x521"
+											alt="카페글 썸네일" width="100" height="75"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">11</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/ecogreenphone/5748"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:5748,r:6"><b>아이폰</b>
+												액정 교체 통으로 갈아 !</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											요즘들어 떨어트리기 일쑤인 <b>아이폰</b> ㅠㅠ결국 얼마전에는 깨지는 사고가 생겨서 <b>아이폰</b>
+											액정 교체 를 받아야 했어요 일단 리퍼는 비용때문에 비싸서 포기한지 오래...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/ecogreenphone/5748"
+												target="_blank" class="url N=a:art.url,i:25257971,r:6">http://cafe.naver.com/ecogreenphone/5748</a>
+											카페명 : <a href="http://cafe.naver.com/ecogreenphone"
+												target="_blank" class="cafe_name N=art.name,i:25257971,r:6">직폰
+												◀ 직거래 폰 스마트폰 휴대폰 뽐뿌 버스폰 중고폰 장터</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/canlo/3921"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_20/calri555_1456885191663Ug7rc_JPEG/412.JPG#695x521"
+											alt="카페글 썸네일" width="100" height="75"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">11</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank" href="http://cafe.naver.com/canlo/3921"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:3921,r:7"><b>아이폰</b>
+												액정 매입 안되면 어째?</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											<b>아이폰</b> 액정 매입 안되면 어째? 지난번에 폰을 깨트려가지고 ..저는 그냥 <b>아이폰</b> 액정
+											매입 되는줄알고큰걱정없이 동부대우전자를 갔었네요 ^^;;원래 삼성폰을 쓰던사람이고...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/canlo/3921" target="_blank"
+												class="url N=a:art.url,i:13702632,r:7">http://cafe.naver.com/canlo/3921</a>
+											카페명 : <a href="http://cafe.naver.com/canlo" target="_blank"
+												class="cafe_name N=art.name,i:13702632,r:7">고치고 ◈ 아이폰수리
+												5s액정수리 수리비 중고시세가격 수리센터</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/fishopgae/2445"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_280/wjatlavks_1456888660453RLMuw_JPEG/%BE%C6%C0%CC%C6%F95s_%C1%DF%B0%ED%B0%A1%B0%DD_1.jpg#590x331"
+											alt="카페글 썸네일" width="100" height="56"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">12</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/fishopgae/2445"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:2445,r:8"><b>아이폰</b>5s
+												중고가격 한눈에 반하다</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											<b>아이폰</b>5s 중고가격 한눈에 반하다 2년넘게 <b>아이폰</b>5s 사용해왔던 제가 드디어 <b>아이폰</b>6s로갈아탔습니다
+											하하한달정도 사용중인데 디자인과기능이 예술이네요진작에 바꿀껄...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/fishopgae/2445"
+												target="_blank" class="url N=a:art.url,i:25599130,r:8">http://cafe.naver.com/fishopgae/2445</a>
+											카페명 : <a href="http://cafe.naver.com/fishopgae"
+												target="_blank" class="cafe_name N=art.name,i:25599130,r:8">폰데이▶선불폰개통
+												중고폰판매</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/sp321/7684"> <img
+											src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_176/dmswk5935_1456912048439ns1IR_JPEG/%BE%C6%C0%CC%C6%F96s_%B8%C5%C0%D4_1.jpg#580x326"
+											alt="카페글 썸네일" width="100" height="56"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">12</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank" href="http://cafe.naver.com/sp321/7684"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:7684,r:9"><b>아이폰</b>6s
+												매입 어렵지 않아요</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											<b>아이폰</b>6s 매입 어렵지 않아요 구입한 <b>아이폰</b>6s 마음에들지만 너무작아서화면이 큰
+											사용했던 <b>아이폰</b>6플러스로 교체하고 <b>아이폰</b>6s 매입 하기로 마음을 먹었는데요 워낙
+											투철한...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/sp321/7684" target="_blank"
+												class="url N=a:art.url,i:24243932,r:9">http://cafe.naver.com/sp321/7684</a>
+											카페명 : <a href="http://cafe.naver.com/sp321" target="_blank"
+												class="cafe_name N=art.name,i:24243932,r:9">&lt;폰데이&gt;중고휴대폰
+												정보카페</a>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<div class="thumb thumb-rollover">
+										<span class="height_s"></span> <a target="_blank"
+											href="http://cafe.naver.com/ecogreenphone/5750"> <img
+											src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_107/gooa24_14568854723879hWyW_JPEG/131.JPG#695x521"
+											alt="카페글 썸네일" width="100" height="75"
+											onerror="this.onerror=null;this.parentNode.parentNode.style.display='none';" />
+										</a>
+										<p class="thumb_num">
+											<a href="#" class="_stopDefault">11</a>
+										</p>
+										<div class="thumb_slide_wrap" style="display: none"></div>
+									</div>
+									<dl>
+										<dt>
+											<a target="_blank"
+												href="http://cafe.naver.com/ecogreenphone/5750"
+												style="width: 300px"
+												class="ellipsis _ellipsisArticleTitle N=a:art.article,i:5750,r:10"><b>아이폰</b>
+												사설수리 신뢰가는곳!</a>
+										</dt>
+										<dd class="tit_sub txt_block">2016.03.02.</dd>
+										<dd>
+											<b>아이폰</b> 사설수리 신뢰가는곳! 저는 처음으로 <b>아이폰</b> 쓰는사람이라그런지 ㅠㅠ 아우 진짜
+											못써먹겠어요 벌써 두번째로 액정을 깨트리는건데요 ;; 지난번에는 뭐 암것도 모르니...
+										</dd>
+										<dd class="txt_block">
+											<a href="http://cafe.naver.com/ecogreenphone/5750"
+												target="_blank" class="url N=a:art.url,i:25257971,r:10">http://cafe.naver.com/ecogreenphone/5750</a>
+											카페명 : <a href="http://cafe.naver.com/ecogreenphone"
+												target="_blank" class="cafe_name N=art.name,i:25257971,r:10">직폰
+												◀ 직거래 폰 스마트폰 휴대폰 뽐뿌 버스폰 중고폰 장터</a>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+							<div id="pageArea" class="paging">
+								<strong>1</strong> <a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=2"
+									class="_click(CafeSearch|Page|2) _stopDefault N=a:art.page,r:2">2</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=3"
+									class="_click(CafeSearch|Page|3) _stopDefault N=a:art.page,r:3">3</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=4"
+									class="_click(CafeSearch|Page|4) _stopDefault N=a:art.page,r:4">4</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=5"
+									class="_click(CafeSearch|Page|5) _stopDefault N=a:art.page,r:5">5</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=6"
+									class="_click(CafeSearch|Page|6) _stopDefault N=a:art.page,r:6">6</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=7"
+									class="_click(CafeSearch|Page|7) _stopDefault N=a:art.page,r:7">7</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=8"
+									class="_click(CafeSearch|Page|8) _stopDefault N=a:art.page,r:8">8</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=9"
+									class="_click(CafeSearch|Page|9) _stopDefault N=a:art.page,r:9">9</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=10"
+									class="_click(CafeSearch|Page|10) _stopDefault N=a:art.page,r:10">10</a>
+								<a
+									href="/ArticleSearch.nhn?query=%EC%95%84%EC%9D%B4%ED%8F%B0&amp;page=11"
+									class="next _click(CafeSearch|Page|11) _stopDefault">다음페이지</a>
+							</div>
+							<!-- [D] 검색결과가 100페이지 이상 될 경우 보여줌 -->
+							<div class="bx_srch_msg" style="display: none" id="pageOverArea">
+								<p>
+									네이버 검색은 최상의 검색결과 품질을 위해 1000건 이상의 카페 검색결과를 제공하지 않습니다.<br />원하시는
+									검색결과를 찾으시려면 <em>더 구체적인 검색어</em>를 입력해 보세요.
+								</p>
+							</div>
+							<div class="searchad">
+								<div class="searchad_vt">
+									<dl class="item">
+										<dt>
+											<a
+												href="http://adcr.naver.com/adcr?x=eHc8yQRDS4Ka/Dzre9tNj////w==b0dLi26BWdtMDFxkuBh6by9qwPq9y8y0Iq0CTmMYc3r53bWp3ZZVSogQKF8PEHVth5yi61g5Nf/JPT6/3O4XZ1CC50SuMWnHYiPIjHBdeazboQekS1pa1JoNOgPbcAyf+So/Q0pzqaf/liZwJjLJ7QAUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyixyvETJHtg5Lsi/JcLiKv4DRMSu+nMP7AyA0HW+Z/a2XUbllKl0+17ybhsip5kcK20fiXNGIAS9YqijhS55VSeDmVd3XyDhgOayaHgiI63GulBOS4o7AEY/zEDX86IFHjJG4m9yYMmOhzSD5/kbPEnmJJj0MoSYO92RRvRBme8dHA8boGoX/B1NpGkqq5g6m2WnV+3OrtDL8thMoyEU9WCno3j+mIg4ovN5lFvRZ0Sds="
+												target="_blank" class="tit" id="sa_title_1">아이폰 다고폰</a> <a
+												href="http://adcr.naver.com/adcr?x=eHc8yQRDS4Ka/Dzre9tNj////w==b0dLi26BWdtMDFxkuBh6by9qwPq9y8y0Iq0CTmMYc3r53bWp3ZZVSogQKF8PEHVth5yi61g5Nf/JPT6/3O4XZ1CC50SuMWnHYiPIjHBdeazboQekS1pa1JoNOgPbcAyf+So/Q0pzqaf/liZwJjLJ7QAUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyixyvETJHtg5Lsi/JcLiKv4DRMSu+nMP7AyA0HW+Z/a2XUbllKl0+17ybhsip5kcK20fiXNGIAS9YqijhS55VSeDmVd3XyDhgOayaHgiI63GulBOS4o7AEY/zEDX86IFHjJG4m9yYMmOhzSD5/kbPEnmJJj0MoSYO92RRvRBme8dHA8boGoX/B1NpGkqq5g6m2WnV+3OrtDL8thMoyEU9WCno3j+mIg4ovN5lFvRZ0Sds="
+												target="_blank" class="url">dagophone.com</a>
+										</dt>
+										<dd>
+											<a
+												href="http://adcr.naver.com/adcr?x=eHc8yQRDS4Ka/Dzre9tNj////w==b0dLi26BWdtMDFxkuBh6by9qwPq9y8y0Iq0CTmMYc3r53bWp3ZZVSogQKF8PEHVth5yi61g5Nf/JPT6/3O4XZ1CC50SuMWnHYiPIjHBdeazboQekS1pa1JoNOgPbcAyf+So/Q0pzqaf/liZwJjLJ7QAUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyixyvETJHtg5Lsi/JcLiKv4DRMSu+nMP7AyA0HW+Z/a2XUbllKl0+17ybhsip5kcK20fiXNGIAS9YqijhS55VSeDmVd3XyDhgOayaHgiI63GulBOS4o7AEY/zEDX86IFHjJG4m9yYMmOhzSD5/kbPEnmJJj0MoSYO92RRvRBme8dHA8boGoX/B1NpGkqq5g6m2WnV+3OrtDL8thMoyEU9WCno3j+mIg4ovN5lFvRZ0Sds="
+												target="_blank" class="desc">아이폰, 기기값할인, 무료퀵, 샤오미밧데리,
+												블루투스이어폰증정</a>
+										</dd>
+									</dl>
+									<dl class="item">
+										<dt>
+											<a
+												href="http://adcr.naver.com/adcr?x=frnmZEm/MN86LId5h0Oyq////w==bfgteDMHfqGwKYlfMmPF7mbuTUZK63LD9dOA9+3I806K10vfAZ/qpi6ZZrzz7KBHJHfml701xdq6om2nKneTIr7G1IxE4r8LuZA1RDl+KQFXFbjuoQnH8xRNc87aCQy2hDEETwbksywEWQQHeSVqmNJFNIW+Krt9V46sbwvzC6ClDZC6AalOHpX4kz3+pYWrC7aGU6qCZpExaXW03wsNGsgapwbBb0TP1lYOi9uTcOAtd5lEoyUUEQtCT8yBELvwDjcroSqfWAqp0uvEo7Jn6rb4M33cPF7QY+NBn7MQFKVDh2Q8EKKhYlDx7dSqjaaE41sM8wEGBLgPVCmNRMNGnz3gQugGw3nvo7fjDJKrNSj4AsirtU5Bl62ja4eAdY2z/aEkkuarcV8X+Z3h99mERZW1s3o7gCjWwWTLfx6Waq3L6So+6lHxBQGLz5IvPG5TOWSX6hmfKpDJSAsS2SpeA8NPQJb7wT+WF2NgXLy3/gELmaJysLGLHhob7U8R4l0+fahODgwqa7HLIN+zX05VTiw=="
+												target="_blank" class="tit" id="sa_title_2">CJ 헬로모바일
+												알뜰폰특가</a> <a
+												href="http://adcr.naver.com/adcr?x=frnmZEm/MN86LId5h0Oyq////w==bfgteDMHfqGwKYlfMmPF7mbuTUZK63LD9dOA9+3I806K10vfAZ/qpi6ZZrzz7KBHJHfml701xdq6om2nKneTIr7G1IxE4r8LuZA1RDl+KQFXFbjuoQnH8xRNc87aCQy2hDEETwbksywEWQQHeSVqmNJFNIW+Krt9V46sbwvzC6ClDZC6AalOHpX4kz3+pYWrC7aGU6qCZpExaXW03wsNGsgapwbBb0TP1lYOi9uTcOAtd5lEoyUUEQtCT8yBELvwDjcroSqfWAqp0uvEo7Jn6rb4M33cPF7QY+NBn7MQFKVDh2Q8EKKhYlDx7dSqjaaE41sM8wEGBLgPVCmNRMNGnz3gQugGw3nvo7fjDJKrNSj4AsirtU5Bl62ja4eAdY2z/aEkkuarcV8X+Z3h99mERZW1s3o7gCjWwWTLfx6Waq3L6So+6lHxBQGLz5IvPG5TOWSX6hmfKpDJSAsS2SpeA8NPQJb7wT+WF2NgXLy3/gELmaJysLGLHhob7U8R4l0+fahODgwqa7HLIN+zX05VTiw=="
+												target="_blank" class="url">sk7-cjmobile.com</a>
+										</dt>
+										<dd>
+											<a
+												href="http://adcr.naver.com/adcr?x=frnmZEm/MN86LId5h0Oyq////w==bfgteDMHfqGwKYlfMmPF7mbuTUZK63LD9dOA9+3I806K10vfAZ/qpi6ZZrzz7KBHJHfml701xdq6om2nKneTIr7G1IxE4r8LuZA1RDl+KQFXFbjuoQnH8xRNc87aCQy2hDEETwbksywEWQQHeSVqmNJFNIW+Krt9V46sbwvzC6ClDZC6AalOHpX4kz3+pYWrC7aGU6qCZpExaXW03wsNGsgapwbBb0TP1lYOi9uTcOAtd5lEoyUUEQtCT8yBELvwDjcroSqfWAqp0uvEo7Jn6rb4M33cPF7QY+NBn7MQFKVDh2Q8EKKhYlDx7dSqjaaE41sM8wEGBLgPVCmNRMNGnz3gQugGw3nvo7fjDJKrNSj4AsirtU5Bl62ja4eAdY2z/aEkkuarcV8X+Z3h99mERZW1s3o7gCjWwWTLfx6Waq3L6So+6lHxBQGLz5IvPG5TOWSX6hmfKpDJSAsS2SpeA8NPQJb7wT+WF2NgXLy3/gELmaJysLGLHhob7U8R4l0+fahODgwqa7HLIN+zX05VTiw=="
+												target="_blank" class="desc">알뜰폰, 학생폰 효도폰추천, 요금 3~40%할인,
+												기본료50%할인, 가입비면제</a>
+										</dd>
+									</dl>
+									<dl class="item">
+										<dt>
+											<a
+												href="http://adcr.naver.com/adcr?x=6xq9ozMryQaQ2jPJkVnab////w==bRnH9ZOZNpzbqIMN22ME7SqRCjKG31/46Dme9WufpaTDen5HwRCNia9muwMNo2BuWg9NEVHH1gzlZ4H15KTLSxEn9T6LXtuuWwc9BhUNcE3wDY8NLEVJg4I6jlCtGsct2fYAlGp9Bz2sywrn8J7hi4QUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyikVbSM+iJDfb4neRtEUXr+Tc/KHb5cGDUTfytXBy3drLZbYGe6bXsRDqZ+rRibKoq+I4Nh57Iy/NabUi6VbBJ/164F12YqVSirEWqExmjVi0NvMxBI9lOWfVpyBtZROyB/D/K9MaH4tA+hwhLxOg3Qg9w50juiMdudNSoYOQX5t/NvekGwXaZog7vOlE4hMW6JH8ZXj/Zv6SbRGh/S9vk7clSGDwOjTMpNfGVo9tezuxGhLTnvK+kPimCEIAhSSJSokP4CM6k5rdgZkW445E3uOjc5kjZULCmIpjRNqIySPUf31r08k52dyBtlXqqejq6HGIOkTDql9Xo14CRd2VPlgNmF8nZZ6wokVDc6LBHv/8b3hmIVBBjibIAYvY1RH7aMAOWI0HIqUZfAKIA4UR2/94Lf9ekvFyLW3w17Y+QrC10iy3ULLLCgDqlIjaKj5TUYKCQ0cLM7wDIJS4HGp6UuutZRSGTBTNpyf9Np4DeIx83tTfYoRyJDXKAxbjQIq5YCdpS48I2OoOf1FNfuFq8Ya0c7icyAjfZnqghUEcRM/o="
+												target="_blank" class="tit" id="sa_title_3">U+Shop 아이폰6S
+												할인</a> <a
+												href="http://adcr.naver.com/adcr?x=6xq9ozMryQaQ2jPJkVnab////w==bRnH9ZOZNpzbqIMN22ME7SqRCjKG31/46Dme9WufpaTDen5HwRCNia9muwMNo2BuWg9NEVHH1gzlZ4H15KTLSxEn9T6LXtuuWwc9BhUNcE3wDY8NLEVJg4I6jlCtGsct2fYAlGp9Bz2sywrn8J7hi4QUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyikVbSM+iJDfb4neRtEUXr+Tc/KHb5cGDUTfytXBy3drLZbYGe6bXsRDqZ+rRibKoq+I4Nh57Iy/NabUi6VbBJ/164F12YqVSirEWqExmjVi0NvMxBI9lOWfVpyBtZROyB/D/K9MaH4tA+hwhLxOg3Qg9w50juiMdudNSoYOQX5t/NvekGwXaZog7vOlE4hMW6JH8ZXj/Zv6SbRGh/S9vk7clSGDwOjTMpNfGVo9tezuxGhLTnvK+kPimCEIAhSSJSokP4CM6k5rdgZkW445E3uOjc5kjZULCmIpjRNqIySPUf31r08k52dyBtlXqqejq6HGIOkTDql9Xo14CRd2VPlgNmF8nZZ6wokVDc6LBHv/8b3hmIVBBjibIAYvY1RH7aMAOWI0HIqUZfAKIA4UR2/94Lf9ekvFyLW3w17Y+QrC10iy3ULLLCgDqlIjaKj5TUYKCQ0cLM7wDIJS4HGp6UuutZRSGTBTNpyf9Np4DeIx83tTfYoRyJDXKAxbjQIq5YCdpS48I2OoOf1FNfuFq8Ya0c7icyAjfZnqghUEcRM/o="
+												target="_blank" class="url">shop.uplus.co.kr/</a>
+										</dt>
+										<dd>
+											<a
+												href="http://adcr.naver.com/adcr?x=6xq9ozMryQaQ2jPJkVnab////w==bRnH9ZOZNpzbqIMN22ME7SqRCjKG31/46Dme9WufpaTDen5HwRCNia9muwMNo2BuWg9NEVHH1gzlZ4H15KTLSxEn9T6LXtuuWwc9BhUNcE3wDY8NLEVJg4I6jlCtGsct2fYAlGp9Bz2sywrn8J7hi4QUNKWLpMDs0T3kST5/2j4uUzNRmY7ABSsVvxducgEyikVbSM+iJDfb4neRtEUXr+Tc/KHb5cGDUTfytXBy3drLZbYGe6bXsRDqZ+rRibKoq+I4Nh57Iy/NabUi6VbBJ/164F12YqVSirEWqExmjVi0NvMxBI9lOWfVpyBtZROyB/D/K9MaH4tA+hwhLxOg3Qg9w50juiMdudNSoYOQX5t/NvekGwXaZog7vOlE4hMW6JH8ZXj/Zv6SbRGh/S9vk7clSGDwOjTMpNfGVo9tezuxGhLTnvK+kPimCEIAhSSJSokP4CM6k5rdgZkW445E3uOjc5kjZULCmIpjRNqIySPUf31r08k52dyBtlXqqejq6HGIOkTDql9Xo14CRd2VPlgNmF8nZZ6wokVDc6LBHv/8b3hmIVBBjibIAYvY1RH7aMAOWI0HIqUZfAKIA4UR2/94Lf9ekvFyLW3w17Y+QrC10iy3ULLLCgDqlIjaKj5TUYKCQ0cLM7wDIJS4HGp6UuutZRSGTBTNpyf9Np4DeIx83tTfYoRyJDXKAxbjQIq5YCdpS48I2OoOf1FNfuFq8Ya0c7icyAjfZnqghUEcRM/o="
+												target="_blank" class="desc">오직 U+샵에서 최대 712,800원 절약!
+												아이폰로즈골드를 27% 혜택가에.</a>
+										</dd>
+									</dl>
+									<div class="adsby">
+										<span class="by">Ads by<span class="sa_logo">NAVER</span></span>
+										<a
+											href="https://help.naver.com/support/contents/contents.nhn?serviceNo=522&amp;categoryNo=11661"
+											target="_blank" class="help"><i class="ico_help"></i><span
+											class="blind">도움말</span></a>
+									</div>
+								</div>
+							</div>
+							<script type="text/javascript">
+function show(el) {
+	// 그외 숨김처리
+	var aTooltip = $$('SPAN._tooltip');
+	for(var i=0, nLen = aTooltip.length ; i < nLen ; i++){
+		var oTooltip = aTooltip[i].parentNode;
+		$Element(oTooltip).removeClass("on");
+		oTooltip.parentNode.style.zIndex = "";
+	}
+	
+	if (!el) {
+		return;
+	}
+	
+	var tooltip = el.parentNode;
+
+	if (el && tooltip) {
+		$Element(tooltip).addClass("on");
+		tooltip.parentNode.style.zIndex = 1;
+	}
+}
+function hide(el) {
+	if (!el) {
+		return;
+	}
+	
+	var tooltip = el.parentNode;
+	
+	if (el && tooltip) {
+		$Element(tooltip).removeClass("on");
+		tooltip.parentNode.style.zIndex = "";
+	}
+}
+</script>
+						</div>
+					</div>
+				</div>
+				<!-- //content -->
+			</div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li class="first"><a
+					href="http://cafe.naver.com/common/cafein_service.htm"
+					target="_blank" class="N=a:fot.agreement">카페 이용약관</a></li>
+				<li><a
+					href="http://cafe.naver.com/common/cafein_service_rule.htm"
+					target="_blank" class="N=a:fot.rule">카페 운영원칙</a></li>
+				<li><a href="http://www.naver.com/rules/privacy.html"
+					target="_blank" class="N=a:fot.privacy"><strong>개인정보취급방침</strong></a></li>
+				<li><a href="http://www.naver.com/rules/disclaimer.html"
+					target="_blank" class="N=a:fot.discalimer">책임의 한계와 법적고지</a></li>
+				<li><a href="http://help.naver.com/claim_main.asp"
+					target="_blank" class="N=a:fot.claim">게시중단요청서비스</a></li>
+				<li><a
+					href="https://help.naver.com/support/service/main.nhn?serviceNo=522"
+					target="_blank" class="N=a:fot.help">카페 고객센터</a></li>
+			</ul>
+			<address>
+				<a href="http://www.navercorp.com/" target="_blank" class="logo"><img
+					src="http://static.naver.net/common/footer/ci_naver.gif" width="63"
+					height="11" alt="NAVER Corp." /></a> <em>Copyright &copy;</em> <a
+					href="http://www.navercorp.com/" target="_blank">NAVER Corp.</a> <span>All
+					Rights Reserved.</span>
+			</address>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+var g_sNoteUrl = "http://note.naver.com";
+var g_sAppStoreUrl = "http://apps.naver.com";
+var g_sItemUrl = "http://item.naver.com";
+var g_sBlogUrl = "http://blog.naver.com";
+var g_sCafeUrl = "http://cafe.naver.com";
+var g_sCafeImgUrl = 'http://cafeimgs.naver.net';
+var g_sCafeFileUrl = 'http://cafefiles.naver.net';
+var g_sItem2Url = 'http://item2.naver.com';
+var g_sMobileCafeUrl = "http://m.cafe.naver.com";
+var g_sUpcafeUrl = "http://up.cafe.naver.com";
+var g_sCafeThumbUrl = "http://cafethumb.naver.net";
+var g_sLoginUrl = "http://nid.naver.com";
+var g_sCafeSectionUrl = "http://section.cafe.naver.com";
+var g_sChatUrl = "https://chat.cafe.naver.com";
+var g_sWebMsgUrl = "http://webmsg.naver.com/popup_send/send_url.php";
+
+var g_bHasGift = false;
+var g_bHasGiftMessage = false;
+var g_bReadOnlyStatus = false;
+var g_sDocumentTitle = document.title.replace(/#.*$/,"");
+var g_sAcitivtyStopAlertMsg = '현재 활동정지 상태입니다. \n\n활동 정지가 해제되기 전까지 \n해당 카페에서 글쓰기와 수정, \n공유하기, 구독등 \n카페 활동이 불가합니다.';
+var g_bTablet = false;
+var g_sUserId = "";
+
+var ERROR_LOGIN_FAIL = 101;
+
+var nsc="cafe.section"; //서비스에서 사용하는 nclick service code.
+var gnb_service="section.cafe"; //서비스 명 .naver.com 이하 도메인을 기술 ex) sports.news.naver.com => sports.news
+var gnb_logout="http://section.cafe.naver.com/Logout.nhn?alreadyNaverLogout=true"; //GNB에서 로그아웃 후 redirect 될 URL
+var gnb_template="gnb_utf8"; //사용하고 있는 템플릿 명
+var gnb_brightness=1; // 0: 어두운색 아이콘, 1: 어두운색 아이콘 + 투명도, 2: 밝은색 아이콘 + 투명도, 3: 밝은색 아이콘(pwe 사용권장)
+var gnb_item_hide_option=0 //0(default) : 모두 표시, 1 : 로그인버튼 숨기기, 2 : user 레이어 숨기기, 4: Naver Me 영역 숨기기, 8 : 메일알림영역 숨기기, 16 : 프로필 이미지 숨기기, 32 : 임직원혜택 보이기(숨길 영역의 값을 bit sum 하여 적용)
+// var gnb_searchbox="off"; // (2014 GNB에서는 사라진 옵션) 미니 검색창을 on 할지 off 할지. default는 off
+// var gnb_shortnick="off"; // (2014 GNB에서는 사라진 옵션) 닉네임 말줄임(10자)을 on할지 off 할지. default는 off.
+var gnb_more_layer_open_callback = function() {
+    loginframe.checkAd(1);
+};
+var gnb_more_layer_close_callback = function() {
+    loginframe.checkAd(0);
+};
+
+</script>
+	<script type="text/javascript"
+		src="/static/js/section/CommonBottomScript-1453285965000-521955.js"
+		charset="utf-8"></script>
+	<script type="text/javascript"
+		src="/javascript/section/MobileInfoLayer.js?1449048656000"></script>
+	<script id="alarmMessageListTpl" type="text/template">
+<div class="news_list" id="ComcastHideArea">
+<ul class="list_tab">
+	<li class="fc select"><a href="#" class="_click(Comcast|AlarmMessageList) _stopDefault">전체 <strong {if nTotalCount == 0}class="zero"{/if}>{=nTotalCount}</strong></a></li>
+</ul>
+{=sListHtml}
+</div>
+</script>
+	<script id="alarmMessageTpl" type="text/template">
+<li class="{if nIdx == 0}fc{/if}{if !oAlarmMessage.unread} dim{/if}{if bErrorMessage} delete{/if}">
+{if !bErrorMessage}
+	{if oAlarmMessage.alarmType == "CmtOfArticle" || oAlarmMessage.alarmType == "CmtOfBoard"}
+    	{set writeDate = (=oAlarmMessage.comment.writeDateForView)}
+    	{set writerNickname = (=oAlarmMessage.comment.writerNickname)}
+	{else}
+    	{set writeDate = (=oAlarmMessage.writeDateForView)}
+    	{set writerNickname = (=oAlarmMessage.writerNickname)}
+	{/if}
+	<span class="n_cafe">{=oAlarmMessage.cafeName}</span><br>
+	<a href="{=sDomain}/{=oAlarmMessage.cafeUrl}/{=oAlarmMessage.articleId}" target="_blank" class="tit N=a:cst*n.list _click(Comcast|AlarmMessageRead|{=oAlarmMessage.cafeId}|{=oAlarmMessage.articleId}|{=oAlarmMessage.commentId})">
+		{if oAlarmMessage.alarmType == "Board"}[게시판 새글]
+		{elseif oAlarmMessage.alarmType == "Member"}[멤버 새글]
+		{elseif oAlarmMessage.alarmType == "Keyword"}[키워드 새글]
+		{elseif oAlarmMessage.alarmType == "CmtOfArticle"}[관심글 새댓글]
+		{elseif oAlarmMessage.alarmType == "CmtOfBoard"}[게시판 새댓글]
+		{else}[게시판 새글]
+		{/if}
+		{=oAlarmMessage.messageContent}
+	</a><br>
+	<span class="option">{=writeDate} <span class="hr"></span>by {=writerNickname}</span>
+{else}
+	<span class="tit N=a:cst*n.list">
+	{=oAlarmMessage.errorMessage}
+	</span> <br>
+{/if}
+	<a href="#" class="del N=a:cst*n.del,t:1 _click(Comcast|RemoveAlarmMessage|{=oAlarmMessage.cafeId}|{=oAlarmMessage.articleId}|{=oAlarmMessage.commentId}|{=oAlarmMessage.alarmType}) _stopDefault">삭제</a>
+</li>
+</script>
+	<script id="alarmMessageFunctionBarTpl" type="text/template">
+<div class="l_control">
+	<a href="#" class="btn_reload _click(Comcast|AlarmMessageList) _stopDefault">새로고침</a>
+	{if bPrev}<a href="#" class="btn_prev on _click(Comcast|AlarmMessageListPage|prev) _stopDefault">새 소식 이전</a>{else}<span class="btn_prev">새 소식 이전</span>{/if}{if bNext}<a href="#" class="btn_next on _click(Comcast|AlarmMessageListPage|next) _stopDefault">새 소식 다음</a>{else}<span class="btn_next">새 소식 다음</span>{/if}
+	<div class="action">
+	{if nTotalCount > 0}<a href="#" class="del N=a:cst*n.delall,t:1 _click(Comcast|RemoveAllAlarmMessage) _stopDefault">모두 삭제</a>
+	{else}<span class="del">모두 삭제</span>
+	{/if}
+	</div>
+</div>
+</script>
+	<script id="alarmMessageNoneTpl" type="text/template">
+<div class="no_list">
+	<h5>알림을 받은 새소식이 없습니다.</h5>
+	<p>카페앱의 게시판, 멤버 프로필 등에서<br><span class="ico_bell">종 아이콘</span>을 터치하여 새소식 알림을 받으세요. </p>
+	<a href="#" class="_click(Comcast|CafeappInstallIntroLayer) _stopDefault"><img height="24" width="108" alt="카페앱 간편설치" src="http://static.naver.net/cafe/section/btn_installcafeapp.gif"></a>
+</div>
+</script>
+	<script type="text/javascript">
+$Element("<div></div>").html(); // 진도 버그 대응용
+var oUtil = new nhn.Utility();
+var oLayer = new nhn.LayerManager({
+		nShowOpacity : 0.0
+	});
+
+
+jsMVC.setController('cafeSectionController', CafeSectionController);
+jsMVC.setModel('cafeSectionController', 'cafeSectionModel', CafeSectionModel);
+jsMVC.setView('cafeSectionController', 'cafeSectionView', CafeSectionView);
+var oCafeSectionController = jsMVC.getController('cafeSectionController');
+var smartSearch; 
+showBanner = $Fn(oCafeSectionController.showBanner, oCafeSectionController).bind();
+onBannerCloseClick = $Fn(oCafeSectionController.onBannerCloseClick, oCafeSectionController).bind();
+onBannerClick = $Fn(oCafeSectionController.onBannerClick, oCafeSectionController).bind();
+
+jsMVC.setController('comcastController', ComcastController);
+jsMVC.setModel('comcastController', 'comcastModel', ComcastModel);
+jsMVC.setView('comcastController', 'comcastView', ComcastView);
+var oComcastController = jsMVC.getController('comcastController');
+oComcastController.comcastModel.setHasNew({
+	articleNews : false,
+	totalActivityNews : false
+});
+oComcastController.comcastModel.setCategoryId();
+oComcastController.comcastModel.setManageNewsList();
+oComcastController.comcastView.paintDelegateMemberNews(oComcastController.comcastModel.getCurrentManagerNews());
+
+var oTabletHandler = new TabletHandler(g_bTablet);
+
+document.onclick = null;
+
+$Fn(function(){ // Lazy Loading
+	// GNB 영역 정보 가져오기(GNB JSONP 호출)
+	getGNB();
+	
+	var elDa1Iframe = $("f280240_209C");
+	if(elDa1Iframe){
+		elDa1Iframe.src = "http://ad.naver.com/adshow?unit=209C";
+	}
+	
+	var elDa2Iframe = $("f280240_210C");
+	if(elDa2Iframe){
+		elDa2Iframe.src = "http://ad.naver.com/adshow?unit=210C";
+	}
+	
+	var elLoginIframe = $("loginframe");
+	if(elLoginIframe){
+		elLoginIframe.src = "http://static.nid.naver.com/b4/b4login.nhn?svc=d278&url=http://section.cafe.naver.com";
+	}
+
+	// MobileInfoLayer by laziel
+	if($("cafe_layer_mobile")){
+		var oMobileInfo = new MobileInfoLayer;
+		oMobileInfo.bindEvent();
+		
+		if(elLoginIframe && $Element("loginframe").offset().top < 400){
+			function showLayerFrame(){
+				var elLoginDoc = $("loginframe").document || $("loginframe").contentDocument;
+				var elLayerFrame = elLoginDoc.getElementById("_mobileLayerFrame");
+				if(!elLayerFrame){
+					var elFrame = elLoginDoc.createElement("iframe");
+					$Element(elFrame).css({
+						'position': 'absolute',
+						'top' : '0px',
+						'right' : '0px',
+						'border' : '0px',
+						'width' : '247px',
+						'height' : '88px',
+						'display' : 'none'
+					}).attr({
+						'id' : '_mobileLayerFrame',
+						'frameBorder' : 0
+					});
+					elLoginDoc.body.appendChild(elFrame);
+				}
+				elLayerFrame = elLoginDoc.getElementById("_mobileLayerFrame");
+				elLayerFrame.style.display = "block";
+			}
+			
+			function hideLayerFrame(){
+				var elLoginDoc = $("loginframe").document || $("loginframe").contentDocument;		
+				var elLayerFrame = elLoginDoc.getElementById("_mobileLayerFrame");
+				if(elLayerFrame){
+					elLayerFrame.style.display = "none";
+				}
+			}
+			
+			oMobileInfo.attach('show', showLayerFrame);
+			oMobileInfo.attach('hide', hideLayerFrame);
+		}
+	}
+}).attach(window, "load");
+
+var ToggleCafeGNBLayer = {
+    init : function() {
+        this.elGnbCurrent = { layer : null, button : null };
+        this.bClickGnb = false;
+        this.attachEvent(true);
+    },
+    attachEvent : function(bInit) {
+        if (bInit) {
+            var oThis = this;
+            $Fn(this.hide, this).attach(document, "click");
+            for(var gnFitted = 0; gnFitted < 10; gnFitted++ ) {
+                if( $('gnb_my_layer') && $('gnb_notice_layer') && $('gnb_service_layer') ) {
+                    setTimeout(function(){
+                        $Fn(oThis.toggleGnbLayer, oThis).attach($('gnb_my_layer'), "click");
+                        $Fn(oThis.toggleGnbLayer, oThis).attach($('gnb_notice_layer'), "click");
+                        $Fn(oThis.toggleGnbLayer, oThis).attach($('gnb_service_layer'), "click");
+                    }, 500);
+                    break;
+                }
+            }
+        }
+    },
+    hide : function(oEvent) {
+        // 2014년 GNB 레이어 닫기처리
+        if(this.elGnbCurrent.layer && (this.elGnbCurrent.layer.myLayerElement || this.elGnbCurrent.layer.meLayerElement || this.elGnbCurrent.layer.moreLayerElement) && !this.bClickGnb) {
+            gnbAllLayerClose();
+        }
+        this.bClickGnb = false;
+    },
+    toggleGnbLayer : function() {
+        if( gnbUserLayer && gnbUserLayer.show ) {
+            this.elGnbCurrent = { layer : gnbUserLayer, button : null };
+            this.bClickGnb = true;
+        } else if ( gnbNaverMeLayer && gnbNaverMeLayer.show ) {
+            this.elGnbCurrent = { layer : gnbNaverMeLayer, button : null };
+            this.bClickGnb = true;
+        } else if ( gnbMoreLayer && gnbMoreLayer.show ) {
+            this.elGnbCurrent = { layer : gnbMoreLayer, button : null };
+            this.bClickGnb = true;
+        } else {
+            this.elGnbCurrent = { layer : null, button : null };
+            this.bClickGnb = false;
+        }
+    }
+};
+
+ToggleCafeGNBLayer.init();
+</script>
+	<script type="text/javascript"
+		src="/javascript/lib/skipNavigationWebkit.js?1449048652000"
+		charset="utf-8"></script>
+	<script type="text/javascript"
+		src="/static/js/section/SearchScript-1449048657000-122522.js"
+		charset="utf-8"></script>
+	<script>
+var oValidator = new nhn.Validator({sCharset : "euc-kr"});
+
+jsMVC.setController('cafeSearchController', CafeSearchController);
+jsMVC.setModel('cafeSearchController', 'cafeSearchModel', CafeSearchModel);
+jsMVC.setView('cafeSearchController', 'cafeSearchView', CafeSearchView);
+var oCafeSearchController = jsMVC.getController('cafeSearchController');
+oCafeSearchController.cafeSearchView.showLoadingLayer();
+
+oCafeSearchController.cafeSearchModel.setSearchQuery($$.getSingle("div.snb_search_box .snb_search_text").value);
+
+
+
+oCafeSearchController.cafeSearchModel.setSearchType("ArticleSearch");
+
+
+
+//oCafeSearchController.cafeSearchModel.setSearchType("ArticleSearch");
+
+var oSearchAjaxHistory = new jindo.AjaxHistory({
+	"sIFrameUrl" : "/AjaxHistory.nhn",
+	nCheckInterval : 100,
+	htCustomEventHandler : {
+		"load" : function(){
+			oSearchAjaxHistory.addHistory(oCafeSearchController.cafeSearchModel.getQueryData());
+			oCafeSearchController.cafeSearchView.hideLoadingLayer();
+		},
+		"change" : function(htData){
+			if(!oCafeSearchController.cafeSearchModel.getAdultQuery()){
+				delete htData.adult;
+			}
+			oCafeSearchController.getSearchData(htData);
+		},
+		"error" : function(){
+			oCafeSearchController.cafeSearchView.hideLoadingLayer();
+		}
+	}
+});
+oSearchAjaxHistory.initialize();
+
+
+
+(function() {
+	var oThumbnailSliderHtmls = (function() {
+		var oResults = new cafe.SectionSearch.ThumbnailSliderHtmls();
+	
+		
+			var oArticle = {
+				nTotalImageCount : 7,
+				sArticleUrl : "http://cafe.naver.com/torrentist/2956",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_109/audwnrkwk_1456889489849WKUFL_PNG/%BE%C6%C0%CC%C6%F9%C1%DF%B0%ED%BD%C3%BC%BC1.PNG#481x264", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "55px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_135/audwnrkwk_1456889516660pfhVo_PNG/%BE%C6%C0%CC%C6%F9%C1%DF%B0%ED%BD%C3%BC%BC2.PNG#467x260", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_188/audwnrkwk_1456889540203DKAu8_PNG/%BE%C6%C0%CC%C6%F9%C1%DF%B0%ED%BD%C3%BC%BC4.PNG#478x255", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "53px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_219/audwnrkwk_1456889571121xp5ju_JPEG/%B8%F0%C0%CC%B0%ED%C6%F9.jpg#500x500", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "100px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_191/audwnrkwk_1456889609111XIbDJ_PNG/%BE%C6%C0%CC%C6%F9%BB%E7%C0%CC%C6%AE.PNG#483x174", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "36px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_197/audwnrkwk_1456890014793mfkai_PNG/1231316561.PNG#496x278", 
+						sTagClass : "N=a:art.img,i:2956,r:1 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 9,
+				sArticleUrl : "http://cafe.naver.com/power2junecafe/63",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_164/g9fyxxjux_1456985604488yuiIb_JPEG/2016-03-03_14%3B38%3B59.jpg#650x863", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "75px",
+						sHeight : "100px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_169/g9fyxxjux_1456985604843s8K7g_JPEG/20160116_154708.jpg#650x367", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_255/g9fyxxjux_1456985605067YR3gg_JPEG/20160116_154946.jpg#650x367", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_92/g9fyxxjux_1456985605326IE46u_JPEG/20160116_155035.jpg#650x367", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_129/g9fyxxjux_1456985605532M1DOO_JPEG/20160116_154940.jpg#650x367", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_287/g9fyxxjux_1456985605905mp3oV_JPEG/20160116_155505.jpg#650x367", 
+						sTagClass : "N=a:art.img,i:63,r:2 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 8,
+				sArticleUrl : "http://cafe.naver.com/puppy2puppy/4656",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://image.nmv.naver.net/cafeucc15/2016/03/03/1632/b8bcb6288467ca9a82fc270d59ed737e384b_ugcvideo_480P_01_16x9_s152.jpg#152x114#m", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "100px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_140/tove92_14569729059833taKM_JPEG/1.jpg#525x466", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "89px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_106/tove92_1456972919103VHAIT_JPEG/2.jpg#529x334", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "63px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_76/tove92_1456972927976bgytJ_JPEG/3.jpg#504x266", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "53px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_14/tove92_1456972935220pIWRe_JPEG/4.jpg#504x351", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "70px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_62/tove92_1456972942352O5FE6_JPEG/5.jpg#504x355", 
+						sTagClass : "N=a:art.img,i:4656,r:3 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "70px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 7,
+				sArticleUrl : "http://cafe.naver.com/je61/13355",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_131/xqif164836_1456993450387OLBGW_JPEG/tistory_com_20160303_172351.jpg#480x406", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "85px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_210/xqif164836_1456993540575uB95o_PNG/%BE%C6%C0%CC%C6%F96s.png#480x242", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "50px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_130/xqif164836_14569949602439JoaG_JPEG/image.JPEG#480x359", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_71/xqif164836_1456994960518IJQr5_JPEG/image.JPEG#480x480", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "100px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_155/xqif164836_1456994960740fyoax_JPEG/image.JPEG#480x440", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "92px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_46/xqif164836_1456994961076gxcX4_JPEG/image.JPEG#480x269", 
+						sTagClass : "N=a:art.img,i:13355,r:4 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 10,
+				sArticleUrl : "http://cafe.naver.com/canlo/3925",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_241/kumoy_14569749481547kfM9_JPEG/1394.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_43/kumoy_1456974948375bbWuV_JPEG/098_%282%29.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_31/kumoy_1456974948522yfmsi_JPEG/1078_%282%29.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_104/kumoy_1456974948714GPIaE_JPEG/1169.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_40/kumoy_1456974948960CIT6w_JPEG/1914.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160303_178/kumoy_14569749491041fkJc_JPEG/3617.JPG#697x523", 
+						sTagClass : "N=a:art.img,i:3925,r:5 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 12,
+				sArticleUrl : "http://cafe.naver.com/ecogreenphone/5748",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_77/magpiekwak_1456884630964qJhuC_JPEG/077.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_189/magpiekwak_1456884631174b8CaR_JPEG/660_%282%29.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_15/magpiekwak_14568846314403KnYq_JPEG/756.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_242/magpiekwak_1456884632043iMVtN_JPEG/1062.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_18/magpiekwak_1456884632522wpMmI_JPEG/1380.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_300/magpiekwak_1456884633152D9JBj_JPEG/1525.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5748,r:6 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 12,
+				sArticleUrl : "http://cafe.naver.com/canlo/3921",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_20/calri555_1456885191663Ug7rc_JPEG/412.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_74/calri555_1456885191841hF5NW_JPEG/315_%282%29.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_226/calri555_1456885192076VUEes_JPEG/322_%282%29.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_119/calri555_1456885192257Cwehy_JPEG/328.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_137/calri555_1456885192584THDlg_JPEG/530_%282%29.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_181/calri555_1456885192720kf5fy_JPEG/777.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:3921,r:7 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 13,
+				sArticleUrl : "http://cafe.naver.com/fishopgae/2445",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_280/wjatlavks_1456888660453RLMuw_JPEG/%BE%C6%C0%CC%C6%F95s_%C1%DF%B0%ED%B0%A1%B0%DD_1.jpg#590x331", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_253/wjatlavks_1456888660721zIg1G_JPEG/%B3%EB%BF%F8_%C6%F9%B5%A5%C0%CC_%BF%AC%B6%F4%C3%B312016.03.02.012016.03.02-112.jpg#590x349", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "59px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_155/wjatlavks_1456888660963ctJ7n_JPEG/%BE%C6%C0%CC%C6%F95s_%C1%DF%B0%ED%B0%A1%B0%DD_2.jpg#590x331", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_142/wjatlavks_1456888661623hL8D9_JPEG/%C6%ED%C0%C7%C1%A1_%C5%C3%B9%E82016.03.02.012016.03.02-112.jpg#590x462", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "78px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_114/wjatlavks_1456888661914ai41a_JPEG/%B3%EB%BF%F8_%B8%C5%C0%D4_%C5%C3%B9%E82016.03.02.012016.03.02-112.jpg#590x364", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "62px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_238/wjatlavks_1456888662176vc83c_JPEG/%B3%EB%BF%F8_%C7%D8%BF%DC%BC%F6%C3%E2_%C0%AF%C5%EB%B0%FA%C1%A42016.03.02.012016.03.02-112.jpg#590x436", 
+						sTagClass : "N=a:art.img,i:2445,r:8 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "74px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 13,
+				sArticleUrl : "http://cafe.naver.com/sp321/7684",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_176/dmswk5935_1456912048439ns1IR_JPEG/%BE%C6%C0%CC%C6%F96s_%B8%C5%C0%D4_1.jpg#580x326", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_143/dmswk5935_1456912048752H9RIn_JPEG/%C5%EB%C7%D5_%C6%F9%B5%A5%C0%CC_%B1%B8%BC%BA%C7%B0_%C2%F7%B0%A82016.03.02.012016.03.02-117.jpg#580x334", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "58px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_226/dmswk5935_1456912048985zmix1_JPEG/%BE%C6%C0%CC%C6%F96s_%B8%C5%C0%D4_2.jpg#580x326", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_233/dmswk5935_1456912049239QHML1_JPEG/%B3%EB%BF%F8_%C6%F9%B5%A5%C0%CC_%BF%AC%B6%F4%C3%B312016.03.02.012016.03.02-117.jpg#580x343", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "59px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_108/dmswk5935_1456912049520pvUrw_JPEG/%C5%C3%B9%E8%BB%E7%C1%F8_82016.03.02.012016.03.02-117.jpg#580x326", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "56px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv02.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_263/dmswk5935_14569120497751zWr6_JPEG/%B3%EB%BF%F8_%B8%C5%C0%D4_%C5%C3%B9%E82016.03.02.012016.03.02-117.jpg#580x357", 
+						sTagClass : "N=a:art.img,i:7684,r:9 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "62px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+			var oArticle = {
+				nTotalImageCount : 12,
+				sArticleUrl : "http://cafe.naver.com/ecogreenphone/5750",
+				aThumbnails : (function() {
+					var aThumbnails = [];
+					
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_107/gooa24_14568854723879hWyW_JPEG/131.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_291/gooa24_14568854726238gitB_JPEG/184.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_95/gooa24_1456885472875PEujc_JPEG/189.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_162/gooa24_1456885473198tWr6A_JPEG/620.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_8/gooa24_145688547343636Jez_JPEG/1614.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					aThumbnails.push({
+						sUrl : "http://tv01.search.naver.net/rtugc?size=r120&q=http://cafefiles.naver.net/20160302_244/gooa24_14568854736488qlzY_JPEG/2081.JPG#695x521", 
+						sTagClass : "N=a:art.img,i:5750,r:10 _click(CafeSearch|CloseSlidePanel)",
+						sWidth : "100px",
+						sHeight : "75px"
+					});
+					
+					
+					return aThumbnails;
+				})()
+			};
+			
+			
+			
+			
+			oResults.add(oArticle);
+		
+		
+		return oResults;
+	})();
+	
+	cafe.SectionSearch.slideThumbnails($("ArticleSearchResultArea"), oThumbnailSliderHtmls);
+})();
+</script>
+	<script>
+var g_ssc = "svc.cafe.text",
+	g_query = $("query").value;
+	nclk_evt = 3;
+	nclk_do();
+	oUtil.wrapperLcsDo('true' == 'true', '');
+</script>
+</body>
+</html>

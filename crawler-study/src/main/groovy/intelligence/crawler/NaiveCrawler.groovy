@@ -5,11 +5,10 @@ import groovy.transform.TypeChecked
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.GetMethod
-import org.apache.commons.httpclient.params.HttpMethodParams
-import org.apache.http.HttpStatus
+import org.apache.http.HttpResponse
+import org.apache.http.client.HttpClient
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.DefaultHttpClient
 
 @TypeChecked
 class NaiveCrawler {
@@ -123,7 +122,7 @@ class NaiveCrawler {
 		}
 		if (!crawlerUrl.isCheckedForPermission()) {
 			crawlerUrl.setAllowedToVisit(true)
-//			crawlerUrl.setAllowedToVisit(computePermissionForVisiting(crawlerUrl))
+			//			crawlerUrl.setAllowedToVisit(computePermissionForVisiting(crawlerUrl))
 		}
 		return crawlerUrl.isAllowedToVisit()
 	}
@@ -187,20 +186,15 @@ class NaiveCrawler {
 		return getContent(new CrawlerUrl(urlString, 0))
 	}
 	private String getContent(CrawlerUrl url) {
-		HttpClient client = new HttpClient()
+		HttpClient client = new DefaultHttpClient()
 		// URL에 해당하는 컨텐츠를 가져옴
-		GetMethod method = new GetMethod(url.getUrlString())
-		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-				new  DefaultHttpMethodRetryHandler(3, false))
+		HttpGet method = new HttpGet(url.getUrlString())
 
 		String text = null
 		try {
-			int statusCode = client.executeMethod(method)
-			if (statusCode == HttpStatus.SC_OK) {
-				text = readContentsFromStream(new InputStreamReader(
-						method.getResponseBodyAsStream(),
-						method.getResponseCharSet()))
-			}
+			HttpResponse response = client.execute(method)
+			text = readContentsFromStream(new InputStreamReader(
+					response.getEntity().getContent()))
 		} catch (Exception e) {
 			println e.toString()
 			e.printStackTrace()
@@ -261,7 +255,7 @@ class NaiveCrawler {
 		URL textURL = crawlerUrl.getURL()
 		String host = textURL.getHost()
 		while (m.find()){
-			// ,구분자로 이어진 일치된 url string 
+			// ,구분자로 이어진 일치된 url string
 			String url = m.group()
 			String[] terms = url.split("a href=\"")
 			for (String term : terms) {
@@ -303,10 +297,10 @@ class NaiveCrawler {
 	static main(args) {
 		Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>()
 		String url = "https://twitter.com"
-//		String url = "http://en.wikipedia.org/wiki/Collective_intelligence"
-//		String url = "http://ko.wikipedia.org/wiki/%EC%A7%91%EB%8B%A8_%EC%A7%80%EC%84%B1"
-//		String regexp = "collective.*intelligence"
-//		String regexp = "집단지성"
+		//		String url = "http://en.wikipedia.org/wiki/Collective_intelligence"
+		//		String url = "http://ko.wikipedia.org/wiki/%EC%A7%91%EB%8B%A8_%EC%A7%80%EC%84%B1"
+		//		String regexp = "collective.*intelligence"
+		//		String regexp = "집단지성"
 		String regexp = "하둡"
 		urlQueue.add(new CrawlerUrl(url, 0))
 

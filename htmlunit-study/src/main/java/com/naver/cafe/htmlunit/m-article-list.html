@@ -1,0 +1,972 @@
+http://m.cafe.naver.com/SectionArticleSearch.nhn?page=1&sortBy=0&query=%20%EC%95%84%EC%9D%B4%ED%8F%B0
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="ko">
+  <style type="text/css" id="_jmc_no_tap_highlight_tag_">
+  </style>
+  <head>
+    <title>
+      네이버 카페
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi"/>
+    <link rel="stylesheet" type="text/css" href="/css/cafe/w_home.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/cafe/sa.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/cafe/campaign.css"/>
+    <script type="text/javascript" src="/static/js/mobileweb/core/SectionHeadScript-1449728781000-3077.js" charset="utf-8">
+    </script>
+    <script>
+//<![CDATA[
+
+document.domain='naver.com';
+
+lcs_do();
+
+//]]>
+    </script>
+    <meta name="decorator" content="SectionSearch"/>
+    <meta name="jsfooter" content="/jsp/main/search/include/ScriptSectionArticleSearch.jsp"/>
+  </head>
+  <body id="body" class="" onload="mCafeCommon.closeScroll()">
+    <div class="u_skip" id="u_skip">
+      <a href="#ct" onclick="var t=document.getElementById('ct');t.tabIndex=-1;t.focus();return false;" class="skip">
+        본문 바로가기
+      </a>
+    </div>
+    <header class="header header_search">
+      <div class="gnb blind" role="banner">
+        <a href="http://m.naver.com" onclick="nclk(this, 'gnb.naver', '', '');" class="logo logo_naver">
+          <span class="blind">
+            네이버
+          </span>
+        </a>
+        <h1>
+          <a href="/" onclick="nclk(this, 'gnb.cafe', '', '');" class="logo logo_cafe">
+            <span class="blind">
+              카페
+            </span>
+          </a>
+        </h1>
+      </div>
+      <div class="searchbox" role="search">
+        <div class="btns">
+          <a href="/" class="ibtn btn_prev" onclick="nclk(this, 'sch.back', '', '');">
+            <span class="blind">
+              이전
+            </span>
+          </a>
+        </div>
+        <form name="search" role="search" method="get">
+          <fieldset>
+            <legend class="blind">
+              카페 검색 폼
+            </legend>
+            <label for="cafe_search" class="blind">
+              검색
+            </label>
+            <!-- [D] input text에 포커스 이동 시 input_wrap에 focus 클래스 추가 -->            <div class="input_wrap">
+              <input id="nx_query" type="text" name="query" maxlength="255" value=" 아이폰" placeholder="검색어 입력" autocomplete="off"/>
+              <button id="nx_input_clear" type="button" class="ibtn btn_clear_input _click(SectionSearch|Remove)">
+                <span class="blind">
+                  입력내용 초기화
+                </span>
+              </button>
+              <button type="submit" class="ibtn btn_search_cafe _click(SectionSearch|Search)" onclick="nclk(this, 'sch.go', '', '');">
+                <span class="blind">
+                  카페검색
+                </span>
+              </button>
+            </div>
+            <button type="submit" class="btn btn_search_naver _click(SectionSearch|Search|nexearch)" onclick="nclk(this, 'sch.nx', '', '');">
+              <span>
+                통합검색
+              </span>
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="suggest">
+        <div id="nx_suggest_layer" class="recent" style="display:none;">
+          <div id="nx_suggest_recent" class="suggest_body">
+            <h2>
+              최근 검색어
+            </h2>
+            <ul>
+              <li class="_click(SectionSearch|KeywordHistorySelect)" onclick="return false;" data-rank="@rank@">
+                <a href="#" class="ellip">
+                  @txt@
+                </a>
+                <button type="button" class="_click(SectionSearch|KeywordHistoryRemove|@rank@)" onclick="return false;">
+                  <i class="ico ico_del"/>
+                  <span class="blind">
+                    삭제
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div id="nx_suggest_recent_nothing" class="recent_nodata">
+            <i class="ico ico_warning"/>
+            <p>
+              최근 검색어 내역이
+              <br/>
+               없습니다.
+            </p>
+          </div>
+          <div id="nx_suggest_recent_off" class="recent_disabled">
+            <i class="ico ico_warning"/>
+            <p>
+              최근 검색어 저장 기능이
+              <br/>
+               꺼져 있습니다.
+            </p>
+          </div>
+          <div class="suggest_foot">
+            <span class="btn_group">
+              <span class="btn_all_del_wrap">
+                <button id="nx_suggest_recent_clear" type="button" class="btn_all_del">
+                  전체삭제
+                </button>
+                <span class="pipe">
+                </span>
+              </span>
+              <button id="nx_suggest_recent_unuse" type="button" class="btn_autosave_off">
+                자동저장 끄기
+              </button>
+            </span>
+            <span class="btn_group">
+              <button id="nx_suggest_recent_close" type="button" class="btn_close">
+                닫기
+              </button>
+            </span>
+          </div>
+        </div>
+        <div id="nx_ac_layer" class="autocomplete" style="display:none">
+          <div class="suggest_body">
+            <h2 class="blind">
+              자동완성
+            </h2>
+            <ul>
+              <li class="_click(SectionSearch|AutoCompleteSelect) @li_class@" txt-data="@in_txt@">
+                <a href="javascript:;" class="ellip">
+                  @txt@
+                </a>
+                <button type="button" class="_click(SectionSearch|AutoCompleteExtendKeyword)" style="display:@ex_btn@" onmousedown="$Event(event).stop();" onclick="return false;">
+                  <i class="ico ico_arrow_dg60"/>
+                  <span class="blind">
+                    자동완성
+                  </span>
+                </button>
+                <span id="rank@rank@" style="display:none">
+                  @in_txt@
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="suggest_foot">
+            <span class="btn_group">
+              <button id="nx_ac_toggle" type="button" class="btn_autocomplete_off">
+                자동완성 끄기
+              </button>
+              <span class="pipe">
+              </span>
+              <a id="nx_ac_help" href="#">
+                도움말
+              </a>
+            </span>
+            <span class="btn_group">
+              <button id="nx_ac_layer_close" type="button" class="btn_close">
+                닫기
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr/>
+    <div id="ct" class="content" role="main">
+      <div class="related_keys">
+        <div id="relatedWordLine" class="wrap">
+          <h2>
+            연관 
+            <span class="blind">
+              검색어
+            </span>
+          </h2>
+          <ul>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰7|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰7
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰6S|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰6S
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰 감시|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰 감시
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰6|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰6
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰7 출시|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰7 출시
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰6s 플러스|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰6s 플러스
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰5se|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰5se
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|oled|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                oled
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰5s|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰5s
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이튠즈|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이튠즈
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|애플 4인치|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                애플 4인치
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|애플 fbi|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                애플 fbi
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|애플|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                애플
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰5|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰5
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰 테러범|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰 테러범
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|애플 테러범 아이폰 잠금해제 거부|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                애플 테러범 아이폰 잠금해제 거부
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|애플 아이폰7|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                애플 아이폰7
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰 fbi|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰 fbi
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|아이폰 보급형|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                아이폰 보급형
+              </a>
+            </li>
+            <li>
+              <a href="#" class="_click(SectionSearch|Query|갤럭시s7|article)" onclick="nclk(this, 'rkw.kw', '', '')">
+                갤럭시s7
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <section class="section section_search_result">
+        <h2 class="blind">
+          검색결과
+        </h2>
+        <div class="section_head">
+          <nav class="tabs" role="navigation">
+            <ul>
+              <li class=" _click(SectionSearch|QueryTarget|cafe)">
+                <a href="javascript:">
+                  <span>
+                    카페명
+                  </span>
+                </a>
+              </li>
+              <li class="on _click(SectionSearch|QueryTarget|article)">
+                <a href="javascript:;">
+                  <span>
+                    카페글
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="section_body" id="search_result">
+          <div class="result_sorting">
+            <em>
+              '
+              <span class="ellip">
+                 아이폰
+              </span>
+              '
+            </em>
+            <span class="cnt">
+              3,285,921
+            </span>
+            <select id="nx_sortBy" class="selectbox _change(SectionSearch|QuerySortBy)">
+              <option value="0" selected="selected">
+                정확도
+              </option>
+              <option value="1">
+                최신
+              </option>
+            </select>
+          </div>
+          <h3 class="blind">
+            카페글 검색결과
+          </h3>
+          <ul id="sectionArticleSearchList" class="list list_result_cafearticle">
+            <li>
+              <a href="http://m.cafe.naver.com/torrentist/2956?query= 아이폰" onclick="nclk(this, 'csr*a.list', '2956', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                    5s 중고시세 좋을때 팔아요
+                  </strong>
+                  <span class="date">
+                    2016.03.02.
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                    5s 중고시세 좋을때 팔아요 날씨가 점점 풀리는거 같죠~ 이제 봄이 오는거 같아요제 주변에 
+                    <b>
+                      아이폰
+                    </b>
+                    5s 에서 
+                    <b>
+                      아이폰
+                    </b>
+                    6s로 교체하는 경우가 많이 있더라구요 판매하기전에꼭... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_109/audwnrkwk_1456889489849WKUFL_PNG/%BE%C6%C0%CC%C6%F9%C1%DF%B0%ED%BD%C3%BC%BC1.PNG#481x264" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/je61/13355?query= 아이폰" onclick="nclk(this, 'csr*a.list', '13355', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                    6s 스펙, 개봉기, 장/단점 입니다!!
+                  </strong>
+                  <span class="date">
+                    18시간 전
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                    6s 스펙 입니다! ▼ 
+                    <b>
+                      아이폰
+                    </b>
+                    6s 개봉기 입니다. ▼ 
+                    <b>
+                      아이폰
+                    </b>
+                    6s 리뷰 입니다. ▼ &lt;장점&gt; 1. 지문인식 속도 최고!!2. 3D 터치기능(터치를 누르는 세기에 따라 반응이 틀려지는 기능)... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_131/xqif164836_1456993450387OLBGW_JPEG/tistory_com_20160303_172351.jpg#480x406" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/puppy2puppy/4656?query= 아이폰" onclick="nclk(this, 'csr*a.list', '4656', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    서현 
+                    <b>
+                      아이폰
+                    </b>
+                    수리 이렇게 빨리?
+                  </strong>
+                  <span class="date">
+                    2016.03.03.
+                  </span>
+                  <p class="desc ellip">
+                    
+								서현 
+                    <b>
+                      아이폰
+                    </b>
+                    수리 이렇게 빨리? 핸드폰 없이는 못 사는 한국인들 손에는 항상 핸드폰이... 그런데 
+                    <b>
+                      아이폰
+                    </b>
+                     유저들은 그 흔한 일을 겪게 되면 엄청난 스트레스가 따라오죠. 그래서... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://image.nmv.naver.net/cafeucc15/2016/03/03/1632/b8bcb6288467ca9a82fc270d59ed737e384b_ugcvideo_480P_01_16x9_s152.jpg#152x114#m" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/power2junecafe/63?query= 아이폰" onclick="nclk(this, 'csr*a.list', '63', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    대구
+                    <b>
+                      아이폰
+                    </b>
+                    수리 정품만고집하다!
+                  </strong>
+                  <span class="date">
+                    18시간 전
+                  </span>
+                  <p class="desc ellip">
+                    
+								요즘 
+                    <b>
+                      아이폰
+                    </b>
+                     참 많이들 사용하시지요?저도 
+                    <b>
+                      아이폰
+                    </b>
+                     유자랍니다 ㅎㅎ이 
+                    <b>
+                      아이폰
+                    </b>
+                    이 다 좋은데 액정이 정말 약하잖아요.저도 얼마전에 액정을 아주 보기 좋게 아작을 냈던 적이... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_164/g9fyxxjux_1456985604488yuiIb_JPEG/2016-03-03_14%3B38%3B59.jpg#650x863" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/ecogreenphone/5747?query= 아이폰" onclick="nclk(this, 'csr*a.list', '5747', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                    6플러스 액정교체 으뜸이야
+                  </strong>
+                  <span class="date">
+                    2016.03.02.
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                    쓰는 분들이라면 공감하시겠지만
+                    <b>
+                      아이폰
+                    </b>
+                    의 특성상 급한 수리나 가벼운 고장들은쉽게 수리할 수 없어서 많은 어려움들이 있는거 같아요ㅠㅠ 아무래도 우리나라에서는... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_72/passn3_1456884349007ftjgN_JPEG/137.JPG#695x521" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/canlo/3925?query= 아이폰" onclick="nclk(this, 'csr*a.list', '3925', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                    6플러스 액정파손 기억도안나
+                  </strong>
+                  <span class="date">
+                    23시간 전
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                    6플러스 액정파손 기억도안나 어째 이번에 쓰는 
+                    <b>
+                      아이폰
+                    </b>
+                    은 ..
+                    <b>
+                      아이폰
+                    </b>
+                    6플러스 액정 이라 그런지커서 불안불안하디만.. 결국은 액정을 깨트리는 불상사가 발생을... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_241/kumoy_14569749481547kfM9_JPEG/1394.JPG#697x523" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/ecogreenphone/5767?query= 아이폰" onclick="nclk(this, 'csr*a.list', '5767', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                     액정수리비 아껴보긴했니?
+                  </strong>
+                  <span class="date">
+                    23시간 전
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                     액정수리비 아껴보긴했니? 얼마전에 친구가 ㅋㅋ친구들이랑 여행다녀온다고... 
+                    <b>
+                      아이폰
+                    </b>
+                    이 리퍼비가 넘 비싸서 ㅠㅠ수리를 안받을까 고민을 하고있었는데다른친구... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160303_98/nyj1120_1456976423858SV8mw_JPEG/1140.JPG#697x523" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/fishopgae/2445?query= 아이폰" onclick="nclk(this, 'csr*a.list', '2445', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                    5s 중고가격 한눈에 반하다
+                  </strong>
+                  <span class="date">
+                    2016.03.02.
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                    5s 중고가격 한눈에 반하다 2년넘게 
+                    <b>
+                      아이폰
+                    </b>
+                    5s 사용해왔던 제가 드디어
+                    <b>
+                      아이폰
+                    </b>
+                    6s로갈아탔습니다 하하한달정도 사용중인데 디자인과기능이 예술이네요진작에 바꿀껄... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_280/wjatlavks_1456888660453RLMuw_JPEG/%BE%C6%C0%CC%C6%F95s_%C1%DF%B0%ED%B0%A1%B0%DD_1.jpg#590x331" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/canlo/3921?query= 아이폰" onclick="nclk(this, 'csr*a.list', '3921', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                     액정 매입 안되면 어째?
+                  </strong>
+                  <span class="date">
+                    2016.03.02.
+                  </span>
+                  <p class="desc ellip">
+                    <b>
+                      아이폰
+                    </b>
+                     액정 매입 안되면 어째? 지난번에 폰을 깨트려가지고 ..저는 그냥 
+                    <b>
+                      아이폰
+                    </b>
+                     액정 매입 되는줄알고큰걱정없이 동부대우전자를 갔었네요 ^^;;원래 삼성폰을 쓰던사람이고... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv02.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_20/calri555_1456885191663Ug7rc_JPEG/412.JPG#695x521" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="http://m.cafe.naver.com/ecogreenphone/5748?query= 아이폰" onclick="nclk(this, 'csr*a.list', '5748', '')">
+                <div class="article_wrap">
+                  <strong class="tit">
+                    <b>
+                      아이폰
+                    </b>
+                     액정 교체 통으로 갈아 !
+                  </strong>
+                  <span class="date">
+                    2016.03.02.
+                  </span>
+                  <p class="desc ellip">
+                    
+								요즘들어 떨어트리기 일쑤인 
+                    <b>
+                      아이폰
+                    </b>
+                     ㅠㅠ결국 얼마전에는 깨지는 사고가 생겨서 
+                    <b>
+                      아이폰
+                    </b>
+                     액정 교체 를 받아야 했어요 일단 리퍼는 비용때문에 비싸서 포기한지 오래... 
+							
+                  </p>
+                </div>
+                <div class="thumb_wrap">
+                  <span class="thumb">
+                    <img src="http://tv01.search.naver.net/rtugc?size=r120&amp;q=http://cafefiles.naver.net/20160302_77/magpiekwak_1456884630964qJhuC_JPEG/077.JPG#695x521" alt="" onerror="this.src='http://static.naver.net/m/cafe/mobile/img_noimg_20150618.png'"/>
+                  </span>
+                </div>
+              </a>
+            </li>
+            <script id="sectionArticleSearchListTpl" type="text/template">
+//<![CDATA[
+
+				<li>
+					<a href='{=resultItem.linkUrl}?query={=query}' onclick="nclk(this, 'csr*a.list', '{=resultItem.articleid}', '')">
+						<div class='article_wrap'>
+							<strong class='tit'>{=resultItem.subject}</strong>
+							<span class='date'>{=resultItem.formatWriteDate}</span>
+							<p class='desc ellip'>
+								{=resultItem.content}
+							</p>
+						</div>
+						{if resultItem.thumbnailList[0]}
+							<div class='thumb_wrap'>
+								<span class='thumb'><img src='{=resultItem.thumbnailList[0]}' alt=''></span>
+							</div>
+						{/if}
+					</a>
+				</li>
+				
+//]]>
+            </script>
+          </ul>
+        </div>
+        <div class="section_footer">
+          <div class="more_bar" id="moreLoader">
+            <a href="#" id="moreLoaderBtn" class="more_tab _click(MoreLoader|More) _stopDefault" onclick="nclk(this, 'csr*a.more', '', '')">
+              <em id="moreBarMsg">
+                10개 더보기
+              </em>
+              <span class="cnt_wrap">
+                <span class="cnt" id="moreLoaderCurrentCount">
+                  10
+                </span>
+                <span class="slash">
+                </span>
+                <span class="total" id="moreLoaderTotalCount">
+                  3285921
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <div class="area_sa area_sa_h">
+        <div class="wrap_sa">
+          <em class="ads">
+            Ads by NAVER
+          </em>
+          <a href="https://m.help.naver.com/support/contents/contentsView.nhn?contentsNo=4299&amp;lang=ko" class="ic help">
+            도움말
+          </a>
+          <ul class="lst_sa">
+            <li>
+              <div class="lst_in">
+                <div class="lst_h">
+                  <a href="http://adcr.naver.com/adcr?x=WLluZydOWH7IQmj/RVy1+////w==bqWQCfeLG/SXYRSjdPUH9w0OTIE8NL2RxUubhwFzAavl3bWp3ZZVSogQKF8PEHVth5yi61g5Nf/JPT6/3O4XZ1JgqyE3YHvJK6TyjJDkuTi++8OrRzYtCn28kCZQawPafamL8jNqw6Znns0vi0WksdD35QTNE+Xnd5XwjASysdb1ThJ43RvehLOZNKwic37RLBFDU0oRzx4+Yx6HGSzNMOaLa1Qz17K1iupLsYeOs0NnbOQKLg7Qkmh3I0OTc3u36q8xbAtYMsJI4ugn/28+vMbycYV0Z2sHmQsrTyu58zgeFsZKeoKImbMaJPWWrUicXKJPLdBr4NklFIwNUbchmf3eY3eAt6expGye2w9nFQFLdJGom/mfN5V7+hoaEMrLxbvyCIushAzBsF4ccpC+Fv7Wg+k1vHlHbe6tBX5m8dc8=" target="_top" class="tit">
+                    <strong>
+                      <span class="tit_ellps">
+                        아이폰 다고폰
+                      </span>
+                    </strong>
+                  </a>
+                </div>
+                <p class="txt">
+                  아이폰, 기기값할인, 무료퀵, 샤오미밧데리, 블루투스이어폰증정
+                </p>
+                <div class="lst_f">
+                  <a href="http://adcr.naver.com/adcr?x=WLluZydOWH7IQmj/RVy1+////w==bqWQCfeLG/SXYRSjdPUH9w0OTIE8NL2RxUubhwFzAavl3bWp3ZZVSogQKF8PEHVth5yi61g5Nf/JPT6/3O4XZ1JgqyE3YHvJK6TyjJDkuTi++8OrRzYtCn28kCZQawPafamL8jNqw6Znns0vi0WksdD35QTNE+Xnd5XwjASysdb1ThJ43RvehLOZNKwic37RLBFDU0oRzx4+Yx6HGSzNMOaLa1Qz17K1iupLsYeOs0NnbOQKLg7Qkmh3I0OTc3u36q8xbAtYMsJI4ugn/28+vMbycYV0Z2sHmQsrTyu58zgeFsZKeoKImbMaJPWWrUicXKJPLdBr4NklFIwNUbchmf3eY3eAt6expGye2w9nFQFLdJGom/mfN5V7+hoaEMrLxbvyCIushAzBsF4ccpC+Fv7Wg+k1vHlHbe6tBX5m8dc8=" target="_top" class="btn_link">
+                    http://dagophone.com
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="lst_in">
+                <div class="lst_h">
+                  <a href="http://adcr.naver.com/adcr?x=7AqVpXcYa/dKkXx0OrKoFf///w==b2MjfkPQ84W1c5HKvwtW02U1ENoAx9w3/0b0GaZmSChveGKeccaH/xRdN0vAH5YaSBOw2EGgWAdiNWxYhr8gLp3qxwECF+Zzg2iaW88GV+EpZKCNygZwUJ3OzqQhi1EbL4n4RdpIc5q+GUPHL0UMyInMsxDeF8h/WlbTF/LyQJf97P0tIHiLukJG+YUvKATOCy8v8mDhWExWAD8WE618P3OPSTC1e2AY2sTkYIey0V/p+xYuaKY4gbdDVLhpKrPG+cbVbNl0Uz7LGNWlnb3S1IzITm5W4joqPZPt+efLF1R/qR4rC3GJO0dWV3kiocKB3p2DBmR620lCpbQzQY8reCoL545OpSDj38LMfpNwNqeMh18R3S8SemaUjFSTgxm4dYgv/xB0TvVCut6Ow6AZOMXeq/CImbzYpzuAA4Xk4slUkFyfpWYYacuuqk95TwyoUmX5PbAHnn8ix9KjJmipZhbDrb7ilAuvk0LLunQsoN+wMJEjD+YSJBc71UnYOLIGRJmDdkc+0c7Z/JYXOw/foSw==" target="_top" class="tit">
+                    <strong>
+                      <span class="tit_ellps">
+                        아이폰예스폰
+                      </span>
+                    </strong>
+                  </a>
+                </div>
+                <p class="txt">
+                  동구청대명성서점운영, 폰매입판매,대구전지역출장매입가능, 당일현금지급, 알뜰폰
+                </p>
+                <div class="lst_f">
+                  <a href="http://adcr.naver.com/adcr?x=7AqVpXcYa/dKkXx0OrKoFf///w==b2MjfkPQ84W1c5HKvwtW02U1ENoAx9w3/0b0GaZmSChveGKeccaH/xRdN0vAH5YaSBOw2EGgWAdiNWxYhr8gLp3qxwECF+Zzg2iaW88GV+EpZKCNygZwUJ3OzqQhi1EbL4n4RdpIc5q+GUPHL0UMyInMsxDeF8h/WlbTF/LyQJf97P0tIHiLukJG+YUvKATOCy8v8mDhWExWAD8WE618P3OPSTC1e2AY2sTkYIey0V/p+xYuaKY4gbdDVLhpKrPG+cbVbNl0Uz7LGNWlnb3S1IzITm5W4joqPZPt+efLF1R/qR4rC3GJO0dWV3kiocKB3p2DBmR620lCpbQzQY8reCoL545OpSDj38LMfpNwNqeMh18R3S8SemaUjFSTgxm4dYgv/xB0TvVCut6Ow6AZOMXeq/CImbzYpzuAA4Xk4slUkFyfpWYYacuuqk95TwyoUmX5PbAHnn8ix9KjJmipZhbDrb7ilAuvk0LLunQsoN+wMJEjD+YSJBc71UnYOLIGRJmDdkc+0c7Z/JYXOw/foSw==" target="_top" class="btn_link">
+                    http://www.yesponmall.co.kr/
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <script type="text/javascript">
+//<![CDATA[
+
+function adCR(adcrUrl, p, hrefUrl) {
+    var l = adcrUrl + "&p=" + p;
+    if (document.images) {
+        var img = new Image();
+        if (typeof hrefUrl != "undefined") {
+            img.onerror = function (event) {
+                document.location = hrefUrl;
+            };
+        }
+        img.src = l;
+    } else {
+        document.location = l;
+    }
+};
+
+//]]>
+      </script>
+    </div>
+    <hr/>
+    <footer id="footer" class="footer" role="contentinfo">
+      <div class="page_top">
+        <a href="#" class="ico ico_top _click(Utility|Top) _stopDefault" onclick="nclk(this, 'fos.top', '', '')">
+          <span class="blind">
+            맨위로 이동
+          </span>
+        </a>
+      </div>
+      <div class="footer_snb">
+        <a href="#" class="_click(LoginManager|Login|http%3A%2F%2Fm.cafe.naver.com%2FSectionArticleSearch.nhn%3Fpage%3D1%26sortBy%3D0%26query%3D%2520%25EC%2595%2584%25EC%259D%25B4%25ED%258F%25B0) _stopDefault" onclick="nclk(this, 'fos.login', '', '')">
+          로그인
+        </a>
+        <a href="/CafeWhitePaper.nhn" onclick="nclk(this, 'fos.bible', '', '')">
+          카페앱백서
+        </a>
+        <a href="http://section.cafe.naver.com?viewType=pc" target="_top" onclick="nclk(this, 'fos.gopc', '', '')">
+          PC버전
+        </a>
+        <a href="http://m.naver.com/services.html?f=svc.cafe" onclick="nclk(this, 'fos.sitemap', '', '');">
+          전체서비스
+        </a>
+      </div>
+      <div class="footer_lnb">
+        <a href="https://m.help.naver.com/support/service/main.nhn?serviceNo=5622" onclick="nclk(this, 'fos.help', '', '')">
+          카페 고객센터
+        </a>
+        <a href="https://m.help.naver.com/support/issue/report.nhn?serviceNo=5622" onclick="nclk(this, 'fos.error', '', '')" class="last">
+          오류신고
+        </a>
+      </div>
+      <address class="copyright">
+        ©
+        <a href="http://www.navercorp.com/" onclick="nclk(this, 'fos.navercorp', '', '')">
+          NAVER Corp.
+        </a>
+      </address>
+    </footer>
+    <script>
+//<![CDATA[
+
+var g_sUserId = '';
+var g_sCafeId = '';
+var g_sCafeUrl = '';
+
+var g_sCafeMainUrl = 'http://cafe.naver.com';
+var g_sCafeMobileWebUrl = 'http://m.cafe.naver.com';
+var g_sNoteSendUrl = 'http://m.note.naver.com/mobile/mobileSendNoteForm.nhn?reply=1&targetUserId=';
+var g_sUploadDomain = 'http://up.cafe.naver.com';
+var g_sCafeFilesDomain = 'http://cafefiles.naver.net';
+var g_sCafeThumbDomain = 'http://cafethumb.naver.net';
+var g_sMCafeThumbDomain = 'http://mcafethumb1.phinf.naver.net';
+var g_sGfmarketDomain = 'http://m.gfmarket.naver.com';
+var g_sGfmarketThumbnailDomain = 'http://gfmarket.phinf.naver.net';
+
+var g_sLoginUrl = 'https://nid.naver.com/nidlogin.login?svctype=262144&url=';
+var g_sLogoutUrl = 'https://nid.naver.com/nidlogin.logout?svctype=262144&url=';
+
+//]]>
+    </script>
+    <script type="text/javascript" src="/static/js/mobileweb/core/SectionCommonScript-1456159413000-637276.js" charset="utf-8">
+    </script>
+    <script type="text/javascript">
+//<![CDATA[
+
+BMR.run('http://sp.naver.com/sp');
+$Element("<div></div>").html(); // 진도 버그 대응용
+var oUtil = new nhn.Utility();
+var oCafeAppLauncher = new nhn.AppLauncher({
+    "sAPPName" : "네이버 카페",
+    "sInstallURLForIOS" : "http://itunes.apple.com/app/id420615104?mt=8",
+    "sInstallURLForANDROID" : "market://details?id=com.nhn.android.navercafe"
+});
+
+//]]>
+    </script>
+    <script type="text/javascript" src="/static/js/mobileweb/section/SectionArticleSearchScript-1451281106000-225426.js" charset="utf-8">
+    </script>
+    <script type="text/javascript">
+//<![CDATA[
+
+var oSectionSearch = new SectionSearch({
+    inputBox : 'nx_query',
+    sortBySelectBox : 'nx_sortBy',
+    clearButton : 'nx_input_clear',
+    sortBy : '0',
+    target : 'article',
+    acUrl : 'https://mac.search.naver.com/mobile/ac',
+    moreUlId : 'sectionArticleSearchList',
+    moreRequestUrl : '/SectionArticleSearchAjax.nhn?sortBy=0&query=' + encodeURIComponent(' 아이폰'),
+    moreTemplateId : 'sectionArticleSearchListTpl',
+    escapedQuery : '아이폰'
+});
+
+
+var oPersist = new Persist();
+var oMoreLoader = new MoreLoader({
+	perPage : 10,
+	currentPage : 1,
+	currentCount : 10,
+	totalCount : 3285921,
+	elContent : $("sectionArticleSearchList"),
+	elMoreBarMsg : $("moreBarMsg"),
+	elMoreLoader : $("moreLoader"),
+	elCurrentCount : $("moreLoaderCurrentCount"),
+	elTotalCount : $("moreLoaderTotalCount"),
+	oLoader : oSectionSearch,
+	oPersist : oPersist
+});
+
+
+
+var relatedWords = new Array();
+
+relatedWords[0] = '아이폰7';
+
+relatedWords[1] = '아이폰6S';
+
+relatedWords[2] = '아이폰 감시';
+
+relatedWords[3] = '아이폰6';
+
+relatedWords[4] = '아이폰7 출시';
+
+relatedWords[5] = '아이폰6s 플러스';
+
+relatedWords[6] = '아이폰5se';
+
+relatedWords[7] = 'oled';
+
+relatedWords[8] = '아이폰5s';
+
+relatedWords[9] = '아이튠즈';
+
+relatedWords[10] = '애플 4인치';
+
+relatedWords[11] = '애플 fbi';
+
+relatedWords[12] = '애플';
+
+relatedWords[13] = '아이폰5';
+
+relatedWords[14] = '아이폰 테러범';
+
+relatedWords[15] = '애플 테러범 아이폰 잠금해제 거부';
+
+relatedWords[16] = '애플 아이폰7';
+
+relatedWords[17] = '아이폰 fbi';
+
+relatedWords[18] = '아이폰 보급형';
+
+relatedWords[19] = '갤럭시s7';
+
+relatedWordBox = new RelatedWordBox({
+	words : relatedWords,
+	wordLine : 'relatedWordLine',
+	searchParams : ['article']
+});
+
+
+//]]>
+    </script>
+  </body>
+</html>
+

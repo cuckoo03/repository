@@ -34,14 +34,18 @@ class Search {
 		Twitter twitter = new TwitterFactory(cb.build()).getInstance()
 		int count = 0
 		try {
-			def query = new Query("하둡")
+			def query = new Query("남성남나이")
 			def result = twitter.search(query)
-			while ((query = result.nextQuery()) != null) {
+			while (query != null) {
 				def tweets = result.getTweets()
+				println result.getTweets().size()
+				
 				tweets.each {tweet ->
 					println count++ + ":" + tweet.getUser().getScreenName() + "-" + tweet.getText()
 				}
-				result = twitter.search(query)
+				query = result.nextQuery()
+				if (query != null)
+					result = twitter.search(query)
 			}
 			System.exit(0)
 		} catch (TwitterException e) {

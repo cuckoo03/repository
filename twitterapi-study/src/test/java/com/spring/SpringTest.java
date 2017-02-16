@@ -21,12 +21,11 @@ public class SpringTest {
 	private IMybatisService mybatisService;
 
 	/**
-	 * hibernate는 transaction1,2 둘다에도 적용됨
+	 * hibernate는 transaction1,2,hibernatetransction 모두에 적용됨
 	 */
 	@Test
-	@Transactional("transactionManager2")
+	@Transactional("hibernatTransactionManager")
 	public void hibernateTest() {
-		mybatisService.insert();
 		hibernateDao.addTypes();
 		System.out.println(hibernateDao.getTypes().size());
 	}

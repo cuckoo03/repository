@@ -24,7 +24,7 @@ public class SimpleProducer {
 
 	public static void main(String[] args) {
 		SimpleProducer sp = new SimpleProducer();
-		String topic = "multitopic";
+		String topic = "kafkatopic";
 		String messageStr = "hello everyone";
 		KeyedMessage<Integer, String> data = new KeyedMessage<>(topic,
 				messageStr);

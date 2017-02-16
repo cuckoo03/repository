@@ -4,8 +4,8 @@ import redis.clients.jedis.Jedis;
 
 public class HelloJedis {
 	public static void main(String[] args) {
-		Jedis jedis = new Jedis("192.168.1.101", 6300);
-		jedis.auth("12341234");
+		Jedis jedis = new Jedis("210.122.11.210", 6379);
+		jedis.auth("tapaman");
 		
 		String result = jedis.set("redisbook", "Hello jedis");
 		System.out.println(result);

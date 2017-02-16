@@ -8,12 +8,10 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.hibernate.vo.Types;
 
 @Repository
-@Service
 public class MybatisDao extends SqlSessionDaoSupport {
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSession sqlSession;

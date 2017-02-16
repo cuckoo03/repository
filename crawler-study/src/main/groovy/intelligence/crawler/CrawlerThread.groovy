@@ -2,18 +2,16 @@ package intelligence.crawler
 
 import groovy.transform.TypeChecked
 
-import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.GetMethod
-import org.apache.commons.httpclient.params.HttpMethodParams
-import org.apache.http.HttpStatus
+import org.apache.http.HttpResponse
+import org.apache.http.client.HttpClient
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.DefaultHttpClient
 
 @TypeChecked
 class CrawlerThread implements Runnable, ICrawler{
@@ -63,7 +61,7 @@ class CrawlerThread implements Runnable, ICrawler{
 
 	@Override
 	public void run() {
-//		crawl();
+		//		crawl();
 	}
 
 	@Override
@@ -181,20 +179,15 @@ class CrawlerThread implements Runnable, ICrawler{
 		return getContent(new CrawlerUrl(urlString, 0))
 	}
 	private String getContent(CrawlerUrl url) {
-		HttpClient client = new HttpClient()
+		HttpClient client = new DefaultHttpClient()
 		// URL에 해당하는 컨텐츠를 가져옴
-		GetMethod method = new GetMethod(url.getUrlString())
-		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-				new  DefaultHttpMethodRetryHandler(3, false))
+		HttpGet method = new HttpGet(url.getUrlString())
 
 		String text = null
 		try {
-			int statusCode = client.executeMethod(method)
-			if (statusCode == HttpStatus.SC_OK) {
-				text = readContentsFromStream(new InputStreamReader(
-						method.getResponseBodyAsStream(),
-						method.getResponseCharSet()))
-			}
+			HttpResponse response = client.execute(method)
+			text = readContentsFromStream(new InputStreamReader(
+					response.getEntity().getContent()))
 		} catch (Exception e) {
 			println e.toString()
 			e.printStackTrace()

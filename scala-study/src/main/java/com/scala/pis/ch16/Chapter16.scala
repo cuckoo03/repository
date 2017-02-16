@@ -90,6 +90,62 @@ object Chapter16 {
 		println(words map (_.toList.reverse.mkString))
 
 		// flatmap
+		println(for (i <- List.range(1, 5); j <- List.range(1, i)) yield (i, j))
+
 		// foreach
+		var sum = 0
+		List(1, 2, 3, 4, 5) foreach (sum += _)
+		println("sum:" + sum)
+
+		//filter
+		println(List(1, 2, 3, 4, 5) filter (_ % 2 == 0))
+
+		//partition
+		println(List(1, 2, 3, 4, 5) partition { x => x % 2 == 0 })
+		println(List(1, 2, 3, 4, 5) partition (_ % 2 == 0))
+
+		//find
+		println(List(1, 2, 3, 4, 5) find (_ % 2 == 0))
+		println(List(1, 2, 3, 4, 5) find (_ <= 0))
+
+		// takeWhile
+		println(List(1, 2, 3, -4, 5) takeWhile (_ > 0))
+
+		// dropWhile
+		println(List(1, 2, 3, -4, 5) dropWhile (_ > 0))
+
+		// span
+		println(List(1, 2, 3, -4, 5) span (_ > 0))
+
+		//forall
+		println(List(1, 2, 3, 4, 5) forall (_ > 0))
+		println(List(1, 2, 3, -4, 5) forall (_ > 0))
+
+		// exists
+		println(List(1, 2, 3, 4, 5) exists (_ > 0))
+		println(List(1, 2, 3, -4, 5) exists (_ > 0))
+
+		// fold: /: :\
+
+		// sortWith
+		println(List(1, -3, 4, 2, 6) sortWith (_ < _))
+
+		// List.range
+		println(List.range(1, 5))
+		println(List.range(1, 9, 2))
+		println(List.range(9, 1, -3))
+
+		//List.fill
+		println(List.fill(5)('a'))
+		println(List.fill(2, 3)('b'))
+
+		//List.tabulate
+		println(List.tabulate(5)(n => n * n))
+		println(List.tabulate(5, 5)(_ * _))
+
+		//List.concat
+		println(List.concat(List('a', 'b'), List('c')))
+
+		println((List(10, 20), List(3, 4, 5)).zipped.map(_ * _))
 	}
 }

@@ -247,7 +247,7 @@
 									classname="org.apache.tools.ant.taskdefs.optional.ssh.Scp"
 									classpathref="maven.dependency.classpath" />
 								<scp file="target/${project.artifactId}-${project.version}.jar"
-									todir="cuckoo03:12341234@192.168.1.101:/home/cuckoo03/" trust="true" />
+									todir="hadoop:tapaman@210.122.11.215:/home/hadoop/" trust="true" />
 							</tasks>
 						</configuration>
 					</execution>

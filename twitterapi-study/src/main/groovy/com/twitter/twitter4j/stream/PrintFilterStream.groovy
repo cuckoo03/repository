@@ -69,7 +69,7 @@ class PrintFilterStream {
 		twitterStream.addListener(listener)
 		long[] followArray = []
 		def track = new ArrayList<String>()
-		track[0] = "twitter"
+		track[0] = "빅데이터"
 		def trackArray = (String[])track.toArray()
 		def lang = (String[])["ko"].toArray()
 		twitterStream.filter(new FilterQuery(0, followArray, trackArray, null,

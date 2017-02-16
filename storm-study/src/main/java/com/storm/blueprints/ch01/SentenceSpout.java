@@ -19,8 +19,7 @@ public class SentenceSpout extends BaseRichSpout {
 	private static final long serialVersionUID = 1L;
 	private ConcurrentHashMap<UUID, Values> pending;
 	private SpoutOutputCollector collector;
-	private String[] sentences = { "my dog has fleas",
-			"i like dog ate my homework" };
+	private String[] sentences = { "a", "b", "c", "d", "a", "c" };
 
 	private int index = 0;
 
@@ -39,19 +38,26 @@ public class SentenceSpout extends BaseRichSpout {
 	@Override
 	public void nextTuple() {
 		// nextTuple()는 계속 호출되므로 종료될수 있는 코드가 있어야 한다.
-		if (index < sentences.length) {
+		while (true) {
+			Utils.sleep(1000);
+			
 			Values values = new Values(sentences[index]);
 			UUID msgId = UUID.randomUUID();
 			this.pending.put(msgId, values);
 			this.collector.emit(values, msgId);
+			System.out.println(this.getClass().getName() + ":execute");
 			index++;
+
+			if (index == sentences.length)
+				index = 0;
 		}
-		Utils.sleep(1000);
 	}
+
 	@Override
 	public void ack(Object msgId) {
 		this.pending.remove(msgId);
 	}
+
 	@Override
 	public void fail(Object msgId) {
 		this.collector.emit(this.pending.get(msgId), msgId);
