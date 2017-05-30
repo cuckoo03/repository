@@ -1,26 +1,27 @@
 package com.youtube.htmlunit;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.htmlunit.common.HtmlUnitFactory;
 
 public class HtmlunitYoutubeTest {
-	WebClient webClient;
-	HtmlPage page;
-
-	public void get(String url) throws FailingHttpStatusCodeException,
-			MalformedURLException, IOException {
-		webClient = HtmlUnitFactory.createDefaultWebClient();
-		HtmlPage page1 = webClient.getPage(url);
-		System.out.println(page1.asXml());
+	private Document get(String url, boolean source) throws IOException {
+		WebClient webClient = HtmlUnitFactory.createDefaultWebClient();
+		final HtmlPage page = webClient.getPage(url);
+		Document doc = Jsoup.parse(page.asXml());
+		if (source) {
+			System.out.println(doc.html());
+		}
+		
+		webClient.closeAllWindows();
+		
+		return doc;
 	}
 
 	/**
@@ -31,7 +32,7 @@ public class HtmlunitYoutubeTest {
 	 */
 	@Test
 	public void crawlHotMoviesDetailCrawlTest() throws IOException {
-		String articleUrl = "https://www.youtube.com/watch?v=L-2M_-QLs8k";
-		get(articleUrl);
+		String articleUrl = "https://www.youtube.com/watch?v=TCDPXisHsfA";
+		Document doc = get(articleUrl, true);
 	}
 }

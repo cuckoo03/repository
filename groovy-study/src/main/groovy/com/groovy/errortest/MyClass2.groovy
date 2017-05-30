@@ -35,11 +35,15 @@ class MyClass2 {
 		println "list" 
 	}	
 	
+	def void setList2(List<Map<String, String>> list) {
+		println "list"
+	}
+	
 	def void setStringList(List<String> list) {
 		println "stringList"
 	}
 	
-	def void setMap(Map map) {
+	def void setMap(Map<String, String> map) {
 		println map
 	}
 }

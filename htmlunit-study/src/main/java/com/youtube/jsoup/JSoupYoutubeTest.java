@@ -53,12 +53,12 @@ public class JSoupYoutubeTest {
 	@Test
 	public void crawlHotMoviesDetailCrawlTest() throws IOException {
 		String articleUrl = "https://www.youtube.com/watch?v=L-2M_-QLs8k";
-		Document doc = get(articleUrl, false);
+		Document doc = get(articleUrl, true);
 		String title = doc.select("span#eow-title").attr("title");
 		System.out.println("title:" + title);
 		
 		String userUrl = doc.select("div#watch7-user-header > a").attr("href");
-		System.out.println("userUrl:" + userUrl);
+		System.out.println("userUrl:" + "https://www.youtube.com" + userUrl);
 		
 		String channelUrl = doc.select("div.yt-user-info > a").attr("href");
 		System.out.println("channelUrl:" + channelUrl);
@@ -67,15 +67,15 @@ public class JSoupYoutubeTest {
 		System.out.println("channelName:" + channelName);
 		
 		String subscriberCount = doc.select("span[class=yt-subscription-button-subscriber-count-branded-horizontal yt-subscriber-count]").attr("title");
-		System.out.println("sub count:" + subscriberCount);
+		System.out.println("subcribe count:" + subscriberCount);
 		
 		String viewCount = doc.select("div.watch-view-count").text();
-		System.out.println("viewCount:" + viewCount);
+		System.out.println("view Count:" + viewCount);
 
 		List<Element> sentimentList = doc.select("span > span.yt-uix-clickcard > button > span.yt-uix-button-content");
 		for (Element item : sentimentList) {
 			String value = item.text();
-			System.out.println("senti:" + value);
+			System.out.println("sentiment:" + value);
 		}
 		
 		String upload = doc.select("div#watch-uploader-info > strong ").text();
@@ -91,6 +91,7 @@ public class JSoupYoutubeTest {
 	 * @throws IOException
 	 */
 	@Test
+	@Ignore
 	public void crawlMusicsCrawlTest() throws IOException {
 		String hotMusics = "https://www.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ";
 		Document doc = get(hotMusics, false);
@@ -105,6 +106,7 @@ public class JSoupYoutubeTest {
 	}
 	
 	@Test
+	@Ignore
 	public void crawlNewsCrawlTest() throws IOException {
 		String hotNews = "https://www.youtube.com/channel/UCYfdidRxbB8Qhf0Nx7ioOYw";
 		Document doc = get(hotNews, false);
@@ -117,5 +119,4 @@ public class JSoupYoutubeTest {
 			System.out.println("");
 		}
 	}
-	
 }

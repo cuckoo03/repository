@@ -9,7 +9,7 @@ class A {
 	}
 
 	void run() {
-		def s = f('42')
+		def String s = f('42')
 		s.length()
 	}
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+  http://www.springframework.org/schema/context   
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/rabbit 
+  http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd
+  http://www.springframework.org/schema/util
+  http://www.springframework.org/schema/util/spring-util-4.0.xsd
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/jdbc 
+  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+  http://www.springframework.org/schema/data/mongo 
+  http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+  
+  <context:annotation-config />
+	<context:property-placeholder location="classpath:application.properties" />
+	<util:properties id="applicationProperties" location="classpath:application.properties" />
+	<bean class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" id="dataSource">
+		<property name="driverClassName" value="${trendsrch20.datasource.driverClassName}" />
+		<property name="url" value="${trendsrch20.datasource.url}" />
+		<property name="username" value="${trendsrch20.datasource.username}" />
+		<property name="password" value="${trendsrch20.datasource.password}" />
+		<property name="validationQuery" value="select 1 from dual"/>
+        <property name="testWhileIdle" value="true"/> 
+        <property name="testOnBorrow" value="true"/> 
+        <property name="testOnReturn" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="5000"/> 
+        <property name="maxActive" value="1"/> 
+        <property name="minIdle" value="0"/> 
+        <property name="maxWait" value="10000"/> 
+        <property name="initialSize" value="0"/> 
+        <property name="removeAbandoned" value="true"/>
+	</bean>
+	<!-- Hibernate config -->
+	<bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.entity.EntityClass</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${oracle.hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
+	<bean id="hibernatTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
+	<bean id="scalaDao" class="com.beans.ScalaDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"/>
+	</bean>
+</beans>  

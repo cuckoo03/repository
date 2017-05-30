@@ -12,10 +12,11 @@ class MyClass1 {
 
 		def objectList = myClass2.getObjectList() 
 		
-		def List<Map> mapList = myClass2.getMapList() as List<Map> 
+		def mapList = myClass2.getMapList() 
 		myClass2.setList(mapList)
+		myClass2.setList2(mapList)
 	
-		def List<Set> setList = myClass2.getSetList() as List<Set>
+		def setList = myClass2.getSetList() 
 		
 		def stringList = myClass2.getStringList()
 		myClass2.setStringList(stringList)
@@ -24,12 +25,12 @@ class MyClass1 {
 			myClass2.setString(it)
 		}
 		
-		mapList.each { Map it ->
-			myClass2.setMap(it as Map)
+		mapList.each { Map<String, String> it ->
+			myClass2.setMap(it as Map<String, String>)
 			myClass2.setMap(new HashMap())
 		}
 		
-		for (Map map in mapList) {
+		for (Map<String, String> map in mapList) {
 			myClass2.setMap(map)
 		}
 	}

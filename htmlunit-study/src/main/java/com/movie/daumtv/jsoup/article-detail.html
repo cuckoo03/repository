@@ -1,0 +1,1127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=8" /> 
+  <title>Daum tv팟</title> 
+  <meta property="og:title" content="내 손안에 TV" /> 
+  <meta property="og:description" content="내 손안에 TV" /> 
+  <meta property="og:image" content="http://t1.daumcdn.net/tvpot/common/tvpot.png" /> 
+  <link rel="shortcut icon" href="/favicon.ico?20170213101234" /> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/svc/original/U03/cssjs/jsonp/jsonp-0.1.0.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="http://s1.daumcdn.net/tvpot/20170213101234/css/common.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://s1.daumcdn.net/tvpot/20170213101234/css/best.css" /> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/js/jigu.min.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/js/common.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/js/best.js"></script> 
+  <script type="text/javascript">
+window.__IS_TEST = 'false';
+</script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/svc/original/U03/cssjs/jquery/jquery-1.8.3.min.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/brandpot/js/lib/jquery.tmpl.min.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/brandpot/js/lib/jquery.json-2.4.min.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/brandpot/js/lib/jquery.cookie.js"></script> 
+  <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/brandpot/js/module/anyViewPlaylist.js"></script> 
+  <script type="text/javascript">
+jQuery.noConflict();
+</script> 
+ </head> 
+ <body> 
+  <ul id="skipList"> 
+   <li><a href="#accessBestMenu">메뉴 건너뛰기</a></li> 
+   <li><a href="#accessBestMenu">베스트 메뉴 바로가기</a></li> 
+   <li><a href="#accessBestClipList">동영상 목록 바로가기</a></li> 
+  </ul> 
+  <hr /> 
+  <div id="adWallpaper"></div>
+  <div id="wrap"> 
+   <hr /> 
+   <div id="topWrap"> 
+    <!-- 101029 --> 
+    <!-- 2013-11-07 서비스 로고 수정 시작 --> 
+    <h1> <a href="/Top.do?nil_profile=title&amp;nil_src=tvpot" id="daumServiceLogo" title="tv팟 메인페이지로 가기" target="_top"><span class="ir_wa">tv팟</span></a> </h1> 
+    <!-- 2013-11-07 서비스 로고 수정 끝 --> 
+    <div id="logoDecoArea"></div> 
+    <h2 class="hidden">검색</h2> 
+    <form id="daumSearch" name="daumSearch" action="/search/" method="get" target="_top"> 
+     <fieldset class="fld_inside opt_on">
+      <!--  내부검색 fld_inside 추가 -->
+      <!--  내부검색 옵션이 있을경우 opt_on 추가 --> 
+      <legend class="screen_out">검색어 입력폼</legend> 
+      <div class="box_searchbar">
+       <!-- 입력창 선택시 search_on 추가  --> 
+       <!-- 옵션창  --> 
+       <!-- 2013-11-08 삭제<p id="daumSearchOptionLayer"></p> --> 
+       <div id="daumSearchOption" class="opt_search" value="total">
+        <!-- 옵션창 활성화시 opt_open 추가  --> 
+        <div id="searchOptionButton"> 
+         <div class="search_option"> 
+          <label for="selectedOption" class="screen_out"></label> 
+          <input type="text" value="전체" id="selectedOption" class="tf_opt" readonly="readonly" onfocus="" /> 
+         </div> 
+         <a href="javascript:;" class="btn_opt"><span class="ico_search ico_arrow">검색 옵션 보기</span></a> 
+        </div> 
+        <div id="searchOptionLayer" class="layer_opt"> 
+         <ul class="list_opt"> 
+          <li><input type="radio" name="search_opt" id="radAll" class="inp_opt" /><label for="radTotal" class="total lab_opt" id="total">전체</label></li>
+          <!-- 선택된 옵션에 on 추가  --> 
+          <li><input type="radio" name="search_opt" id="radUtil" class="inp_opt" /><label for="radClip" class="clip lab_opt" id="clip">동영상</label></li> 
+          <li><input type="radio" name="search_opt" id="radMulti" class="inp_opt" /><label for="radPlaylist" class="playlist lab_opt" id="playlist">플레이리스트</label></li> 
+          <li><input type="radio" name="search_opt" id="radGame" class="inp_opt" /><label for="radMypot" class="mypot lab_opt" id="mypot">마이팟</label></li> 
+         </ul> 
+        </div> 
+       </div> 
+       <!--// 옵션창  --> 
+       <input type="text" class="tf_keyword" id="qTop" name="q" value="" title="검색어 입력" autocomplete="off" spellcheck="false" /> 
+       <button id="daumBtnSearch" class="ico_search btn_search" type="submit"><span class="ir_wa">검색</span></button> 
+      </div> 
+     </fieldset> 
+    </form> 
+    <!--[if lte IE 6]>
+<script type="text/javascript">
+// <![CDATA[
+	(function() {
+		var daumBtnSearchAll = document.getElementById('daumBtnSearchAll');
+		var daumSuggest = document.getElementById('daumSuggest');
+		var daumBtnSearch = document.getElementById('daumBtnSearch');
+
+		daumBtnSearchAll.onmouseover
+		= daumBtnSearch.onmouseover
+		= function() {this.style.backgroundPositionY='bottom'};
+
+		daumBtnSearchAll.onmouseout
+		= daumBtnSearch.onmouseout
+		= function() {this.style.backgroundPositionY='top'};
+
+	})();
+// ]]>
+</script>
+<![endif]--> 
+    <h2 class="screen_out">tv팟 메인메뉴</h2> 
+    <div id="daumGnb"> 
+     <ul class="gnb_tvpot"> 
+      <li class=""><a href="/Top.do?from=gnb" class="link_gnb link_gnb1"><span class="ir_wa">tv팟 홈</span></a></li> 
+      <li class="on"><a href="/best/Top.do?from=gnb" class="link_gnb link_gnb2"><span class="ir_wa">베스트</span></a></li> 
+      <li class=""><a href="/brands/Top.do?from=gnb" class="link_gnb link_gnb3"><span class="ir_wa">브랜드</span></a></li> 
+      <li class=""><a href="/broadcast/Top.do?from=gnb" class="link_gnb link_gnb4"><span class="ir_wa">라이브</span></a></li> 
+      <li class=""><a href="/best/TvZone.do?from=gnb" class="link_gnb link_gnb5"><span class="ir_wa">tv존</span></a></li> 
+      <!-- 2016-08-29 추가 시작 / 2016-12-13 수정 --> 
+      <li class="#tvpot_close_menu"> <a href="http://blog.daum.net/ahahvideo/17946753" target="_blank" class="link_gnb link_gnb6"><span class="ir_wa">tv팟 통합 안내</span></a> </li> 
+      <!-- 2016-08-29 추가 끝 / 2016-12-13 수정 끝 --> 
+     </ul> 
+     <ul class="gnb_with"> 
+      <!-- 2013-01-09 구독 시작 --> 
+      <li class="subscribe"> <a href="javascript:;" class="link_gnb link_gnb2"> <span class="ir_wa">구독</span> </a> </li> 
+      <!-- 2013-01-09 구독 끝 --> 
+      <li> <a href="/my/Gate.do?from=gnb" class="link_gnb link_gnb3"> <span class="ir_wa">마이팟</span> </a> </li> 
+      <li> <a href="/upload/ClipUpload.do?from=gnb" class="link_gnb link_gnb4"> <span class="ir_wa">업로드</span> </a> </li> 
+     </ul> 
+     <a href="/application/Mobile.do" target="_blank" class="link_app">tv팟앱</a> 
+     <!-- 2013-01-09 구독 레이어 시작 --> 
+     <div class="inform_layer subscribe_layer" id="subscribeLayer" style="display:none;"> 
+      <div class="inner_inform_layer"> 
+       <div class="layer_head"> 
+        <strong class="screen_out">구독 목록</strong> 
+       </div> 
+       <div class="layer_body"> 
+        <div class="img_noti arr_noti"></div> 
+        <p class="txt_noti">로그인 후 구독정보를<br />확인할 수 있습니다.</p> 
+       </div> 
+       <div class="layer_foot"> 
+        <a href="http://login.daum.net/accounts/loginform.do?nil_profile=login" class="img_noti link_all">로그인 하기</a> 
+       </div> 
+      </div> 
+     </div> 
+     <!-- 2013-01-09 구독 레이어 끝 --> 
+    </div> 
+    <div class="dummy_panel_logo_list"></div> 
+    <a href="http://tvpot.daum.net"><img id="tvpot_QRcode" height="105" width="72" src="http://i1.daumcdn.net/icon/see/banner/20110426_mobile.gif" alt="tv팟 모바일웹 QR코드" /></a> 
+    <div id="rightSideAd" style="display: block;"> 
+     <iframe title="광고 영역" src="http://display.ad.daum.net/imp?slotid=05N64" width="130" height="250" border="0" frameborder="0" scrolling="no" marginheight="0"></iframe> 
+    </div> 
+    <script type="text/javascript" src="http://s1.daumcdn.net/tvpot/20170213101234/js/suggest.min.js"></script> 
+    <script type="text/javascript">
+// <![CDATA[
+		
+	tvpot.Common.GnbData.init(function() {
+		tvpot.Common.GnbRolling.init(daum.$('tvzone'));
+		tvpot.Common.QRCodeRolling.init();
+	});
+	
+	tvpot.Common.Subscribe.init(function() {
+		//console.log("callback");
+	});
+// ]]>
+</script> 
+    <div id="ad_cont_wrap"></div> 
+    <div id="wrapMinidaum"></div> 
+    <script type="text/javascript">
+var minidaum_options = {
+    // background 타입 지정 관련 옵션. default: white.
+    bgType: "white", // white, dark, custom(no background)
+
+
+    // logout 시 return url 변경 여부 flag : default: false - 다음탑으로 이동
+    enableLogoutRetun: false, // false - 다음탑으로 이동, true - 현재페이지 혹은 returnUrl 값으로 이동
+    returnUrl: '', // default - 현재페이지(window.location.href)
+
+
+    // 실시간 이슈 사용 여부, default: false
+    disableHotissue: false, // false일 경우 사용, true일 경우 미사용
+
+    // 로고 사용 여부, default: false
+    disableLogo: false, // false일 경우 사용, true일 경우 미사용
+
+    // 티아라 사용 여부, default: false
+    disableTracker: false, // false일 경우 사용, true일 경우 미사용
+
+    // 플래시에 의한 레이어 가림 현상 방지 사용 여부, default: false
+    enableShield: false // false일 경우 미사용, true일 경우 사용
+}
+</script> 
+   </div> 
+   <!-- // topWrap --> 
+   <hr /> 
+   <div id="bodyWrap"> 
+    <div id="leftWrap" class="lnb"> 
+     <h2 class="hidden">좌측 날개</h2> 
+     <h3 id="accessBestMenu"><a href="/best/Top.do?lu=nb_l_best">베스트 메뉴</a></h3> 
+     <h4 class="hidden">주요 채널</h4> 
+     <ul class="menu_major"> 
+      <li class="selected"><a href="/best/Top.do?lu=nb_l_all"><span class="menu_all">전체</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=63&amp;lu=nb_l_63"><span class="menu_cate63">예능</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=64&amp;lu=nb_l_64"><span class="menu_cate64">드라마</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=65&amp;lu=nb_l_65"><span class="menu_cate65">시사교양</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=66&amp;lu=nb_l_66"><span class="menu_cate66">키즈</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=22&amp;lu=nb_l_22"><span class="menu_cate22">연예</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=10&amp;lu=nb_l_10"><span class="menu_cate10">유머</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=6&amp;lu=nb_l_6"><span class="menu_cate6">스포츠</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=1&amp;lu=nb_l_1"><span class="menu_cate1">애완동물</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=8&amp;lu=nb_l_8"><span class="menu_cate8">자동차</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=13&amp;lu=nb_l_13"><span class="menu_cate13">애니</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=20&amp;lu=nb_l_20"><span class="menu_cate20">뉴스</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=9&amp;lu=nb_l_9"><span class="menu_cate9">게임</span></a></li> 
+      <li><a href="/best/BestClip.do?cateid=16&amp;lu=nb_l_16"><span class="menu_cate16">뮤직</span></a></li> 
+      <li><a href="/best/TvZone.do?lu=nb_l_tvzone"><span class="menu_tvzone">TV존</span></a></li> 
+     </ul> 
+     <a class="btn_more" href="#menuMinor">더보기<span class="ico_fold"></span></a> 
+     <h4 class="hidden">기타 채널</h4> 
+     <ul id="menuMinor" class="menu_minor"> 
+      <li><a href="/best/BestClip.do?cateid=26&amp;lu=nb_l_26">아기</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=31&amp;lu=nb_l_31">취미,특기</a></li> 
+      <li><a href="/best/BestClip.do?cateid=60&amp;lu=nb_l_60">일상</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=61&amp;lu=nb_l_61">친목모임</a></li> 
+      <li><a href="/best/BestClip.do?cateid=1102&amp;lu=nb_l_1102">뷰티</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=1110&amp;lu=nb_l_1110">살림,요리</a></li> 
+      <li><a href="/best/BestClip.do?cateid=1125&amp;lu=nb_l_1125">경제</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=28&amp;lu=nb_l_28">문화,예술</a></li> 
+      <li><a href="/best/BestClip.do?cateid=2&amp;lu=nb_l_2">CF</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=5&amp;lu=nb_l_5">여행,자연</a></li> 
+      <li><a href="/best/BestClip.do?cateid=17&amp;lu=nb_l_17">다큐</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=14&amp;lu=nb_l_14">영화</a></li> 
+      <li><a href="/best/BestClip.do?cateid=1123&amp;lu=nb_l_1123">강의</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=62&amp;lu=nb_l_62">종교</a></li> 
+      <li><a href="/best/BestClip.do?cateid=1121&amp;lu=nb_l_1121">다이어트</a></li> 
+      <li class="right_item"><a href="/best/BestClip.do?cateid=1127&amp;lu=nb_l_1127">IT</a></li> 
+     </ul> 
+     <h4 class="title_special">이색 베스트 메뉴</h4> 
+     <ul class="menu_special"> 
+      <li class="theme"><a href="/best/ThemeBest.do?lu=nb_l_theme">테마</a></li> 
+      <li class="gender"><a href="/best/GenderBest.do?lu=nb_l_gender">남녀</a></li> 
+      <li class="total"><a href="/best/TotalBest.do?lu=nb_l_total">역대</a></li> 
+     </ul> 
+     <a class="btn_potranking" href="/best/PotRanking.do?lu=nb_l_rank">마이팟 랭킹</a> 
+    </div> 
+    <!-- // leftWrap --> 
+    <hr /> 
+    <div id="contentsWrap" class="content_best"> 
+     <h2 class="hidden">중앙 컨텐츠</h2> 
+     <div class="content_header"> 
+      <h3 class="heading_set_major heading_cateall"><a href="/best/Top.do">전체</a></h3> 
+      <p class="update_time">| 업데이트 : 2017년 02월 16일 17시 01분</p> 
+     </div> 
+     <h3 id="accessBestClipList" class="hidden">동영상 목록</h3> 
+     <ul id="clipList" class="clip_list"> 
+      <li class="wrap_bestclip  first_row first_col"> 
+       <dl id="clip81740547" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740547" title="이효리가 참여한 '눈길' OST"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_135748_72680690.jpg" width="187" height="105" alt="이효리가 참여한 '눈길' OST" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740547" title="이효리가 참여한 '눈길' OST">이효리가 참여한 '눈길' OST</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         10,624
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         2
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:56</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_row"> 
+       <dl id="clip81741909" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81741909" title="치고 박고 장난치다가 그만!"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_153345_22962635.jpg" width="187" height="105" alt="치고 박고 장난치다가 그만!" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81741909" title="치고 박고 장난치다가 그만!">치고 박고 장난치다가 그만!</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         2,896
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         2
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:09</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_row"> 
+       <dl id="clip81745472" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81745472" title="미친듯이 귀여운 영상 통화"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_145536_26763920.jpg" width="187" height="105" alt="미친듯이 귀여운 영상 통화" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81745472" title="미친듯이 귀여운 영상 통화">미친듯이 귀여운 영상 통화</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         21,301
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         4
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>00:56</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_row"> 
+       <dl id="clip81740620" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740620" title="세월 지나도 변하지 않은 실력"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_153135_76259380.jpg" width="187" height="105" alt="세월 지나도 변하지 않은 실력" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740620" title="세월 지나도 변하지 않은 실력">세월 지나도 변하지 않은 실력</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         7,993
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         1
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:20</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_col"> 
+       <dl id="clip81746204" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81746204" title="골종양 투병? 심각도 언급 불가"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_154529_63968426.jpg" width="187" height="105" alt="골종양 투병? 심각도 언급 불가" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81746204" title="골종양 투병? 심각도 언급 불가">골종양 투병? 심각도 언급 불가</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         425
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         1
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>04:35</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81740525" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740525" title="20대도 울고 갈 42살 뒤태 미녀"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_140255_4373751.jpg" width="187" height="105" alt="20대도 울고 갈 42살 뒤태 미녀" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740525" title="20대도 울고 갈 42살 뒤태 미녀">20대도 울고 갈 42살 뒤태 미녀</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         50,765
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         26
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:54</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81742346" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81742346" title="떡볶이 진짜 맛있게 만드는 방법"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_130718_89691964.jpg" width="187" height="105" alt="떡볶이 진짜 맛있게 만드는 방법" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81742346" title="떡볶이 진짜 맛있게 만드는 방법">떡볶이 진짜 맛있게 만드는 방법</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         3,971
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         4
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>04:01</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81740013" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740013" title="거실에 자리 잡은 솜뭉치의 정체"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_133433_75313336.jpg" width="187" height="105" alt="거실에 자리 잡은 솜뭉치의 정체" /> <span class="layer_border"></span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740013" title="거실에 자리 잡은 솜뭉치의 정체">거실에 자리 잡은 솜뭉치의 정체</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         35,153
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         17
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>00:51</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_col"> 
+       <dl id="clip81744222" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81744222" title="손발이 찬 이유 이것 때문이구나"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_142718_96852763.jpg" width="187" height="105" alt="손발이 찬 이유 이것 때문이구나" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81744222" title="손발이 찬 이유 이것 때문이구나">손발이 찬 이유 이것 때문이구나</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         2,951
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         1
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:03</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81745795" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81745795" title="집 옥상에 이런 것도 있다니"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_150730_42330684.jpg" width="187" height="105" alt="집 옥상에 이런 것도 있다니" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81745795" title="집 옥상에 이런 것도 있다니">집 옥상에 이런 것도 있다니</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         2,075
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:31</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81744345" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81744345" title="이분 최소 리액션 자판기"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_142129_86428162.jpg" width="187" height="105" alt="이분 최소 리액션 자판기" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81744345" title="이분 최소 리액션 자판기">이분 최소 리액션 자판기</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         629
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:03</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81740809" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740809" title="제시카가 부르는 비버 노래"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_135315_47653997.jpg" width="187" height="105" alt="제시카가 부르는 비버 노래" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740809" title="제시카가 부르는 비버 노래">제시카가 부르는 비버 노래</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         612
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:38</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_col"> 
+       <dl id="clip81739874" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81739874" title="포니테일도 스타일리시하게!"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_134018_91526345.jpg" width="187" height="105" alt="포니테일도 스타일리시하게!" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81739874" title="포니테일도 스타일리시하게!">포니테일도 스타일리시하게!</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         2,664
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>00:46</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81742187" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81742187" title="늙지 않는 초동안 미모 자랑"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_130935_82520126.jpg" width="187" height="105" alt="늙지 않는 초동안 미모 자랑" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81742187" title="늙지 않는 초동안 미모 자랑">늙지 않는 초동안 미모 자랑</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         1,071
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         2
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>00:52</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81739884" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81739884" title="안 쓰는 셰도우 립밤과 섞었더니"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_133809_5437770.jpg" width="187" height="105" alt="안 쓰는 셰도우 립밤과 섞었더니" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81739884" title="안 쓰는 셰도우 립밤과 섞었더니">안 쓰는 셰도우 립밤과 섞었더니</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         876
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>00:58</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81740731" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740731" title="제시카의 셀카 잘 찍는 법 공개"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_134938_43716995.jpg" width="187" height="105" alt="제시카의 셀카 잘 찍는 법 공개" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740731" title="제시카의 셀카 잘 찍는 법 공개">제시카의 셀카 잘 찍는 법 공개</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         363
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:33</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_col"> 
+       <dl id="clip81740318" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81740318" title="대세 래퍼들이 부르는 속풀이송"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_132728_44328645.jpg" width="187" height="105" alt="대세 래퍼들이 부르는 속풀이송" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81740318" title="대세 래퍼들이 부르는 속풀이송">대세 래퍼들이 부르는 속풀이송</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         2,356
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>05:20</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81737379" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81737379" title="명세빈 이혼을 다짐케 한 한마디"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_093906_34779016.jpg" width="187" height="105" alt="명세빈 이혼을 다짐케 한 한마디" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81737379" title="명세빈 이혼을 다짐케 한 한마디">명세빈 이혼을 다짐케 한 한마디</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         127,586
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         10
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>02:33</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81734138" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81734138" title="뭐가 달라도 다른 양세형 인터뷰"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170215/20170215_223914_95294855.jpg" width="187" height="105" alt="뭐가 달라도 다른 양세형 인터뷰" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81734138" title="뭐가 달라도 다른 양세형 인터뷰">뭐가 달라도 다른 양세형 인터뷰</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         23,412
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         6
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>02:07</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81736243" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81736243" title="24년 차 예능인의 엄청난 실수"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_110316_14439429.jpg" width="187" height="105" alt="24년 차 예능인의 엄청난 실수" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81736243" title="24년 차 예능인의 엄청난 실수">24년 차 예능인의 엄청난 실수</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         39,490
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         13
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>03:03</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip  first_col"> 
+       <dl id="clip81733721" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81733721" title="보고서도 믿기 힘든 영재의 재능"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170215/20170215_215205_73168331.jpg" width="187" height="105" alt="보고서도 믿기 힘든 영재의 재능" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81733721" title="보고서도 믿기 힘든 영재의 재능">보고서도 믿기 힘든 영재의 재능</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         18,024
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         9
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:51</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81729323" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81729323" title="지구 반대편에서는 이런 일이"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170215/20170215_174750_15539242.jpg" width="187" height="105" alt="지구 반대편에서는 이런 일이" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81729323" title="지구 반대편에서는 이런 일이">지구 반대편에서는 이런 일이</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         18,441
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         9
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>01:14</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81736931" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81736931" title="손님 맞이 했는데 깜놀한 이유"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_105429_53625970.jpg" width="187" height="105" alt="손님 맞이 했는데 깜놀한 이유" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81736931" title="손님 맞이 했는데 깜놀한 이유">손님 맞이 했는데 깜놀한 이유</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         19,988
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         0
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>02:34</em> 
+        </dd> 
+       </dl> </li> 
+      <li class="wrap_bestclip"> 
+       <dl id="clip81736242" class="bestclip"> 
+        <dt>
+         대표 이미지
+        </dt> 
+        <dd class="image"> 
+         <a href="/clip/ClipView.do?clipid=81736242" title="연하남 집에 놀러 갔다가 충격"> <img src="http://i1.daumcdn.net/thumb/C320x180/?fname=http://i1.tvpot.daumcdn.net/svc/image/U03/tvpot_admin/admin/20170216/20170216_100023_32063085.jpg" width="187" height="105" alt="연하남 집에 놀러 갔다가 충격" /> <span class="layer_border"></span> <span class="ico_hd ico_hd1">HD</span> </a> 
+        </dd> 
+        <dt>
+         제목
+        </dt> 
+        <dd class="title"> 
+         <a href="/clip/ClipView.do?clipid=81736242" title="연하남 집에 놀러 갔다가 충격">연하남 집에 놀러 갔다가 충격</a> 
+        </dd> 
+        <dt>
+         플레이수
+        </dt> 
+        <dd class="play_cnt" title="플레이수">
+         42,703
+        </dd> 
+        <dt>
+         댓글수
+        </dt> 
+        <dd class="wow_cnt" title="댓글수">
+         7
+        </dd> 
+        <dt>
+         재생시간
+        </dt> 
+        <dd class="duration"> 
+         <span class="layer_bg"></span>
+         <em>04:18</em> 
+        </dd> 
+       </dl> </li> 
+     </ul> 
+     <div class="wrap_folding"> 
+      <a id="btnOpenMore" class="btn_moreclip" href="#btnOpenMore"> <span class="num"></span><span class="desc">개의 동영상 더 불러오기</span> </a> 
+     </div> 
+     <div class="clear_flow"></div> 
+     <div id="viewHelper" style="display:none;"> 
+      <a href="#wrap">맨위로</a> 
+      <label for="autoLoad">자동불러오기</label> 
+      <input type="checkbox" name="autoload" id="autoLoad" checked="checked" /> 
+     </div> 
+    </div> 
+    <!-- // contentsWrap --> 
+    <hr /> 
+   </div> 
+   <!-- // bodyWrap --> 
+   <hr /> 
+   <div id="footerWrap"> 
+    <div id="DAUMCOMMON_FOOTER"> 
+     <p> <a href="http://www.daum.net/doc/info.html" target="_blank">서비스 약관/정책</a> I <a href="http://www.daum.net/doc/info_protection.html" target="_blank">개인정보처리방침</a> I <a href="https://cs.daum.net/redbell/top.html" target="_blank">권리침해신고</a> I <a href="http://cs.daum.net/faq/142.html" target="_blank">tv팟 고객센터</a> </p> 
+     <small class="info_copyright">Copyright &copy; <a href="http://www.kakaocorp.com/" target="_blank" class="link_daumkakao">Kakao Corp.</a> All rights reserved.</small> 
+    </div> 
+    <script id="CTConfigScript" type="text/javascript">
+	//<![CDATA[	
+	var CTConfig = {
+		targetElement: "wrap",
+		includeQuery: false,
+		pageId: null
+	};
+	//]]>
+	</script> 
+    <script src="http://s1.daumcdn.net/photo-media/static/ct/ct.min.js" type="text/javascript" charset="utf-8"></script> 
+   </div> 
+   <!-- // footerWrap --> 
+  </div> 
+  <!-- // wrap --> 
+  <script src="http://go.daum.net/jsa_minidaum_pc.daum" charset="utf-8" type="text/javascript" async=""></script> 
+  <!-- https 인 경우 https://go.daum.net/jsa_minidaum_pc.daum 사용 --> 
+  <script type="text/javascript">
+// <![CDATA[
+
+(function(){
+	Best.UI.lnbInit();
+	Best.UI.QuickViewManager.init({
+		from: 'best',
+		startDuration: ''
+	});
+	Best.UI.OpenMoreManager.init({
+		from: 'best',
+		load: 'ajax',
+		skipSize : '24'
+		
+	});
+	Best.UI.ViewHelper.init();
+	Best.UI.LuTagManager.init('nb_today_');
+})();
+document.domain = "daum.net";
+
+daum.addEvent(window,'load',function(){
+	Tvpot.AnyViewPlayList.init({
+		thumbList:['.bestclip dd.image a'],
+		login:false	});
+});
+
+// ]]>
+</script>  
+ </body>
+</html>
