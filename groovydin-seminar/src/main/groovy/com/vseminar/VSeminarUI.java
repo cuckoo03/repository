@@ -23,8 +23,9 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("vseminar")
 @Widgetset("com.vseminar.VSeminarWidgetset")
 public class VSeminarUI extends UI {
+	private static final long serialVersionUID = 1L;
 
-    @Override
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
         
