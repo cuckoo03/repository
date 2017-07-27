@@ -1,7 +1,6 @@
 package com.vseminar
 
 import java.util.Date
-
 import com.vaadin.annotations.Theme
 import com.vaadin.annotations.VaadinServletConfiguration
 import com.vaadin.annotations.Widgetset
@@ -14,8 +13,8 @@ import com.vaadin.ui.Label
 import com.vaadin.ui.Notification
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
-
 import javax.servlet.annotation.WebServlet
+import com.vseminar.screen.LoginScreen
 
 /**
  * @author TC
@@ -37,7 +36,7 @@ class VSeminarUI extends UI {
           Notification.show("The time is " + new Date)
       }))
 
-    setContent(content)
+    setContent(new LoginScreen())
   }
   
 }
