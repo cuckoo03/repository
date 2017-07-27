@@ -1,5 +1,7 @@
 package com.mahout.mahoutinaction.ch01
 
+import groovy.transform.TypeChecked;
+
 import java.nio.file.FileSystems
 import java.nio.file.Path
 
@@ -16,6 +18,7 @@ import org.apache.mahout.cf.taste.recommender.Recommender
 import org.apache.mahout.cf.taste.similarity.UserSimilarity
 import org.apache.mahout.common.RandomUtils
 
+@TypeChecked
 class RecommenderIntro2 {
 	static main(args) {
 		Path p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")

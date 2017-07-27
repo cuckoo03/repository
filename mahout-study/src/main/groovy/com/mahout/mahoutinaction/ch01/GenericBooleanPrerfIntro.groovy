@@ -24,34 +24,27 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity
 @TypeChecked
 class GenericBooleanPrerfIntro {
 	static main(args) {
-		Path p = FileSystems.getDefault().getPath(
+		def p = FileSystems.getDefault().getPath(
 				"C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")
-		DataModel dataModel = new GenericBooleanPrefDataModel(
+		def dataModel = new GenericBooleanPrefDataModel(
 				GenericBooleanPrefDataModel.toDataMap(new FileDataModel(
 				p.toFile())))
 
-		RecommenderEvaluator eval = new AverageAbsoluteDifferenceRecommenderEvaluator()
+		def eval = new AverageAbsoluteDifferenceRecommenderEvaluator()
 
-		RecommenderBuilder builder = new RecommenderBuilder() {
-					@Override
-					public Recommender buildRecommender(DataModel model) {
-						UserSimilarity similar = new LogLikelihoodSimilarity(model)
-						UserNeighborhood neighbor = new NearestNUserNeighborhood(
-								10, similar, model)
-						return new GenericUserBasedRecommender(model, neighbor, similar)
-					}
-				}
+		def builder = { DataModel model ->
+			UserSimilarity similar = new LogLikelihoodSimilarity(model)
+			UserNeighborhood neighbor = new NearestNUserNeighborhood(
+					10, similar, model)
+			return new GenericUserBasedRecommender(model, neighbor, similar)
+		}
 
-		DataModelBuilder modelBuilder = new DataModelBuilder() {
-					@Override
-					public DataModel buildDataModel(
-							FastByIDMap<PreferenceArray> trainigData) {
-						return new GenericBooleanPrefDataModel(
-								GenericBooleanPrefDataModel.toDataMap(trainigData))
-					}
-				}
+		def modelBuilder = { FastByIDMap<PreferenceArray> trainigData ->
+			return new GenericBooleanPrefDataModel(
+					GenericBooleanPrefDataModel.toDataMap(trainigData))
+		}
 
-		double score = eval.evaluate(builder, modelBuilder, dataModel, 0.9, 1.0)
+		def score = eval.evaluate(builder, modelBuilder, dataModel, 0.9, 1.0)
 		println score
 	}
 }
