@@ -7,8 +7,13 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 import com.vseminar.screen.LoginScreen;
+
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -26,24 +31,23 @@ public class VSeminarUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
-		/*
 		final VerticalLayout layout = new VerticalLayout();
 
 		final TextField name = new TextField();
 		name.setCaption("Type your name here:");
 
-		Button button = new Button("Click Me1");
-		button.addClickListener(e -> {
+		Button button = new Button("Click Me1", e -> {
 			layout.addComponent(new Label("Thanks " + name.getValue()
 					+ ", it works!"));
-		});
-
+			System.out.println("");
+			}
+		);
+		
 		layout.addComponents(name, button);
 		layout.setMargin(true);
 		layout.setSpacing(true);
 
-		setContent(layout);
-		*/
+//		setContent(layout);
 		
 		this.setContent(new LoginScreen());
 	}

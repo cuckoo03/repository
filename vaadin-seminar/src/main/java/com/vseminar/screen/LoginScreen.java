@@ -54,7 +54,7 @@ public class LoginScreen extends VerticalLayout {
 	}
 
 	private Component buildLabel() {
-		Label titleLabel = new Label("welcome");
+		Label titleLabel = new Label("Welcome");
 		titleLabel.addStyleName(ValoTheme.LABEL_H4);
 		titleLabel.addStyleName(ValoTheme.LABEL_COLORED);
 
