@@ -23,14 +23,14 @@ import org.apache.mahout.common.RandomUtils
 @TypeChecked
 class RecommenderIntro {
 	static main(args) {
-		Path p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/intro.csv")
-		DataModel dataModel = new FileDataModel(p.toFile())
+		def p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/intro.csv")
+		def dataModel = new FileDataModel(p.toFile())
 
-		UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel)
-		UserNeighborhood neighborhood = new NearestNUserNeighborhood(2,
+		def similarity = new PearsonCorrelationSimilarity(dataModel)
+		def neighborhood = new NearestNUserNeighborhood(2,
 				similarity, dataModel)
 
-		Recommender recommender = new GenericUserBasedRecommender(
+		def recommender = new GenericUserBasedRecommender(
 				dataModel, neighborhood, similarity)
 
 //		List<RecommendedItem> recommendations = recommender.recommend(1, 2)
@@ -39,11 +39,11 @@ class RecommenderIntro {
 //			println recommendation
 //		}
 		
-		LongPrimitiveIterator user = dataModel.getUserIDs()
+		def user = dataModel.getUserIDs()
 		while (user.hasNext()) {
-			long userId = user.nextLong()
+			def userId = user.nextLong()
 			
-			List<RecommendedItem> recommendations = recommender.recommend(userId, 1)
+			def recommendations = recommender.recommend(userId, 1)
 			for (RecommendedItem recommendation : recommendations){
 				println userId + "," + recommendation.getItemID() + "," + recommendation.getValue()
 			} 

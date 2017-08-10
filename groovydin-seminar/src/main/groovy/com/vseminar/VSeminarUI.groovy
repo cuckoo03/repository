@@ -15,7 +15,10 @@ import com.vaadin.ui.TextField
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Button.ClickListener
+import com.vseminar.data.LoadingDataGenerator
+import com.vseminar.data.UserSession
 import com.vseminar.screen.LoginScreen
+import com.vseminar.screen.MainScreen
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -28,16 +31,15 @@ import com.vseminar.screen.LoginScreen
 @Theme("vseminar")
 @Widgetset("com.vseminar.VSeminarWidgetset")
 public class VSeminarUI extends UI {
-	private static final long serialVersionUID = 1L;
+	private static final def dataGenerator = new LoadingDataGenerator()
 
-	@Override
-    protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
+    protected void initbak(VaadinRequest vaadinRequest) {
+        final def layout = new VerticalLayout();
         
-        final TextField name = new TextField();
+        final def name = new TextField();
         name.setCaption("Type your name here:my groovy");
 
-		Button button = new Button("Click Me", { e ->
+		def button = new Button("Click Me", { e ->
 			layout.addComponent(new Label("Thanks " + name.getValue()
 					+ ", it works!"))
 			println ""
@@ -48,12 +50,21 @@ public class VSeminarUI extends UI {
         layout.setSpacing(true);
         
         setContent(new LoginScreen())
-
     }
+	
+	@Override
+	protected void init(VaadinRequest vaadinRequest) {
+		if (UserSession.isSignedIn()) {
+			setContent(new MainScreen(this))
+			return
+		}
+		
+		setContent(new LoginScreen())
+	}
 	
 	@WebServlet(urlPatterns = "/*", name = "VSeminarUIServlet", asyncSupported = true)
 	@VaadinServletConfiguration(ui = VSeminarUI.class, productionMode = false)
-	public static class VSeminarUIServlet extends VaadinServlet {
+	static class VSeminarUIServlet extends VaadinServlet {
 		private static final long serialVersionUID = 1L;
 	}
 }

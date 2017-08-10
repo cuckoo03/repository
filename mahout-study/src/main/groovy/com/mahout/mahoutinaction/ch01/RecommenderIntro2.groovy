@@ -21,28 +21,25 @@ import org.apache.mahout.common.RandomUtils
 @TypeChecked
 class RecommenderIntro2 {
 	static main(args) {
-		Path p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")
-		DataModel dataModel = new FileDataModel(p.toFile())
+		def p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")
+		def dataModel = new FileDataModel(p.toFile())
 
 		RandomUtils.useTestSeed()
 
-		RecommenderEvaluator evaluator =
+		def evaluator =
 				new AverageAbsoluteDifferenceRecommenderEvaluator()
 
-		RecommenderBuilder builder = new RecommenderBuilder() {
-					@Override
-					public Recommender buildRecommender(DataModel model) {
-						UserSimilarity similarity =
-								new PearsonCorrelationSimilarity(model)
-						UserNeighborhood neighborhood =
-								new NearestNUserNeighborhood(2, similarity, model)
+		def builder = { DataModel model ->
+			def similarity =
+					new PearsonCorrelationSimilarity(model)
+			def neighborhood =
+					new NearestNUserNeighborhood(2, similarity, model)
 
-						return new GenericUserBasedRecommender(model, neighborhood,
-								similarity)
-					}
-				}
-
-		double score = evaluator.evaluate(builder, null, dataModel, 0.7, 1.0)
+			return new GenericUserBasedRecommender(model, neighborhood,
+					similarity)
+		}
+		
+		def score = evaluator.evaluate(builder, null, dataModel, 0.7, 1.0)
 		println score
 	}
 }

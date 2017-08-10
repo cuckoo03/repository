@@ -22,21 +22,21 @@ import org.apache.mahout.common.RandomUtils
 @TypeChecked
 class RecommenderIRStatsEvaluatorIntro {
 	static main(args) {
-		Path p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")
-		DataModel dataModel = new FileDataModel(p.toFile())
+		def p = FileSystems.getDefault().getPath("C:/Users/cuckoo03/workspace/mahout-study/target/classes/resources/ua.base")
+		def dataModel = new FileDataModel(p.toFile())
 
 		RandomUtils.useTestSeed()
 
-		RecommenderIRStatsEvaluator evaluator = new GenericRecommenderIRStatsEvaluator()
-		RecommenderBuilder builder = { DataModel model ->
-			UserSimilarity similarity =
+		def evaluator = new GenericRecommenderIRStatsEvaluator()
+		def builder = { DataModel model ->
+			def similarity =
 					new PearsonCorrelationSimilarity(model)
-			UserNeighborhood neighborhood = new NearestNUserNeighborhood(
+			def neighborhood = new NearestNUserNeighborhood(
 					2, similarity, model)
 			return new GenericUserBasedRecommender(model, neighborhood, similarity)
 		}
 
-		IRStatistics stats = evaluator.evaluate(builder, null, dataModel,
+		def stats = evaluator.evaluate(builder, null, dataModel,
 				null, 2, GenericRecommenderIRStatsEvaluator.CHOOSE_THRESHOLD, 1.0)
 		
 		println stats.getPrecision()

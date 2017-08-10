@@ -33,9 +33,10 @@ class GenericBooleanPrerfIntro {
 		def eval = new AverageAbsoluteDifferenceRecommenderEvaluator()
 
 		def builder = { DataModel model ->
-			UserSimilarity similar = new LogLikelihoodSimilarity(model)
-			UserNeighborhood neighbor = new NearestNUserNeighborhood(
+			def similar = new LogLikelihoodSimilarity(model)
+			def neighbor = new NearestNUserNeighborhood(
 					10, similar, model)
+			
 			return new GenericUserBasedRecommender(model, neighbor, similar)
 		}
 
