@@ -56,6 +56,7 @@ public class VSeminarUI extends UI {
 	protected void init(VaadinRequest vaadinRequest) {
 		if (UserSession.isSignedIn()) {
 			setContent(new MainScreen(this))
+			getNavigator().navigateTo(getNavigator().getState())
 			return
 		}
 		

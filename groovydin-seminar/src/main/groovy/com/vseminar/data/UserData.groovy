@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong
 import com.vseminar.data.model.User
 
 @TypeChecked
-class UserData implements VSeminarData<User>{
+class UserData implements VSeminarData<User> {
 	private static volatile UserData INSTANCE = null
 	private Map<Long, User> users
 	private AtomicLong nextId

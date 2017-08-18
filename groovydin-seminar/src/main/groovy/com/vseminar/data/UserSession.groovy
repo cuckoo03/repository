@@ -9,8 +9,8 @@ import com.vseminar.data.model.User
 
 @TypeChecked
 class UserSession implements Serializable {
-	public static final String SESSION_KEY = UserSession.getClass().canonicalName
-	UserData userData
+	static final String SESSION_KEY = UserSession.getClass().canonicalName
+	private UserData userData
 	
 	UserSession() {
 		this.userData = UserData.instance

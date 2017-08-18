@@ -12,7 +12,7 @@ import com.vseminar.data.model.RoleType
 @Canonical
 @ToString(includeFields = true, includeNames = true)
 class Navi {
-	private String fragement
+	private String fragment
 	private String viewName
 	private Class<? extends View> viewClass
 	private Resource icon

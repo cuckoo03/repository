@@ -6,6 +6,7 @@ import com.vaadin.navigator.Navigator
 import com.vaadin.ui.ComponentContainer
 import com.vaadin.ui.UI
 import com.vseminar.data.UserSession
+import com.vseminar.data.model.RoleType;
 
 @TypeChecked
 class VSeminarNavigator extends Navigator {
@@ -18,7 +19,11 @@ class VSeminarNavigator extends Navigator {
 		final def userRoleType = UserSession.user.role
 		
 		activeNaviMaps = new LinkedHashMap<>()
-		naviMaps.each { key, value ->
+		naviMaps.each { key, Navi value ->
+			if (userRoleType.ordinal() >= value.roleType.ordinal()) {
+				super.addView(value.fragment, value.viewClass)
+				activeNaviMaps[value.fragment] = value
+			}
 		}
 	}
 	
