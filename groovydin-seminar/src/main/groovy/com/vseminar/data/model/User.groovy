@@ -5,7 +5,6 @@ import groovy.transform.ToString
 import groovy.transform.TypeChecked
 
 @TypeChecked
-@Canonical
 @ToString(includeFields = true, includeNames = true)
 class User {
 	private static final String DEFAULT_PROFILE_PATH = "img/profile-pic-300px.jpg"
@@ -17,6 +16,7 @@ class User {
 	String imgPath
 	RoleType role
 	
+	/*
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +60,7 @@ class User {
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
 	}
+	*/
 
 	User() {
 		this.role = RoleType.User

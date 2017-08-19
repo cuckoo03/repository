@@ -3,7 +3,9 @@ package com.vseminar.data
 import groovy.transform.TypeChecked
 
 import com.vaadin.server.FontAwesome
+import com.vseminar.data.model.LevelType
 import com.vseminar.data.model.RoleType
+import com.vseminar.data.model.Session
 import com.vseminar.data.model.User
 import com.vseminar.menu.Navi
 import com.vseminar.menu.VSeminarNavigator
@@ -16,6 +18,7 @@ class LoadingDataGenerator {
 	static {
 		createUsers()
 		createNavis()
+		createSessions()
 	}
 
 	private static void createUsers() {
@@ -36,5 +39,18 @@ class LoadingDataGenerator {
 		VSeminarNavigator.naviMaps["user"] = new Navi(fragment:UserView.VIEW_NAME,
 			viewName:"User", viewClass:UserView.class, icon:FontAwesome.CUBE,
 			roleType:RoleType.User)
+	}
+	
+	private static void createSessions() {
+		def userData = UserData.getInstance()
+		def user1Id = userData.findOne(1L).id
+		def user2Id = userData.findOne(2L).id
+		
+		def sessionData = SessionData.getInstance()
+		
+		sessionData.save(new Session("title1", LevelType.Junior, "url1", 
+			"speaker1", user1Id, ""))
+		sessionData.save(new Session("title2", LevelType.Senior, "url2", 
+			"speaker2", user2Id, ""))
 	}
 }

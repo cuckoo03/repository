@@ -2,21 +2,38 @@ package com.vseminar.view
 
 import groovy.transform.TypeChecked
 
+import com.vaadin.data.util.BeanItemContainer
 import com.vaadin.navigator.View
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
 import com.vaadin.server.Sizeable.Unit
 import com.vaadin.ui.Alignment
+import com.vaadin.ui.Grid
 import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.Label
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
+import com.vseminar.data.SessionData
+import com.vseminar.data.UserSession
+import com.vseminar.data.model.RoleType
+import com.vseminar.data.model.Session
 
 @TypeChecked
 class SessionView extends VerticalLayout implements View {
 	static final String VIEW_NAME = "session"
+	private Grid grid
+	private BeanItemContainer<Session> container
+	private SessionData sessionData
 
 	SessionView() {
+		sessionData = SessionData.getInstance()
+
+		setHeight(100, Unit.PERCENTAGE)
+		grid = createGrid()
+		findBean()
+
 		addComponent(createTopBar())	
+		addComponent(grid)
+		setExpandRatio(grid, 1)
 	}
 
 	@Override
@@ -37,5 +54,29 @@ class SessionView extends VerticalLayout implements View {
 		topLayout.setComponentAlignment(title, Alignment.MIDDLE_LEFT)
 
 		return topLayout
+	}
+	
+	private Grid createGrid() {
+		def grid = new Grid()
+		grid.setSizeFull()
+		
+		container = new BeanItemContainer<>(Session.class, null)
+		grid.setContainerDataSource(container)
+		
+		grid.setColumnOrder("id", "title", "level", "startDate", "endDate", 
+			"embeddedUrl", "speaker", "description")
+		
+		grid.getColumn("id").setHeaderCaption("ID")
+		grid.getColumn("title").setHeaderCaption("TITLE").setHidden(true)
+		
+		return grid 
+	}
+	
+	private void findBean() {
+		def sessions = new ArrayList<Session>()
+		if (UserSession.getUser().role == RoleType.Admin) {
+			sessions.addAll(sessionData.findAll())
+		}
+
 	}
 }
