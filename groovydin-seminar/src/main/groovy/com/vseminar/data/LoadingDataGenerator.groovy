@@ -9,6 +9,7 @@ import com.vseminar.menu.Navi
 import com.vseminar.menu.VSeminarNavigator
 import com.vseminar.view.DashboardView
 import com.vseminar.view.SessionView
+import com.vseminar.view.UserView
 
 @TypeChecked
 class LoadingDataGenerator {
@@ -31,5 +32,9 @@ class LoadingDataGenerator {
 		VSeminarNavigator.naviMaps["session"] = new Navi(fragment:SessionView.VIEW_NAME,
 		viewName:"Session", viewClass:SessionView.class, icon:FontAwesome.CUBE,
 		roleType:RoleType.User)
+		
+		VSeminarNavigator.naviMaps["user"] = new Navi(fragment:UserView.VIEW_NAME,
+			viewName:"User", viewClass:UserView.class, icon:FontAwesome.CUBE,
+			roleType:RoleType.User)
 	}
 }

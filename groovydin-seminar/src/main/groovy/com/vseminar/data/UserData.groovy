@@ -12,7 +12,7 @@ class UserData implements VSeminarData<User> {
 	private Map<Long, User> users
 	private AtomicLong nextId
 
-	UserData() {
+	private UserData() {
 		this.nextId = new AtomicLong()
 		users = new LinkedHashMap<>()
 	}
