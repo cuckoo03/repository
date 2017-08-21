@@ -1,11 +1,11 @@
 package com.vseminar.view
 
-import groovy.transform.TypeChecked
-
+import com.vaadin.data.sort.Sort
 import com.vaadin.data.util.BeanItemContainer
 import com.vaadin.navigator.View
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
 import com.vaadin.server.Sizeable.Unit
+import com.vaadin.shared.data.sort.SortDirection
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.Grid
 import com.vaadin.ui.HorizontalLayout
@@ -16,6 +16,8 @@ import com.vseminar.data.SessionData
 import com.vseminar.data.UserSession
 import com.vseminar.data.model.RoleType
 import com.vseminar.data.model.Session
+
+import groovy.transform.TypeChecked
 
 @TypeChecked
 class SessionView extends VerticalLayout implements View {
@@ -75,8 +77,18 @@ class SessionView extends VerticalLayout implements View {
 	private void findBean() {
 		def sessions = new ArrayList<Session>()
 		if (UserSession.getUser().role == RoleType.Admin) {
-			sessions.addAll(sessionData.findAll())
+			sessions += sessionData.findAll()
+		} else {
+			sessions += sessionData.findByOwner(UserSession.getUser())
 		}
-
+		
+		if (sessions.size <= 0) {
+			return
+		}
+		
+		container.removeAllItems()
+		container.addAll(sessions)
+		
+		grid.sort(Sort.by("startDate", SortDirection.ASCENDING))
 	}
 }

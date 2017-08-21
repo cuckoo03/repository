@@ -41,7 +41,7 @@ class UserData implements VSeminarData<User> {
 
 	@Override
 	List<User> findAll() {
-		return Collections.unmodifiableList(new ArrayList<>(users.values()))
+		return Collections.unmodifiableList(new ArrayList<User>(users.values()))
 	}
 
 	@Override

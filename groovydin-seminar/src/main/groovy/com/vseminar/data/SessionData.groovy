@@ -43,7 +43,7 @@ class SessionData implements VSeminarData<Session> {
 
 	@Override
 	public List<Session> findAll() {
-		return Collections.unmodifiableList(new ArrayList<>(sessions.values()))
+		return Collections.unmodifiableList(new ArrayList<Session>(sessions.values()))
 	}
 
 	@Override
