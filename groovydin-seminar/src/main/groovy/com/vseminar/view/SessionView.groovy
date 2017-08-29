@@ -61,6 +61,7 @@ class SessionView extends VerticalLayout implements View {
 	private Grid createGrid() {
 		def grid = new Grid()
 		grid.setSizeFull()
+//		grid.setEditorEnabled(true)
 		
 		container = new BeanItemContainer<>(Session.class, null)
 		grid.setContainerDataSource(container)
@@ -68,9 +69,9 @@ class SessionView extends VerticalLayout implements View {
 		grid.setColumnOrder("id", "title", "level", "startDate", "endDate", 
 			"embeddedUrl", "speaker", "description")
 		
-		grid.getColumn("id").setHeaderCaption("ID")
+		grid.getColumn("id").setHeaderCaption("ID1")
 		grid.getColumn("title").setHeaderCaption("TITLE").setHidden(true)
-		
+	
 		return grid 
 	}
 	
@@ -90,5 +91,6 @@ class SessionView extends VerticalLayout implements View {
 		container.addAll(sessions)
 		
 		grid.sort(Sort.by("startDate", SortDirection.ASCENDING))
+		
 	}
 }
