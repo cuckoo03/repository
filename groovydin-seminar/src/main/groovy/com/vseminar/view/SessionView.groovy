@@ -68,12 +68,7 @@ class SessionView extends VerticalLayout implements View {
 		def grid = new Grid()
 		grid.setSizeFull()
 //		grid.setEditorEnabled(true)
-<<<<<<< HEAD
-//		grid.setEditorEnabled(true)
-
-=======
 		
->>>>>>> branch 'master' of https://github.com/cuckoo03/repository.git
 		container = new BeanItemContainer<>(Session.class, null)
 		grid.setContainerDataSource(container)
 		
@@ -82,7 +77,6 @@ class SessionView extends VerticalLayout implements View {
 		
 		grid.getColumn("id").setHeaderCaption("ID1")
 		grid.getColumn("title").setHeaderCaption("TITLE").setHidden(true)
-<<<<<<< HEAD
 		grid.getColumn("endDate").setEditorField(dateEditorField())
 		grid.getColumn("description").setHeaderCaption("DESC").setEditorField(textEditorField())
 		
@@ -98,8 +92,6 @@ class SessionView extends VerticalLayout implements View {
 				sessionData.save(session)
 			}
 		})
-=======
->>>>>>> branch 'master' of https://github.com/cuckoo03/repository.git
 	
 		return grid 
 	}
@@ -120,8 +112,6 @@ class SessionView extends VerticalLayout implements View {
 		container.addAll(sessions)
 		
 		grid.sort(Sort.by("startDate", SortDirection.ASCENDING))
-		
-<<<<<<< HEAD
 	}
 	
 	private DateField dateEditorField() {
@@ -136,7 +126,5 @@ class SessionView extends VerticalLayout implements View {
 		textField.setNullRepresentation("null")
 
 		return textField
-=======
->>>>>>> branch 'master' of https://github.com/cuckoo03/repository.git
 	}
 }
