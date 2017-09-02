@@ -24,7 +24,7 @@ class LoadingDataGenerator {
 	private static void createUsers() {
 		def userData = UserData.instance
 		userData.save(new User("u1", "u1@", "1", "img/upload/1.jpg", RoleType.User))
-		userData.save(new User("u2", "u2@", "1", "img/upload/2.jpg", RoleType.Admin))
+		userData.save(new User("u2", "u2@", "2", "img/upload/2.jpg", RoleType.Admin))
 	}
 
 	private static void createNavis() {

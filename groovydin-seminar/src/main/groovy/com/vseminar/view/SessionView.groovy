@@ -1,15 +1,21 @@
 package com.vseminar.view
 
+import com.vaadin.data.fieldgroup.FieldGroup.CommitEvent
+import com.vaadin.data.fieldgroup.FieldGroup.CommitException
+import com.vaadin.data.fieldgroup.FieldGroup.CommitHandler
 import com.vaadin.data.sort.Sort
 import com.vaadin.data.util.BeanItemContainer
 import com.vaadin.navigator.View
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
 import com.vaadin.server.Sizeable.Unit
 import com.vaadin.shared.data.sort.SortDirection
+import com.vaadin.shared.ui.datefield.Resolution
 import com.vaadin.ui.Alignment
+import com.vaadin.ui.DateField
 import com.vaadin.ui.Grid
 import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.Label
+import com.vaadin.ui.TextField
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
 import com.vseminar.data.SessionData
@@ -61,16 +67,33 @@ class SessionView extends VerticalLayout implements View {
 	private Grid createGrid() {
 		def grid = new Grid()
 		grid.setSizeFull()
-		
+//		grid.setEditorEnabled(true)
+//		grid.setEditorEnabled(true)
+
 		container = new BeanItemContainer<>(Session.class, null)
 		grid.setContainerDataSource(container)
 		
 		grid.setColumnOrder("id", "title", "level", "startDate", "endDate", 
 			"embeddedUrl", "speaker", "description")
 		
-		grid.getColumn("id").setHeaderCaption("ID")
+		grid.getColumn("id").setHeaderCaption("ID1")
 		grid.getColumn("title").setHeaderCaption("TITLE").setHidden(true)
+		grid.getColumn("endDate").setEditorField(dateEditorField())
+		grid.getColumn("description").setHeaderCaption("DESC").setEditorField(textEditorField())
 		
+		grid.getEditorFieldGroup().addCommitHandler(new CommitHandler() {
+			@Override
+			void preCommit(CommitEvent event) throws CommitException {
+				
+			}
+			
+			@Override
+			void postCommit(CommitEvent event) throws CommitException {
+				def session = (Session) grid.getEditedItemId()
+				sessionData.save(session)
+			}
+		})
+	
 		return grid 
 	}
 	
@@ -90,5 +113,20 @@ class SessionView extends VerticalLayout implements View {
 		container.addAll(sessions)
 		
 		grid.sort(Sort.by("startDate", SortDirection.ASCENDING))
+		
+	}
+	
+	private DateField dateEditorField() {
+		def dateField = new DateField()
+		dateField.setResolution(Resolution.MINUTE)
+		
+		return dateField
+	}
+	
+	private TextField textEditorField() {
+		def textField = new TextField()
+		textField.setNullRepresentation("null")
+
+		return textField
 	}
 }
