@@ -6,6 +6,9 @@ import groovy.transform.TypeChecked
 @TypeChecked
 @ToString(includeFields = true, includeNames = true)
 class Session {
+	private static final int MAX_ENTRIES = 100
+	private Set<Long> questions
+
 	Long id
 	String title
 	LevelType level
@@ -20,6 +23,8 @@ class Session {
 		this.level = LevelType.Junior
 		this.startDate = new Date()
 		this.endDate = new Date()
+		
+//		newMessages()
 	}
 	
 	Session(Long ownerId) {
@@ -27,6 +32,8 @@ class Session {
 		this.level = LevelType.Junior
 		this.startDate = new Date()
 		this.endDate = new Date()
+
+//		newMessages()
 	}
 	
 	Session(String title, LevelType level, String embeddedUrl, String speaker, 
@@ -39,5 +46,19 @@ class Session {
 		this.startDate = new Date()
 		this.endDate = new Date()
 		this.description = descrption
+
+//		newMessages()
+	}
+		
+	private void newMessages() {
+		def initialCapacity = MAX_ENTRIES + 1
+		def loadFactor = 0.90F
+		def accessOrder = false
+		def hashmap = new LinkedHashMap<Long, Boolean>(initialCapacity, loadFactor, accessOrder) {
+			protected boolean removeEldestEntry(Map.Entry<Long, Boolean> eldest) {
+				return false
+			}
+		}
+		this.questions = Collections.newSetFromMap(hashmap)
 	}
 }
