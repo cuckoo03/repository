@@ -4,6 +4,7 @@ import groovy.transform.TypeChecked
 
 import com.vaadin.server.FontAwesome
 import com.vseminar.data.model.LevelType
+import com.vseminar.data.model.Question
 import com.vseminar.data.model.RoleType
 import com.vseminar.data.model.Session
 import com.vseminar.data.model.User
@@ -52,5 +53,12 @@ class LoadingDataGenerator {
 			"speaker1", user1Id, ""))
 		sessionData.save(new Session("title2", LevelType.Senior, "url2", 
 			"speaker2", user2Id, ""))
+	}
+	
+	private static void createQuestions(Session session, Long userId) {
+		def questionData = QuestionData.instance
+		(1..30).each {
+			questionData.save(new Question(session.id, "test sample $it:$session.title", userId))
+		}
 	}
 }

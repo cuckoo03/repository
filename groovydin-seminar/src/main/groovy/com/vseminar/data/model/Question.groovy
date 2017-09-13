@@ -11,4 +11,14 @@ class Question {
 	String message
 	Long createdBy
 	Date createdDate
+	
+	Question() {
+		this.createdDate = new Date()
+	}
+	
+	Question(Long id, String message, Long createdBy) {
+		this.id = id
+		this.message = message
+		this.createdBy = createdBy
+	}
 }

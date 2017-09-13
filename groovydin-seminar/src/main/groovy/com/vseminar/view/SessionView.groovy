@@ -129,6 +129,8 @@ class SessionView extends VerticalLayout implements View {
 		grid.addSelectionListener({ event ->
 			delBtn.setEnabled(grid.getSelectedRows().size() > 0)
 		})
+		
+		grid.getColumn("questions").setHidable(true).setEditable(false)
 	
 		return grid 
 	}

@@ -24,7 +24,7 @@ class Session {
 		this.startDate = new Date()
 		this.endDate = new Date()
 		
-//		newMessages()
+		newMessages()
 	}
 	
 	Session(Long ownerId) {
@@ -33,7 +33,7 @@ class Session {
 		this.startDate = new Date()
 		this.endDate = new Date()
 
-//		newMessages()
+		newMessages()
 	}
 	
 	Session(String title, LevelType level, String embeddedUrl, String speaker, 
@@ -47,7 +47,7 @@ class Session {
 		this.endDate = new Date()
 		this.description = descrption
 
-//		newMessages()
+		newMessages()
 	}
 		
 	private void newMessages() {
@@ -55,6 +55,7 @@ class Session {
 		def loadFactor = 0.90F
 		def accessOrder = false
 		def hashmap = new LinkedHashMap<Long, Boolean>(initialCapacity, loadFactor, accessOrder) {
+			@Override
 			protected boolean removeEldestEntry(Map.Entry<Long, Boolean> eldest) {
 				return false
 			}

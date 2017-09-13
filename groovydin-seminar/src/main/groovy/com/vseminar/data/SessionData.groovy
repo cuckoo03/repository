@@ -4,6 +4,7 @@ import groovy.transform.TypeChecked
 
 import java.util.concurrent.atomic.AtomicLong
 
+import com.vseminar.data.model.Question
 import com.vseminar.data.model.Session
 import com.vseminar.data.model.User
 
@@ -99,5 +100,11 @@ class SessionData implements VSeminarData<Session> {
 		def results = sessions.findAll { it.ownerId == user.id } as List<Session>
 		
 		return results 
+	}
+	
+	synchronized void addMessage(Question question) {
+		def session = sessions[question.sessionId]
+		def questions = session.questions
+		questions += question.id
 	}
 }
