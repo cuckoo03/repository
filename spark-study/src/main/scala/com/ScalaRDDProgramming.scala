@@ -1,9 +1,9 @@
-package com.scala
+package com
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-object RDDProgramming extends App {
+object ScalaRDDProgramming extends App {
 	val conf = new SparkConf().setAppName("appName").setMaster("local")
 	val sc = new SparkContext(conf)
 

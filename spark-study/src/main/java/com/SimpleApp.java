@@ -1,4 +1,4 @@
-package com.java;
+package com;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;

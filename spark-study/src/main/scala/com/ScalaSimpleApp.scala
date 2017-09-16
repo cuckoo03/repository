@@ -1,11 +1,11 @@
-package com.scala
+package com
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-object SimpleApp extends App {
+object ScalaSimpleApp extends App {
 	val logFile = "/usr/local/spark/README.md"
-	val conf = new SparkConf().setAppName("Simple application")
+	val conf = new SparkConf().setAppName("Scala Simple application")
 	val sc = new SparkContext(conf)
 	val logData = sc.textFile(logFile, 2).cache()
 	val numAs = logData.filter(line => line.contains("a")).count()
