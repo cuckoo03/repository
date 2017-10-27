@@ -10,19 +10,14 @@ import org.springframework.context.support.GenericXmlApplicationContext
 @TypeChecked
 class GroovyJpaMain {
 	static main(args) {
-		@SuppressWarnings("resource")
-				GenericXmlApplicationContext context = new GenericXmlApplicationContext(
+		GenericXmlApplicationContext context = new GenericXmlApplicationContext(
 				"classpath:spring/application-context.xml")
 
 		def emf = (EntityManagerFactory) context.getBean("entityManagerFactory")
 		def em = emf.createEntityManager()
 		def tx = em.getTransaction()
-		try {
-			tx.begin()
-			tx.commit()
-		} catch (Exception e) {
-			tx.rollback()
-		}
+		tx.begin()
+
 
 		def id = "id1"
 		def member = new Member()
@@ -33,9 +28,15 @@ class GroovyJpaMain {
 		em.persist(member)
 
 		member.age = 20
-		
+
 		def findMember = em.find(Member.class, id)
 		System.out.println("findMember:" + findMember)
-		println "member equals:${member == findMember}"
+		println "insert member equals:${member == findMember}"
+
+		//		em.detach(member)
+		//		println "remove member. contains:${em.contains(member)}"
+
+		tx.commit()
+		em.close()
 	}
 }

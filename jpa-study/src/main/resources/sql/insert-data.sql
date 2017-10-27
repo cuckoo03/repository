@@ -1,1 +1,1 @@
-insert into member(id, name, age) values ('d1', 'name1', 2)
+insert into member(id, name, age) values ('d0', 'name0', 0)
