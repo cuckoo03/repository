@@ -28,8 +28,7 @@
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:application.properties" />
 	<jdbc:embedded-database id="dataSource" type="H2">
-		<jdbc:script location="classpath:sql/create-db.sql" />
-		<jdbc:script location="classpath:sql/insert-data.sql" />
+		<jdbc:script location="classpath:sql/create-db-ch04.sql" />
 	</jdbc:embedded-database>
 	 <!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

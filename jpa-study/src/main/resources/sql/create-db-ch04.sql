@@ -9,4 +9,6 @@ create table team (
 	name varchar(255),
 	primary key (team_id)
 );
-alter table meber add constraint fk_member_team
+alter table member add constraint fk_member_team
+foreign key (team_id)
+references team
