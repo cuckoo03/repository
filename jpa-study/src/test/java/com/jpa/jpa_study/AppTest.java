@@ -1,5 +1,7 @@
 package com.jpa.jpa_study;
 
+import com.jpa.jpa_study.AppTest;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

@@ -1,4 +1,4 @@
-package com.jpa.jpa_study;
+package jpabook.start;
 
 /**
  * Hello world!
