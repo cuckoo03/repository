@@ -4,7 +4,9 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import groovy.transform.TypeChecked
 
+import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.Id
 import javax.persistence.Table
 
 @TypeChecked
@@ -13,6 +15,10 @@ import javax.persistence.Table
 @Entity
 @Table(name = "TEAM")
 class Team {
-	private String id
-	private String name
+	@Id
+	@Column(name = "TEAM_ID")
+	String id
+
+	@Column(name = "NAME")
+	String name
 }
