@@ -20,31 +20,30 @@ import javax.persistence.TemporalTypeimport javax.persistence.UniqueConstraint;
 @TypeChecked
 @ToString(includeNames = true, includeFields = true)
 @EqualsAndHashCode
-@Entity
+@Entity(name = "jpabook.start.Member")
 @Table(name = "MEMBER")
 class Member {
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id
+	String id
 
 	@Column(name = "NAME", nullable = false, length = 10)
-	private String username
+	String username
 
 	@Column(name = "AGE")
-	private Integer age
+	Integer age
 
 	@Enumerated(EnumType.STRING)
-	private RoleType roleType
+	RoleType roleType
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate
+	Date createdDate
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastModifiedDate
+	Date lastModifiedDate
 
 	@Lob
-	private String description
+	String description
 
 	enum RoleType {
 		ADMIN, USER

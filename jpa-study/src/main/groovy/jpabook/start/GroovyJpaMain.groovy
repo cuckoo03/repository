@@ -1,9 +1,13 @@
 package jpabook.start
 
+import java.util.List;
+
 import groovy.transform.TypeChecked
 
 import javax.persistence.EntityManager
 import javax.persistence.EntityManagerFactory
+
+import jpabook.start2.Member2;
 
 import org.springframework.context.support.GenericXmlApplicationContext
 
@@ -32,9 +36,9 @@ class GroovyJpaMain {
 		def findMember = em.find(Member.class, id)
 		System.out.println("findMember:" + findMember)
 		println "insert member equals:${member == findMember}"
-
-		//		em.detach(member)
-		//		println "remove member. contains:${em.contains(member)}"
+		
+		def members = em.createQuery("select m from jpabook.start.Member m", Member.class).getResultList();
+		System.out.println("members.size=" + members.size());
 
 		tx.commit()
 		em.close()

@@ -5,6 +5,8 @@ import groovy.transform.TypeChecked
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 
+import jpabook.start2.Member2;
+
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.test.context.ContextConfiguration
@@ -26,7 +28,7 @@ class JpaMainTest {
 	@Test
 	void test() {
 		def id = "id1"
-		def member = new Member()
+		def member = new Member2()
 		member.id = id
 		member.username = "name1"
 		member.age = 2
@@ -35,7 +37,7 @@ class JpaMainTest {
 
 		member.age = 20
 		
-		def findMember = em.find(Member.class, id)
+		def findMember = em.find(Member2.class, id)
 		System.out.println("findMember:" + findMember)
 		println "member equals:${member == findMember}"
 	}
