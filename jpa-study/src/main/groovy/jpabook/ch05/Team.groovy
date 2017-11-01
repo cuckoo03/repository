@@ -12,7 +12,7 @@ import javax.persistence.Table
 @TypeChecked
 @ToString(includeNames = true, includeFields = true)
 @EqualsAndHashCode
-@Entity
+@Entity(name = "jpabook.ch05.Team")
 @Table(name = "TEAM")
 class Team {
 	@Id

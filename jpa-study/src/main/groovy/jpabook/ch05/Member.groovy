@@ -14,7 +14,7 @@ import javax.persistence.Table
 @TypeChecked
 @ToString(includeNames = true, includeFields = true)
 @EqualsAndHashCode
-@Entity
+@Entity(name = "jpabook.ch05.Member")
 @Table(name = "MEMBER")
 class Member {
 	@Id

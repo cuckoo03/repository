@@ -15,37 +15,37 @@ class Ch05Main {
 
 		def emf = (EntityManagerFactory) context.getBean("entityManagerFactory")
 		def em = emf.createEntityManager()
+		def tx = em.getTransaction()
+		tx.begin()
 		
-		def team1 = new Team(id:"t1", name:"team1")
-		em.persist(team1)
-		
-		def findTeam1 = em.find(Team.class, "t1")
-		println "findTeam1:$findTeam1"
-		
-		def member1 = new Member(id:"m1", username:"m name1")
-		member1.team = team1
-		em.persist(member1)
+		try {
+			def team1 = new Team(id:"t1", name:"team1")
+			em.persist(team1)
+			
+			def findTeam1 = em.find(Team.class, "t1")
+			println "findTeam1:$findTeam1"
+			
+			def member1 = new Member(id:"m1", username:"name1")
+			member1.team = team1
+			em.persist(member1)
+			
+			def findMember1 = em.find(Member.class, member1.id)
+			println "findMember1 team:$findMember1.team"
+			
+			queryLogicJoin(em)
 
-		def findMember1 = em.find(Member.class, member1.id)
-		println "findMember1 team:$findMember1.team"
-		
-		/*
-		def team2 = new Team(id:"t2", name:"team2")
-		em.persist(team2)
-		
-		findMember1.team = team2
-		*/
-		
-		def jpql = "select m from Member m"
-		
-		queryLogicJoin(em)
+			tx.commit()			
+		} catch (Exception e) {
+			e.printStackTrace()
+			tx.rollback()
+		}
 	}
 	
 	static void queryLogicJoin(EntityManager em) {
-		def jpql = "select m from Member m"
+		def jpql = "select m from jpabook.ch05.Member m join m.team t where t.id=:teamId"
 		
 		def resultList = em.createQuery(jpql, Member.class)
-//				.setParameter("teamName", "team1")
+				.setParameter("teamId", "t1")
 				.getResultList()
 		
 		println "$resultList"
