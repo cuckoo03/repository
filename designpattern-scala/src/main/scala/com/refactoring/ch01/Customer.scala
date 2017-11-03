@@ -12,22 +12,23 @@ class Customeer(private val name: String) {
     var totalAmount: Double = 0
     var frequentReenterPoints: Int = 0
     var result = s"rental record for $getName()\n"
-    rentals.foreach { rental =>
-      var thisAmount: Double = 0
+    rentals.foreach { each =>
+      frequentReenterPoints += each.getFrequentRenterPoints()
 
-      thisAmount = rental.getCharge()
-
-      frequentReenterPoints += 1
-      if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-        rental.getDaysRented() > 1)
-        frequentReenterPoints += 1
-
-      result += s"\t ${rental.getMovie().getTitle()}\t $thisAmount\n"
-      totalAmount += thisAmount
+      result += s"\t ${each.getMovie().getTitle()}\t ${each.getCharge()}\n"
+      totalAmount += each.getCharge()
     }
 
-    result += s"amount owed is $totalAmount\n"
+    result += s"amount owed is ${getTotalCharge()}\n"
     result += s"you earned $frequentReenterPoints frequent renter points"
     return result
+  }
+  def getTotalCharge(): Double = {
+    var result: Double = 0
+    rentals.foreach { each =>
+      result += each.getCharge()
+    }
+
+    result
   }
 }
