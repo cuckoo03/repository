@@ -2,10 +2,14 @@ package com.refactoring.ch01
 
 import scala.beans.BeanProperty
 
-@BeanProperty
-class Movie(private val title: String, private val priceeCode: Int) {
-
+class Movie(private val _title: String, private val _priceCode: Int) {
+  @BeanProperty
+  val title = _title
+  @BeanProperty
+  val priceCode = _priceCode
 }
 object Movie {
-  val CHILDREN: Int = 2
+  val CHILDREN = 2
+  val REGULAR = 0
+  val NEW_RELEASE = 1
 }
