@@ -19,8 +19,9 @@ class Weekday implements Comparable {
 		return new Weekday(DAYS[index - 1])
 	}
 
-	public int compareTo(Weekday other) {
-		return this.index <=> other.index
+	@Override
+	public int compareTo(Object other) {
+		return this.index <=> (other as Weekday).index
 	}
 
 	@Override
