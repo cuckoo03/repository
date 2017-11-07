@@ -27,6 +27,7 @@ class MyClass1 {
 		
 		mapList.each { Map<String, String> it ->
 			myClass2.setMap(it as Map<String, String>)
+			myClass2.setMap(new HashMap<>())
 			myClass2.setMap(new HashMap())
 		}
 		

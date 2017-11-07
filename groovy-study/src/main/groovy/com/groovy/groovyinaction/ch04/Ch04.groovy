@@ -1,5 +1,8 @@
 package com.groovy.groovyinaction.ch04
 
+import groovy.transform.TypeChecked;
+
+@TypeChecked
 class Ch04 {
 	static main(args) {
 		// use complex type
@@ -184,15 +187,15 @@ class Ch04 {
 		def found = myMap.find { entry -> entry.value < 3}
 		println "found:" + found
 		
-		doubled = myMap.collect { entry -> entry.value *= 2 }
+		doubled = myMap.collect { entry -> entry.value.multiply(2) }
 		assert doubled instanceof List
 		
 		def textCorpus = "Look for the bare necessities" 
 		
 		def words = textCorpus.tokenize();
-		def wordFrequency = [:]
-		words.each  { word ->
-			wordFrequency[word] = wordFrequency.get(word, 0) + 1
+		def Map<String, Integer> wordFrequency = [:]
+		words.each  { String word ->
+			wordFrequency[word] = wordFrequency.getOrDefault(word, 0) + 1
 		}
 		println wordFrequency
 		def wordList = wordFrequency.keySet().toList();

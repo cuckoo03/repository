@@ -1,7 +1,8 @@
 package com.groovy.groovyinaction.ch05
 
-class Ch05 {
+import groovy.transform.TypeChecked;
 
+class Ch05 {
 	static main(args) {
 		def log = ''
 		(1..10).each{ counter -> log += counter }

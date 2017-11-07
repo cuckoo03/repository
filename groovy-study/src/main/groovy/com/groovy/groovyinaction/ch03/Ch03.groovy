@@ -1,8 +1,9 @@
 package com.groovy.groovyinaction.ch03
 
+import groovy.transform.TypeChecked;
 
+@TypeChecked
 class Ch03 {
-
 	static main(args) {
 		// translation strings
 		def a = "A"
@@ -24,7 +25,7 @@ class Ch03 {
 		println greeting
 		assert greeting << '!'
 		println greeting
-		greeting[1..4] = 'i'
+//		greeting[1..4] = "i"
 		println greeting
 		
 		// use regular expression
@@ -64,7 +65,7 @@ class Ch03 {
 		
 		store = ''
 		0.step(0.5, 0.1) { number ->
-			store += number + ' '
+			store += number.toString() + ' ' 
 		}
 		println store;
 	}
