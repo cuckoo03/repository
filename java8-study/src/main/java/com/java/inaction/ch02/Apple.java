@@ -2,6 +2,7 @@ package com.java.inaction.ch02;
 
 public class Apple implements Comparable<Apple> {
 	private Integer weight;
+	private String color;
 
 	public Apple() {};
 	
@@ -10,7 +11,8 @@ public class Apple implements Comparable<Apple> {
 	}
 
 	public Apple(String color, Integer weight) {
-		
+		this.color = color;
+		this.weight = weight;
 	}
 	
 	public int getWeight() {

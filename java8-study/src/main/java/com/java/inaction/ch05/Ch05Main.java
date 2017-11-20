@@ -37,7 +37,7 @@ public class Ch05Main {
 				.collect(Collectors.toList()).forEach(System.out::println);
 		
 		// mapping
-		menu.stream().map(Dish::getN).map(String::length)
+		menu.stream().map(Dish::getName).map(String::length)
 				.forEach(System.out::println);
 		
 		// flatten stream
@@ -58,7 +58,7 @@ public class Ch05Main {
 		Optional<Dish> findAny = menu.stream().filter(Dish::isVe).findAny();
 		System.out.println(findAny);
 		menu.stream().filter(Dish::isVe).findAny()
-				.ifPresent(d -> System.out.println(d.getN()));
+				.ifPresent(d -> System.out.println(d.getName()));
 		Optional<Dish> findFirst = menu.stream().findFirst();
 		System.out.println(findFirst);
 		

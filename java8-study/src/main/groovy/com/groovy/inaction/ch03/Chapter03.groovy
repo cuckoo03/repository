@@ -16,8 +16,18 @@ class Chapter03 {
 		str.sort({a1, a2 -> a1.compareTo(a2)})
 	
 		def c5 = {Integer i -> new Apple(i)} as Function
-		println c5
-		def c6 = {String s, Integer i -> new Apple(s, i)} as BiFunction
-		println c6
+		BiFunction<String, Integer, Apple> c6 = {
+			String s, Integer i ->
+			new Apple(s, i)
+		} as BiFunction
+
+		def c7 = c6.apply("green", 1)
+		println c7.weight
+		
+		// concat comparator
+		def c8 = Comparator.comparing({Apple a -> a.weight})
+		def c9 = Comparator.comparing({Apple a -> a.weight} as Function)
+		c8.reversed().thenComparing(c9)
+		
 	}
 }

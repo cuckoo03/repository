@@ -3,13 +3,13 @@ package com.java.inaction.ch04;
 public class Dish {
 	private final String n;
 	private final boolean ve;
-	private final int cal;
+	private final int calories;
 	private final Type t;
 
 	public Dish(String n, boolean ve, int cal, Type t) {
 		this.n = n;
 		this.ve = ve;
-		this.cal = cal;
+		this.calories = cal;
 		this.t = t;
 	}
 
@@ -17,7 +17,7 @@ public class Dish {
 	 * getName
 	 * @return
 	 */
-	public String getN() {
+	public String getName() {
 		return n;
 	}
 
@@ -26,7 +26,7 @@ public class Dish {
 	}
 
 	public int getCal() {
-		return cal;
+		return calories;
 	}
 
 	public Type getType() {
@@ -40,7 +40,7 @@ public class Dish {
 		sb.append(", ");
 		sb.append(ve);
 		sb.append(", ");
-		sb.append(cal);
+		sb.append(calories);
 		sb.append(", ");
 		sb.append(t);
 		return sb.toString();

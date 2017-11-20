@@ -11,14 +11,14 @@ class Ch04Main {
 				new Dish("french", true, 700, Dish.Type.OTHER));
 		
 		List<String> names = menu.stream().filter(d -> d.getCal() > 100)
-				.map(Dish::getN).limit(3).collect(Collectors.toList());
+				.map(Dish::getName).limit(3).collect(Collectors.toList());
 		
 		names = menu.stream().filter(d -> {
-			System.out.println("filtering:" + d.getN());
+			System.out.println("filtering:" + d.getName());
 			return d.getCal() > 100;
 		}).map(d -> {
-			System.out.println("mapping:" + d.getN());
-			return d.getN();
+			System.out.println("mapping:" + d.getName());
+			return d.getName();
 		}).limit(3).collect(Collectors.toList());
 
 		names.forEach(System.out::println);
