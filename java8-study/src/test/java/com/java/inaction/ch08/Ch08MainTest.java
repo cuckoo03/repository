@@ -19,7 +19,7 @@ public class Ch08MainTest {
 	}
 
 	@Test
-	public void testComparingTowPoints() {
+	public void testComparingTwoPoints() {
 		Point p1 = new Point(10, 15);
 		Point p2 = new Point(10, 20);
 		int result = Point.compareBy.compare(p1, p2);
