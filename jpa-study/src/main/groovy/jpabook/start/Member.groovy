@@ -16,7 +16,6 @@ import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalTypeimport javax.persistence.UniqueConstraint;
 
-
 @TypeChecked
 @ToString(includeNames = true, includeFields = true)
 @EqualsAndHashCode
@@ -45,7 +44,4 @@ class Member {
 	@Lob
 	String description
 
-	enum RoleType {
-		ADMIN, USER
-	}
 }

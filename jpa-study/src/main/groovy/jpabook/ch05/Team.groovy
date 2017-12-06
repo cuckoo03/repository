@@ -7,6 +7,7 @@ import groovy.transform.TypeChecked
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.OneToMany;
 import javax.persistence.Table
 
 @TypeChecked
@@ -21,4 +22,7 @@ class Team {
 
 	@Column(name = "NAME")
 	String name
+	
+	@OneToMany(mappedBy = "team")
+	List<Member> members = new ArrayList<>() 
 }

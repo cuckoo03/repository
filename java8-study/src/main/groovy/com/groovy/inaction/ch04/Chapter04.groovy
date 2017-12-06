@@ -2,6 +2,8 @@ package com.groovy.inaction.ch04
 
 import static java.util.stream.Collectors.*;
 
+import java.util.stream.Collectors;
+
 import groovy.transform.TypeChecked
 
 import com.java.inaction.ch04.Dish
@@ -26,5 +28,12 @@ class Chapter04 {
 			it.name
 		}.limit(3).collect(toList())
 		println names
+
+		println ""
+		menu.stream().filter{it.cal > 100 }
+		.peek{println "filter:$it"}
+		.map{it.name}.peek{println "map:$it"}.forEach{System.out.&println}
+		
+		menu.stream().filter{it.isVe()}.collect{Collectors.toList()}
 	}
 }

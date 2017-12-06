@@ -26,4 +26,9 @@ class Member {
 	@ManyToOne
 	@JoinColumn(name = "TEAM_ID")
 	Team team
+	
+	def void setTeam(Team team) {
+		this.team = team
+		(team.members as List<Member>).add(this)
+	}
 }
