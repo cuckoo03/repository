@@ -28,6 +28,9 @@ class Member {
 	Team team
 	
 	def void setTeam(Team team) {
+		if (this.team != null)
+			(this.team.members as List<Member>).remove(this)
+
 		this.team = team
 		(team.members as List<Member>).add(this)
 	}

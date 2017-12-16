@@ -23,15 +23,11 @@ class GroovyJpaMain {
 		tx.begin()
 
 
-		def id = "id1"
+		def id = 1
 		def member = new Member()
 		member.id = id
-		member.username = "name1"
-		member.age = 2
 
 		em.persist(member)
-
-		member.age = 20
 
 		def findMember = em.find(Member.class, id)
 		System.out.println("findMember:" + findMember)

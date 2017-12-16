@@ -1,3 +1,4 @@
+#예제DB
 create table member (
 	id varchar(255) not null,
 	name varchar(255),

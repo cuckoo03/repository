@@ -1,5 +1,7 @@
 package jpabook.start
 
+import java.nio.MappedByteBuffer;
+
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import groovy.transform.TypeChecked
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id
 import javax.persistence.Lob
+import javax.persistence.OneToMany;
 import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalTypeimport javax.persistence.UniqueConstraint;
@@ -23,25 +26,13 @@ import javax.persistence.TemporalTypeimport javax.persistence.UniqueConstraint;
 @Table(name = "MEMBER")
 class Member {
 	@Id
-	@Column(name = "ID")
-	String id
+	@Column(name = "MEMBER_ID")
+	long id
 
-	@Column(name = "NAME", nullable = false, length = 10)
-	String username
+	String name
+	String city
+	String street
 
-	@Column(name = "AGE")
-	Integer age
-
-	@Enumerated(EnumType.STRING)
-	RoleType roleType
-
-	@Temporal(TemporalType.TIMESTAMP)
-	Date createdDate
-
-	@Temporal(TemporalType.TIMESTAMP)
-	Date lastModifiedDate
-
-	@Lob
-	String description
-
+	@OneToMany(mappedBy = "member")
+	List<Order> orders = []
 }
