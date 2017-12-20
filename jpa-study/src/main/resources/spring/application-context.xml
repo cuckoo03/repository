@@ -24,13 +24,17 @@
   	<!-- 
 	<context:component-scan base-package="jpabook" />
   	 -->
-	<!-- annotation이 추가된 인스턴스가 생성되게 하려면 annotation-config 빈을 등록해야 한다. -->
+	<!-- 
 	<context:annotation-config />
+	 -->
 	<context:property-placeholder location="classpath:application.properties" />
+	<!-- sql 데이터를 시작시 업로드해야 할경우 사용-->
+	<!-- 
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:sql/create-db-ch04.sql" />
 	</jdbc:embedded-database>
-	 <!-- 
+	 -->
+	 <!-- 데이터 업로드없이 테이블만 생성할 경우 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.h2.Driver" />
@@ -38,12 +42,11 @@
 		<property name="username" value="sa" />
 		<property name="password" value="" />
 	</bean>
-	  -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
       <property name="dataSource" ref="dataSource" />
       <property name="packagesToScan">
       	<array>
-      		<value>jpabook.ch05</value>
+      		<value>jpabook.ch06.manytomany3</value>
       	</array>
       </property>
       <property name="jpaVendorAdapter">
@@ -53,8 +56,10 @@
          <props>
             <prop key="hibernate.show_sql">true</prop>
         	<prop key="hibernate.format_sql">true</prop>
-            <prop key="hibernate.hbm2ddl.auto">validate</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop>
             <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.id.new_generator_mappings">true</prop>
          </props>
       </property>
 	</bean>

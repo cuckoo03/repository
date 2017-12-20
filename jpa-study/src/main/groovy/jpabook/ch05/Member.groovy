@@ -27,11 +27,11 @@ class Member {
 	@JoinColumn(name = "TEAM_ID")
 	Team team
 	
-	def void setTeam(Team team) {
-		if (this.team != null)
-			(this.team.members as List<Member>).remove(this)
-
+	// 다대일 양방향 처리
+	void setTeam(Team team) {
 		this.team = team
-		(team.members as List<Member>).add(this)
+		if (!(team.members as List).contains(this)) {
+			(team.members as List).add(this)
+		}
 	}
 }

@@ -43,7 +43,7 @@ class Ch05Main {
 //			findMember1.team = null
 //			em.remove(team2)
 
-//			queryLogicJoin(em)
+			queryLogicJoin(em)
 			
 			biDirection(em)
 			tx.commit()
