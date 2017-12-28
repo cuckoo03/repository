@@ -1,6 +1,5 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.medianstd
 
-import org.apache.commons.math.stat.descriptive.summary.SumOfSquares
 import org.apache.hadoop.io.IntWritable
 import org.apache.hadoop.mapreduce.Reducer
 import org.apache.hadoop.mapreduce.Reducer.Context

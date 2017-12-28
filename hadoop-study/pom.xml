@@ -38,15 +38,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>0.20.2</version>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.hadoop</groupId>
-		  <artifactId>hadoop-core</artifactId>
-		  <version>0.20.2-cdh3u6</version>
-		  <type>pom</type>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-core</artifactId>
+		    <version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.mrunit</groupId>
