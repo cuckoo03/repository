@@ -7,6 +7,7 @@ encoding//src/main/java/com/naver/blog/jsoup/article.html=UTF-8
 encoding//src/main/java/com/naver/blog/jsoup/main-page2.html=UTF-8
 encoding//src/main/java/com/naver/cafe/htmlunit/article1.html=UTF-8
 encoding//src/main/java/com/naver/cafe/jsoup/m-article1.html=UTF-8
+encoding//src/main/resources=UTF-8
 encoding//src/main/resources/log4j.properties=UTF-8
 encoding//src/test/groovy/com/diorcafe/htmlunit/article.html=UTF-8
 encoding//src/test/groovy/com/diorcafe/htmlunit/main-logon.html=UTF-8

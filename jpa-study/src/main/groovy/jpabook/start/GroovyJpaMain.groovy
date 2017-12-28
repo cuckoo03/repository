@@ -22,8 +22,13 @@ class GroovyJpaMain {
 		def tx = em.getTransaction()
 		tx.begin()
 
+		logic1(em)
 
-		def id = 1
+		tx.commit()
+		em.close()
+	}
+	static void logic1(EntityManager em) {
+		def id = 1L
 		def member = new Member()
 		member.id = id
 
@@ -32,11 +37,8 @@ class GroovyJpaMain {
 		def findMember = em.find(Member.class, id)
 		System.out.println("findMember:" + findMember)
 		println "insert member equals:${member == findMember}"
-		
+
 		def members = em.createQuery("select m from jpabook.start.Member m", Member.class).getResultList();
 		System.out.println("members.size=" + members.size());
-
-		tx.commit()
-		em.close()
 	}
 }

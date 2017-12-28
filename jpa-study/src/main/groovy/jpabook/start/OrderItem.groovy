@@ -29,7 +29,7 @@ class OrderItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "ODER_ID")
-	Order order
+	Orders order
 	
 	int orderPrice
 	int count

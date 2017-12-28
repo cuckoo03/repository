@@ -19,7 +19,4 @@ class Member {
 	String id
 	
 	String username
-	
-	@OneToMany(mappedBy = "member")
-	List<OrderItem> orders = []
 }

@@ -15,9 +15,9 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 @EqualsAndHashCode
-@Entity(name = "jpabook.ch06.manytomany3.OrderItem")
-@Table(name = "ORDER_ITEM")
-class OrderItem {
+@Entity(name = "jpabook.ch06.manytomany3.Orders")
+@Table(name = "ORDERS")
+class Orders {
 	@Id
 	@GeneratedValue
 	@Column(name = "ORDER_ID")

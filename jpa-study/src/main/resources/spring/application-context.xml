@@ -46,7 +46,7 @@
       <property name="dataSource" ref="dataSource" />
       <property name="packagesToScan">
       	<array>
-      		<value>jpabook.ch06.manytomany3</value>
+      		<value>jpabook.start</value>
       	</array>
       </property>
       <property name="jpaVendorAdapter">

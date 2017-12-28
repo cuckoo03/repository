@@ -13,6 +13,7 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
+import javax.persistence.OneToOne
 import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
@@ -21,38 +22,45 @@ import javax.persistence.TemporalType
 @ToString(includeNames = true, includeFields = true)
 @EqualsAndHashCode
 @Entity(name = "jpabook.start.Order")
-@Table(name = "Order")
-class Order {
+@Table(name = "ORDERS")
+class Orders {
 	@Id
 	@GeneratedValue
 	@Column(name = "ORDER_ID")
 	long id
-	
+
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID")
 	Member member
-	
+
 	@OneToMany(mappedBy = "order")
 	List<OrderItem> orderItems = []
-	
+
+	@OneToOne
+	@JoinColumn(name = "DELIVERY_ID")
+	Delivery delivery
+
 	@Temporal(TemporalType.TIMESTAMP)
 	Date orderDate
-	
 
 	@Enumerated(EnumType.STRING)
 	OrderStatus status
-	
+
 	void setMember(Member member) {
 		if (this.member != null)
 			(this.member.orders as List).remove(this)
-		
+
 		this.member = member
 		(member.orders as List).add(this)
 	}
-	
+
 	void addOrderItem(OrderItem orderItem) {
 		orderItems += orderItem
 		orderItem.order = this
 	}
 
+	void setDelivery(Delivery delivery) {
+		this.delivery = delivery
+		delivery.order = this
+	}
 }

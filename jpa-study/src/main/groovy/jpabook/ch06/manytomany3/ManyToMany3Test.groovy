@@ -39,7 +39,7 @@ class ManyToMany3Test {
 		productA.name = "p1"
 		em.persist(productA)
 		
-		def orderItem = new OrderItem()
+		def orderItem = new Orders()
 		orderItem.member = member1
 		orderItem.product = productA
 		orderItem.orderAmount = 2
@@ -48,7 +48,7 @@ class ManyToMany3Test {
 	}
 	
 	static void find(EntityManager em) {
-		def order = em.find(OrderItem.class, 1L)
+		def order = em.find(Orders.class, 1L)
 		def member = order.member
 		def product = order.product
 		

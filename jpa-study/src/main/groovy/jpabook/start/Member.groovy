@@ -34,5 +34,5 @@ class Member {
 	String street
 
 	@OneToMany(mappedBy = "member")
-	List<Order> orders = []
+	List<Orders> orders = []
 }

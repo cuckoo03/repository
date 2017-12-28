@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @TypeChecked
-//@EqualsAndHashCode
+@EqualsAndHashCode
 @Entity(name = "jpabook.ch06.manytomany2.MemberProduct")
 @IdClass(MemberProductId.class)
 class MemberProduct {

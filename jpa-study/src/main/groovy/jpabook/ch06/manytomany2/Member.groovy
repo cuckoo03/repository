@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table
 
 @TypeChecked
-//@EqualsAndHashCode
+@EqualsAndHashCode
 @Entity(name = "jpabook.ch06.manytomany2.Member")
 @Table(name = "MEMBER")
 class Member {

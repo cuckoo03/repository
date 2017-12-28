@@ -8,6 +8,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.ManyToMany
 import javax.persistence.Table
 
 @TypeChecked
@@ -20,8 +21,11 @@ class Item {
 	@GeneratedValue
 	@Column(name = "ITEM_ID")
 	long id
-	
+
 	String name
 	int price
 	int stockQuantity
+
+	@ManyToMany(mappedBy = "items")
+	List<Category> categories = []
 }
