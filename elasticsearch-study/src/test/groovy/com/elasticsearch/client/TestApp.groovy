@@ -1,16 +1,14 @@
 package com.elasticsearch.client
 
-import java.beans.FeatureDescriptor;
-
 import groovy.transform.TypeChecked
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.client.Client
 import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.ImmutableSettings
+import org.elasticsearch.common.settings.Settings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.common.xcontent.json.JsonXContent
-import org.junit.Ignore;
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,10 +26,9 @@ class TestApp {
 	private TapacrossDao dao
 
 	static Client client
-	static final String INDEX_NAME1 = "twitter"
-	static final String INDEX_NAME2 = "media"
-	static final String TYPE_NAME1 = "1711"
-	static final String TYPE_NAME2 = "1710"
+	static final String INDEX_NAME1 = "myindex"
+	static final String TYPE_NAME1 = "mytype"
+	static final String TYPE_NAME2 = "mytype2"
 	static final String FIELD1_NAME = "articleId"
 	static final String FIELD2_NAME = "title"
 	static final String FIELD3_NAME = "body"
@@ -42,18 +39,16 @@ class TestApp {
 	void run() {
 		createClient()
 		deleteIndex(INDEX_NAME1)
-		deleteIndex(INDEX_NAME2)
 		createIndex(INDEX_NAME1)
-		createIndex(INDEX_NAME2)
 		createMapping(INDEX_NAME1, TYPE_NAME1)
-		createMapping(INDEX_NAME2, TYPE_NAME1)
+//		createMapping(INDEX_NAME1, TYPE_NAME2)
 		
 		def start = System.currentTimeMillis()
 		println "start add documents"
-		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
-//		addDocument("tb_article_search_twitter_1710", INDEX_NAME1, TYPE_NAME2)
-//		addDocument("tb_article_search_media_1711", INDEX_NAME2, TYPE_NAME1)
-//		addDocument("tb_article_search_media_1710", INDEX_NAME2, TYPE_NAME2)
+		addDocument("tb_article_search_twitter_1712", INDEX_NAME1, TYPE_NAME1)
+//		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME2)
+//		addDocument("tb_article_search_media_1712", INDEX_NAME2, TYPE_NAME1)
+//		addDocument("tb_article_search_media_1711", INDEX_NAME2, TYPE_NAME2)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 
@@ -78,37 +73,39 @@ class TestApp {
 	}
 
 	void deleteIndex(String indexName) {
-		client.admin().indices().prepareDelete(indexName).execute().actionGet()
-		client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
+		if (indexExists(indexName)) {
+			client.admin().indices().prepareDelete(indexName).execute().actionGet()
+			client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
+		}
 	}
 	void createMapping(String indexName, String typeName) {
-		// properties:{
-		// 	field1:{
-		//		type:string
-		// }, field2:{
-		// 		type:string
-		// }
-		//}
+		// myindex:{
+		//	mappings:{
+		//		mytype:{
+		//			properties:{
+		//				fieldName1:{
+		//					type:long, analyzer:keyword
 		def builder = JsonXContent.contentBuilder().
-				startObject().field("")
-				.startObject().field("properties")
-				.startObject()
-				.field(FIELD1_NAME)
-				.startObject().field("type", "long")
-				.endObject()
-				.field(FIELD2_NAME)
-				.startObject().field("type", "string").field("tokenizer", "whitespace")
-				.endObject()
-				.field(FIELD3_NAME)
-				.startObject().field("type", "string").field("tokenizer", "whitespace")
-				.endObject()
-				.field(FIELD4_NAME)
-				.startObject().field("type", "date").field("format", "yyyyMMddHHmmss")
-				.endObject()
-				.field(FIELD5_NAME)
-				.startObject().field("type", "string")
-				.endObject()
-				.endObject()
+				startObject().field(typeName)
+					.startObject().field("properties")
+						.startObject()
+							.field(FIELD1_NAME)
+								.startObject().field("type", "long")
+								.endObject()
+								.field(FIELD2_NAME)
+									.startObject().field("type", "string")
+									.endObject()
+								.field(FIELD3_NAME)
+									.startObject().field("type", "string")
+									.endObject()
+								.field(FIELD4_NAME)
+									.startObject().field("type", "date").field("format", "yyyyyMMddHHmmss")
+									.endObject()
+								.field(FIELD5_NAME)
+									.startObject().field("type", "string").field("analyzer", "keyword")
+									.endObject()
+						.endObject()
+					.endObject()
 				.endObject()
 		def response = client.admin().indices().preparePutMapping(indexName)
 				.setType(typeName).setSource(builder).execute().actionGet()
@@ -118,10 +115,10 @@ class TestApp {
 	}
 	
 	void addDocument(String tableName, String indexName, String typeName) {
-		def fetch = 10000
+		def fetch = 100
 		def start = 0
 		def end = start + fetch
-		def dest = 10000
+		def dest = 1000
 		while (start < dest) {
 			def startTime = System.currentTimeMillis()
 			def bulker = client.prepareBulk()
@@ -142,17 +139,5 @@ class TestApp {
 		}
 	}
 	static void updateDocument() {
-		//		client.prepareUpdate(INDEX_NAME, TYPE_NAME, "1").setScript(ScriptService.ScriptType.INLINE)
-	}
-	static void bulkOperation() {
-		def bulker = client.prepareBulk()
-		(1..700).each {
-			def id = String.valueOf(it)
-			def value = String.valueOf(it)
-			def ir = client.prepareIndex(INDEX_NAME1, TYPE_NAME1, id + "12345678910")
-					.setSource(FIELD1_NAME, value, FIELD2_NAME, value+ "12345678910")
-			bulker.add(ir)
-		}
-		bulker.execute().actionGet()
 	}
 }

@@ -19,21 +19,17 @@ import com.elasticsearch.client.entity.TableEntity
 @TypeChecked
 class DocumentInserter {
 	Client client
-	final String INDEX_NAME1 = "twitter"
-	final String INDEX_NAME2 = "media"
-	final String TYPE_NAME1 = "1711"
-	final String TYPE_NAME2 = "1710"
+	final String INDEX_NAME1 = "myindex"
+	final String TYPE_NAME1 = "mytype"
 	final String FIELD1_NAME = "articleId"
 	final String FIELD2_NAME = "title"
 	final String FIELD3_NAME = "body"
 	final String FIELD4_NAME = "createDate"
-	final String FIELD5_NAME = "siteType"
 	
 	private ApplicationContext context;
 	
 	@Autowired
 	private TapacrossDao dao
-
 
 	void run() {
 		this.context = new GenericXmlApplicationContext(
@@ -41,19 +37,14 @@ class DocumentInserter {
 		dao = context.getBean(TapacrossDao.class)
 		
 		createClient()
-		deleteIndex(INDEX_NAME1)
-		deleteIndex(INDEX_NAME2)
-		createIndex(INDEX_NAME1)
-		createIndex(INDEX_NAME2)
-		createMapping(INDEX_NAME1, TYPE_NAME1)
-		createMapping(INDEX_NAME2, TYPE_NAME1)
+		
+//		deleteIndex(INDEX_NAME1)
+//		createIndex(INDEX_NAME1)
+//		createMapping(INDEX_NAME1, TYPE_NAME1)
 		
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
-//		addDocument("tb_article_search_twitter_1710", INDEX_NAME1, TYPE_NAME2)
-//		addDocument("tb_article_search_media_1711", INDEX_NAME2, TYPE_NAME1)
-//		addDocument("tb_article_search_media_1710", INDEX_NAME2, TYPE_NAME2)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 
@@ -78,8 +69,10 @@ class DocumentInserter {
 	}
 
 	void deleteIndex(String indexName) {
-		client.admin().indices().prepareDelete(indexName).execute().actionGet()
-		client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
+		if (indexExists(indexName)) {
+			client.admin().indices().prepareDelete(indexName).execute().actionGet()
+			client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
+		}
 	}
 	void createMapping(String indexName, String typeName) {
 		// properties:{
@@ -90,25 +83,23 @@ class DocumentInserter {
 		// }
 		//}
 		def builder = JsonXContent.contentBuilder().
-				startObject().field("")
-				.startObject().field("properties")
-				.startObject()
-				.field(FIELD1_NAME)
-				.startObject().field("type", "long")
-				.endObject()
-				.field(FIELD2_NAME)
-				.startObject().field("type", "string").field("tokenizer", "whitespace")
-				.endObject()
-				.field(FIELD3_NAME)
-				.startObject().field("type", "string").field("tokenizer", "whitespace")
-				.endObject()
-				.field(FIELD4_NAME)
-				.startObject().field("type", "date").field("format", "yyyyMMddHHmmss")
-				.endObject()
-				.field(FIELD5_NAME)
-				.startObject().field("type", "string")
-				.endObject()
-				.endObject()
+				startObject().field(typeName)
+					.startObject().field("properties")
+						.startObject()
+							.field(FIELD1_NAME)
+								.startObject().field("type", "long")
+								.endObject()
+								.field(FIELD2_NAME)
+									.startObject().field("type", "string")
+									.endObject()
+								.field(FIELD3_NAME)
+									.startObject().field("type", "string")
+									.endObject()
+								.field(FIELD4_NAME)
+									.startObject().field("type", "date").field("format", "yyyyyMMddHHmmss")
+									.endObject()
+						.endObject()
+					.endObject()
 				.endObject()
 		def response = client.admin().indices().preparePutMapping(indexName)
 				.setType(typeName).setSource(builder).execute().actionGet()
@@ -119,9 +110,9 @@ class DocumentInserter {
 	
 	void addDocument(String tableName, String indexName, String typeName) {
 		def fetch = 10000
-		def start = 0
+		def start = 1
 		def end = start + fetch
-		def dest = 100000000
+		def dest = 200000000
 		while (start < dest) {
 			def startTime = System.currentTimeMillis()
 			def bulker = client.prepareBulk()
@@ -130,7 +121,7 @@ class DocumentInserter {
 				def ir = client.prepareIndex(indexName, typeName, it.seq.toString())
 				.setSource(FIELD1_NAME, it.articleId,
 					FIELD2_NAME, it.title, FIELD3_NAME, it.body,
-					FIELD4_NAME, it.createDate, FIELD5_NAME, it.siteType)
+					FIELD4_NAME, it.createDate)
 				bulker.add(ir)
 			}
 			bulker.execute().actionGet()
