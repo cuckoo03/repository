@@ -1,6 +1,8 @@
 package com.elasticsearch.client
 
-import groovy.transform.TypeChecked
+import java.util.concurrent.atomic.AtomicInteger
+
+import javax.sql.rowset.Joinable
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.client.Client
@@ -8,7 +10,6 @@ import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.ImmutableSettings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.common.xcontent.json.JsonXContent
-import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -16,10 +17,13 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import com.elasticsearch.client.dao.TapacrossDao
 import com.elasticsearch.client.entity.TableEntity
 
+import groovy.transform.TypeChecked
+
 @TypeChecked
 class DocumentInserter {
+	private def start
 	Client client
-	final String INDEX_NAME1 = "myindex"
+	final String INDEX_NAME1 = "twitter1711"
 	final String TYPE_NAME1 = "mytype"
 	final String FIELD1_NAME = "articleId"
 	final String FIELD2_NAME = "title"
@@ -44,16 +48,38 @@ class DocumentInserter {
 		
 		def start = System.currentTimeMillis()
 		println "start add documents"
-		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
+		
+		createThreads()
+		
+		sleep(1000 * 60 * 60 * 24)
+//		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
-
+	
+	int sequence = 53130001
+	void createThreads() {
+		32.times {
+			Thread.start {
+				while (true) {
+					addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
+				}
+			}
+		}
+	}
+	int makeSequence() {
+		def fetch = 10000
+		def end = sequence + fetch
+		sequence = end
+		
+		return end
+		
+	}
 	void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
 				.put("cluster.name", "elasticsearch").build();
 		def tmp = new TransportClient(s);
-		tmp.addTransportAddress(new InetSocketTransportAddress("210.122.10.31",
-				9300));
+		tmp.addTransportAddress(new InetSocketTransportAddress(
+			"121.254.177.193", 9300));
 		client = tmp;
 	}
 	void createIndex(String indexName) {
@@ -110,10 +136,19 @@ class DocumentInserter {
 	
 	void addDocument(String tableName, String indexName, String typeName) {
 		def fetch = 10000
-		def start = 1
-		def end = start + fetch
-		def dest = 200000000
-		while (start < dest) {
+		def start = 0
+		def end = 0
+		synchronized(this) {
+			start = sequence
+			end = makeSequence()
+		}
+		def dest = 180000000
+		if (start >= dest) {
+			println "dest:$start"
+			System.exit(1)
+		}
+		
+		if (start < dest) {
 			def startTime = System.currentTimeMillis()
 			def bulker = client.prepareBulk()
 			def result = dao.selectArticles(start, end, tableName)
@@ -128,8 +163,8 @@ class DocumentInserter {
 			
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
 			println "add $tableName, start:$start, end:$end, elapsed:$elasped"
-			start = end + 1
-			end = end + fetch
+//			start = end + 1
+//			end = end + fetch
 		}
 	}
 	static void updateDocument() {

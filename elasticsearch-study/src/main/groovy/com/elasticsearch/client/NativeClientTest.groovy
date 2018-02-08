@@ -22,7 +22,7 @@ import groovy.transform.TypeChecked
 @TypeChecked
 class NativeClientTest {
 	Client client
-	final String INDEX_NAME = "myindex2"
+	final String INDEX_NAME = "myindex4"
 	final String TYPE_NAME = "mytype"
 	final String FIELD1_NAME = "articleId"
 	final String FIELD3_NAME = "body"
@@ -115,7 +115,7 @@ class NativeClientTest {
 			def value = String.valueOf(it)
 			def ir = client.prepareIndex(INDEX_NAME, TYPE_NAME, id + "")
 					.setSource(FIELD1_NAME, value, 
-						FIELD3_NAME, "전주비빕밥")
+						FIELD3_NAME, "이것은 루씬한국어 형태소 분석기 플러그인 입니다 엘사가오나시")
 			bulker.add(ir)
 		}
 		bulker.execute().actionGet()
