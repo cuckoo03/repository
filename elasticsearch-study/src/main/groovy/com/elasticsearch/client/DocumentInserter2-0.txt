@@ -15,16 +15,11 @@ import com.elasticsearch.client.entity.TableEntity
 
 import groovy.transform.TypeChecked
 
-/**
- * 순차적으로 과거 월 색인을 만드는 프로그램
- * @author admin
- *
- */
 @TypeChecked
 class DocumentInserter {
 	private def start
 	Client client
-	final String INDEX_NAME1 = "twitter1706"
+	final String INDEX_NAME1 = "twitter1711"
 	final String TYPE_NAME1 = "mytype"
 	final String FIELD1_NAME = "articleId"
 	final String FIELD2_NAME = "title"
@@ -50,24 +45,19 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-		createThreads("tb_article_search_twitter_1706")
+		createThreads()
 		
 		sleep(1000 * 60 * 60 * 24)
-		//addDocument("tb_article_search_twitter_1709", INDEX_NAME1, TYPE_NAME1)
+//		addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 	
 	int sequence = 1
-	void createThreads(String tableName) {
-		12.times {
+	void createThreads() {
+		24.times {
 			Thread.start {
 				while (true) {
-					try {
-						addDocument(tableName, INDEX_NAME1, TYPE_NAME1)
-					} catch (Exception e) {
-						e.printStackTrace()
-						sleep(5 * 1000)
-					}
+					addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
 				}
 			}
 		}
@@ -78,14 +68,15 @@ class DocumentInserter {
 		sequence = end
 		
 		return end
+		
 	}
 	void createClient() {
 		def s = Settings.settingsBuilder()
-				.put("cluster.name", "elasticsearch").build();
+				.put("cluster.name", "es-2.0").build();
 		def tmp = TransportClient.builder().settings(s).build();
 		tmp.addTransportAddress(
 			new InetSocketTransportAddress(
-				new InetSocketAddress("121.254.177.193", 9300)));
+				new InetSocketAddress("210.122.10.62", 9300)));
 		client = tmp;
 	}
 	void createIndex(String indexName) {
@@ -148,7 +139,7 @@ class DocumentInserter {
 			start = sequence
 			end = makeSequence()
 		}
-		def dest = 10000000
+		def dest = 180000000
 		if (start >= dest) {
 			println "dest:$start"
 			System.exit(1)
@@ -159,18 +150,13 @@ class DocumentInserter {
 			def bulker = client.prepareBulk()
 			def result = dao.selectArticles(start, end, tableName)
 			result.each { TableEntity it ->
-//				def currentIndexName = "twitter" + it.createDate.substring(2, 8)
 				def ir = client.prepareIndex(indexName, typeName, it.seq.toString())
 				.setSource(FIELD1_NAME, it.articleId,
-					FIELD2_NAME, "", FIELD3_NAME, it.body,
+					FIELD2_NAME, it.title, FIELD3_NAME, it.body,
 					FIELD4_NAME, it.createDate)
 				bulker.add(ir)
 			}
-			try {
-				bulker.execute().actionGet()
-			} catch (Exception e) {
-				e.printStackTrace()
-			}
+			bulker.execute().actionGet()
 			
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
 			println "add $tableName, start:$start, end:$end, elapsed:$elasped"
