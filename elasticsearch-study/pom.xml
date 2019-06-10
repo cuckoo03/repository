@@ -72,6 +72,7 @@
 		<!-- es1.4와 groovy2.3.10 사용시 com.vividsolutions.jts.geom.Coordinate class not found error 발생 -->
 		<!-- 아래와  같은 라이브러리 추가해야함 -->
 		<!-- https://github.com/elastic/elasticsearch/issues/9891 -->
+		<!-- 
 		<dependency>
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
@@ -83,6 +84,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		 -->
 		<!-- logging -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -100,8 +102,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${springframework.version}</version>
-			<!-- <exclusions> <exclusion> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 
-				</exclusion> </exclusions> -->
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -216,10 +222,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -266,6 +271,15 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 빌드시 테스트단계 통과 -->			
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-surefire-plugin</artifactId>
+		      <version>2.22.0</version>
+		      <configuration>
+		        <skipTests>true</skipTests>
+		      </configuration>
+		    </plugin>			
 		</plugins>
 	</build>
 </project>

@@ -24,18 +24,32 @@ import groovy.transform.TypeChecked
 class DocumentInserter {
 	private def start
 	Client client
-	final String INDEX_NAME1 = "twitter1706"
 	final String TYPE_NAME1 = "mytype"
 	final String FIELD1_NAME = "articleId"
 	final String FIELD2_NAME = "title"
 	final String FIELD3_NAME = "body"
 	final String FIELD4_NAME = "createDate"
 	
+	final String month = null
+	final int numThread = 0
+	final String host = null
+
 	private ApplicationContext context;
 	
 	@Autowired
 	private TapacrossDao dao
 
+	public DocumentInserter(List<String> args) {
+		if (args.size() <= 2) {
+			println "Usage:DocumentInserter month[yymm] numThread host"
+			System.exit(0)
+		} 	
+		
+		month = args[0]
+		numThread = args[1] as int
+		host = args[2]
+	}
+	
 	void run() {
 		this.context = new GenericXmlApplicationContext(
 			"classpath:spring/application-context.xml");
@@ -50,20 +64,20 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-		createThreads("tb_article_search_twitter_1706")
+		createThreads("tb_article_search_twitter_" + month)
 		
 		sleep(1000 * 60 * 60 * 24)
-		//addDocument("tb_article_search_twitter_1709", INDEX_NAME1, TYPE_NAME1)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 	
 	int sequence = 1
 	void createThreads(String tableName) {
-		12.times {
+		numThread.times {
 			Thread.start {
 				while (true) {
 					try {
-						addDocument(tableName, INDEX_NAME1, TYPE_NAME1)
+						addDocument(tableName, 
+							tableName.replace("tb_article_search_", ""), TYPE_NAME1)
 					} catch (Exception e) {
 						e.printStackTrace()
 						sleep(5 * 1000)
@@ -85,7 +99,7 @@ class DocumentInserter {
 		def tmp = TransportClient.builder().settings(s).build();
 		tmp.addTransportAddress(
 			new InetSocketTransportAddress(
-				new InetSocketAddress("121.254.177.193", 9300)));
+				new InetSocketAddress(host, 9300)));
 		client = tmp;
 	}
 	void createIndex(String indexName) {
@@ -148,7 +162,7 @@ class DocumentInserter {
 			start = sequence
 			end = makeSequence()
 		}
-		def dest = 10000000
+		def dest = 150000000
 		if (start >= dest) {
 			println "dest:$start"
 			System.exit(1)
@@ -159,7 +173,6 @@ class DocumentInserter {
 			def bulker = client.prepareBulk()
 			def result = dao.selectArticles(start, end, tableName)
 			result.each { TableEntity it ->
-//				def currentIndexName = "twitter" + it.createDate.substring(2, 8)
 				def ir = client.prepareIndex(indexName, typeName, it.seq.toString())
 				.setSource(FIELD1_NAME, it.articleId,
 					FIELD2_NAME, "", FIELD3_NAME, it.body,
@@ -170,12 +183,11 @@ class DocumentInserter {
 				bulker.execute().actionGet()
 			} catch (Exception e) {
 				e.printStackTrace()
+				sleep(3 * 1000)
 			}
 			
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
 			println "add $tableName, start:$start, end:$end, elapsed:$elasped"
-//			start = end + 1
-//			end = end + fetch
 		}
 	}
 	static void updateDocument() {
@@ -183,7 +195,7 @@ class DocumentInserter {
 	}
 	
 	static void main(args) {
-		def insert = new DocumentInserter()
+		def insert = new DocumentInserter(args as List<String>)
 		insert.run()
 	}
 }

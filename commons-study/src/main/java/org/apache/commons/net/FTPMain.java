@@ -22,8 +22,8 @@ public class FTPMain {
 		File f = null;
 		FileOutputStream fos = null;
 		try {
-			client.connect("127.0.0.1");
-			client.login("admin", "12341234");
+			client.connect("210.122.10.72");
+			client.login("hadoop", "tapaman");
 
 			FTPFile[] files = client.listDirectories();
 
