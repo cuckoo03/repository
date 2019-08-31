@@ -1,4 +1,4 @@
-package com.tapacross.sns.analyzer;
+package com.tapacross.sns.analyzer
 
 import java.io.IOException;
 import java.io.Reader;
@@ -8,7 +8,10 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
-public class TapacrossTokenizer extends Tokenizer {
+import groovy.transform.TypeChecked;
+
+@TypeChecked
+class MyTokenizer extends Tokenizer {
 	private int offset = 0, bufferIndex = 0, dataLen = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
@@ -20,13 +23,13 @@ public class TapacrossTokenizer extends Tokenizer {
 	private String[] tokens;
 	private String[] pos;
 	
-	protected TapacrossTokenizer(Reader input) {
+	protected MyTokenizer(Reader input) {
 		super(input);
 		offsetAtt = addAttribute(OffsetAttribute.class);
 		termAtt = addAttribute(CharTermAttribute.class);
 	}
 	
-	public TapacrossTokenizer(Reader input, String[] tokens, String[] pos) {
+	public MyTokenizer(Reader input, String[] tokens, String[] pos) {
 		super(input);
 		this.tokens = tokens;
 		this.pos = pos;
