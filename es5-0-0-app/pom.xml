@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.elasticsearch</groupId>
-  <artifactId>es5-study</artifactId>
+  <artifactId>es-5-0-analysis</artifactId>
   <version>5.0</version>
   <packaging>jar</packaging>
 
