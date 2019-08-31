@@ -22,13 +22,15 @@ import groovy.transform.TypeChecked
 @TypeChecked
 class DocumentInserter {
 	private def start
-	Client client
-	final String INDEX_NAME1 = "twitter1711"
-	final String TYPE_NAME1 = "mytype"
-	final String FIELD1_NAME = "articleId"
-	final String FIELD2_NAME = "title"
-	final String FIELD3_NAME = "body"
-	final String FIELD4_NAME = "createDate"
+	private Client client
+	
+	private final String TABLE_NAME = "tb_article_search_twitter_1711"
+	private final String INDEX_NAME1 = "twitter1711"
+	private final String TYPE_NAME1 = "mytype"
+	private final String FIELD1_NAME = "articleId"
+	private final String FIELD2_NAME = "title"
+	private final String FIELD3_NAME = "body"
+	private final String FIELD4_NAME = "createDate"
 	
 	private ApplicationContext context;
 	
@@ -56,12 +58,12 @@ class DocumentInserter {
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 	
-	int sequence = 53130001
+	int sequence = 1
 	void createThreads() {
 		32.times {
 			Thread.start {
 				while (true) {
-					addDocument("tb_article_search_twitter_1711", INDEX_NAME1, TYPE_NAME1)
+					addDocument(TABLE_NAME, INDEX_NAME1, TYPE_NAME1)
 				}
 			}
 		}
@@ -70,7 +72,6 @@ class DocumentInserter {
 		def fetch = 10000
 		def end = sequence + fetch
 		sequence = end
-		
 		return end
 		
 	}

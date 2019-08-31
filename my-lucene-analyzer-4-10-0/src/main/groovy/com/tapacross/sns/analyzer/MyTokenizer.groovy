@@ -139,7 +139,7 @@ class MyTokenizer extends Tokenizer {
 		// set final offset
 		int finalOffset = correctOffset(offset);
 		offsetAtt.setOffset(finalOffset, finalOffset);
-		System.out.println("end");
+//		System.out.println("end");
 	}
 	
 	@Override
@@ -149,11 +149,11 @@ class MyTokenizer extends Tokenizer {
 		offset = 0;
 		dataLen = 0;
 		tokenIndex = 0;
-		System.out.println("reset:" + input);
+//		System.out.println("reset:" + input);
 	}
 	
 	public void close() throws IOException {
 		super.close();
-		System.out.println("close:" + input);
+//		System.out.println("close:" + input);
 	}
 }

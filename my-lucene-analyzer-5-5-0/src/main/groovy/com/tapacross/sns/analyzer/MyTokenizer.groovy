@@ -1,13 +1,16 @@
-package com.tapacross.sns.analyzer;
+package com.tapacross.sns.analyzer
 
-import java.io.IOException;
+import java.io.IOException
 
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+import org.apache.lucene.analysis.Tokenizer
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
+import org.apache.lucene.analysis.tokenattributes.TypeAttribute
 
-public class TapacrossTokenizer extends Tokenizer {
+import groovy.transform.TypeChecked
+
+@TypeChecked
+class MyTokenizer extends Tokenizer {
 	private int offset = 0, bufferIndex = 0, dataLen = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
@@ -19,7 +22,7 @@ public class TapacrossTokenizer extends Tokenizer {
 	private String[] tokens;
 	private String[] pos;
 	
-	public TapacrossTokenizer(String[] tokens, String[] pos) {
+	public MyTokenizer(String[] tokens, String[] pos) {
 		super();
 		this.tokens = tokens;
 		this.pos = pos;
@@ -129,7 +132,7 @@ public class TapacrossTokenizer extends Tokenizer {
 		// set final offset
 		int finalOffset = correctOffset(offset);
 		offsetAtt.setOffset(finalOffset, finalOffset);
-		System.out.println("end");
+//		System.out.println("end");
 	}
 	
 	@Override
@@ -139,11 +142,11 @@ public class TapacrossTokenizer extends Tokenizer {
 		offset = 0;
 		dataLen = 0;
 		tokenIndex = 0;
-		System.out.println("reset:" + input);
+//		System.out.println("reset:" + input);
 	}
 	
 	public void close() throws IOException {
 		super.close();
-		System.out.println("close:" + input);
+//		System.out.println("close:" + input);
 	}
 }
