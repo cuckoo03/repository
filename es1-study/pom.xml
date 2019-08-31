@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.elasticsearch</groupId>
-  <artifactId>es1-study</artifactId>
+  <artifactId>es-1-4-0-app</artifactId>
   <version>1.4</version>
   <packaging>jar</packaging>
 
@@ -22,13 +22,15 @@
 			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
 		</repository>
 		<repository>
-			<id>tapacross</id>
-			<url>http://121.254.177.182:8081/nexus/content/repositories/tapacross</url>
-		</repository>
-		<repository>
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+		<!-- 
+		<repository>
+			<id>tapacross</id>
+			<url>http://121.254.177.182:8081/nexus/content/repositories/tapacross</url>
+		</repository>
+		 -->
 	</repositories>
 
 	<profiles>
@@ -159,11 +161,13 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>odjbc5_g</artifactId>
 			<version>11.2.0.4</version>
 		</dependency>
+		 -->
 	</dependencies>
 
 	<build>
