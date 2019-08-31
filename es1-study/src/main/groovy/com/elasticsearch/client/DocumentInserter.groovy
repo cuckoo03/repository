@@ -31,6 +31,20 @@ class DocumentInserter {
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
 	private final String FIELD4_NAME = "createDate"
+	private final String ELASTIC_SEARCH_IP = "121.254.177.193"
+	private final int ELASTIC_SEARCH_PORT = 9300
+	private final String CLUSTER_NAME_FIELD = "cluster_name"
+	
+	private final String CLUSTER_NAME = "elasticsearch"
+	private final String PROPERTIES_FIELD_NAME = "properties"
+	private final String TYPE_FIELD_NAME = "type"
+	private final String FORMAT_FIELD_NAME = "format"
+
+	private final String LONG_FIELD_TYPE = "long"
+	private final String STRING_FIELD_TYPE = "string"
+	private final String DATE_FIELD_TYPE = "date"
+	
+	private final String FORMAT_FIELD_VALUE = "yyyyyMMddHHmmss"
 	
 	private ApplicationContext context;
 	
@@ -60,7 +74,7 @@ class DocumentInserter {
 	
 	int sequence = 1
 	void createThreads() {
-		32.times {
+		24.times {
 			Thread.start {
 				while (true) {
 					addDocument(TABLE_NAME, INDEX_NAME1, TYPE_NAME1)
@@ -77,10 +91,10 @@ class DocumentInserter {
 	}
 	void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
-				.put("cluster.name", "elasticsearch").build();
+				.put(CLUSTER_NAME_FIELD, CLUSTER_NAME).build();
 		def tmp = new TransportClient(s);
 		tmp.addTransportAddress(new InetSocketTransportAddress(
-			"121.254.177.193", 9300));
+			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 	}
 	void createIndex(String indexName) {
@@ -111,19 +125,19 @@ class DocumentInserter {
 		//}
 		def builder = JsonXContent.contentBuilder().
 				startObject().field(typeName)
-					.startObject().field("properties")
+					.startObject().field(PROPERTIES_FIELD_NAME)
 						.startObject()
 							.field(FIELD1_NAME)
-								.startObject().field("type", "long")
+								.startObject().field(TYPE_FIELD_NAME, LONG_FIELD_TYPE)
 								.endObject()
 								.field(FIELD2_NAME)
-									.startObject().field("type", "string")
+									.startObject().field(TYPE_FIELD_NAME, STRING_FIELD_TYPE)
 									.endObject()
 								.field(FIELD3_NAME)
-									.startObject().field("type", "string")
+									.startObject().field(TYPE_FIELD_NAME, STRING_FIELD_TYPE)
 									.endObject()
 								.field(FIELD4_NAME)
-									.startObject().field("type", "date").field("format", "yyyyyMMddHHmmss")
+									.startObject().field(TYPE_FIELD_NAME, DATE_FIELD_TYPE).field(FORMAT_FIELD_NAME, FORMAT_FIELD_VALUE)
 									.endObject()
 						.endObject()
 					.endObject()
