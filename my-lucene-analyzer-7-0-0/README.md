@@ -1,0 +1,9 @@
+elasticsearch6.0.0=lucene7.0.1
+elasticsearch6.1.0=lucene7
+elasticsearch6.2.0=lucene7
+elasticsearch6.3.0=lucene7
+elasticsearch6.4.0=lucene7
+elasticsearch6.5.0=lucene7
+elasticsearch6.6.0=lucene7
+elasticsearch6.7.0=lucene7
+elasticsearch6.8.0=lucene7
