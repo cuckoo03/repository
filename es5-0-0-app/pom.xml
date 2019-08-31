@@ -7,7 +7,7 @@
   <version>5.0</version>
   <packaging>jar</packaging>
 
-  <name>es5-study</name>
+  <name>es-5-0-0-analysisy</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -21,10 +21,12 @@
 			<id>jboss-3rd-party-releases</id>
 			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
 		</repository>
+		<!-- 
 		<repository>
 			<id>tapacross</id>
 			<url>http://121.254.177.182:8081/nexus/content/repositories/tapacross</url>
 		</repository>
+		 -->
 		<repository>
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
@@ -194,11 +196,13 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>odjbc5_g</artifactId>
 			<version>11.2.0.4</version>
 		</dependency>
+		 -->
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
