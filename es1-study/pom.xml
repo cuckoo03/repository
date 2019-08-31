@@ -3,16 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.elasticsearch</groupId>
-  <artifactId>es-1-4-0-analysis</artifactId>
+  <artifactId>es-1-0-0-analysis</artifactId>
   <version>1.4</version>
   <packaging>jar</packaging>
 
-  <name>es1-study</name>
+  <name>es-1-0-0-analysisy</name>
   <url>http://maven.apache.org</url>
 
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<es.version>1.4.0</es.version>
+		<es.version>1.0.0</es.version>
 		<springframework.version>4.0.1.RELEASE</springframework.version>
 	</properties>
 
