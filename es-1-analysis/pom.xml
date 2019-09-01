@@ -4,7 +4,7 @@
 
   <groupId>com.elasticsearch</groupId>
   <artifactId>es-1-0-0-analysis</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <name>es-1-0-0-analysisy</name>
