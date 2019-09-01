@@ -1,4 +1,4 @@
-package com.elasticsearch.client;
+package com.elasticsearch.index;
 
 /**
  * Hello world!

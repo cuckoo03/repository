@@ -32,27 +32,6 @@
 		</repository>
 	</repositories>
 
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<environment>dev</environment>
-			</properties>
-		</profile>
-		<profile>
-			<id>real</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<environment>real</environment>
-			</properties>
-		</profile>
-	</profiles>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -64,12 +43,13 @@
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 			<version>${es.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.3.11</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- es1.4와 groovy2.3.10 사용시 com.vividsolutions.jts.geom.Coordinate class not found error 발생 -->
 		<!-- 아래와  같은 라이브러리 추가해야함 -->
@@ -78,6 +58,7 @@
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
 			<version>1.13</version>
+			<scope>test</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>xerces</groupId>
@@ -85,91 +66,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- logging -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<!-- jdk1.5 -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<!-- spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${springframework.version}</version>
-			<!-- <exclusions> <exclusion> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 
-				</exclusion> </exclusions> -->
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<!-- mybatis -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle.ojdbc</groupId>
-			<artifactId>odjbc5_g</artifactId>
-			<version>11.2.0.4</version>
-		</dependency>
 		<dependency>
 			<groupId>com.tapacross.sns.analyzer</groupId>
 			<artifactId>my-lucene-analyzer-4</artifactId>
 			<version>4.6.1</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
@@ -184,41 +85,9 @@
 				</excludes>
 			</resource>
 			<resource>
-				<directory>src/main/resources/${environment}</directory>
+				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-		<pluginManagement>
-			<plugins>
-				<!-- groovy classes를 생성하기 위한 플러그인 -->
-				<!-- http://groovy.codehaus.org/Groovy-Eclipse+compiler+plugin+for+Maven -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
-					<configuration>
-						<compilerId>groovy-eclipse-compiler</compilerId>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.codehaus.groovy</groupId>
-							<artifactId>groovy-eclipse-compiler</artifactId>
-							<version>2.9.0-01</version>
-							<exclusions>
-								<exclusion>
-									<groupId>org.codehaus.groovy</groupId>
-									<artifactId>groovy-eclipse-batch</artifactId>
-								</exclusion>
-							</exclusions>
-						</dependency>
-						<dependency>
-							<groupId>org.codehaus.groovy</groupId>
-							<artifactId>groovy-eclipse-batch</artifactId>
-							<version>2.3.4-01</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -230,7 +99,26 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
+	      <plugin>
+	        <artifactId>maven-assembly-plugin</artifactId>
+	        <version>2.3</version>
+	        <configuration>
+	          <appendAssemblyId>false</appendAssemblyId>
+	          <outputDirectory>${project.build.directory}/releases/</outputDirectory>
+	          <descriptors>
+	            <descriptor>${basedir}/src/main/resources/assemblies/plugin.xml</descriptor>
+	          </descriptors>
+	        </configuration>
+	        <executions>
+	          <execution>
+	            <phase>package</phase>
+	            <goals>
+	              <goal>single</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	      </plugin>
+	      <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.1</version>
@@ -273,25 +161,6 @@
 					</execution>
 				</executions>
 			</plugin>
-	      <plugin>
-	        <artifactId>maven-assembly-plugin</artifactId>
-	        <version>2.3</version>
-	        <configuration>
-	          <appendAssemblyId>false</appendAssemblyId>
-	          <outputDirectory>${project.build.directory}/releases/</outputDirectory>
-	          <descriptors>
-	            <descriptor>${basedir}/src/main/resources/assemblies/plugin.xml</descriptor>
-	          </descriptors>
-	        </configuration>
-	        <executions>
-	          <execution>
-	            <phase>package</phase>
-	            <goals>
-	              <goal>single</goal>
-	            </goals>
-	          </execution>
-	        </executions>
-	      </plugin>
 		</plugins>
 	</build>
 </project>

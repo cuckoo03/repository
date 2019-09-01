@@ -1,4 +1,4 @@
-package com.elasticsearch.es1_study;
+package com.elasticsearch;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

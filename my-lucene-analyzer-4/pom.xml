@@ -7,7 +7,7 @@
 	<version>4.6.1</version>
 	<packaging>jar</packaging>
 
-	<name>my-lucene-analyzer-4-6-1</name>
+	<name>my-lucene-analyzer-4</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -33,14 +33,17 @@
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.3.11</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- es1.4와 groovy2.3.10 사용시 com.vividsolutions.jts.geom.Coordinate class not found error 발생 -->
 		<!-- 아래와  같은 라이브러리 추가해야함 -->
 		<!-- https://github.com/elastic/elasticsearch/issues/9891 -->
+		<!-- 
 		<dependency>
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
 			<version>1.13</version>
+			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>xerces</groupId>
@@ -48,18 +51,19 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		 -->
 		<!-- 4.1.0~4.10.0 정상 테스트 -->
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
 			<version>${lucene.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-analyzers-common</artifactId>
 			<version>${lucene.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -118,49 +122,6 @@
 					<target>1.7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.handlers</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.schemas</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass></mainClass>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-							</transformers>
-							<!-- remove manifest signature files -->
-							<!-- http://devday.tistory.com/entry/Exception-in-thread-main-javalangSecurityException-Invalid-signature-file-digest-for-Manifest-main-attributes -->
-							<filters>
-								<filter>
-									<artifact>*:*</artifact>
-									<excludes>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-							</filters>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

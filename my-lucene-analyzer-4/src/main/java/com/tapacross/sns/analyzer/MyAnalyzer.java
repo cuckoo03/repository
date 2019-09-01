@@ -1,14 +1,11 @@
-package com.tapacross.sns.analyzer
-
-import groovy.transform.TypeChecked;
+package com.tapacross.sns.analyzer;
 
 import java.io.Reader;
 
-import org.apache.lucene.analysis.Analyzer
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents;
 
-@TypeChecked
-class MyAnalyzer extends Analyzer {
+public class MyAnalyzer extends Analyzer {
 	private String[] tokens;
 	private String[] pos;
 
