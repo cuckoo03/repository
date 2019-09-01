@@ -16,6 +16,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.elasticsearch.client.dao.TapacrossDao
 import com.elasticsearch.client.entity.TableEntity
+import com.tapacross.sns.analyzer.MyAnalyzer
 
 import groovy.transform.TypeChecked
 
@@ -24,17 +25,16 @@ class DocumentInserter {
 	private def start
 	private Client client
 	
-	private final String TABLE_NAME = "tb_article_search_twitter_1711"
-	private final String INDEX_NAME1 = "twitter1711"
+	private final String TABLE_NAME = "tb_article_search_twitter_1908"
+	private final String INDEX_NAME1 = "twitter_1908"
 	private final String TYPE_NAME1 = "mytype"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
 	private final String FIELD4_NAME = "createDate"
-	private final String ELASTIC_SEARCH_IP = "121.254.177.193"
+	private final String ELASTIC_SEARCH_IP = "220.230.124.211"
 	private final int ELASTIC_SEARCH_PORT = 9300
-	private final String CLUSTER_NAME_FIELD = "cluster_name"
-	
+	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
 	private final String PROPERTIES_FIELD_NAME = "properties"
 	private final String TYPE_FIELD_NAME = "type"
@@ -74,7 +74,7 @@ class DocumentInserter {
 	
 	int sequence = 1
 	void createThreads() {
-		24.times {
+		1.times {
 			Thread.start {
 				while (true) {
 					addDocument(TABLE_NAME, INDEX_NAME1, TYPE_NAME1)
@@ -91,7 +91,8 @@ class DocumentInserter {
 	}
 	void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
-				.put(CLUSTER_NAME_FIELD, CLUSTER_NAME).build();
+				.put(CLUSTER_NAME_FIELD, CLUSTER_NAME)
+				.build();
 		def tmp = new TransportClient(s);
 		tmp.addTransportAddress(new InetSocketTransportAddress(
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
