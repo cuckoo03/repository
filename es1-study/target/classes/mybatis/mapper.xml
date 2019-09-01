@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sql.resources.dao">
+	<select id="selectArticles" parameterType="hashmap" 
+		resultType="Article">
+		select  
+		SEQ as seq,
+		ARTICLE_ID as articleId
+		,SITE_ID_OLD as siteIdOld,WRITER_ID as writerId,CRAWL_DATE as crawlDate,
+		TITLE as title,BODY as  body,RT as rt,REPLY_ID as replyId, 
+		REPLY_WRITER_ID as replyWriterId,
+		RE as re,
+		ADDRESS as address,LAT as lat,LNG as lng,CREATE_DATE as createDate,
+		SITE_TYPE as siteType, VIA_URL as viaUrl,
+		ADDRESS_STATUS as addressStatus,MENTION as mention,
+		ARTICLE_ID_OLD as articleIdOld,
+		URL as url, REPUTATION_TYPE as reputationType,
+		SITE_SUB_TYPE as siteSubType, CONTENT_ID as contentId, ADDRESS2 as addrees2,
+		SITE_ID as siteId, SITE_CODE as siteCode,
+		WRITER_NAME as writerName,COLLECTED_BY as collectedBy,
+		RT_COUNT as rtCount,
+		FOLLOWER_COUNT as followerCount, SITE_NAME as siteName, PICTURE as picture,
+		SCREEN_NAME as screenName,SITE_CATEGORY as siteCategory, 
+		COMMENT_COUNT as commentCount
+		from ${tableName}
+		WHERE 1=1 AND seq BETWEEN #{startNum} AND #{endNum}
+	</select>
+</mapper>
