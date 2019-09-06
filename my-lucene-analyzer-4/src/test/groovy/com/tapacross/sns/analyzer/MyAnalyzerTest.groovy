@@ -34,28 +34,22 @@ import org.junit.Test
 @TypeChecked
 class MyAnalyzerTest {
 	@Test
-	@Ignore
 	public void testAnalyze() throws IOException {
 		String text = "버튼을 이용하여 분석식에"
 
-		String[] tokens = ["버튼", "을", "이용하", "여", "분석", "식에"]
-		String[] pos = ["NN", "PP", "NN", "XX", "NN", "XX"]
-
 		def analyzer = new MyAnalyzer()
-		analyzer.setTokens(tokens)
-		analyzer.setpos(pos)
 		// parse 1
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
 		// http://www.hankcs.com/program/java/lucene-4-6-1-java-lang-illegalstateexception-tokenstream-contract-violation.html
-		stream.reset()
+//		stream.reset()
 		printTerms(stream)
-		stream.close()
+//		stream.close()
 
 		// parse 2
 		stream = analyzer.tokenStream("f", new StringReader(text))
-		stream.reset()
+//		stream.reset()
 		printTerms(stream)
-		stream.close()
+//		stream.close()
 
 		repeat(analyzer, text)
 
@@ -63,15 +57,11 @@ class MyAnalyzerTest {
 	}
 
 	@Test
+	@Ignore
 	public void testIndex() throws IOException {
 		String text = "버튼을 이용하여 분석식에"
 		
-		String[] tokens = ["버튼", "을", "이용하", "여", "분석", "식에"]
-		String[] pos = ["NN", "PP", "NN", "XX", "NN", "XX"]
-
 		def analyzer = new MyAnalyzer()
-		analyzer.setTokens(tokens)
-		analyzer.setpos(pos)
 		
 		Directory dir = new RAMDirectory()
 //		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41)

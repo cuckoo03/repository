@@ -34,7 +34,7 @@ class MyTokenizer extends Tokenizer {
 
 	@Override
 	public final boolean incrementToken() throws IOException {
-//		System.out.println("incrementToken:");
+		System.out.println("incrementToken:");
 		clearAttributes();
 		int length = 0;
 		int start = bufferIndex;
