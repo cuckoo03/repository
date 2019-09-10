@@ -1,8 +1,11 @@
 package com.elasticsearch.index.analysis;
 
+import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 
 import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.core.WhitespaceTokenizer;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
@@ -11,6 +14,7 @@ import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
 import org.elasticsearch.index.settings.IndexSettings;
 
 import com.tapacross.sns.analyzer.MyTokenizer;
+import com.tapacross.sns.analyzer.MyTokenizerOK;
 
 public class MyTokenizerFactory extends AbstractTokenizerFactory {
 	@Inject
@@ -20,6 +24,25 @@ public class MyTokenizerFactory extends AbstractTokenizerFactory {
 
 	@Override
     public Tokenizer create(Reader reader) {
-        return new MyTokenizer(reader);
+		/*
+		String s = "";
+		Reader reader2 = null;
+		try {
+			s = readerToString(reader);
+			reader2 = new StringReader(s);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+//        return new MyTokenizer(reader2, s);
+//        return new WhitespaceTokenizer(reader);
+        return new MyTokenizerOK(reader);
     }
+	
+	private String readerToString(Reader reader) throws IOException {
+		char[] buffer = new char[4096];
+		int charsRead = reader.read(buffer);
+		String text = new String(buffer, 0, charsRead);
+		return text;
+	}
 }

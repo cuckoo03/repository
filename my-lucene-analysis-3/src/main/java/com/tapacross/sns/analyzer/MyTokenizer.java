@@ -55,22 +55,22 @@ public class MyTokenizer extends Tokenizer {
 		
 		log.info("MyTokenizer constructor1");
 		
-		adm.setOnlineEngineAddress("121.254.177.165:2012");
-		MorphemeResult result = new MorphemeResult();
+//		adm.setOnlineEngineAddress("121.254.177.165:2012");
+//		MorphemeResult result = new MorphemeResult();
 		try {
-			readerString = readerToString(input);
-			result = adm.getMorpheme(readerString);
+//			readerString = readerToString(input);
+//			result = adm.getMorpheme(readerString);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private String readerString = null;
-
 	@Override
 	public final boolean incrementToken() throws IOException {
 		System.out.println("incrementToken");
 		clearAttributes();
+		String word = "";
+		String tag = "";
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
@@ -113,10 +113,8 @@ public class MyTokenizer extends Tokenizer {
 		return true;
 	}
 	
-	private String word = "";
-	private String tag = "";
+	
 	protected boolean isTokenChar(char c) {
-		System.out.println("isTokenChar:"+c);
 		return !Character.isWhitespace(c);
 	}
 
@@ -129,9 +127,6 @@ public class MyTokenizer extends Tokenizer {
 	public final void end() throws IOException {
 		super.end();
 		System.out.println("end");
-		// set final offset
-		int finalOffset = correctOffset(offset);
-		offsetAtt.setOffset(finalOffset, finalOffset);
 	}
 	
 	@Override
@@ -141,20 +136,11 @@ public class MyTokenizer extends Tokenizer {
 		bufferIndex = 0;
 		offset = 0;
 		dataLen = 0;
-		
-		this.input = new StringReader(readerString); 
 	}
 	
 	public void close() throws IOException {
-//		super.close();
+		super.close();
 		System.out.println("close");
-		this.input = null;
 	}
 	
-	private String readerToString(Reader reader) throws IOException {
-		char[] buffer = new char[4096];
-		int charsRead = reader.read(buffer);
-		String text = new String(buffer, 0, charsRead);
-		return text;
-	}
 }

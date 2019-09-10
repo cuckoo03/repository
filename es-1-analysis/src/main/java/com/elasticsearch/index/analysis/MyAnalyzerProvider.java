@@ -13,6 +13,7 @@ import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
 import org.elasticsearch.index.settings.IndexSettings;
 
 import com.tapacross.sns.analyzer.MyAnalyzer;
+import com.tapacross.sns.analyzer.MyGlobalReuseStrategy;
 
 public class MyAnalyzerProvider extends AbstractIndexAnalyzerProvider<MyAnalyzer> {
 	private final MyAnalyzer analyzer;

@@ -68,7 +68,13 @@ class DocumentInserter {
 		
 //		createThreads()
 		
-		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title", "버튼을 이용하여 분석식에", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "a b c", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 2, "2", "title2", "a b c", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 3, "3", "title3", "a b c", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 4, "4", "title4", "a b c", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 5, "5", "title5", "a b c", "2019090300000")
+		System.exit(1)
+		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}

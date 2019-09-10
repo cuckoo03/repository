@@ -19,7 +19,7 @@ import com.tapacross.sns.analyzer.MyAnalyzer;
 public class AppTest {
 	@Test
 	public void test() throws IOException {
-		String[] array = new String[]{"버튼 이용", "버튼 사용", "버튼 유즈"};
+		String[] array = new String[]{"한글 이상a", "한글 이상b", "한글 이상c"};
 		Analyzer analyzer = new MyAnalyzer();
 		// parse 1
 		TokenStream stream = null;

@@ -35,23 +35,32 @@ import org.junit.Test
 class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "버튼을 이용하여 분석식에"
+		String text = "한글 이상a"
 
 		def analyzer = new MyAnalyzer()
-		// parse 1
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
 		// http://www.hankcs.com/program/java/lucene-4-6-1-java-lang-illegalstateexception-tokenstream-contract-violation.html
-//		stream.reset()
+		stream.reset()
 		printTerms(stream)
-//		stream.close()
+		stream.close()
+		System.out.println("------------");
 
-		// parse 2
+		text = "한글 이상b"
 		stream = analyzer.tokenStream("f", new StringReader(text))
-//		stream.reset()
+		stream.reset()
 		printTerms(stream)
-//		stream.close()
+		stream.close()
 
-		repeat(analyzer, text)
+		// parse 3
+		/*
+		text = "한글 이상c"
+		stream = analyzer.tokenStream("f", new StringReader(text))
+		stream.reset()
+		printTerms(stream)
+		stream.close()
+		*/
+		
+//		repeat(analyzer, text)
 
 		analyzer.close()
 	}
@@ -87,23 +96,23 @@ class MyAnalyzerTest {
 	}
 	
 	private void printTerms(TokenStream stream) throws IOException {
-		CharTermAttribute term = stream.addAttribute(CharTermAttribute.class)
-		PositionIncrementAttribute posIncr = stream.addAttribute(PositionIncrementAttribute.class)
-		OffsetAttribute offset = stream.addAttribute(OffsetAttribute.class)
-		TypeAttribute type = stream.addAttribute(TypeAttribute.class)
-		int position = 0
+		CharTermAttribute term = stream.addAttribute(CharTermAttribute.class);
+		PositionIncrementAttribute posIncr = stream.addAttribute(PositionIncrementAttribute.class);
+		OffsetAttribute offset = stream.addAttribute(OffsetAttribute.class);
+		TypeAttribute type = stream.addAttribute(TypeAttribute.class);
+		int position = 0;
 
 		while (stream.incrementToken()) {
-			int increment = posIncr.getPositionIncrement()
+			int increment = posIncr.getPositionIncrement();
 			if (increment > 0) {
-				position = position + increment
-				System.out.print(position + ": ")
+				position = position + increment;
+				System.out.print(position + ": ");
 			}
 
 			System.out
-					.print(term.toString() + " " + offset.startOffset() + "->" + offset.endOffset() + " " + type.type())
-			System.out.println()
-			System.out.println()
+					.print(term.toString() + " " + offset.startOffset() + "->" + offset.endOffset() + " " + type.type());
+			System.out.println();
+			System.out.println();
 		}
 	}
 
