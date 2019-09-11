@@ -17,7 +17,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.elasticsearch.client.dao.TapacrossDao
 import com.elasticsearch.client.entity.TableEntity
-import com.tapacross.sns.analyzer.MyAnalyzer
+import com.tapacross.sns.analyzer.MyAnalyzer2
 
 import groovy.transform.TypeChecked
 

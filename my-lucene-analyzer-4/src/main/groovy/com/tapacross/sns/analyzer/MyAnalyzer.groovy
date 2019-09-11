@@ -9,7 +9,7 @@ import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
 import groovy.transform.TypeChecked
 
 @TypeChecked
-class GMyAnalyzer extends Analyzer {
+class MyAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
 		String s = "";
@@ -21,7 +21,7 @@ class GMyAnalyzer extends Analyzer {
 			e.printStackTrace();
 		}
 		
-		return new TokenStreamComponents(new MyTokenizer(reader2, s));
+		return new TokenStreamComponents(new MyTokenizer2(reader2, s));
 //		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}

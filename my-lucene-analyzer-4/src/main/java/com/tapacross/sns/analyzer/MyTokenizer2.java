@@ -1,18 +1,39 @@
-package com.tapacross.sns.analyzer
-import org.apache.lucene.analysis.Tokenizer
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute
+package com.tapacross.sns.analyzer;
 
-import com.tapacross.ise.MorphemeResult
-import com.tapacross.service.AdminDataManager
+import java.io.IOException;
+import java.io.Reader;
 
-import groovy.transform.TypeChecked
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
+import com.tapacross.ise.MorphemeResult;
+import com.tapacross.service.AdminDataManager;
 
-
-@TypeChecked
-class MyGTokenizer extends Tokenizer {
+/**
+ * 메서드 실행순서
+ * 입력테스트=버튼 입력
+ * -constructor
+ * -reset
+ * -incrementToken
+ * --isTokenChar:버
+ * --isTokenChar:튼
+ * --isTokenChar:
+ * -incrementToken
+ * --isTokenChar:입
+ * --isTokenChar:력
+ * -close
+ * 
+ * 토큰결과
+ * 입력:한글A
+ * 출력:
+ * 한글 1->3
+ * A 3->4
+ * @author admin
+ *
+ */
+public class MyTokenizer2 extends Tokenizer {
 	private int offset, bufferIndex = 0, dataLen = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
@@ -26,7 +47,10 @@ class MyGTokenizer extends Tokenizer {
 	private String[] pos;
 	private int tokenIndex = 0;
 	private String s;
-	public MyGTokenizer(Reader input, String s) {
+	public MyTokenizer2(Reader input) {
+		super(input);
+	}
+	public MyTokenizer2(Reader input, String s) {
 		super(input);
 		this.s = s;
 		System.out.println("MyTokenizer constructor");
@@ -74,7 +98,7 @@ class MyGTokenizer extends Tokenizer {
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
 
-				buffer[length++] = c; // buffer it, normalized
+				buffer[length++] = c; // buffer it, normalized 
 
 				String token = tokens[tokenIndex].toLowerCase();
 				word += c;

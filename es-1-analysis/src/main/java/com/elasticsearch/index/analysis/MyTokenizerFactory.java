@@ -14,6 +14,7 @@ import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
 import org.elasticsearch.index.settings.IndexSettings;
 
 import com.tapacross.sns.analyzer.MyTokenizer;
+import com.tapacross.sns.analyzer.MyTokenizer2;
 import com.tapacross.sns.analyzer.MyTokenizerOK;
 
 public class MyTokenizerFactory extends AbstractTokenizerFactory {

@@ -17,7 +17,7 @@ import org.apache.lucene.util.Version;
  * @author admin
  *
  */
-public class MyAnalyzer extends Analyzer {
+public class MyAnalyzer2 extends Analyzer {
 //	public MyAnalyzer() {
 //		super(new MyGlobalReuseStrategy());
 //	}
@@ -33,7 +33,7 @@ public class MyAnalyzer extends Analyzer {
 			e.printStackTrace();
 		}
 		
-		return new TokenStreamComponents(new MyTokenizer(reader2, s));
+		return new TokenStreamComponents(new MyTokenizer2(reader2, s));
 //		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}
