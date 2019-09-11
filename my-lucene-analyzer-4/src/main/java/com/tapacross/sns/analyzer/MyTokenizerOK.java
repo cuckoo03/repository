@@ -9,6 +9,9 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.CharacterUtils;
 import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
 
+import com.tapacross.ise.MorphemeResult;
+import com.tapacross.service.AdminDataManager;
+
 /**
  * 메서드 실행순서
  * 입력테스트=버튼 입력
@@ -29,7 +32,26 @@ public class MyTokenizerOK extends Tokenizer {
 	public MyTokenizerOK(Reader in) {
 	    super(in);
 	    charUtils = CharacterUtils.getInstance();
-	  }
+	}
+	
+	private String[] tokens;
+	private String[] pos;
+	
+	public MyTokenizerOK(Reader in, String s) {
+		super(in);
+	    charUtils = CharacterUtils.getInstance();
+	    
+	    AdminDataManager adm = new AdminDataManager();
+	    adm.setOnlineEngineAddress("121.254.177.165:2012");
+		try {
+			MorphemeResult result = new MorphemeResult();
+			result = adm.getMorpheme(s);
+			tokens = result.getToken();
+			pos = result.getSynaxTag();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
 	private static final int MAX_WORD_LEN = 255;
@@ -48,6 +70,7 @@ public class MyTokenizerOK extends Tokenizer {
 	@Override
 	  public final boolean incrementToken() throws IOException {
 	    clearAttributes();
+	    System.out.println("incrementToken");
 	    int length = 0;
 	    int start = -1; // this variable is always initialized
 	    int end = -1;
@@ -99,9 +122,6 @@ public class MyTokenizerOK extends Tokenizer {
 	public final void end() throws IOException {
 		super.end();
 		System.out.println("end");
-		// set final offset
-//		int finalOffset = correctOffset(offset);
-//		offsetAtt.setOffset(finalOffset, finalOffset);
 	}
 
 	@Override
@@ -111,8 +131,6 @@ public class MyTokenizerOK extends Tokenizer {
 		bufferIndex = 0;
 		offset = 0;
 		dataLen = 0;
-
-		// this.input = new StringReader(readerString);
 	}
 
 	public void close() throws IOException {

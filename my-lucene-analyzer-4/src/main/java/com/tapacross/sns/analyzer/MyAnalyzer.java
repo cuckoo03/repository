@@ -18,13 +18,12 @@ import org.apache.lucene.util.Version;
  *
  */
 public class MyAnalyzer extends Analyzer {
-	public MyAnalyzer() {
+//	public MyAnalyzer() {
 //		super(new MyGlobalReuseStrategy());
-	}
+//	}
 
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-		/*
 		String s = "";
 		Reader reader2 = null;
 		try {
@@ -33,11 +32,10 @@ public class MyAnalyzer extends Analyzer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
 		
-//		return new TokenStreamComponents(new MyTokenizer(reader2, s));
-//		return new TokenStreamComponents(new WhitespaceTokenizer(reader));
-		return new TokenStreamComponents(new MyTokenizerOK(reader));
+		return new TokenStreamComponents(new MyTokenizer(reader2, s));
+//		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
+//		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}
 	
 	private String readerToString(Reader reader) throws IOException {

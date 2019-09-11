@@ -24,7 +24,6 @@ public class MyTokenizerFactory extends AbstractTokenizerFactory {
 
 	@Override
     public Tokenizer create(Reader reader) {
-		/*
 		String s = "";
 		Reader reader2 = null;
 		try {
@@ -33,10 +32,10 @@ public class MyTokenizerFactory extends AbstractTokenizerFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
-//        return new MyTokenizer(reader2, s);
+		// reader2의 문제가 아니라 토크나이저 내부의 특정 코드 문제
+        return new MyTokenizer(reader2, s);
 //        return new WhitespaceTokenizer(reader);
-        return new MyTokenizerOK(reader);
+//        return new MyTokenizerOK(reader2, s);
     }
 	
 	private String readerToString(Reader reader) throws IOException {

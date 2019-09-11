@@ -35,7 +35,7 @@ import org.junit.Test
 class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "한글 이상a"
+		String text = "한글 abc d"
 
 		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
@@ -45,11 +45,11 @@ class MyAnalyzerTest {
 		stream.close()
 		System.out.println("------------");
 
-		text = "한글 이상b"
-		stream = analyzer.tokenStream("f", new StringReader(text))
-		stream.reset()
-		printTerms(stream)
-		stream.close()
+//		text = "한글 이상b"
+//		stream = analyzer.tokenStream("f", new StringReader(text))
+//		stream.reset()
+//		printTerms(stream)
+//		stream.close()
 
 		// parse 3
 		/*

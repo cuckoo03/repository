@@ -8,6 +8,9 @@ import org.elasticsearch.common.settings.ImmutableSettings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.junit.Test
 
+import groovy.transform.TypeChecked
+
+@TypeChecked
 class DocumentAnalyzeTest {
 	private Client client
 	
@@ -42,14 +45,14 @@ class DocumentAnalyzeTest {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 		
-		AnalyzeRequest request = (new AnalyzeRequest("한글 이상 3")).index(INDEX_NAME1)
+		AnalyzeRequest request = (new AnalyzeRequest("한글 a1")).index(INDEX_NAME1)
 			.analyzer("my_analyzer")
-//			.tokenizer("my_tokenizer");//my_analyzer
+			.tokenizer("my_tokenizer");//my_analyzer
 		List<AnalyzeResponse.AnalyzeToken> tokens = client.admin().indices()
 			.analyze(request).actionGet().getTokens();
 		for (AnalyzeResponse.AnalyzeToken token : tokens)
 		{
-			println token.getTerm() + ", " + token.getType() + ", " + token.getPosition()
+			println token.term + " " + token.startOffset + "->" + token.endOffset + " " + token.type
 		}
 	}
 }

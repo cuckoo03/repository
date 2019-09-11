@@ -24,34 +24,36 @@ import com.tapacross.service.AdminDataManager;
  * --isTokenChar:입
  * --isTokenChar:력
  * -close
+ * 
+ * 토큰결과
+ * 입력:한글A
+ * 출력:
+ * 한글 1->3
+ * A 3->4
  * @author admin
  *
  */
 public class MyTokenizer extends Tokenizer {
-	private int offset = 0, bufferIndex = 0, dataLen = 0;
+	private int offset, bufferIndex = 0, dataLen = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
 	private final char[] ioBuffer = new char[IO_BUFFER_SIZE];
-	private CharTermAttribute termAtt;
-	private OffsetAttribute offsetAtt;
-	private TypeAttribute typeAtt;
+	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
+	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
 	
 	private AdminDataManager adm = new AdminDataManager();
 	private String[] tokens;
 	private String[] pos;
 	private int tokenIndex = 0;
-//	private String word = "";
-//	private String tag = "";
+	private String s;
 	public MyTokenizer(Reader input) {
 		super(input);
 	}
 	public MyTokenizer(Reader input, String s) {
 		super(input);
+		this.s = s;
 		System.out.println("MyTokenizer constructor");
-		
-		offsetAtt = addAttribute(OffsetAttribute.class);
-		termAtt = addAttribute(CharTermAttribute.class);
-		typeAtt = addAttribute(TypeAttribute.class);
 		
 		adm.setOnlineEngineAddress("121.254.177.165:2012");
 		try {
@@ -76,7 +78,6 @@ public class MyTokenizer extends Tokenizer {
 		char[] buffer = termAtt.buffer();
 		while (true) {
 			if (bufferIndex >= dataLen) {
-				offset += dataLen;
 				dataLen = input.read(ioBuffer);
 				if (dataLen == -1) {
 					dataLen = 0; // so next offset += dataLen won't decrement
@@ -91,14 +92,13 @@ public class MyTokenizer extends Tokenizer {
 
 			final char c = ioBuffer[bufferIndex++];
 
-			/*
 			if (isTokenChar(c)) { // if it's a token char
 				if (length == 0) // start of token
 					start = offset + bufferIndex - 1;
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
 
-				buffer[length++] = c; // buffer it, normalized
+				buffer[length++] = c; // buffer it, normalized 
 
 				if (length == MAX_WORD_LEN) // buffer overflow!
 					break;
@@ -107,15 +107,11 @@ public class MyTokenizer extends Tokenizer {
 				break; // return 'em
 			} else {
 			}
-			*/
-			
+
+			/*
 			if (isTokenChar(c)) { // if it's a token char
-				int tokenLength = tokens[tokenIndex].length();
 				String token = tokens[tokenIndex].toLowerCase();
 				word += c;
-//				if (word.length() == tokenLength) {
-//					word = word.substring(1, word.length());
-//				}
 				
 				if (word.toLowerCase().equals(token)) {
 					length = word.length();
@@ -123,7 +119,7 @@ public class MyTokenizer extends Tokenizer {
 						buffer[i] = word.charAt(i);
 					}
 					
-					word = "";
+					word = null;
 					tag = pos[tokenIndex];
 					tokenIndex++;
 					break;
@@ -135,12 +131,13 @@ public class MyTokenizer extends Tokenizer {
 				break; // return 'em
 			} else {
 			}
+			*/
 		}
 
 		termAtt.setLength(length);
-		start = bufferIndex - length;
+//		start = bufferIndex - length;
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
-		typeAtt.setType(tag);
+//		typeAtt.setType(tag);
 		return true;
 	}
 	
@@ -148,20 +145,9 @@ public class MyTokenizer extends Tokenizer {
 		return !Character.isWhitespace(c);
 	}
 
-	protected char normalize(char c) {
-		System.out.println("normalizer:"+c);
-		return c;
-	}
-
 	@Override
 	public final void end() throws IOException {
-		super.end();
 		System.out.println("end");
-		
-		bufferIndex = 0;
-		offset = 0;
-		dataLen = 0;
-		tokenIndex = 0;
 	}
 	
 	@Override
@@ -170,18 +156,22 @@ public class MyTokenizer extends Tokenizer {
 		System.out.println("reset");
 		
 		bufferIndex = 0;
-		offset = 0;
 		dataLen = 0;
 		tokenIndex = 0;
+		
+		adm.setOnlineEngineAddress("121.254.177.165:2012");
+		try {
+			MorphemeResult result = new MorphemeResult();
+			result = adm.getMorpheme(s);
+			tokens = result.getToken();
+			pos = result.getSynaxTag();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void close() throws IOException {
 		super.close();
 		System.out.println("close");
-		
-		bufferIndex = 0;
-		offset = 0;
-		dataLen = 0;
-		tokenIndex = 0;
 	}
 }
