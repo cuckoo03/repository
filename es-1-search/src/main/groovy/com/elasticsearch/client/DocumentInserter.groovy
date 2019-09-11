@@ -66,11 +66,9 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-		createThreads()
+//		createThreads()
 		
-//		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "방탄소년단장관", "2019090300000")
-//		addDocument(INDEX_NAME1, TYPE_NAME1, 2, "2", "title2", "방탄소년단장관", "2019090300000")
-//		addDocument(INDEX_NAME1, TYPE_NAME1, 3, "3", "title3", "방탄소년단장관", "2019090300000")
+		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "방탄소년단", "2019090300000")
 		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
@@ -88,7 +86,7 @@ class DocumentInserter {
 		}
 	}
 	int makeSequence() {
-		def fetch = 10000
+		def fetch = fetch
 		def end = sequence + fetch
 		sequence = end
 		return end
@@ -155,8 +153,9 @@ class DocumentInserter {
 		}
 	}
 	
+	def int fetch = 1
 	void addDocuments(String tableName, String indexName, String typeName) {
-		def fetch = 10000
+		def fetch = fetch
 		def start = 0
 		def end = 0
 		synchronized(this) {

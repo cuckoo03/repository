@@ -144,15 +144,15 @@ class MyTokenizer extends Tokenizer {
 		dataLen = 0;
 		tokenIndex = 0;
 		
-		adm.setOnlineEngineAddress("121.254.177.165:2012");
-		try {
-			MorphemeResult result = new MorphemeResult();
-			result = adm.getMorpheme(s);
-			tokens = result.getToken();
-			pos = result.getSynaxTag();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		adm.setOnlineEngineAddress("121.254.177.165:2012");
+//		try {
+//			MorphemeResult result = new MorphemeResult();
+//			result = adm.getMorpheme(s);
+//			tokens = result.getToken();
+//			pos = result.getSynaxTag();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void close() throws IOException {
