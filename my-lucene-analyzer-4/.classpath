@@ -27,5 +27,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="lib" path="lib/sma2-core-2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
