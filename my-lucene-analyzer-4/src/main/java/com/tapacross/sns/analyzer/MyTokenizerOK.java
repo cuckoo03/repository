@@ -31,7 +31,7 @@ import com.tapacross.service.AdminDataManager;
 public class MyTokenizerOK extends Tokenizer {
 	public MyTokenizerOK(Reader in) {
 	    super(in);
-	    charUtils = CharacterUtils.getInstance();
+//	    charUtils = CharacterUtils.getInstance();
 	}
 	
 	private String[] tokens;
@@ -39,7 +39,7 @@ public class MyTokenizerOK extends Tokenizer {
 	
 	public MyTokenizerOK(Reader in, String s) {
 		super(in);
-	    charUtils = CharacterUtils.getInstance();
+//	    charUtils = CharacterUtils.getInstance();
 	    
 	    AdminDataManager adm = new AdminDataManager();
 	    adm.setOnlineEngineAddress("121.254.177.165:2012");
@@ -60,7 +60,7 @@ public class MyTokenizerOK extends Tokenizer {
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 
-	private final CharacterUtils charUtils;// lucene 4.6.1 not found this class
+	private final CharacterUtils charUtils = null;// lucene 4.6.1 not found this class
 	private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
 	protected int normalize(int c) {

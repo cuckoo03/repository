@@ -45,7 +45,7 @@ class DocumentAnalyzeTest {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 		
-		AnalyzeRequest request = (new AnalyzeRequest("한글 a1")).index(INDEX_NAME1)
+		AnalyzeRequest request = (new AnalyzeRequest("방탄소년단")).index(INDEX_NAME1)
 			.analyzer("my_analyzer")
 			.tokenizer("my_tokenizer");//my_analyzer
 		List<AnalyzeResponse.AnalyzeToken> tokens = client.admin().indices()

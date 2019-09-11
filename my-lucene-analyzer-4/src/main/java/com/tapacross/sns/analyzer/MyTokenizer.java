@@ -100,6 +100,14 @@ public class MyTokenizer extends Tokenizer {
 
 				buffer[length++] = c; // buffer it, normalized 
 
+				String token = tokens[tokenIndex].toLowerCase();
+				word += c;
+				if (word.toLowerCase().equals(token)) {
+					word = null;
+					tag = pos[tokenIndex++];
+					break;
+				}
+				
 				if (length == MAX_WORD_LEN) // buffer overflow!
 					break;
 
@@ -135,14 +143,15 @@ public class MyTokenizer extends Tokenizer {
 		}
 
 		termAtt.setLength(length);
-//		start = bufferIndex - length;
+		start = bufferIndex - length;
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
-//		typeAtt.setType(tag);
+		typeAtt.setType(tag);
 		return true;
 	}
 	
 	protected boolean isTokenChar(char c) {
-		return !Character.isWhitespace(c);
+//		return !Character.isWhitespace(c);
+		return true;
 	}
 
 	@Override
