@@ -66,14 +66,11 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-//		createThreads()
+		createThreads()
 		
-		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "방탄소년단장관", "2019090300000")
-		addDocument(INDEX_NAME1, TYPE_NAME1, 2, "2", "title2", "방탄소년단장관", "2019090300000")
-		addDocument(INDEX_NAME1, TYPE_NAME1, 3, "3", "title3", "방탄소년단장관", "2019090300000")
-		addDocument(INDEX_NAME1, TYPE_NAME1, 4, "4", "title4", "방탄소년단장관", "2019090300000")
-		addDocument(INDEX_NAME1, TYPE_NAME1, 5, "5", "title5", "방탄소년단장관", "2019090300000")
-		System.exit(1)
+//		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "방탄소년단장관", "2019090300000")
+//		addDocument(INDEX_NAME1, TYPE_NAME1, 2, "2", "title2", "방탄소년단장관", "2019090300000")
+//		addDocument(INDEX_NAME1, TYPE_NAME1, 3, "3", "title3", "방탄소년단장관", "2019090300000")
 		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
@@ -85,6 +82,7 @@ class DocumentInserter {
 			Thread.start {
 				while (true) {
 					addDocuments(TABLE_NAME, INDEX_NAME1, TYPE_NAME1)
+					sleep(1000)
 				}
 			}
 		}
@@ -165,7 +163,7 @@ class DocumentInserter {
 			start = sequence
 			end = makeSequence()
 		}
-		def dest = 180000000
+		def dest = 100000000
 		if (start >= dest) {
 			println "dest:$start"
 			System.exit(1)
