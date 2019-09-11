@@ -7,6 +7,7 @@ import org.apache.lucene.analysis.tokenattributes.TypeAttribute
 import com.tapacross.ise.MorphemeResult
 import com.tapacross.service.AdminDataManager
 
+import groovy.json.internal.CharacterSource
 import groovy.transform.TypeChecked
 
 
@@ -74,6 +75,10 @@ class MyTokenizer extends Tokenizer {
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
 
+				if (Character.isWhitespace(c)) {
+					continue;
+				}
+					
 				buffer[length++] = c; // buffer it, normalized
 
 				String token = tokens[tokenIndex].toLowerCase();

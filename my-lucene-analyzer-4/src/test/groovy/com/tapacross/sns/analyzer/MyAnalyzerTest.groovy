@@ -35,9 +35,9 @@ import org.junit.Test
 class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "방탄소년단장관"
+		String text = "방탄 12 34"
 
-		def analyzer = new MyAnalyzer2()
+		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
 		// http://www.hankcs.com/program/java/lucene-4-6-1-java-lang-illegalstateexception-tokenstream-contract-violation.html
 		stream.reset()

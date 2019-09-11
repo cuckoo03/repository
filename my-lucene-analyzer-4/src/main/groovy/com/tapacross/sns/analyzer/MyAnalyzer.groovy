@@ -21,7 +21,7 @@ class MyAnalyzer extends Analyzer {
 			e.printStackTrace();
 		}
 		
-		return new TokenStreamComponents(new MyTokenizer2(reader2, s));
+		return new TokenStreamComponents(new MyTokenizer(reader2, s));
 //		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}
