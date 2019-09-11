@@ -35,7 +35,7 @@ import org.junit.Test
 class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "한글 abc d"
+		String text = "방탄소년단장관"
 
 		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))

@@ -121,11 +121,13 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.tapacross</groupId>
 			<artifactId>sma2-core</artifactId>
 			<version>2.0</version>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>com.muhayu</groupId>
 			<artifactId>ise-client</artifactId>
