@@ -33,7 +33,7 @@ class DocumentInserter {
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
 	private final String FIELD4_NAME = "createDate"
-	private final String ELASTIC_SEARCH_IP = "220.230.124.211"
+	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
