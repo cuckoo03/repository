@@ -32,7 +32,7 @@ class MyTokenizer extends Tokenizer {
 		this.s = s;
 		System.out.println("MyTokenizer constructor");
 		
-		adm.setOnlineEngineAddress("121.254.177.165:2012");
+		adm.setOnlineEngineAddress("broker.ip:2012");
 		try {
 			MorphemeResult result = new MorphemeResult();
 			result = adm.getMorpheme(s);
