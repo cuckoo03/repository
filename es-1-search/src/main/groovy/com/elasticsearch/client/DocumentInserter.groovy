@@ -28,7 +28,7 @@ class DocumentInserter {
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
 	private final String INDEX_NAME1 = "twitter_1908"
-	private final String TYPE_NAME1 = "mytype"
+	private final String TYPE_NAME1 = "post"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
@@ -66,9 +66,9 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-//		createThreads()
+		createThreads()
 		
-		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "1", "title1", "방탄소년단", "2019090300000")
+//		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "2", "title1", "방탄소년단", "2019090300000")
 		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
@@ -153,7 +153,7 @@ class DocumentInserter {
 		}
 	}
 	
-	def int fetch = 1
+	def int fetch = 10
 	void addDocuments(String tableName, String indexName, String typeName) {
 		def fetch = fetch
 		def start = 0

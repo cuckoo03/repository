@@ -38,32 +38,30 @@ class MyTokenizer extends Tokenizer {
 			result = adm.getMorpheme(s);
 			tokens = result.getToken();
 			pos = result.getSynaxTag();
+			println ""
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-
 	@Override
 	public final boolean incrementToken() throws IOException {
 		clearAttributes();
 		System.out.println("incrementToken");
 		String word = "";
-		String tag = "";
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
 		while (true) {
 			if (bufferIndex >= dataLen) {
 				dataLen = input.read(ioBuffer);
-				if (dataLen == -1) {
+				if (dataLen == -1) { // end loof 
 					dataLen = 0; // so next offset += dataLen won't decrement
 									// offset
 					if (length > 0)
 						break;
 					else
 						return false;
-				}
+				}// start loof
 				bufferIndex = 0;
 			}
 
@@ -75,9 +73,9 @@ class MyTokenizer extends Tokenizer {
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
 
-				if (Character.isWhitespace(c)) {
-					continue;
-				}
+//				if (Character.isWhitespace(c)) {
+//					continue;
+//				}
 					
 				buffer[length++] = c; // buffer it, normalized
 
@@ -85,7 +83,6 @@ class MyTokenizer extends Tokenizer {
 				word += c;
 				if (word.toLowerCase().equals(token)) {
 					word = null;
-					tag = pos[tokenIndex++];
 					break;
 				}
 				
@@ -124,22 +121,23 @@ class MyTokenizer extends Tokenizer {
 		}
 
 		termAtt.setLength(length);
-		start = bufferIndex - length;
+//		start = bufferIndex - length;
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
-		typeAtt.setType(tag);
+		typeAtt.setType(pos[tokenIndex++]);
 		return true;
 	}
-	
 	protected boolean isTokenChar(char c) {
-//		return !Character.isWhitespace(c);
-		return true;
+		return !Character.isWhitespace(c);
+//		return true;
 	}
-
 	@Override
 	public final void end() throws IOException {
 		System.out.println("end");
+		// set final offset
+//		int finalOffset = correctOffset(offset);
+//		offsetAtt.setOffset(finalOffset, finalOffset);
+//		typeAtt.setType(pos[--tokenIndex]);
 	}
-	
 	@Override
 	public void reset() throws IOException {
 		super.reset();
@@ -159,7 +157,6 @@ class MyTokenizer extends Tokenizer {
 //			e.printStackTrace();
 //		}
 	}
-	
 	public void close() throws IOException {
 		super.close();
 		System.out.println("close");
