@@ -16,7 +16,7 @@ class DocumentAnalyzeTest {
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
 	private final String INDEX_NAME1 = "twitter_1908"
-	private final String TYPE_NAME1 = "mytype"
+//	private final String TYPE_NAME1 = "post"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
@@ -26,7 +26,7 @@ class DocumentAnalyzeTest {
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
 	private final String PROPERTIES_FIELD_NAME = "properties"
-	private final String TYPE_FIELD_NAME = "type"
+//	private final String TYPE_FIELD_NAME = "type"
 	private final String FORMAT_FIELD_NAME = "format"
 
 	private final String LONG_FIELD_TYPE = "long"
@@ -45,7 +45,7 @@ class DocumentAnalyzeTest {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 		
-		AnalyzeRequest request = (new AnalyzeRequest("방탄소년단RT5".toLowerCase())).index(INDEX_NAME1)
+		AnalyzeRequest request = (new AnalyzeRequest("방탄소년단 RT 2 ab".toLowerCase())).index(INDEX_NAME1)
 			.analyzer("my_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer
 		List<AnalyzeResponse.AnalyzeToken> tokens = client.admin().indices()

@@ -82,7 +82,7 @@ class MyTokenizer extends Tokenizer {
 				String token = tokens[tokenIndex].toLowerCase();
 				word += c;
 				if (word.toLowerCase().equals(token)) {
-					word = null;
+//					word = null;
 					break;
 				}
 				
@@ -120,10 +120,12 @@ class MyTokenizer extends Tokenizer {
 			*/
 		}
 
+		termAtt.append(word)
 		termAtt.setLength(length);
 //		start = bufferIndex - length;
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
 		typeAtt.setType(pos[tokenIndex++]);
+		word = null
 		return true;
 	}
 	protected boolean isTokenChar(char c) {
@@ -147,15 +149,15 @@ class MyTokenizer extends Tokenizer {
 		dataLen = 0;
 		tokenIndex = 0;
 		
-//		adm.setOnlineEngineAddress("121.254.177.165:2012");
-//		try {
-//			MorphemeResult result = new MorphemeResult();
-//			result = adm.getMorpheme(s);
-//			tokens = result.getToken();
-//			pos = result.getSynaxTag();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		adm.setOnlineEngineAddress("broker.ip:2012");
+		try {
+			MorphemeResult result = new MorphemeResult();
+			result = adm.getMorpheme(s);
+			tokens = result.getToken();
+			pos = result.getSynaxTag();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void close() throws IOException {
 		super.close();
