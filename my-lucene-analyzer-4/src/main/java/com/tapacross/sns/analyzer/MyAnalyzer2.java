@@ -33,7 +33,7 @@ public class MyAnalyzer2 extends Analyzer {
 			e.printStackTrace();
 		}
 		
-		return new TokenStreamComponents(new MyTokenizer2(reader2, s));
+		return new TokenStreamComponents(new MyTokenizer3(reader2, s));
 //		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}

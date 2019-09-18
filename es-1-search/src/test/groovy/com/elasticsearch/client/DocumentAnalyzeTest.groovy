@@ -14,7 +14,7 @@ import groovy.transform.TypeChecked
 class DocumentAnalyzeTest {
 	private Client client
 	
-	private final String TABLE_NAME = "tb_article_search_twitter_1908"
+	private final String TABLE_NAME = "tb_article_search_twitter_1909"
 	private final String INDEX_NAME1 = "twitter_1908"
 //	private final String TYPE_NAME1 = "post"
 	private final String FIELD1_NAME = "articleId"
@@ -45,14 +45,15 @@ class DocumentAnalyzeTest {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 		
-		AnalyzeRequest request = (new AnalyzeRequest("방탄소년단 RT 2 ab".toLowerCase())).index(INDEX_NAME1)
+		AnalyzeRequest request = (new AnalyzeRequest("방 탄 소 년 단RT1".toLowerCase()))
+			.index(INDEX_NAME1) 
 			.analyzer("my_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer
 		List<AnalyzeResponse.AnalyzeToken> tokens = client.admin().indices()
 			.analyze(request).actionGet().getTokens();
-		for (AnalyzeResponse.AnalyzeToken token : tokens)
-		{
-			println token.term + " " + token.startOffset + "->" + token.endOffset + " " + token.type
+		for (AnalyzeResponse.AnalyzeToken token : tokens) {
+			println token.term + " " + token.startOffset + "->" + token.endOffset + 
+				" type:" + token.type + " pos:" + token.position
 		}
 	}
 }

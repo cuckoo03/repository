@@ -7,6 +7,9 @@ import java.io.StringReader
 
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.analysis.TokenStream
+import org.apache.lucene.analysis.core.SimpleAnalyzer
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer
+import org.apache.lucene.analysis.ngram.NGramTokenizer
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
@@ -33,9 +36,16 @@ import org.junit.Test
 
 @TypeChecked
 class MyAnalyzerTest {
+	/**
+	 * 형태소분석 실패시: 방탄소년단rt1 0->8 ON
+	 * @throws IOException
+	 */
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "방탄소년단RT1ab".toLowerCase()
+//		String text = "1방 탄 소 년 단 R T 1".toLowerCase()
+		String text = "방탄소년단 RT1".toLowerCase()
+		SimpleAnalyzer
+		NGramTokenizer
 
 		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
@@ -103,14 +113,16 @@ class MyAnalyzerTest {
 		int position = 0;
 
 		while (stream.incrementToken()) {
-			int increment = posIncr.getPositionIncrement();
-			if (increment > 0) {
-				position = position + increment;
-				System.out.print(position + ": ");
-			}
+//			int increment = posIncr.getPositionIncrement();
+//			if (increment > 0) {
+//				position = position + increment;
+//				System.out.print(position + ": ");
+//			}
 
 			System.out
-					.print(term.toString() + " " + offset.startOffset() + "->" + offset.endOffset() + " " + type.type());
+					.print(posIncr.getPositionIncrement() + " " + 
+						term.toString() + " " + offset.startOffset() + 
+						"->" + offset.endOffset() + " type:" + type.type());
 			System.out.println();
 			System.out.println();
 		}

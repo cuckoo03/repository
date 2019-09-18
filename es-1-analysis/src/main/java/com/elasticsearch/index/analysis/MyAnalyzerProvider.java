@@ -2,8 +2,6 @@ package com.elasticsearch.index.analysis;
 
 import java.io.IOException;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.util.Version;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
@@ -13,8 +11,6 @@ import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
 import org.elasticsearch.index.settings.IndexSettings;
 
 import com.tapacross.sns.analyzer.MyAnalyzer;
-import com.tapacross.sns.analyzer.MyAnalyzer2;
-import com.tapacross.sns.analyzer.MyGlobalReuseStrategy;
 
 public class MyAnalyzerProvider extends AbstractIndexAnalyzerProvider<MyAnalyzer> {
 	private final MyAnalyzer analyzer;

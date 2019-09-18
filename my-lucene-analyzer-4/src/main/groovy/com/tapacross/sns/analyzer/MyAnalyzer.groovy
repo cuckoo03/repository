@@ -5,6 +5,8 @@ import java.io.Reader
 import java.io.StringReader
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
+import org.apache.lucene.analysis.standard.StandardAnalyzer
+import org.apache.lucene.util.Version
 
 import groovy.transform.TypeChecked
 
@@ -12,16 +14,7 @@ import groovy.transform.TypeChecked
 class MyAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-		String s = "";
-		Reader reader2 = null;
-		try {
-			s = readerToString(reader);
-			reader2 = new StringReader(s);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return new TokenStreamComponents(new MyTokenizer(reader2, s));
+		return new TokenStreamComponents(new MyTokenizer(reader));
 //		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}

@@ -1,7 +1,4 @@
 package com.tapacross.sns.analyzer
-import java.io.IOException
-import java.io.Reader
-
 import java.util.concurrent.atomic.AtomicInteger
 
 import org.apache.lucene.analysis.Tokenizer
@@ -18,15 +15,9 @@ import groovy.sql.ResultSetMetaDataWrapper
 import groovy.transform.TypeChecked
 
 
-/**
- * workflow
- * 최초 객체 생성시:constructor->reset->increment loop->end->close
- * 생성 이후부터:reset->increment loop->end->close
- * @author admin
- *
- */
+
 @TypeChecked
-class MyTokenizer extends Tokenizer {
+class MyTokenizer3 extends Tokenizer {
 	private int offset, bufferIndex = 0, dataLen = 0, tokenIndex = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
@@ -35,15 +26,15 @@ class MyTokenizer extends Tokenizer {
 	private AdminDataManager adm = new AdminDataManager();
 	private String[] tokens;
 	private String[] pos;
-//	private String s;
+	private String s;
 	
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
-//	private final PositionIncrementAttribute posIncrAtt = addAttribute(PositionIncrementAttribute.class);
-	private StringReader input2;
-	public MyTokenizer(Reader input) {
+	private final PositionIncrementAttribute posIncrAtt = addAttribute(PositionIncrementAttribute.class);
+	public MyTokenizer3(Reader input, String s) {
 		super(input);
+		this.s = s;
 		System.out.println("MyTokenizer constructor");
 		
 		adm.setOnlineEngineAddress("broker.ip:2012");
@@ -53,13 +44,13 @@ class MyTokenizer extends Tokenizer {
 		clearAttributes();
 		System.out.println("incrementToken");
 		String word = "";
-//		def word2 = ""
+		def word2 = ""
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
 		while (true) {
 			if (bufferIndex >= dataLen) {
-				dataLen = input2.read(ioBuffer);
+				dataLen = input.read(ioBuffer);
 				if (dataLen == -1) { // end loof 
 					dataLen = 0; // so next offset += dataLen won't decrement
 									// offset
@@ -83,12 +74,12 @@ class MyTokenizer extends Tokenizer {
 				}
 				buffer[length++] = (c); // buffer it, normalized
 
-//				def b = buffer.toString().trim()
-//				word = b
-				word = word + c
+				def b = buffer.toString().trim()
+				word = b
+				word2 = word2 + c
 				String token = tokens[tokenIndex]
-				if (word == token) {
-					word = ""
+				if (word2 == token) {
+					word2 = ""
 					break;
 				}
 				if (length == MAX_WORD_LEN) // buffer overflow!
@@ -102,8 +93,8 @@ class MyTokenizer extends Tokenizer {
 		termAtt.setEmpty()
 		termAtt.setLength(length);
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
-		typeAtt.setType(pos[tokenIndex]);
-//		posIncrAtt.setPositionIncrement(tokenIndex)
+		typeAtt.setType((word).toString());
+		posIncrAtt.setPositionIncrement(length)
 		tokenIndex++
 		return true;
 	}
@@ -119,36 +110,34 @@ class MyTokenizer extends Tokenizer {
 		// set final offset
 //		int finalOffset = correctOffset(offset);
 //		offsetAtt.setOffset(finalOffset, finalOffset);
-//		offset = 0
-//		bufferIndex = 0
-//		dataLen = 0
-//		tokenIndex = 0;
+		offset = 0
+		bufferIndex = 0
+		dataLen = 0
+		tokenIndex = 0;
+		this.s = s;
 		
-//		try {
-//			MorphemeResult result = new MorphemeResult();
-//			result = adm.getMorpheme("end:"+this.toString());
-//			tokenIndex = 0
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			MorphemeResult result = new MorphemeResult();
+			result = adm.getMorpheme("end:"+this.toString());
+			tokenIndex = 0
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void reset() throws IOException {
 		super.reset();
+		System.out.println("reset:"+this.toString());
 		
 		bufferIndex = 0;
 		dataLen = 0;
-		tokenIndex = 0
 		
-		def s = readerToString(input)
-		input2 = new StringReader(s)
 		try {
-			adm.getMorpheme("reset:"+this.toString());
-			
 			MorphemeResult result = new MorphemeResult();
 			result = adm.getMorpheme(s);
 			tokens = result.getToken();
 			pos = result.getSynaxTag();
+			tokenIndex = 0
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,13 +145,16 @@ class MyTokenizer extends Tokenizer {
 	@Override
 	public void close() throws IOException {
 		super.close();
+		System.out.println("close");
+		try {
+			MorphemeResult result = new MorphemeResult();
+			result = adm.getMorpheme("close:"+this.toString());
+			tokenIndex = 0
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	private String readerToString(Reader reader) throws IOException {
-		char[] buffer = new char[4096];
-		int charsRead = reader.read(buffer);
-		String text = new String(buffer, 0, charsRead);
-		return text;
-	}
+	
 	private char normalize1(char c) {
 		if (c.isDigit(c))
 			return c;
