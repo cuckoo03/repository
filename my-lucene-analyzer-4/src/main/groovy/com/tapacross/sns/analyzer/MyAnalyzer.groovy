@@ -5,6 +5,8 @@ import java.io.Reader
 import java.io.StringReader
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer
+import org.apache.lucene.analysis.core.WhitespaceTokenizer
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.util.Version
 
@@ -14,8 +16,12 @@ import groovy.transform.TypeChecked
 class MyAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-		return new TokenStreamComponents(new MyTokenizer(reader));
-//		return new TokenStreamComponents(new WhitespaceTokenizer(reader2));
+		final def tokenizer = new MyTokenizer(reader)  
+		final def filter = new MyTokenFilter(Version.LUCENE_46, tokenizer)
+		return new TokenStreamComponents(tokenizer, filter)
+		
+//		return new TokenStreamComponents(new MyTokenizer(reader));
+//		return new TokenStreamComponents(new WhitespaceAnalyzer(reader2));
 //		return new TokenStreamComponents(new MyTokenizerOK(reader2, s));
 	}
 	

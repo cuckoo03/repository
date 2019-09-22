@@ -45,7 +45,8 @@ class DocumentAnalyzeTest {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 		
-		AnalyzeRequest request = (new AnalyzeRequest("방 탄 소 년 단RT1".toLowerCase()))
+		AnalyzeRequest request = (
+			new AnalyzeRequest("우리짐건 입금을 시작합니다??".toLowerCase()))
 			.index(INDEX_NAME1) 
 			.analyzer("my_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer

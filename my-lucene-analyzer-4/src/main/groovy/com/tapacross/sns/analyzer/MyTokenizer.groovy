@@ -7,9 +7,10 @@ import java.util.concurrent.atomic.AtomicInteger
 import org.apache.lucene.analysis.Tokenizer
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
+import org.apache.lucene.analysis.tokenattributes.PayloadAttribute
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute
-
+import org.apache.lucene.util.BytesRef
 import com.tapacross.ise.MorphemeResult
 import com.tapacross.service.AdminDataManager
 
@@ -40,6 +41,7 @@ class MyTokenizer extends Tokenizer {
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
+	private final PayloadAttribute payloadAtt = addAttribute(PayloadAttribute.class);
 //	private final PositionIncrementAttribute posIncrAtt = addAttribute(PositionIncrementAttribute.class);
 	private StringReader input2;
 	public MyTokenizer(Reader input) {
@@ -103,6 +105,8 @@ class MyTokenizer extends Tokenizer {
 		termAtt.setLength(length);
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
 		typeAtt.setType(pos[tokenIndex]);
+		def bytesRef = new BytesRef(pos[tokenIndex].getBytes("UTF-8"));
+		payloadAtt.setPayload(bytesRef)
 //		posIncrAtt.setPositionIncrement(tokenIndex)
 		tokenIndex++
 		return true;

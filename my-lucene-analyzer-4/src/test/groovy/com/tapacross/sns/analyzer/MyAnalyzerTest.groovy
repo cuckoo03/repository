@@ -13,6 +13,7 @@ import org.apache.lucene.analysis.ngram.NGramTokenizer
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
+import org.apache.lucene.analysis.tokenattributes.PayloadAttribute
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute
 import org.apache.lucene.document.Document
@@ -43,7 +44,7 @@ class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
 //		String text = "1방 탄 소 년 단 R T 1".toLowerCase()
-		String text = "방탄소년단 RT1".toLowerCase()
+		String text = "우리짐건 입금을 시작합니다! !?".toLowerCase()
 		SimpleAnalyzer
 		NGramTokenizer
 
@@ -110,6 +111,7 @@ class MyAnalyzerTest {
 		PositionIncrementAttribute posIncr = stream.addAttribute(PositionIncrementAttribute.class);
 		OffsetAttribute offset = stream.addAttribute(OffsetAttribute.class);
 		TypeAttribute type = stream.addAttribute(TypeAttribute.class);
+		PayloadAttribute payload = stream.addAttribute(PayloadAttribute.class);
 		int position = 0;
 
 		while (stream.incrementToken()) {
@@ -122,7 +124,9 @@ class MyAnalyzerTest {
 			System.out
 					.print(posIncr.getPositionIncrement() + " " + 
 						term.toString() + " " + offset.startOffset() + 
-						"->" + offset.endOffset() + " type:" + type.type());
+						"->" + offset.endOffset() + " type:" + type.type() +
+						" payload:" + payload.payload.utf8ToString()
+						);
 			System.out.println();
 			System.out.println();
 		}

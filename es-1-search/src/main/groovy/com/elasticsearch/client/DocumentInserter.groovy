@@ -28,7 +28,7 @@ class DocumentInserter {
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
 	private final String INDEX_NAME1 = "twitter_1908"
-	private final String TYPE_NAME1 = "post"
+	private final String TYPE_NAME1 = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"

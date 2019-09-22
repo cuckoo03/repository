@@ -1,6 +1,7 @@
 package com.elasticsearch.index.analysis;
 
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.util.Version;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
@@ -18,6 +19,6 @@ public class MyTokenFilterFactory extends AbstractTokenFilterFactory {
 
 	@Override
 	public TokenStream create(TokenStream tokenStream) {
-		return new MyTokenFilter(tokenStream);
+		return new MyTokenFilter(Version.LUCENE_46, tokenStream);
 	}
 }
