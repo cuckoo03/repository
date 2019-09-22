@@ -21,10 +21,12 @@
 			<id>jboss-3rd-party-releases</id>
 			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
 		</repository>
+		<!-- 
 		<repository>
 			<id>tapacross</id>
 			<url>http://121.254.177.182:8081/nexus/content/repositories/tapacross</url>
 		</repository>
+		 -->
 	</repositories>
 
 	<dependencies>
@@ -125,15 +127,15 @@
 			<groupId>com.tapacross</groupId>
 			<artifactId>sma2-core</artifactId>
 			<version>2.0</version>
-			<!-- 
 			<systemPath>${project.basedir}/lib/sma2-core-2.0.jar</systemPath>
 			<scope>system</scope>
-			 -->
 		</dependency>
 		<dependency>
 			<groupId>com.muhayu</groupId>
 			<artifactId>ise-client</artifactId>
 			<version>4.0</version>
+			<systemPath>${project.basedir}/lib/ise-client-4.0.jar</systemPath>
+			<scope>system</scope>
 		</dependency>
 	</dependencies>
 	<build>

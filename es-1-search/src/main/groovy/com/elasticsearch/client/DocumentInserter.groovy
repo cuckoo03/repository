@@ -101,24 +101,6 @@ class DocumentInserter {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 	}
-	void createIndex(String indexName) {
-		if (!indexExists(indexName)) {
-			client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
-		} else {
-			
-		}
-	}
-	boolean indexExists(String indexName) {
-		def map = client.admin().cluster().prepareState().execute().actionGet().getState().getMetaData().getIndices()
-		return map.containsKey(indexName)
-	}
-
-	void deleteIndex(String indexName) {
-		if (indexExists(indexName)) {
-			client.admin().indices().prepareDelete(indexName).execute().actionGet()
-			client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
-		}
-	}
 	void createMapping(String indexName, String typeName) {
 		// properties:{
 		// 	field1:{

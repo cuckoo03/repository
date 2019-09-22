@@ -26,10 +26,12 @@
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+		<!-- 
 		<repository>
 			<id>tapacross</id>
 			<url>http://121.254.177.182:8081/nexus/content/repositories/tapacross</url>
 		</repository>
+		 -->
 	</repositories>
 
 	<profiles>
