@@ -16,12 +16,12 @@ import groovy.transform.TypeChecked
 class AggregationQueryMain {
 	private Client client
 	
-	private final String INDEX_NAME1 = "twitter_1908"
+	private final String INDEX_NAME = "twitter_1908"
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
-	private final String TYPE_NAME1 = "article"
+	private final String TYPE_NAME = "article"
 	def void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
 				.put(CLUSTER_NAME_FIELD, CLUSTER_NAME)
@@ -31,18 +31,24 @@ class AggregationQueryMain {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 	}
-	def void aggregate() {
-		def termQuery = QueryBuilders.matchQuery("body", "김다현")
+	def void termAggregate() {
+		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
 		def aggsBuilder = terms("bodyTerms").field("body")
 		def extStatsAggsBuider = extendedStats("createDateStats").field("createDate")
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
-		def response = client.prepareSearch(INDEX_NAME1).
-			setTypes(TYPE_NAME1).addFields("sentimentTopic").
+		def response = client.prepareSearch(INDEX_NAME).
+			setTypes(TYPE_NAME).
 			setQuery(termQuery).
-			addAggregation(aggsBuilder).addAggregation(extStatsAggsBuider).
+			addAggregation(aggsBuilder).
+			addAggregation(extStatsAggsBuider).
 			execute().actionGet()
 			
 			printResponse(response)
+			printStats(response)
+	}
+	def void histogramAggregate() {
+	}
+	def void dateHistogramAggregation() {
 	}
 	def void printResponse(SearchResponse response) {
 		if (response.status().status == 200) {
@@ -50,9 +56,12 @@ class AggregationQueryMain {
 			def termsAggs = response.aggregations.get("bodyTerms") as Terms
 			println termsAggs.name + ":" + termsAggs.buckets.size()
 			for (def bucket : termsAggs.buckets) {
-				println bucket.key + " " + bucket.docCount
+				println bucket.key + " " + bucket.docCount + " "
 			}
-			
+		}
+	}
+	def void printStats(SearchResponse response) {
+		if (response.status().status == 200) {
 			def extStats = response.aggregations.get("createDateStats") as ExtendedStats
 			println extStats.name
 			println "count:$extStats.count"
@@ -66,6 +75,6 @@ class AggregationQueryMain {
 	static void main(args) {
 		def main = new AggregationQueryMain()
 		main.createClient()
-		main.aggregate()
+		main.termAggregate()
 	}
 }

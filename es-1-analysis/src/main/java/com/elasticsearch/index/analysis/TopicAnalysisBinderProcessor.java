@@ -13,8 +13,8 @@ public class TopicAnalysisBinderProcessor extends AnalysisModule.AnalysisBinderP
 		tokenizersBindings.processTokenizer("topic_tokenizer", TopicTokenizerFactory.class);
 	}
 
-//	@Override
-//	public void processTokenFilters(TokenFiltersBindings tokenFiltersBindings) {
-//		tokenFiltersBindings.processTokenFilter("my_filter", MyTokenFilterFactory.class);
-//	}
+	@Override
+	public void processTokenFilters(TokenFiltersBindings tokenFiltersBindings) {
+		tokenFiltersBindings.processTokenFilter("topic_filter", TopicTokenFilterFactory.class);
+	}
 }

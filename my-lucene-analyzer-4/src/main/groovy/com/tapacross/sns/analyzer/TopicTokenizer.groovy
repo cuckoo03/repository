@@ -38,14 +38,12 @@ class TopicTokenizer extends Tokenizer {
 	
 	private AdminDataManager adm = new AdminDataManager();
 	private String[] tokens;
-	private String[] pos;
-//	private String s;
+	private String[] termNumbers;
+	private String[] c1Names
 	
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
-	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
 	private final PayloadAttribute payloadAtt = addAttribute(PayloadAttribute.class);
-//	private final PositionIncrementAttribute posIncrAtt = addAttribute(PositionIncrementAttribute.class);
 	private StringReader input2;
 	
 	public TopicTokenizer(Reader input) {
@@ -58,70 +56,30 @@ class TopicTokenizer extends Tokenizer {
 	public final boolean incrementToken() throws IOException {
 		clearAttributes();
 		System.out.println("incrementToken");
-		String word = "";
 		int length = 0;
-		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
 		while (true) {
-			if (bufferIndex >= dataLen) {
-				dataLen = input2.read(ioBuffer);
-				if (dataLen == -1) { // end loof 
-					dataLen = 0; // so next offset += dataLen won't decrement
-									// offset
-					if (length > 0)
-						break;
-					else
-						return false;
-				}// start loof
-				bufferIndex = 0;
+			if (tokenIndex >= tokens.size()) {
+				return false;
 			}
-
-			final char c = ioBuffer[bufferIndex++];
-
-			if (isTokenChar(c)) { // if it's a token char
-				if (length == 0) // start of token
-					start = offset + bufferIndex - 1;
-				else if (length == buffer.length)
-					buffer = termAtt.resizeBuffer(1 + length);
-				if (Character.isWhitespace(c)) {
-					continue;
-				}
-//				buffer[length++] = (c); // buffer it, normalized
-
-				length++
-				word = word + c
-				if (tokenIndex >= tokens.size()) {
-					return false;
-				}
-				String token = tokens[tokenIndex]
-				if (word.contains(token)) {
-					setBlankBuffer(buffer)
-					pushBufferChar(buffer, token)
-					println "buffer:" + buffer.toString()
-					word = ""
-					break;
-				}
-				if (length == MAX_WORD_LEN) // buffer overflow!
-					break;
-
-			} else if (length > 0) {// at non-Letter w/ chars
-				break; // return 'em
-			} else {
-			}
+			String token = tokens[tokenIndex]
+			setBlankBuffer(buffer)
+			pushBufferChar(buffer, token)
+			println "buffer:" + buffer.toString()
+			break;
+			if (length == MAX_WORD_LEN) // buffer overflow!
+				break;
 		}
 		def wordLength = tokens[tokenIndex].size()
 		termAtt.setEmpty()
 		termAtt.setLength(wordLength);
-		start = bufferIndex - wordLength 
-		offsetAtt.setOffset(correctOffset(start), correctOffset(start + wordLength));
-		typeAtt.setType(pos[tokenIndex]);
-		def bytesRef = new BytesRef(pos[tokenIndex].getBytes("UTF-8"));
+		typeAtt.setType(c1Names[tokenIndex]);
+		def bytesRef = new BytesRef(termNumbers[tokenIndex].getBytes("UTF-8"));
 		payloadAtt.setPayload(bytesRef)
 		tokenIndex++
 		return true;
 	}
 	protected boolean isTokenChar(char c) {
-//		return !Character.isWhitespace(c);
 		return true;
 	}
 	// reset->increemnttoken->end->close
@@ -129,21 +87,6 @@ class TopicTokenizer extends Tokenizer {
 	public final void end() throws IOException {
 		super.end()
 		System.out.println("end:"+this.toString());
-		// set final offset
-//		int finalOffset = correctOffset(offset);
-//		offsetAtt.setOffset(finalOffset, finalOffset);
-//		offset = 0
-//		bufferIndex = 0
-//		dataLen = 0
-//		tokenIndex = 0;
-		
-//		try {
-//			MorphemeResult result = new MorphemeResult();
-//			result = adm.getMorpheme("end:"+this.toString());
-//			tokenIndex = 0
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 	@Override
 	public void reset() throws IOException {
@@ -161,7 +104,8 @@ class TopicTokenizer extends Tokenizer {
 			def result = new WordResult();
 			result = adm.extractTopic(s, null, 0);
 			tokens = result.getWord()
-			pos = result.getWord()
+			termNumbers = result.getTno()
+			c1Names = result.getC1name()
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

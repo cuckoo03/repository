@@ -27,8 +27,8 @@ class DocumentInserter {
 	private Client client
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
-	private final String INDEX_NAME1 = "twitter_1908"
-	private final String TYPE_NAME1 = "article"
+	private final String INDEX_NAME = "twitter_1908"
+	private final String TYPE_NAME = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
@@ -70,8 +70,8 @@ class DocumentInserter {
 		println "start add documents"
 		
 //		createThreads()
-		final def content = "김다현 존멋 #TWICE #트와이스 #FeelSpecial #다현 #DAHYUN 오늘"
-		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "2", "title1", content, 
+		final def content = "#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
+		addDocument(INDEX_NAME, TYPE_NAME, 1, "2", "title1", content, 
 			"2019090300000", content, content, content)
 		
 //		sleep(1000 * 60 * 60 * 24)
@@ -83,7 +83,7 @@ class DocumentInserter {
 		1.times {
 			Thread.start {
 				while (true) {
-					addDocuments(TABLE_NAME, INDEX_NAME1, TYPE_NAME1)
+					addDocuments(TABLE_NAME, INDEX_NAME, TYPE_NAME)
 					sleep(1000)
 				}
 			}

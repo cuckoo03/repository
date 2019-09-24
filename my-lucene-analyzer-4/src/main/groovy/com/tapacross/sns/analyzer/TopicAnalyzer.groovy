@@ -1,10 +1,8 @@
 package com.tapacross.sns.analyzer
 
-import java.io.IOException
-import java.io.Reader
-
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
+import org.apache.lucene.util.Version
 
 import groovy.transform.TypeChecked
 
@@ -12,6 +10,8 @@ import groovy.transform.TypeChecked
 class TopicAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-		return new TokenStreamComponents(new TopicTokenizer(reader))
+		final def tokenizer = new TopicTokenizer(reader)
+		final def filter = new TopicTokenFilter(Version.LUCENE_46, tokenizer)
+		return new TokenStreamComponents(tokenizer, filter)
 	}
 }

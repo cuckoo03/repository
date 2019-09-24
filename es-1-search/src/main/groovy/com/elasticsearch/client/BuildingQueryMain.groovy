@@ -19,12 +19,12 @@ import groovy.transform.TypeChecked
 class BuildingQueryMain {
 	private Client client
 	
-	private final String INDEX_NAME1 = "twitter_1908"
+	private final String INDEX_NAME = "twitter_1908"
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
-	private final String TYPE_NAME1 = "post"
+	private final String TYPE_NAME = "article"
 	
 	def void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
@@ -56,7 +56,7 @@ class BuildingQueryMain {
 		executeQuery(bool)
 	}
 	def void matchQuery() {
-		def matchQury = QueryBuilders.matchQuery("body", "미코 짱")
+		def matchQury = QueryBuilders.matchQuery("topic", "트와이스")
 		executeQuery(matchQury)
 	}
 	def void matchPhraseQuery() {
@@ -94,8 +94,8 @@ class BuildingQueryMain {
 		executeQuery(qb)
 	}
 	def void executeQuery(QueryBuilder query) {
-		def response = client.prepareSearch(INDEX_NAME1).
-			setTypes(TYPE_NAME1).addFields("articleId", "body").setQuery(query).execute().actionGet()
+		def response = client.prepareSearch(INDEX_NAME).
+			setTypes(TYPE_NAME).addFields("articleId", "body").setQuery(query).execute().actionGet()
 			// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
 		if (response.status().getStatus() == 200) {
 			println response.hits.totalHits

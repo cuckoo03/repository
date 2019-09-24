@@ -38,7 +38,6 @@ import org.junit.Test
 @TypeChecked
 class TopicAnalyzerTest {
 	/**
-	 * 형태소분석 실패시: 방탄소년단rt1 0->8 ON
 	 * @throws IOException
 	 */
 	@Test
@@ -119,7 +118,7 @@ class TopicAnalyzerTest {
 			System.out
 					.print(term.toString() + " " + offset.startOffset() + 
 						"->" + offset.endOffset() + " type:" + type.type() +
-						" payload:" //+ payload.payload.utf8ToString()
+						" payload:" + payload.payload.utf8ToString()
 						);
 			System.out.println();
 			System.out.println();
