@@ -4,6 +4,7 @@ import org.elasticsearch.index.analysis.AnalysisModule;
 import org.elasticsearch.plugins.AbstractPlugin;
 
 import com.elasticsearch.index.analysis.MyAnalysisBinderProcessor;
+import com.elasticsearch.index.analysis.TopicAnalysisBinderProcessor;
 
 public class AnalysisMyPlugin extends AbstractPlugin {
 
@@ -16,5 +17,6 @@ public class AnalysisMyPlugin extends AbstractPlugin {
 	}
 	public void onModule(AnalysisModule module) {
 		module.addProcessor(new MyAnalysisBinderProcessor());
+		module.addProcessor(new TopicAnalysisBinderProcessor());
 	}
 }

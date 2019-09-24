@@ -56,7 +56,7 @@ class BuildingQueryMain {
 		executeQuery(bool)
 	}
 	def void matchQuery() {
-		def matchQury = QueryBuilders.matchQuery("body", "마음")
+		def matchQury = QueryBuilders.matchQuery("body", "미코 짱")
 		executeQuery(matchQury)
 	}
 	def void matchPhraseQuery() {
@@ -110,11 +110,11 @@ class BuildingQueryMain {
 	static void main(args) {
 		def main = new BuildingQueryMain()
 		main.createClient()
-		main.termQuery()
+//		main.termQuery()
 //		main.termsQuery()
 //		main.rangeQuery()
 //		main.boolQuery()
-//		main.matchQuery()
+		main.matchQuery()
 //		main.matchPhraseQuery()
 //		main.matchAllQuery()
 //		main.andFilterQuery()

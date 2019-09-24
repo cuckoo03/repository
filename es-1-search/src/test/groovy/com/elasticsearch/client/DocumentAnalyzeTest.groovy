@@ -44,9 +44,9 @@ class DocumentAnalyzeTest {
 		client = tmp;
 		
 		AnalyzeRequest request = (
-			new AnalyzeRequest("우리짐건 입금을 시작합니다??".toLowerCase()))
+			new AnalyzeRequest("#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!".toLowerCase()))
 			.index(INDEX_NAME1) 
-			.analyzer("my_analyzer")
+			.analyzer("topic_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer
 		List<AnalyzeResponse.AnalyzeToken> tokens = client.admin().indices()
 			.analyze(request).actionGet().getTokens();

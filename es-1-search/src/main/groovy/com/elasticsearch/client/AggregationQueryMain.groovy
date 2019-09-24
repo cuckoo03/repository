@@ -1,6 +1,8 @@
 package com.elasticsearch.client
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.search.aggregations.AggregationBuilders.*;
+
+import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.client.Client
 import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.ImmutableSettings
@@ -19,7 +21,7 @@ class AggregationQueryMain {
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
-	private final String TYPE_NAME1 = "post"
+	private final String TYPE_NAME1 = "article"
 	def void createClient() {
 		def s = ImmutableSettings.settingsBuilder()
 				.put(CLUSTER_NAME_FIELD, CLUSTER_NAME)
@@ -30,41 +32,40 @@ class AggregationQueryMain {
 		client = tmp;
 	}
 	def void aggregate() {
-		def termQuery = QueryBuilders.termQuery("body", "나중")
+		def termQuery = QueryBuilders.matchQuery("body", "김다현")
 		def aggsBuilder = terms("bodyTerms").field("body")
 		def extStatsAggsBuider = extendedStats("createDateStats").field("createDate")
+		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
 		def response = client.prepareSearch(INDEX_NAME1).
-			setTypes(TYPE_NAME1).addFields("articleId", "body").
+			setTypes(TYPE_NAME1).addFields("sentimentTopic").
 			setQuery(termQuery).
 			addAggregation(aggsBuilder).addAggregation(extStatsAggsBuider).
 			execute().actionGet()
+			
+			printResponse(response)
+	}
+	def void printResponse(SearchResponse response) {
 		if (response.status().status == 200) {
 			println "matched number:${response.getHits().getTotalHits()}"
 			def termsAggs = response.aggregations.get("bodyTerms") as Terms
 			println termsAggs.name + ":" + termsAggs.buckets.size()
 			for (def bucket : termsAggs.buckets) {
-				println "-" + bucket.key + ", " + bucket.docCount
+				println bucket.key + " " + bucket.docCount
 			}
 			
 			def extStats = response.aggregations.get("createDateStats") as ExtendedStats
 			println extStats.name
-			println "count:$extStats.count"  
-			println "min:$extStats.min"  
-			println "max:$extStats.max"  
+			println "count:$extStats.count"
+			println "min:$extStats.min"
+			println "max:$extStats.max"
 			println "standard deviation:$extStats.stdDeviation"
 			println "sum of sequares:$extStats.sumOfSquares"
 			println "variance:$extStats.variance"
 		}
-		
 	}
-	def void execute() {
-//		def response = client.prepareSearch(INDEX_NAME1).
-//		setTypes(TYPE_NAME1).addFields("articleId", "body").setQuery(query).execute().actionGet()
-	} 
 	static void main(args) {
 		def main = new AggregationQueryMain()
 		main.createClient()
 		main.aggregate()
-		
 	}
 }

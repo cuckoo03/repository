@@ -107,6 +107,8 @@ class ManageIndexMain {
 				.setType(typeName).setSource(builder).execute().actionGet()
 		if (!response.acknowledged) {
 			println "something strange happens"
+		} else {
+			println "put mapping success."
 		}
 	}
 	def void showMapping(String indexName, String typeName) {

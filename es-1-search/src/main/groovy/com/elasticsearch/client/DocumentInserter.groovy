@@ -33,6 +33,9 @@ class DocumentInserter {
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
 	private final String FIELD4_NAME = "createDate"
+	private final String FIELD5_NAME = "topic"
+	private final String FIELD6_NAME = "sentiment"
+	private final String FIELD7_NAME = "tpo"
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
@@ -66,11 +69,12 @@ class DocumentInserter {
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
-		createThreads()
+//		createThreads()
+		final def content = "김다현 존멋 #TWICE #트와이스 #FeelSpecial #다현 #DAHYUN 오늘"
+		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "2", "title1", content, 
+			"2019090300000", content, content, content)
 		
-//		addDocument(INDEX_NAME1, TYPE_NAME1, 1, "2", "title1", "방탄소년단", "2019090300000")
-		
-		sleep(1000 * 60 * 60 * 24)
+//		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
 	
@@ -171,12 +175,16 @@ class DocumentInserter {
 	}
 	
 	void addDocument(String indexName, String typeName, int seq, String articleId, String title, String body, 
-		String createDate) {
+		String createDate, String topic, String sentiment, String tpo) {
 		def ir = client.prepareIndex(indexName, typeName, seq.toString())
 				.setSource(FIELD1_NAME, articleId,
 					FIELD2_NAME, title, 
 					FIELD3_NAME, body,
-					FIELD4_NAME, createDate).execute().actionGet()
+					FIELD4_NAME, createDate,
+					FIELD5_NAME, topic,
+					FIELD6_NAME, sentiment,
+					FIELD7_NAME, tpo
+					).execute().actionGet()
 		println "version=$ir.version"
 		def gr = client.prepareGet(indexName, typeName, seq.toString()).execute().actionGet()
 		println gr.source
