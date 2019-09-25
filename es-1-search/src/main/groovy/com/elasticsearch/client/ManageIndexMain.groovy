@@ -215,12 +215,6 @@ class ManageIndexMain {
 		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/_cluster/state?pretty"
 		println new URL(data).getText()
 	}
-	def void putSettings(String indexName, String typeName) {
-		
-	}
-	
-	def void showSettings(String indexName, String typeName) {
-	}
 	def void analyze() {
 		def request = new AnalyzeRequest("우리짐건 입금을 시작합니다??".toLowerCase())
 			.index(INDEX_NAME1)

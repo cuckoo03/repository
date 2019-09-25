@@ -71,8 +71,8 @@ class DocumentInserter {
 		
 //		createThreads()
 		final def content = "#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
-		addDocument(INDEX_NAME, TYPE_NAME, 1, "2", "title1", content, 
-			"2019090300000", content, content, content)
+		addDocument(INDEX_NAME, TYPE_NAME, 3, "3", "title3", content, 
+			"2019090400000", content, content, content)
 		
 //		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
