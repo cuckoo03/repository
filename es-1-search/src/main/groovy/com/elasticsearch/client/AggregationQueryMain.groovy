@@ -48,14 +48,10 @@ class AggregationQueryMain {
 		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body")
 		def extStatsAggsBuider = AggregationBuilders.extendedStats(STATS_AGG_NAME).field("createDate")
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
-		def response = client.prepareSearch(INDEX_NAME).
-			setTypes(TYPE_NAME).
-			setQuery(termQuery).
-			addAggregation(aggsBuilder).
-			addAggregation(extStatsAggsBuider).
-			setFrom(0).
-			setSize(10).
-			execute().actionGet()
+		def response = client.prepareSearch(INDEX_NAME)
+		.setTypes(TYPE_NAME).setQuery(termQuery).addAggregation(aggsBuilder)
+		.addAggregation(extStatsAggsBuider)
+		.execute().actionGet()
 			
 		if (response.status().status == 200) {
 			println "matched number:${response.getHits().getTotalHits()}"
@@ -65,23 +61,63 @@ class AggregationQueryMain {
 				println bucket.key + " " + bucket.docCount + " "
 			}
 			
-			if (response.status().status == 200) {
-				def extStats = response.aggregations.get(STATS_AGG_NAME) as ExtendedStats
-				println extStats.name
-				println "count:$extStats.count"
-				println "min:$extStats.min"
-				println "max:$extStats.max"
-				println "standard deviation:$extStats.stdDeviation"
-				println "sum of sequares:$extStats.sumOfSquares"
-				println "variance:$extStats.variance"
+			def extStats = response.aggregations.get(STATS_AGG_NAME) as ExtendedStats
+			println extStats.name
+			println "count:$extStats.count"
+			println "min:$extStats.min"
+			println "max:$extStats.max"
+			println "standard deviation:$extStats.stdDeviation"
+			println "sum of sequares:$extStats.sumOfSquares"
+			println "variance:$extStats.variance"
+		}
+	}
+	def void range() {
+		AggregationBuilders.range("")
+	}
+	def void dateRange() {
+		AggregationBuilders.dateRange("")
+	}
+	def void a() {
+		AggregationBuilders.cardinality("")//add es1.1
+		AggregationBuilders.percentiles("")//add es1.1
+		AggregationBuilders.significantTerms("")// add es1.1
+		AggregationBuilders.nested("")//add es1.0
+
+	}
+	def void tophitAggregate() {
+		final def AGG_NAME = "terms"
+		final def STATS_AGG_NAME = "createDateStats"
+		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
+		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body")
+		def tophitBuilder = AggregationBuilders.topHits("tophit")
+		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
+		def response = client.prepareSearch(INDEX_NAME)
+		.setTypes(TYPE_NAME).setQuery(termQuery).addAggregation(aggsBuilder)
+		.addAggregation(tophitBuilder)
+		.execute().actionGet()
+			
+		if (response.status().status == 200) {
+			println "matched number:${response.getHits().getTotalHits()}"
+			def termsAggs = response.aggregations.get(AGG_NAME) as Terms
+			println termsAggs.name + ":" + termsAggs.buckets.size()
+			for (def bucket : termsAggs.buckets) {
+				println bucket.key + " " + bucket.docCount + " "
 			}
 		}
+	}
+	// add es1.4
+	def void filterAggregate() {
+		
+	}
+	// add es1.4
+	def void childrenAggregate() {
+		
 	}
 	def void histogramAggregate() {
 		final def AGG_NAME = "histogram" 
 		def filter1 = FilterBuilders.termFilter("body", "트와이스")
-		def filter2 = FilterBuilders.rangeFilter("createDate")
-		.from("20190903").to("20190905000000")
+		def filter2 = FilterBuilders.rangeFilter("articleId")
+		.from("1").to("3")
 		def filterBuilder = FilterBuilders.andFilter(filter1, filter2)
 		def qb = QueryBuilders.constantScoreQuery(filterBuilder)
 
@@ -89,7 +125,7 @@ class AggregationQueryMain {
 		.interval(1).order(Order.KEY_DESC).field("articleId")
 		def response = client.prepareSearch(INDEX_NAME)
 		.setTypes(TYPE_NAME).setQuery(qb).addAggregation(histogramBuilder)
-		.setFrom(0).setSize(0).execute().actionGet()
+		.execute().actionGet()
 		
 		if (response.status().status == 200) {
 			def histogramAggs = response.aggregations.get(AGG_NAME) as Histogram
@@ -124,13 +160,19 @@ class AggregationQueryMain {
 			})
 		}
 	}
+	// provide by es1.3.0
+	def void topHitAggragtion() {
+		
+	}
 	static void main(args) {
 		def main = new AggregationQueryMain()
 		main.createClient()
-		main.termAggregate()
+//		main.termAggregate()
 		println ""
-		main.histogramAggregate()
+//		main.histogramAggregate()
 		println ""
 //		main.dateHistogramAggregation()
+		println ""
+		main.tophitAggregate()
 	}
 }
