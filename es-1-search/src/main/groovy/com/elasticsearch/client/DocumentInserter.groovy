@@ -17,7 +17,6 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.elasticsearch.client.dao.TapacrossDao
 import com.elasticsearch.client.entity.TableEntity
-import com.tapacross.sns.analyzer.MyAnalyzer2
 
 import groovy.transform.TypeChecked
 
@@ -27,7 +26,7 @@ class DocumentInserter {
 	private Client client
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
-	private final String INDEX_NAME = "twitter_1908"
+	private final String INDEX_NAME = "twitter-20190101"
 	private final String TYPE_NAME = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
@@ -59,25 +58,19 @@ class DocumentInserter {
 		this.context = new GenericXmlApplicationContext(
 			"classpath:spring/application-context.xml");
 		dao = context.getBean(TapacrossDao.class)
-		
 		createClient()
-		
-//		deleteIndex(INDEX_NAME1)
-//		createIndex(INDEX_NAME1)
-//		createMapping(INDEX_NAME1, TYPE_NAME1)
 		
 		def start = System.currentTimeMillis()
 		println "start add documents"
 		
 //		createThreads()
 		final def content = "#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
-		addDocument(INDEX_NAME, TYPE_NAME, 3, "3", "title3", content, 
+		addDocument(INDEX_NAME, TYPE_NAME, 1, "1", "title1", content, 
 			"2019090400000", content, content, content)
 		
 //		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
 	}
-	
 	int sequence = 1
 	void createThreads() {
 		1.times {
@@ -104,39 +97,6 @@ class DocumentInserter {
 		tmp.addTransportAddress(new InetSocketTransportAddress(
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
-	}
-	void createMapping(String indexName, String typeName) {
-		// properties:{
-		// 	field1:{
-		//		type:string
-		// }, field2:{
-		// 		type:string
-		// }
-		//}
-		def builder = JsonXContent.contentBuilder().
-				startObject().field(typeName)
-					.startObject().field(PROPERTIES_FIELD_NAME)
-						.startObject()
-							.field(FIELD1_NAME)
-								.startObject().field(TYPE_FIELD_NAME, LONG_FIELD_TYPE)
-								.endObject()
-								.field(FIELD2_NAME)
-									.startObject().field(TYPE_FIELD_NAME, STRING_FIELD_TYPE)
-									.endObject()
-								.field(FIELD3_NAME)
-									.startObject().field(TYPE_FIELD_NAME, STRING_FIELD_TYPE)
-									.endObject()
-								.field(FIELD4_NAME)
-									.startObject().field(TYPE_FIELD_NAME, DATE_FIELD_TYPE).field(FORMAT_FIELD_NAME, FORMAT_FIELD_VALUE)
-									.endObject()
-						.endObject()
-					.endObject()
-				.endObject()
-		def response = client.admin().indices().preparePutMapping(indexName)
-				.setType(typeName).setSource(builder).execute().actionGet()
-		if (!response.acknowledged) {
-			println "something strange happens"
-		}
 	}
 	
 	def int fetch = 10
@@ -188,10 +148,6 @@ class DocumentInserter {
 		println "version=$ir.version"
 		def gr = client.prepareGet(indexName, typeName, seq.toString()).execute().actionGet()
 		println gr.source
-	}
-	
-	static void updateDocument() {
-		//		client.prepareUpdate(INDEX_NAME, TYPE_NAME, "1").setScript(ScriptService.ScriptType.INLINE)
 	}
 	
 	static void main(args) {

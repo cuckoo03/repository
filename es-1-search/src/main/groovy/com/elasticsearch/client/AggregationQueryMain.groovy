@@ -9,13 +9,18 @@ import org.elasticsearch.search.aggregations.AggregationBuilders
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogram.Interval
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogram
 import org.elasticsearch.search.aggregations.bucket.histogram.Histogram
+import org.elasticsearch.search.aggregations.bucket.histogram.HistogramBuilder
 import org.elasticsearch.search.aggregations.bucket.histogram.Histogram.Order
 import org.elasticsearch.search.aggregations.bucket.histogram.InternalDateHistogram
 import org.elasticsearch.search.aggregations.bucket.histogram.InternalHistogram
 import org.elasticsearch.search.aggregations.bucket.terms.Terms
+import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder
 import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats
-
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHits
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHitsAggregator
+import org.elasticsearch.search.internal.InternalSearchHit
 import groovy.transform.TypeChecked
+import java.text.SimpleDateFormat
 
 /**
  * https://www.programcreek.com/java-api-examples/?api=org.elasticsearch.search.aggregations.AggregationBuilders
@@ -27,6 +32,7 @@ class AggregationQueryMain {
 	private Client client
 	
 	private final String INDEX_NAME = "twitter_1908"
+	private final List<String> INDEX_NAMES = ["twitter-20190101", "twitter-20190102"]
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
@@ -45,10 +51,11 @@ class AggregationQueryMain {
 		final def AGG_NAME = "terms"
 		final def STATS_AGG_NAME = "createDateStats" 
 		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
-		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body")
+		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body") as TermsBuilder
+		aggsBuilder.size(2)
 		def extStatsAggsBuider = AggregationBuilders.extendedStats(STATS_AGG_NAME).field("createDate")
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
-		def response = client.prepareSearch(INDEX_NAME)
+		def response = client.prepareSearch(INDEX_NAMES as String[])
 		.setTypes(TYPE_NAME).setQuery(termQuery).addAggregation(aggsBuilder)
 		.addAggregation(extStatsAggsBuider)
 		.execute().actionGet()
@@ -84,16 +91,20 @@ class AggregationQueryMain {
 		AggregationBuilders.nested("")//add es1.0
 
 	}
+	// add es1.3
 	def void tophitAggregate() {
 		final def AGG_NAME = "terms"
-		final def STATS_AGG_NAME = "createDateStats"
+		final def TOPHIT_AGG_NAME = "tophit"
 		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
 		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body")
-		def tophitBuilder = AggregationBuilders.topHits("tophit")
+		def tophitBuilder = AggregationBuilders.topHits(TOPHIT_AGG_NAME)
+			.setExplain(true).setFrom(0).setSize(1)
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
 		def response = client.prepareSearch(INDEX_NAME)
-		.setTypes(TYPE_NAME).setQuery(termQuery).addAggregation(aggsBuilder)
+		.setTypes(TYPE_NAME).setQuery(termQuery)
+		.addAggregation(aggsBuilder)
 		.addAggregation(tophitBuilder)
+		.setSize(1)
 		.execute().actionGet()
 			
 		if (response.status().status == 200) {
@@ -103,6 +114,13 @@ class AggregationQueryMain {
 			for (def bucket : termsAggs.buckets) {
 				println bucket.key + " " + bucket.docCount + " "
 			}
+			
+			def tophitAggs = 
+				response.aggregations.get(TOPHIT_AGG_NAME) as TopHits
+			println tophitAggs.hits
+			tophitAggs.hits.forEach({ InternalSearchHit it ->
+				println it.source
+			})
 		}
 	}
 	// add es1.4
@@ -120,7 +138,6 @@ class AggregationQueryMain {
 		.from("1").to("3")
 		def filterBuilder = FilterBuilders.andFilter(filter1, filter2)
 		def qb = QueryBuilders.constantScoreQuery(filterBuilder)
-
 		def histogramBuilder = AggregationBuilders.histogram(AGG_NAME)
 		.interval(1).order(Order.KEY_DESC).field("articleId")
 		def response = client.prepareSearch(INDEX_NAME)
@@ -160,19 +177,31 @@ class AggregationQueryMain {
 			})
 		}
 	}
-	// provide by es1.3.0
-	def void topHitAggragtion() {
+	def List<String> createDailyIndexes() {
+		def result = []
+		def indexName = ""
+		def cal = Calendar.instance
+		cal.set(Calendar.YEAR, 2019)
+		cal.set(Calendar.MONTH, 0)
+		cal.set(Calendar.DATE, 1)
+		def sdf = new SimpleDateFormat("yyyyMMdd")
+		while (cal.get(Calendar.YEAR) > 2010) {
+			def formatted = sdf.format(cal.time)
+			result += "twitter-$formatted"
+			cal.add(Calendar.DATE, - 1)
+		}
 		
+		return result
 	}
 	static void main(args) {
 		def main = new AggregationQueryMain()
 		main.createClient()
-//		main.termAggregate()
+		main.termAggregate()
 		println ""
 //		main.histogramAggregate()
 		println ""
 //		main.dateHistogramAggregation()
 		println ""
-		main.tophitAggregate()
+//		main.tophitAggregate()
 	}
 }

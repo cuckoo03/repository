@@ -19,6 +19,7 @@ import org.elasticsearch.common.xcontent.json.JsonXContent
 
 import groovy.json.JsonSlurper
 import groovy.transform.TypeChecked
+import java.text.SimpleDateFormat
 
 /**
  * https://www.programcreek.com/java-api-examples/?api=org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse
@@ -30,8 +31,8 @@ class ManageIndexMain {
 	private Client client
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
-	private static final String INDEX_NAME1 = "twitter_1908"
-	private static final String TYPE_NAME1 = "article"
+	private static final String INDEX_NAME = "twitter_1909"
+	private static final String TYPE_NAME = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
@@ -63,7 +64,7 @@ class ManageIndexMain {
 	void createIndex(String indexName) {
 		if (!indexExists(indexName)) {
 			client.admin().indices().create(new CreateIndexRequest(indexName)).actionGet()
-			println "index create success."
+			println "$indexName:index create success."
 		} else {
 			println "exist index."
 		}
@@ -114,7 +115,7 @@ class ManageIndexMain {
 		def json = new JsonSlurper().parseText(data)
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		HttpPost postRequest = new HttpPost(
-			"http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$INDEX_NAME1");
+			"http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$indexName");
 
 		StringEntity input = new StringEntity(data);
 		input.setContentType("application/text");
@@ -123,6 +124,7 @@ class ManageIndexMain {
 		HttpResponse response = httpClient.execute(postRequest);
 
 		if (response.getStatusLine().getStatusCode() != 200) {
+			println response
 			throw new RuntimeException("Failed : HTTP error code : "
 				+ response.getStatusLine().getStatusCode());
 		}
@@ -136,6 +138,20 @@ class ManageIndexMain {
 		}
 
 		httpClient.getConnectionManager().shutdown();
+	}
+	def void createDailyIndexes() {
+		def indexName = ""
+		def cal = Calendar.instance
+		cal.set(Calendar.YEAR, 2019)
+		cal.set(Calendar.MONTH, 0)
+		cal.set(Calendar.DATE, 1)
+		def sdf = new SimpleDateFormat("yyyyMMdd")
+		while (cal.get(Calendar.YEAR) > 2010) {
+			def formatted = sdf.format(cal.time)
+//			deleteIndex("twitter-$formatted")
+			createIndexRest("twitter-$formatted")
+			cal.add(Calendar.DATE, - 1)
+		}
 	}
 	boolean indexExists(String indexName) {
 		def map = client.admin().cluster().prepareState().execute().actionGet().getState().getMetaData().getIndices()
@@ -202,12 +218,12 @@ class ManageIndexMain {
 		}
 	}
 	def void showMappingRest(String indexName) {
-		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$INDEX_NAME1/_mapping?pretty"
+		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$INDEX_NAME/_mapping?pretty"
 		println data
 		println new URL(data).getText()
 	}
 	def void showSettingsRest(String indexName) {
-		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$INDEX_NAME1/_settings?pretty"
+		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$INDEX_NAME/_settings?pretty"
 		println data
 		println new URL(data).getText()
 	}
@@ -217,7 +233,7 @@ class ManageIndexMain {
 	}
 	def void analyze() {
 		def request = new AnalyzeRequest("우리짐건 입금을 시작합니다??".toLowerCase())
-			.index(INDEX_NAME1)
+			.index(INDEX_NAME)
 			.analyzer("my_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer
 		def tokens = client.admin().indices().analyze(request).actionGet().getTokens();
@@ -229,14 +245,19 @@ class ManageIndexMain {
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()
-		main.deleteIndex(INDEX_NAME1)
-//		main.createIndex(INDEX_NAME1)
-		main.createIndexRest(INDEX_NAME1)
+//		main.deleteIndex(INDEX_NAME)
+//		main.createIndex(INDEX_NAME)
+
+//		main.createIndexRest(INDEX_NAME)
 //		main.putMapping(INDEX_NAME1, TYPE_NAME1)
 //		main.showMapping(INDEX_NAME1, TYPE_NAME1)
-		main.showMappingRest(INDEX_NAME1)
-		main.showSettingsRest(INDEX_NAME1)
+
+//		main.showMappingRest(INDEX_NAME1)
+//		main.showSettingsRest(INDEX_NAME1)
+
 //		main.showClusterStateRest()
 //		main.analyze()
+		
+		main.createDailyIndexes()
 	}
 }

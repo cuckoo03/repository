@@ -11,7 +11,6 @@ import org.apache.lucene.analysis.util.CharTokenizer
 import org.apache.lucene.analysis.util.CharacterUtils
 import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer
 import org.apache.lucene.util.Version
-import org.apache.lucene.util.AttributeSource.AttributeFactory
 import com.tapacross.ise.MorphemeResult
 import com.tapacross.service.AdminDataManager
 import groovy.transform.TypeChecked
@@ -27,7 +26,7 @@ class MyCharTokenizer extends Tokenizer {
 	 * @param input
 	 *          the input to split up into tokens
 	 */
-	public MyCharTokenizer(Version matchVersion, Reader input, s) {
+	def MyCharTokenizer(Version matchVersion, Reader input, s) {
 		super(input);
 		charUtils = CharacterUtils.getInstance(matchVersion);
 		this.s = s
@@ -37,21 +36,6 @@ class MyCharTokenizer extends Tokenizer {
 	private String[] tokens;
 	private String[] pos;
 
-	/**
-	 * Creates a new {@link CharTokenizer} instance
-	 *
-	 * @param matchVersion
-	 *          Lucene version to match
-	 * @param factory
-	 *          the attribute factory to use for this {@link Tokenizer}
-	 * @param input
-	 *          the input to split up into tokens
-	 */
-	public MyCharTokenizer(Version matchVersion, AttributeFactory factory,
-	Reader input) {
-		super(factory, input);
-		charUtils = CharacterUtils.getInstance(matchVersion);
-	}
 	private String readerToString(Reader reader) throws IOException {
 		char[] buffer = new char[4096];
 		int charsRead = reader.read(buffer);

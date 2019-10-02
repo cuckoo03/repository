@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<lucene.version>4.6.1</lucene.version>
+		<lucene.version>4.10.2</lucene.version>
 		<springframework.version>4.0.1.RELEASE</springframework.version>
 	</properties>
 
@@ -40,23 +40,6 @@
 			<version>2.3.11</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- es1.4와 groovy2.3.10 사용시 com.vividsolutions.jts.geom.Coordinate class not found error 발생 -->
-		<!-- 아래와  같은 라이브러리 추가해야함 -->
-		<!-- https://github.com/elastic/elasticsearch/issues/9891 -->
-		<!-- 
-		<dependency>
-			<groupId>com.vividsolutions</groupId>
-			<artifactId>jts</artifactId>
-			<version>1.13</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		 -->
 		<!-- 4.1.0~4.10.0 정상 테스트 -->
 		<dependency>
 			<groupId>org.apache.lucene</groupId>

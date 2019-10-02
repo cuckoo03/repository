@@ -77,11 +77,10 @@ class MyAnalyzerTest {
 	}
 
 	@Test
-	@Ignore
 	public void testIndex() throws IOException {
 		String text = "버튼을 이용하여 분석식에"
 		
-		def analyzer = new MyAnalyzer2()
+		def analyzer = new MyAnalyzer()
 		
 		Directory dir = new RAMDirectory()
 //		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41)
@@ -129,15 +128,6 @@ class MyAnalyzerTest {
 						);
 			System.out.println();
 			System.out.println();
-		}
-	}
-
-	private void repeat(Analyzer analyzer, String text) throws IOException {
-		for (int i = 0; i < 10000; i++) {
-			TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
-			stream.reset()
-			printTerms(stream)
-			stream.close()
 		}
 	}
 }
