@@ -23,7 +23,7 @@ import groovy.transform.TypeChecked
 
 
 /**
- * 주제어 토크나이저
+ * 감성어 토크나이저
  * workflow
  * 최초 객체 생성시:constructor->reset->increment loop->end->close
  * 생성 이후부터:reset->increment loop->end->close
@@ -31,25 +31,27 @@ import groovy.transform.TypeChecked
  *
  */
 @TypeChecked
-class TopicTokenizer extends Tokenizer {
+class SentimentTokenizer extends Tokenizer {
 	private int offset, bufferIndex = 0, dataLen = 0, tokenIndex = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
 	private char[] ioBuffer = new char[IO_BUFFER_SIZE];
 	
 	private AdminDataManager adm = new AdminDataManager();
-	private String[] tokens;
-	private String[] termNumbers;
-	private String[] c1Names
+	private String[] tokens
+	private String[] termNumbers
+	private int[] cliches
+	private int[] polarities
+	private int[] scores
 	
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
 	private final PayloadAttribute payloadAtt = addAttribute(PayloadAttribute.class);
 	private StringReader input2;
 	
-	public TopicTokenizer(Reader input) {
+	public SentimentTokenizer(Reader input) {
 		super(input);
-		System.out.println("TopicTokenizer constructor");
+		System.out.println("SentimentTokenizer constructor");
 		
 		adm.setOnlineEngineAddress("broker.ip:2012");
 	}
@@ -74,7 +76,7 @@ class TopicTokenizer extends Tokenizer {
 		def wordLength = tokens[tokenIndex].size()
 		termAtt.setEmpty()
 		termAtt.setLength(wordLength);
-		typeAtt.setType(c1Names[tokenIndex]);
+		typeAtt.setType("sentiment");
 		def bytesRef = new BytesRef(termNumbers[tokenIndex].getBytes("UTF-8"));
 		payloadAtt.setPayload(bytesRef)
 		tokenIndex++
@@ -103,10 +105,12 @@ class TopicTokenizer extends Tokenizer {
 			adm.getMorpheme("reset:"+this.toString());
 			
 			def result = new WordResult();
-			result = adm.extractTopic(s, null, 0);
+			result = adm.extractSentiment(s, null, 0);
 			tokens = result.getWord()
 			termNumbers = result.getTno()
-			c1Names = result.getC1name()
+			cliches = result.getCliche()
+			polarities = result.getPolarity()
+			scores = result.getScore()
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

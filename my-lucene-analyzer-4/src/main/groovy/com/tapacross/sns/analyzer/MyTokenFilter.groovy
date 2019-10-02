@@ -13,7 +13,7 @@ import org.apache.lucene.util.Version
 import groovy.transform.TypeChecked
 
 /**
- * 주제어 필터
+ * 형태소 필터
  * @author admin
  *
  */

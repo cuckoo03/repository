@@ -34,7 +34,7 @@ class DocumentInserter {
 	private final String FIELD4_NAME = "createDate"
 	private final String FIELD5_NAME = "topic"
 	private final String FIELD6_NAME = "sentiment"
-	private final String FIELD7_NAME = "tpo"
+	private final String FIELD7_NAME = "occasion"
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
@@ -64,7 +64,7 @@ class DocumentInserter {
 		println "start add documents"
 		
 //		createThreads()
-		final def content = "#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
+		final def content = "좋은 #트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
 		addDocument(INDEX_NAME, TYPE_NAME, 1, "1", "title1", content, 
 			"2019090400000", content, content, content)
 		
@@ -135,7 +135,7 @@ class DocumentInserter {
 	}
 	
 	void addDocument(String indexName, String typeName, int seq, String articleId, String title, String body, 
-		String createDate, String topic, String sentiment, String tpo) {
+		String createDate, String topic, String sentiment, String occasion) {
 		def ir = client.prepareIndex(indexName, typeName, seq.toString())
 				.setSource(FIELD1_NAME, articleId,
 					FIELD2_NAME, title, 
@@ -143,7 +143,7 @@ class DocumentInserter {
 					FIELD4_NAME, createDate,
 					FIELD5_NAME, topic,
 					FIELD6_NAME, sentiment,
-					FIELD7_NAME, tpo
+					FIELD7_NAME, occasion
 					).execute().actionGet()
 		println "version=$ir.version"
 		def gr = client.prepareGet(indexName, typeName, seq.toString()).execute().actionGet()

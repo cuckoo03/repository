@@ -105,7 +105,6 @@ class BuildingQueryMain {
 				println hit.field("body").value
 			}
 		}
-		
 	}
 	static void main(args) {
 		def main = new BuildingQueryMain()

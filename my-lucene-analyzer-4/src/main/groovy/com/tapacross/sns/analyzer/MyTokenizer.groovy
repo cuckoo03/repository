@@ -20,6 +20,7 @@ import groovy.transform.TypeChecked
 
 
 /**
+ * 형태소 토크나이저
  * workflow
  * 최초 객체 생성시:constructor->reset->increment loop->end->close
  * 생성 이후부터:reset->increment loop->end->close

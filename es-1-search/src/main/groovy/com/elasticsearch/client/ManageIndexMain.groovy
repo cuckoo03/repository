@@ -31,7 +31,7 @@ class ManageIndexMain {
 	private Client client
 	
 	private final String TABLE_NAME = "tb_article_search_twitter_1908"
-	private static final String INDEX_NAME = "twitter_1909"
+	private static final String INDEX_NAME = "twitter-20190101"
 	private static final String TYPE_NAME = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
@@ -87,6 +87,12 @@ class ManageIndexMain {
                 },
                 "topic_analyzer": {
                     "type": "custom", "tokenizer": "topic_tokenizer", "filter":"topic_filter"
+                },
+                "sentiment_analyzer": {
+                    "type": "custom", "tokenizer": "sentiment_tokenizer", "filter":"sentiment_filter"
+                },
+                "occasion_analyzer": {
+                    "type": "custom", "tokenizer": "occasion_tokenizer", "filter":"occasion_filter"
                 }
             }
         }
@@ -104,8 +110,8 @@ class ManageIndexMain {
                     "title": {"type": "string", "analyzer":"my_analyzer"},
                     "createDate": {"type": "date", "format":"yyyyMMddHHmmss"},
                     "topic": {"type": "string", "analyzer":"topic_analyzer"},
-                    "sentiment": {"type": "string", "analyzer":"my_analyzer"},
-                    "tpo": {"type": "string", "analyzer":"my_analyzer"}
+                    "sentiment": {"type": "string", "analyzer":"sentiment_analyzer"},
+                    "occasion": {"type": "string", "analyzer":"occasion_analyzer"}
                     }
                 }
             }
@@ -146,7 +152,7 @@ class ManageIndexMain {
 		cal.set(Calendar.MONTH, 0)
 		cal.set(Calendar.DATE, 1)
 		def sdf = new SimpleDateFormat("yyyyMMdd")
-		while (cal.get(Calendar.YEAR) > 2010) {
+		while (cal.get(Calendar.YEAR) > 2017) {
 			def formatted = sdf.format(cal.time)
 //			deleteIndex("twitter-$formatted")
 			createIndexRest("twitter-$formatted")
@@ -232,9 +238,9 @@ class ManageIndexMain {
 		println new URL(data).getText()
 	}
 	def void analyze() {
-		def request = new AnalyzeRequest("우리짐건 입금을 시작합니다??".toLowerCase())
+		def request = new AnalyzeRequest("좋은 #트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다".toLowerCase())
 			.index(INDEX_NAME)
-			.analyzer("my_analyzer")
+			.analyzer("occasion_analyzer")
 //			.tokenizer("my_tokenizer");//my_analyzer
 		def tokens = client.admin().indices().analyze(request).actionGet().getTokens();
 		for (AnalyzeResponse.AnalyzeToken token : tokens) {
@@ -245,10 +251,10 @@ class ManageIndexMain {
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()
-//		main.deleteIndex(INDEX_NAME)
+		main.deleteIndex(INDEX_NAME)
 //		main.createIndex(INDEX_NAME)
 
-//		main.createIndexRest(INDEX_NAME)
+		main.createIndexRest(INDEX_NAME)
 //		main.putMapping(INDEX_NAME1, TYPE_NAME1)
 //		main.showMapping(INDEX_NAME1, TYPE_NAME1)
 
@@ -258,6 +264,6 @@ class ManageIndexMain {
 //		main.showClusterStateRest()
 //		main.analyze()
 		
-		main.createDailyIndexes()
+//		main.createDailyIndexes()
 	}
 }

@@ -12,6 +12,11 @@ import org.apache.lucene.util.Version
 
 import groovy.transform.TypeChecked
 
+/**
+ * 형태소 분석기
+ * @author admin
+ *
+ */
 @TypeChecked
 class MyAnalyzer extends Analyzer {
 	@Override

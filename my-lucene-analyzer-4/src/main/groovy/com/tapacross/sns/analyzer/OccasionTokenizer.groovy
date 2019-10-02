@@ -23,7 +23,7 @@ import groovy.transform.TypeChecked
 
 
 /**
- * 주제어 토크나이저
+ * TPO 토크나이저
  * workflow
  * 최초 객체 생성시:constructor->reset->increment loop->end->close
  * 생성 이후부터:reset->increment loop->end->close
@@ -31,7 +31,7 @@ import groovy.transform.TypeChecked
  *
  */
 @TypeChecked
-class TopicTokenizer extends Tokenizer {
+class OccasionTokenizer extends Tokenizer {
 	private int offset, bufferIndex = 0, dataLen = 0, tokenIndex = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
@@ -40,16 +40,15 @@ class TopicTokenizer extends Tokenizer {
 	private AdminDataManager adm = new AdminDataManager();
 	private String[] tokens;
 	private String[] termNumbers;
-	private String[] c1Names
 	
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
 	private final PayloadAttribute payloadAtt = addAttribute(PayloadAttribute.class);
 	private StringReader input2;
 	
-	public TopicTokenizer(Reader input) {
+	public OccasionTokenizer(Reader input) {
 		super(input);
-		System.out.println("TopicTokenizer constructor");
+		System.out.println("TPOTokenizer constructor");
 		
 		adm.setOnlineEngineAddress("broker.ip:2012");
 	}
@@ -74,7 +73,7 @@ class TopicTokenizer extends Tokenizer {
 		def wordLength = tokens[tokenIndex].size()
 		termAtt.setEmpty()
 		termAtt.setLength(wordLength);
-		typeAtt.setType(c1Names[tokenIndex]);
+		typeAtt.setType(termNumbers[tokenIndex]);
 		def bytesRef = new BytesRef(termNumbers[tokenIndex].getBytes("UTF-8"));
 		payloadAtt.setPayload(bytesRef)
 		tokenIndex++
@@ -103,10 +102,9 @@ class TopicTokenizer extends Tokenizer {
 			adm.getMorpheme("reset:"+this.toString());
 			
 			def result = new WordResult();
-			result = adm.extractTopic(s, null, 0);
+			result = adm.extractOccasion(s, null, 0);
 			tokens = result.getWord()
 			termNumbers = result.getTno()
-			c1Names = result.getC1name()
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

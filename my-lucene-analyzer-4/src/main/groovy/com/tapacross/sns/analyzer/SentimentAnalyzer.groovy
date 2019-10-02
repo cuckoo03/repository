@@ -7,14 +7,14 @@ import org.apache.lucene.util.Version
 import groovy.transform.TypeChecked
 
 /**
- * 주제어 분석기 
+ * 감성어 분석기 
  */
 @TypeChecked
-class TopicAnalyzer extends Analyzer {
+class SentimentAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-		final def tokenizer = new TopicTokenizer(reader)
-		final def filter = new TopicTokenFilter(Version.LUCENE_46, tokenizer)
+		final def tokenizer = new SentimentTokenizer(reader)
+		final def filter = new SentimentTokenFilter(Version.LUCENE_46, tokenizer)
 		return new TokenStreamComponents(tokenizer, filter)
 	}
 }

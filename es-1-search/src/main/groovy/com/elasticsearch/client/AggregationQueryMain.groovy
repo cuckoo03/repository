@@ -31,8 +31,8 @@ import java.text.SimpleDateFormat
 class AggregationQueryMain {
 	private Client client
 	
-	private final String INDEX_NAME = "twitter_1908"
-	private final List<String> INDEX_NAMES = ["twitter-20190101", "twitter-20190102"]
+	private final String INDEX_NAME = "twitter-20190101"
+	private final List<String> INDEX_NAMES = ["twitter-20190101", "twitter-20190101"]
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
@@ -51,8 +51,8 @@ class AggregationQueryMain {
 		final def AGG_NAME = "terms"
 		final def STATS_AGG_NAME = "createDateStats" 
 		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
-		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("body") as TermsBuilder
-		aggsBuilder.size(2)
+		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("occasion") as TermsBuilder
+		aggsBuilder.size(4)
 		def extStatsAggsBuider = AggregationBuilders.extendedStats(STATS_AGG_NAME).field("createDate")
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
 		def response = client.prepareSearch(INDEX_NAMES as String[])

@@ -13,14 +13,12 @@ import org.apache.lucene.util.Version
 import groovy.transform.TypeChecked
 
 /**
- * 주제어 필터
- * PP품사 필터처리
- * 1글자 SY품사 필터처리
+ * 감성어 필터
  * @author admin
  *
  */
 @TypeChecked
-class TopicTokenFilter extends FilteringTokenFilter {
+class SentimentTokenFilter extends FilteringTokenFilter {
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final TypeAttribute typeAtt = addAttribute(TypeAttribute.class);
 	
@@ -29,20 +27,13 @@ class TopicTokenFilter extends FilteringTokenFilter {
 	 * @param version the Lucene match version
 	 * @param in      the {@link TokenStream} to consume
 	 */
-	public TopicTokenFilter(Version version, TokenStream stream) {
+	public SentimentTokenFilter(Version version, TokenStream stream) {
 		super(version, stream);
 	}
 
 	/** Override this method and return if the current input token should be returned by {@link #incrementToken}. */
 	@Override
 	protected boolean accept() throws IOException {
-		def type = typeAtt.type 
-		if (type == "PP") {
-			return false
-		}
-		if (termAtt.size() == 1 && type == "SY") {
-			return false
-		}
 		return true 
 	}
 
