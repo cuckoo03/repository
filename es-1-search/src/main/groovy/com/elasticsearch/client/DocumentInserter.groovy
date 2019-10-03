@@ -25,7 +25,7 @@ import groovy.transform.TypeChecked
 class DocumentInserter {
 	private def start
 	private Client client
-	private final int FETCH_SIZE = 1000
+	private final int FETCH_SIZE = 100
 	private final String TABLE_NAME = "tb_article_search_twitter_1901"
 	private final String INDEX_NAME = "twitter-20190101"
 	private final String TYPE_NAME = "article"
@@ -115,12 +115,12 @@ class DocumentInserter {
 				def ir = client.prepareIndex(articleIndexName, typeName, it.seq.toString())
 				.setSource(
 					TableField.FIELD1_NAME, it.articleId,
-					TableField.FIELD2_NAME, it.title, 
-					TableField.FIELD3_NAME, it.body,
+					TableField.FIELD2_NAME, it.title?.toLowerCase(), 
+					TableField.FIELD3_NAME, it.body?.toLowerCase(),
 					TableField.FIELD4_NAME, it.createDate,
-					TableField.FIELD5_NAME, it.body,
-					TableField.FIELD6_NAME, it.body,
-					TableField.FIELD7_NAME, it.body,
+					TableField.FIELD5_NAME, it.body?.toLowerCase(),
+					TableField.FIELD6_NAME, it.body?.toLowerCase(),
+					TableField.FIELD7_NAME, it.body?.toLowerCase(),
 				)
 				bulker.add(ir)
 			}

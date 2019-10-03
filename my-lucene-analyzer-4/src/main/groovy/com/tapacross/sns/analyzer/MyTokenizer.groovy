@@ -146,7 +146,7 @@ class MyTokenizer extends Tokenizer {
 		tokenIndex = 0
 		
 		def s = readerToString(input)
-		input2 = new StringReader(s)
+		input2 = new StringReader(s.toLowerCase())
 		try {
 			adm.getMorpheme("reset:"+this.toString());
 			

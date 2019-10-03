@@ -44,9 +44,7 @@ class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
 //		String text = "1방 탄 소 년 단 R T 1".toLowerCase()
-		String text = "우리짐건 입금을 시작합니다! !?".toLowerCase()
-		SimpleAnalyzer
-		NGramTokenizer
+		String text = "RT우리짐건 입금을 시작합니다! !?"
 
 		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
@@ -77,6 +75,7 @@ class MyAnalyzerTest {
 	}
 
 	@Test
+	@Ignore
 	public void testIndex() throws IOException {
 		String text = "버튼을 이용하여 분석식에"
 		

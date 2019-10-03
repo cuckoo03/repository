@@ -241,8 +241,7 @@ class ManageIndexMain {
 	def void analyze() {
 		def request = new AnalyzeRequest("좋은 #트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다".toLowerCase())
 			.index(INDEX_NAME)
-			.analyzer("occasion_analyzer")
-//			.tokenizer("my_tokenizer");//my_analyzer
+			.analyzer("my_analyzer")
 		def tokens = client.admin().indices().analyze(request).actionGet().getTokens();
 		for (AnalyzeResponse.AnalyzeToken token : tokens) {
 			println token.term + " " + token.startOffset + "->" + token.endOffset +
