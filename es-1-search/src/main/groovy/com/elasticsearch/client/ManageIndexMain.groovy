@@ -248,15 +248,58 @@ class ManageIndexMain {
 				" type:" + token.type + " pos:" + token.position
 		}
 	}
-	def void createPercolate() {
+	def void createPercolate(String indexName, String percolatorName) {
+		if (!indexExists(indexName)) {
+			println "not exist index."
+			return
+		}
+		
+		def data =
+		"""
+{
+		"query":{
+			"match":{
+				"body":"트와이스"
+			}
+		}
+}
+"""
+		def json = new JsonSlurper().parseText(data)
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpPost postRequest = new HttpPost(
+			"http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$indexName/.percolator/$percolatorName");
+
+		StringEntity input = new StringEntity(data);
+		input.setContentType("application/text");
+		postRequest.setEntity(input);
+
+		HttpResponse response = httpClient.execute(postRequest);
+		if (response.getStatusLine().getStatusCode() != 200) {
+			println response
+			throw new RuntimeException("Failed : HTTP error code : "
+				+ response.getStatusLine().getStatusCode());
+		}
+
+		BufferedReader br = new BufferedReader(
+						new InputStreamReader((response.getEntity().getContent())));
+
+		String output;
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+		}
+
+		httpClient.getConnectionManager().shutdown();
+	}
+	def void deletePercolator(String indexName, String percolatorName) {
+		
 	}
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()
-		main.deleteIndex(INDEX_NAME)
+//		main.deleteIndex(INDEX_NAME)
 //		main.createIndex(INDEX_NAME)
 
-		main.createIndexRest(INDEX_NAME)
+//		main.createIndexRest(INDEX_NAME)
 //		main.putMapping(INDEX_NAME1, TYPE_NAME1)
 //		main.showMapping(INDEX_NAME1, TYPE_NAME1)
 
@@ -267,5 +310,7 @@ class ManageIndexMain {
 //		main.analyze()
 		
 //		main.createDailyIndexes()
+		main.deletePercolator(INDEX_NAME, "p1")
+		main.createPercolate(INDEX_NAME, "p1")
 	}
 }

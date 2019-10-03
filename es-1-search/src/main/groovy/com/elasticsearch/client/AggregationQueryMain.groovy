@@ -50,8 +50,8 @@ class AggregationQueryMain {
 	def void termAggregate() {
 		final def AGG_NAME = "terms"
 		final def STATS_AGG_NAME = "createDateStats" 
-		def termQuery = QueryBuilders.matchQuery("body", "트와이스 멜론")
-		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("occasion") as TermsBuilder
+		def termQuery = QueryBuilders.matchQuery("body", "RT")
+		def aggsBuilder = AggregationBuilders.terms(AGG_NAME).field("sentiment") as TermsBuilder
 		aggsBuilder.size(4)
 		def extStatsAggsBuider = AggregationBuilders.extendedStats(STATS_AGG_NAME).field("createDate")
 		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
