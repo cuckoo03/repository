@@ -16,6 +16,7 @@ import org.elasticsearch.common.collect.ImmutableOpenMap
 import org.elasticsearch.common.settings.ImmutableSettings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.common.xcontent.json.JsonXContent
+import org.elasticsearch.index.query.QueryBuilders
 
 import groovy.json.JsonSlurper
 import groovy.transform.TypeChecked
@@ -293,6 +294,13 @@ class ManageIndexMain {
 	def void deletePercolator(String indexName, String percolatorName) {
 		
 	}
+	def void deleteDocuments(String indexName, String typeName) {
+		def response = client.prepareDeleteByQuery(indexName)
+			.setTypes(typeName)
+			.setQuery(QueryBuilders.matchAllQuery())
+			.execute().actionGet()
+		println response
+	}
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()
@@ -307,10 +315,12 @@ class ManageIndexMain {
 //		main.showSettingsRest(INDEX_NAME1)
 
 //		main.showClusterStateRest()
-//		main.analyze()
+		main.analyze()
 		
 //		main.createDailyIndexes()
-		main.deletePercolator(INDEX_NAME, "p1")
-		main.createPercolate(INDEX_NAME, "p1")
+//		main.deletePercolator(INDEX_NAME, "p1")
+//		main.createPercolate(INDEX_NAME, "p1")
+		
+//		main.deleteDocuments(INDEX_NAME, TYPE_NAME)
 	}
 }
