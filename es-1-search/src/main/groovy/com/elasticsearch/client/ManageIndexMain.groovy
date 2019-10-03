@@ -248,6 +248,8 @@ class ManageIndexMain {
 				" type:" + token.type + " pos:" + token.position
 		}
 	}
+	def void createPercolate() {
+	}
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()

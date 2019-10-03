@@ -5,21 +5,11 @@ import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.ImmutableSettings
 import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.index.query.QueryBuilders
-import org.elasticsearch.search.aggregations.AggregationBuilders
-import org.elasticsearch.search.aggregations.bucket.terms.Terms
-import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder
-import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats
-import org.elasticsearch.search.highlight.HighlightField
 
 import groovy.transform.TypeChecked
 
-/**
- * https://www.programcreek.com/java-api-examples/?api=org.elasticsearch.search.aggregations.AggregationBuilders
- * @author admin
- *
- */
 @TypeChecked
-class HighlightQueryMain {
+class PercolateQueryMain {
 	private Client client
 	
 	private final String INDEX_NAME = "twitter-20190101"
@@ -38,8 +28,8 @@ class HighlightQueryMain {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 	}
-	def void highlightQuery() {
-		def final highlightField = "body"  
+	def void test() {
+		def final highlightField = "body"
 		def termQuery = QueryBuilders.matchQuery("body", "트와이스멜론")
 		def response = client.prepareSearch(INDEX_NAMES as String[])
 		.setTypes(TYPE_NAME).setQuery(termQuery).addHighlightedField(highlightField)
@@ -64,8 +54,8 @@ class HighlightQueryMain {
 		}
 	}
 	static main(args) {
-		def main = new HighlightQueryMain()
+		def main = new PercolateQueryMain()
 		main.createClient()
-		main.highlightQuery()
+		main.test()
 	}
 }
