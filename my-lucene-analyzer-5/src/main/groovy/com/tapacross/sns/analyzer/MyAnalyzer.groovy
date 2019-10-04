@@ -1,24 +1,30 @@
 package com.tapacross.sns.analyzer
 
+import java.io.IOException
+import java.io.Reader
+import java.io.StringReader
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
+import org.apache.lucene.analysis.CharFilter
+import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer
+import org.apache.lucene.analysis.core.WhitespaceTokenizer
+import org.apache.lucene.analysis.standard.StandardAnalyzer
+import org.apache.lucene.util.Version
 
 import groovy.transform.TypeChecked
 
+/**
+ * 형태소 분석기
+ * @author admin
+ *
+ */
 @TypeChecked
 class MyAnalyzer extends Analyzer {
-	private String[] tokens;
-	private String[] pos;
-
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName) {
-		return new TokenStreamComponents(new MyTokenizer(tokens, pos));
-	}
-
-	public void setTokens(String[] tokens) {
-		this.tokens = tokens;
-	}
-	public void setpos(String[] pos) {
-		this.pos = pos;
+		final def tokenizer = new MyTokenizer()  
+		final def filter = new MyTokenFilter(tokenizer)
+		return new TokenStreamComponents(tokenizer, filter)
 	}
 }
