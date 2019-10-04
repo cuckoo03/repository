@@ -44,7 +44,8 @@ class MyAnalyzerTest {
 	@Test
 	public void testAnalyze() throws IOException {
 //		String text = "1방 탄 소 년 단 R T 1".toLowerCase()
-		String text = "RT우리짐건 입금을 시작합니다! !?"
+//		String text = "RT우리짐건 입금을 시작합니다! !?"
+		final def text = "ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
 
 		def analyzer = new MyAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))

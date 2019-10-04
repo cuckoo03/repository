@@ -86,12 +86,19 @@ class MyTokenizer extends Tokenizer {
 				}
 				buffer[length++] = (c); // buffer it, normalized
 
-//				def b = buffer.toString().trim()
-//				word = b
+				// 반복음절로 인해 문장은 남아있지만 형태소토큰이 더이상 없을경우 메서드를 종료한다
+				// ex)ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+				// ㅋㅋㅋ/SY불치병/NN입니다/VVㅋㅋㅋ/NNㅋㅋ/NNㅋㅋㅋㅋ/IC
+				if (tokenIndex == tokens.size())
+					return false
+					
 				word = word + c
 				String token = tokens[tokenIndex]
 				if (word == token) {
 					word = ""
+					setBlankBuffer(buffer)
+					pushBufferChar(buffer, token)
+					println "buffer:" + buffer.toString()
 					break;
 				}
 				if (length == MAX_WORD_LEN) // buffer overflow!
@@ -121,21 +128,6 @@ class MyTokenizer extends Tokenizer {
 	public final void end() throws IOException {
 		super.end()
 		System.out.println("end:"+this.toString());
-		// set final offset
-//		int finalOffset = correctOffset(offset);
-//		offsetAtt.setOffset(finalOffset, finalOffset);
-//		offset = 0
-//		bufferIndex = 0
-//		dataLen = 0
-//		tokenIndex = 0;
-		
-//		try {
-//			MorphemeResult result = new MorphemeResult();
-//			result = adm.getMorpheme("end:"+this.toString());
-//			tokenIndex = 0
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 	@Override
 	public void reset() throws IOException {
@@ -175,5 +167,17 @@ class MyTokenizer extends Tokenizer {
 			return c.toLowerCase();
 		
 		return c;
-	  }
+	}
+	private void setBlankBuffer(char[] buffer) {
+		for (def i = 0; i < buffer.size(); i++) {
+			buffer[i] = Character.MIN_VALUE
+		}
+	}
+	private void pushBufferChar(char[] buffer, String word) {
+		def length = 0
+		word.toCharArray().each { char it ->
+			def int index = length++
+			buffer[index] = it
+		}
+	}
 }
