@@ -47,7 +47,7 @@ class OccasionTokenizer extends Tokenizer {
 	private StringReader input2;
 	
 	public OccasionTokenizer() {
-		System.out.println("TPOTokenizer constructor");
+		System.out.println("OccasionTokenizer constructor");
 		
 		adm.setOnlineEngineAddress("broker.ip:2012");
 	}
