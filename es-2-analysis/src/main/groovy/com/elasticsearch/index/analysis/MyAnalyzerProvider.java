@@ -8,7 +8,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
-import org.elasticsearch.index.settings.IndexSettings;
+import org.elasticsearch.index.settings.IndexDynamicSettings;
 
 import com.tapacross.sns.analyzer.MyAnalyzer;
 
@@ -16,7 +16,7 @@ public class MyAnalyzerProvider extends AbstractIndexAnalyzerProvider<MyAnalyzer
 	private final MyAnalyzer analyzer;
 
 	@Inject
-	public MyAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
+	public MyAnalyzerProvider(Index index, @IndexDynamicSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
 		super(index, indexSettings, name, settings);
 
 		analyzer = new MyAnalyzer();

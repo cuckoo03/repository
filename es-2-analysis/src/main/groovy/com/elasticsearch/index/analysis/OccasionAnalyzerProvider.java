@@ -8,17 +8,15 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
-import org.elasticsearch.index.settings.IndexSettings;
+import org.elasticsearch.index.settings.IndexDynamicSettings;
 
 import com.tapacross.sns.analyzer.OccasionAnalyzer;
-import com.tapacross.sns.analyzer.SentimentAnalyzer;
-import com.tapacross.sns.analyzer.TopicAnalyzer;
 
 public class OccasionAnalyzerProvider extends AbstractIndexAnalyzerProvider<OccasionAnalyzer> {
 	private final OccasionAnalyzer analyzer;
 
 	@Inject
-	public OccasionAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, 
+	public OccasionAnalyzerProvider(Index index, @IndexDynamicSettings Settings indexSettings, 
 			Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
 		super(index, indexSettings, name, settings);
 
