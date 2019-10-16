@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.tapacross.sns.analyzer</groupId>
-  <artifactId>my-lucene-analyzer-4</artifactId>
-  <name>my-lucene-analyzer-4</name>
-  <version>4.10.4</version>
+  <groupId>com.tapacross.sns.search</groupId>
+  <artifactId>es-1-search</artifactId>
+  <name>es-1-search</name>
+  <version>1.0.0</version>
   <url>http://maven.apache.org</url>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
-    <testSourceDirectory>src/main/test</testSourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -17,7 +17,7 @@
         </excludes>
       </resource>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/main/resources/${environment}</directory>
       </resource>
     </resources>
     <pluginManagement>
@@ -95,12 +95,37 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.0</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <environment>dev</environment>
+      </properties>
+    </profile>
+    <profile>
+      <id>real</id>
+      <properties>
+        <environment>real</environment>
+      </properties>
+    </profile>
+  </profiles>
   <repositories>
     <repository>
       <id>jboss-3rd-party-releases</id>
       <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
+    </repository>
+    <repository>
+      <id>clojars.org</id>
+      <url>http://clojars.org/repo</url>
     </repository>
     <repository>
       <id>tapacross</id>
@@ -120,29 +145,13 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>2.3.11</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-core</artifactId>
-      <version>4.10.4</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-analyzers-common</artifactId>
-      <version>4.10.4</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
   <properties>
+    <analyzer.version>4.10.4</analyzer.version>
     <springframework.version>4.0.1.RELEASE</springframework.version>
+    <java.version>1.5</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <lucene.version>4.10.4</lucene.version>
+    <es.version>1.6.0</es.version>
   </properties>
 </project>
 

@@ -99,17 +99,40 @@ class ManageIndexMain {
         }
       },
       "number_of_shards" : 1,
-      "number_of_replicas" : 0
+      "number_of_replicas" : 1
 	  },
         "mappings":{
             "article": {
                 "_all":{"enabled":false},
                 "dynamic":"false",
                 "properties": {
-                    "articleId": {"type": "long" },
-                    "body": {"type": "string", "analyzer":"my_analyzer"},
-                    "title": {"type": "string", "analyzer":"my_analyzer"},
-                    "createDate": {"type": "date", "format":"yyyyMMddHHmmss"},
+                    "article_id": {"type":"string", "index":"not_analyzed"},
+                    "content_id": {"type":"string", "index":"not_analyzed"},
+                    "site_id": {"type":"string", "index":"not_analyzed"},
+                    "writer_id": {"type":"string", "index":"not_analyzed"},
+                    "title": {"type":"string", "analyzer":"my_analyzer"},
+                    "body": {"type":"string", "analyzer":"my_analyzer"},
+                    "rt": {"type":"string", "index":"not_analyzed"},
+                    "reply_id": {"type":"string", "index":"not_analyzed"},
+                    "reply_writer_id": {"type":"string", "index":"not_analyzed"},
+                    "re": {"type":"string", "index":"not_analyzed"},
+                    "address": {"type":"string", "index":"not_analyzed"},
+                    "address2": {"type":"string", "index":"not_analyzed"},
+                    "create_date": {"type":"date", "format":"yyyyMMddHHmmss"},
+                    "site_type": {"type":"string", "index":"not_analyzed"},
+                    "via_url": {"type":"string", "index":"not_analyzed"},
+					"url": {"type":"string", "index":"not_analyzed"},
+                    "rt_count": {"type":"long"},
+                    "follower_count": {"type":"long"},
+                    "site_name": {"type":"string", "index":"not_analyzed"},
+                    "picture": {"type":"string", "index":"not_analyzed"},
+                    "screen_name": {"type":"string", "index":"not_analyzed"},
+                    "site_category": {"type":"string", "index":"not_analyzed"},
+                    "site_sub_category": {"type":"string", "index":"not_analyzed"},
+                    "hit_count": {"type":"long"},
+                    "comment_count": {"type":"long"},
+                    "like_count": {"type":"long"},
+                    "polarity": {"type":"long"},
                     "topic": {"type": "string", "analyzer":"topic_analyzer"},
                     "sentiment": {"type": "string", "analyzer":"sentiment_analyzer"},
                     "occasion": {"type": "string", "analyzer":"occasion_analyzer"}
@@ -150,14 +173,14 @@ class ManageIndexMain {
 		def indexName = ""
 		def cal = Calendar.instance
 		cal.set(Calendar.YEAR, 2019)
-		cal.set(Calendar.MONTH, 0)
+		cal.set(Calendar.MONTH, 9)
 		cal.set(Calendar.DATE, 1)
 		def sdf = new SimpleDateFormat("yyyyMMdd")
-		while (cal.get(Calendar.YEAR) > 2017) {
+		while (cal.get(Calendar.MONTH) < 9+1) {
 			def formatted = sdf.format(cal.time)
-//			deleteIndex("twitter-$formatted")
+			deleteIndex("twitter-$formatted")
 			createIndexRest("twitter-$formatted")
-			cal.add(Calendar.DATE, - 1)
+			cal.add(Calendar.DATE, + 1)
 		}
 	}
 	boolean indexExists(String indexName) {
@@ -314,9 +337,9 @@ class ManageIndexMain {
 //		main.showSettingsRest(INDEX_NAME1)
 
 //		main.showClusterStateRest()
-		main.analyze()
+//		main.analyze()
 		
-//		main.createDailyIndexes()
+		main.createDailyIndexes()
 //		main.deletePercolator(INDEX_NAME, "p1")
 //		main.createPercolate(INDEX_NAME, "p1")
 		

@@ -3,6 +3,7 @@ package com.elasticsearch.client
 import static org.elasticsearch.index.query.FilterBuilders.*;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
+import com.elasticsearch.util.DateUtil
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse
 import org.elasticsearch.client.Client
@@ -14,6 +15,7 @@ import org.elasticsearch.index.query.QueryBuilder
 import org.elasticsearch.index.query.QueryBuilders
 
 import groovy.transform.TypeChecked
+import java.text.SimpleDateFormat
 
 @TypeChecked
 class BuildingQueryMain {
@@ -34,6 +36,19 @@ class BuildingQueryMain {
 		tmp.addTransportAddress(new InetSocketTransportAddress(
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
+	}
+	/**
+	 * 기간에 해당하는 인덱스명 리스트를 생성한다.
+	 * @param channel twitter
+	 * @param from yyyyMMdd
+	 * @param to yyyyMMdd
+	 */
+	def List<String> makeIndexNames(String channel, String from, String to) {
+		def list = 	DateUtil.getDaysFromAToB(from, to)
+		def collected = list.collectAll({it ->
+			channel + "-" + it
+		})
+		return collected.reverse()
 	}
 	def void termQuery() {
 		def termQuery = QueryBuilders.termQuery("body", "rt")
@@ -108,12 +123,13 @@ class BuildingQueryMain {
 	}
 	static void main(args) {
 		def main = new BuildingQueryMain()
+		println main.makeIndexNames("twitter", "20190929", "20191015")
 		main.createClient()
 //		main.termQuery()
 //		main.termsQuery()
 //		main.rangeQuery()
 //		main.boolQuery()
-		main.matchQuery()
+//		main.matchQuery()
 //		main.matchPhraseQuery()
 //		main.matchAllQuery()
 //		main.andFilterQuery()

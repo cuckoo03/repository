@@ -23,11 +23,10 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 class DocumentInserter {
-	private def start
+	private long jobStart
 	private Client client
-	private final int FETCH_SIZE = 100
-	private final String TABLE_NAME = "tb_article_search_twitter_1901"
-	private final String INDEX_NAME = "twitter-20190101"
+	private final int FETCH_SIZE = 1000
+	private final String TABLE_NAME = "tb_article_search_twitter_1910"
 	private final String TYPE_NAME = "article"
 	private final String ELASTIC_SEARCH_IP = "es.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
@@ -35,14 +34,6 @@ class DocumentInserter {
 	private final String CLUSTER_NAME = "elasticsearch"
 	private final String PROPERTIES_FIELD_NAME = "properties"
 	private final String TYPE_FIELD_NAME = "type"
-//	private final String FORMAT_FIELD_NAME = "format"
-
-//	private final String LONG_FIELD_TYPE = "long"
-//	private final String STRING_FIELD_TYPE = "string"
-//	private final String DATE_FIELD_TYPE = "date"
-	
-//	private final String FORMAT_FIELD_VALUE = "yyyyyMMddHHmmss"
-	
 	private ApplicationContext context;
 	
 	@Autowired
@@ -54,24 +45,24 @@ class DocumentInserter {
 		dao = context.getBean(TapacrossDao.class)
 		createClient()
 		
-		def start = System.currentTimeMillis()
+		jobStart = System.currentTimeMillis()
 		println "start add documents"
 		
 		createThreads()
-//		final def content = "좋은 #트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!"
+//		final def content = "RT 배우도 피해갈수 없는 내새끼작아병ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
 //		addDocument(INDEX_NAME, TYPE_NAME, 1, "1", "title1", content, 
 //			"2019090400000", content, content, content)
 		
 		sleep(1000 * 60 * 60 * 24)
-		println "end add document. elasped:${(System.currentTimeMillis() - start) / 1000}s."
+		println "end add document. elasped:${(System.currentTimeMillis() - jobStart) / 1000}s."
 	}
 	
-	int sequence = 1
+	int sequence = 0
 	void createThreads() {
-		1.times {
+		4.times {
 			Thread.start {
 				while (true) {
-					addBulkDocuments(TABLE_NAME, INDEX_NAME, TYPE_NAME)
+					addBulkDocuments(TABLE_NAME, TYPE_NAME)
 				}
 			}
 		}
@@ -91,7 +82,7 @@ class DocumentInserter {
 			ELASTIC_SEARCH_IP, ELASTIC_SEARCH_PORT));
 		client = tmp;
 	}
-	void addBulkDocuments(String tableName, String indexName, String typeName) {
+	void addBulkDocuments(String tableName, String typeName) {
 		def fetch = FETCH_SIZE
 		def start = 0
 		def end = 0
@@ -100,7 +91,7 @@ class DocumentInserter {
 			end = makeSequence(sequence)
 			sequence = end
 		}
-		def dest = 100000000
+		def dest = 200000000
 		if (start >= dest) {
 			println "dest:$start"
 			System.exit(1)
@@ -115,19 +106,43 @@ class DocumentInserter {
 				def ir = client.prepareIndex(articleIndexName, typeName, it.seq.toString())
 				.setSource(
 					TableField.FIELD1_NAME, it.articleId,
-					TableField.FIELD2_NAME, it.title?.toLowerCase(), 
-					TableField.FIELD3_NAME, it.body?.toLowerCase(),
-					TableField.FIELD4_NAME, it.createDate,
-					TableField.FIELD5_NAME, it.body?.toLowerCase(),
-					TableField.FIELD6_NAME, it.body?.toLowerCase(),
-					TableField.FIELD7_NAME, it.body?.toLowerCase(),
+					TableField.FIELD2_NAME, it.contentId, 
+					TableField.FIELD3_NAME, it.siteId,
+					TableField.FIELD4_NAME, it.writerId,
+					TableField.FIELD5_NAME, it.title,
+					TableField.FIELD6_NAME, it.body,
+					TableField.FIELD7_NAME, it.rt,
+					TableField.FIELD8_NAME, it.replyId,
+					TableField.FIELD9_NAME, it.replyWriterId,
+					TableField.FIELD10_NAME, it.re,
+					TableField.FIELD11_NAME, it.address,
+					TableField.FIELD12_NAME, it.address2,
+					TableField.FIELD13_NAME, it.createDate,
+					TableField.FIELD14_NAME, it.siteType,
+					TableField.FIELD15_NAME, it.viaUrl,
+					TableField.FIELD16_NAME, it.url,
+					TableField.FIELD17_NAME, it.rtCount,
+					TableField.FIELD18_NAME, it.followerCount,
+					TableField.FIELD19_NAME, it.siteName,
+					TableField.FIELD20_NAME, it.picture,
+					TableField.FIELD21_NAME, it.screenName,
+					TableField.FIELD22_NAME, it.siteCategory,
+					TableField.FIELD23_NAME, it.siteSubType,
+					TableField.FIELD24_NAME, it.hitCount,
+					TableField.FIELD25_NAME, it.commentCount,
+					TableField.FIELD26_NAME, it.likeCount,
+					TableField.FIELD27_NAME, "C",
+					TableField.FIELD28_NAME, 0,
+					TableField.FIELD29_NAME, it.body,
+					TableField.FIELD30_NAME, it.body,
+					TableField.FIELD31_NAME, it.body 
 				)
 				bulker.add(ir)
 			}
 			bulker.execute().actionGet()
 			
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
-			println "add $tableName, start:$start, end:$end, elapsed:$elasped"
+			println "add $tableName, start:$start, end:$end, elapsed:$elasped, tot elasped:${(System.currentTimeMillis() - jobStart) / 1000}"
 //			start = end + 1
 //			end = end + fetch
 		}
