@@ -26,20 +26,31 @@ class DocumentInserter {
 	private long jobStart
 	private Client client
 	private final int FETCH_SIZE = 1000
-	private final String TABLE_NAME = "tb_article_search_twitter_1910"
+	private final String TABLE_NAME = "tb_article_search"
 	private final String TYPE_NAME = "article"
-	private final String ELASTIC_SEARCH_IP = "es.ip"
+	private final String ELASTIC_SEARCH_IP = "broker.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
 	private final String PROPERTIES_FIELD_NAME = "properties"
 	private final String TYPE_FIELD_NAME = "type"
 	private ApplicationContext context;
+	int sequence = 0
+	private String searchDate
+	private String channel
 	
 	@Autowired
 	private TapacrossDao dao
 
-	void run() {
+	void run(List<String> args) {
+		if (args.size() == 0) {
+			println "invalid args. <startRowSeq> <channel> <searchDate>. exit."
+			System.exit(0)
+		}
+		sequence = args[0].toInteger()
+		channel = args[1]
+		searchDate = args[2]
+		
 		this.context = new GenericXmlApplicationContext(
 			"classpath:spring/application-context.xml");
 		dao = context.getBean(TapacrossDao.class)
@@ -49,20 +60,17 @@ class DocumentInserter {
 		println "start add documents"
 		
 		createThreads()
-//		final def content = "RT 배우도 피해갈수 없는 내새끼작아병ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
-//		addDocument(INDEX_NAME, TYPE_NAME, 1, "1", "title1", content, 
-//			"2019090400000", content, content, content)
 		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - jobStart) / 1000}s."
 	}
 	
-	int sequence = 0
+	
 	void createThreads() {
 		4.times {
 			Thread.start {
 				while (true) {
-					addBulkDocuments(TABLE_NAME, TYPE_NAME)
+					addBulkDocuments("${TABLE_NAME}_${channel}_$searchDate", TYPE_NAME)
 				}
 			}
 		}
@@ -166,6 +174,6 @@ class DocumentInserter {
 	}
 	static void main(args) {
 		def insert = new DocumentInserter()
-		insert.run()
+		insert.run(args as List<String>)
 	}
 }

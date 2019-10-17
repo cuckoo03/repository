@@ -20,7 +20,7 @@ import groovy.transform.TypeChecked
 class ESManager {
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
 	private final String CLUSTER_NAME = "elasticsearch"
-	private final String ELASTIC_SEARCH_IP = "es.ip"
+	private final String ELASTIC_SEARCH_IP = "broker.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String TYPE_NAME = "article"
 	

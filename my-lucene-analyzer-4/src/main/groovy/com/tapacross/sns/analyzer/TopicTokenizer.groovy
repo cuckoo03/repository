@@ -64,6 +64,9 @@ class TopicTokenizer extends Tokenizer {
 				return false;
 			}
 			String token = tokens[tokenIndex]
+			if (token.size() > buffer.size()) {
+				buffer = termAtt.resizeBuffer(token.size())
+			}
 			setBlankBuffer(buffer)
 			pushBufferChar(buffer, token)
 			println "buffer:" + buffer.toString()

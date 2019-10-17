@@ -42,7 +42,7 @@ class TopicAnalyzerTest {
 	 */
 	@Test
 	public void testAnalyze() throws IOException {
-		String text = "#트와이스 #멜론 #멜론이벤트 트와이스 필스페셜 너무좋다ㅜㅜ 꼭 1위가쟈!!".toLowerCase()
+		String text = "RT 내가 날 눈치챘던 순간 떠나야만 했어 난 찾아내야 했어 All day all night #PCAs #TheGroup #BTS @BTS_twt"
 		def analyzer = new TopicAnalyzer()
 		TokenStream stream = analyzer.tokenStream("f", new StringReader(text))
 		stream.reset()
