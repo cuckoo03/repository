@@ -35,4 +35,35 @@ class TableField {
 	public static final String FIELD29_NAME = "topic"
 	public static final String FIELD30_NAME = "sentiment"
 	public static final String FIELD31_NAME = "occasion"
+	
+	public static String[] allFields = [
+		FIELD1_NAME, 
+		FIELD2_NAME,
+		FIELD3_NAME,
+		FIELD4_NAME,
+		FIELD5_NAME,
+		FIELD6_NAME,
+		FIELD7_NAME,
+		FIELD8_NAME,
+		FIELD9_NAME,
+		FIELD10_NAME,
+		FIELD11_NAME,
+		FIELD12_NAME,
+		FIELD13_NAME,
+		FIELD14_NAME,
+		FIELD15_NAME,
+		FIELD16_NAME,
+		FIELD17_NAME,
+		FIELD18_NAME,
+		FIELD19_NAME,
+		FIELD20_NAME,
+		FIELD21_NAME,
+		FIELD22_NAME,
+		FIELD23_NAME,
+		FIELD24_NAME,
+		FIELD25_NAME,
+		FIELD26_NAME,
+		FIELD27_NAME,
+		FIELD28_NAME
+	]
 }

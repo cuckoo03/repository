@@ -1,5 +1,7 @@
 package com.elasticsearch.client
 
+import javax.naming.ldap.ManageReferralControl
+
 import org.junit.Test
 
 import groovy.transform.TypeChecked
@@ -12,8 +14,8 @@ class ESManagerTest {
 		manager.init()
 		def collection = "twitter"
 		def searchQuery = "rt"
-		def from = "20190101"
-		def to = "20190102"
+		def from = "20191001"
+		def to = "20191003"
 		def offset = 0
 		def size = 16
 		def result = manager.searchDocument(collection, searchQuery, from, to, 
@@ -28,10 +30,25 @@ class ESManagerTest {
 		manager.init()
 		def collection = "twitter"
 		def searchQuery = "rt"
-		def from = "20190101"
-		def to = "20190102"
+		def from = "20191001"
+		def to = "20191002"
 		def result = manager.searchTrend(collection, searchQuery, from, to)	
 		assert result.buckets.size() > 0
-		assert result.buckets.size() == 16
+		assert result.buckets.size() == 2
+	}
+	@Test
+	def void testSearchTopic() {
+		def manager = new ESManager()
+		manager.init()
+		def collection = "twitter"
+		def searchQuery = "rt"
+		def from = "20191001"
+		def to = "20191002"
+		def offset = 0
+		def size = 5
+		def result = manager.searchTopic(collection, searchQuery, from, to, 
+			offset, size)
+//		assert result.buckets.size() > 0
+//		assert result.buckets.size() == size
 	}
 }

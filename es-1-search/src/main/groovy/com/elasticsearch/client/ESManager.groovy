@@ -13,6 +13,10 @@ import org.elasticsearch.search.aggregations.AggregationBuilders
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogram
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogram.Interval
 import org.elasticsearch.search.aggregations.bucket.histogram.Histogram.Order
+import org.elasticsearch.search.aggregations.bucket.terms.Terms
+import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder
+import org.elasticsearch.search.sort.SortOrder
+import com.elasticsearch.client.entity.TermsResult
 import com.elasticsearch.util.DateUtil
 import groovy.transform.TypeChecked
 
@@ -52,9 +56,37 @@ class ESManager {
 		def matchQury = QueryBuilders.matchQuery("body", searchQuery)
 		def response = client.prepareSearch(indexNames as String[])
 			.setTypes(TYPE_NAME)
-			.addFields("title").addFields("body").addFields("article_id").addFields("create_date")
+			.addField(TableField.FIELD1_NAME)
+			.addField(TableField.FIELD2_NAME)
+			.addField(TableField.FIELD3_NAME)
+			.addField(TableField.FIELD4_NAME)
+			.addField(TableField.FIELD5_NAME)
+			.addField(TableField.FIELD6_NAME)
+			.addField(TableField.FIELD7_NAME)
+			.addField(TableField.FIELD8_NAME)
+			.addField(TableField.FIELD9_NAME)
+			.addField(TableField.FIELD10_NAME)
+			.addField(TableField.FIELD11_NAME)
+			.addField(TableField.FIELD12_NAME)
+			.addField(TableField.FIELD13_NAME)
+			.addField(TableField.FIELD14_NAME)
+			.addField(TableField.FIELD15_NAME)
+			.addField(TableField.FIELD16_NAME)
+			.addField(TableField.FIELD17_NAME)
+			.addField(TableField.FIELD18_NAME)
+			.addField(TableField.FIELD19_NAME)
+			.addField(TableField.FIELD20_NAME)
+			.addField(TableField.FIELD21_NAME)
+			.addField(TableField.FIELD22_NAME)
+			.addField(TableField.FIELD23_NAME)
+			.addField(TableField.FIELD24_NAME)
+			.addField(TableField.FIELD25_NAME)
+			.addField(TableField.FIELD26_NAME)
+			.addField(TableField.FIELD27_NAME)
+			.addField(TableField.FIELD28_NAME)
 			.setQuery(matchQury)
 			.setFrom(offset).setSize(size)
+			.addSort(TableField.FIELD13_NAME, SortOrder.DESC)
 			.execute().actionGet()
 		
 		return response.hits
@@ -66,25 +98,43 @@ class ESManager {
 	 * @param from yyyyMMdd
 	 * @param to yyyyMMdd
 	 */
-	def DateHistogram searchTrend(String collection, String searchQuery, String from, String to) {
+	def DateHistogram searchTrend(String collection, String searchQuery, 
+		String from, String to) {
 		def indexNames = makeIndexNames(collection, from, to)
 		final def AGG_NAME = "dateHistogram"
 		def filter1 = FilterBuilders.termFilter("body", searchQuery)
-		def filter2 = FilterBuilders.rangeFilter("createDate")
+		def filter2 = FilterBuilders.rangeFilter(TableField.FIELD13_NAME)
 			.from(from + "000000").to(to + "000000")
 		def filterBuilder = FilterBuilders.andFilter(filter1, filter2)
 		def qb = QueryBuilders.constantScoreQuery(filterBuilder)
 		
 		def dateHistogramBuilder = AggregationBuilders.dateHistogram(AGG_NAME)
-			.interval(Interval.HOUR).order(Order.COUNT_DESC).field("createDate")
+			.interval(Interval.DAY).order(Order.KEY_ASC).field(TableField.FIELD13_NAME)
 		def response = client.prepareSearch(indexNames as String[])
 			.setTypes(TYPE_NAME).setQuery(qb).addAggregation(dateHistogramBuilder)
 			.execute().actionGet()
 			
 		return response.aggregations.get(AGG_NAME) as DateHistogram
 	}
-	def void searchTopic(String collection, String searchQuery, String from, 
+	def TermsResult searchTopic(String collection, String searchQuery, String from, 
 		String to, int offset, int size) {
+		def indexNames = makeIndexNames(collection, from, to)
+		final def AGG_NAME = "terms"
+		def termQuery = QueryBuilders.matchQuery("body", searchQuery)
+		// SearchRequestBuilder에 addField를 추가한경우 리턴되는 source 객체는 널을 리턴한다
+		def aggsBuilder = AggregationBuilders.terms(AGG_NAME)
+			.field("topic") as TermsBuilder
+		aggsBuilder.size(size)
+		
+		def response = client.prepareSearch(indexNames as String[])
+			.setTypes(TYPE_NAME).setQuery(termQuery).addAggregation(aggsBuilder)
+			.execute().actionGet()
+		
+		def termsResult = new TermsResult()
+		termsResult.terms = response.aggregations.get(AGG_NAME) as Terms
+		termsResult.totalHits = response.getHits().getTotalHits()
+		
+		return termsResult
 	}
 	/**
 	 * 기간에 해당하는 인덱스명 리스트를 생성한다.
