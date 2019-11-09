@@ -1,9 +1,12 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount;
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Reducer
 import org.apache.hadoop.mapreduce.Reducer.Context
 
+@TypeChecked
 public class MinMaxCountReduce extends
 Reducer<Text, MinMaxCountTuple, Text, MinMaxCountTuple> {
 	private MinMaxCountTuple result = new MinMaxCountTuple();
@@ -27,7 +30,7 @@ Reducer<Text, MinMaxCountTuple, Text, MinMaxCountTuple> {
 			|| val.getMax().compareTo(result.getMax()) > 0) {
 				result.setMax(val.getMax());
 			}
-			sum += val.getCount();
+			sum += val.getCount().toInteger();
 		}
 		result.setCount(sum);
 		context.write(key, result);

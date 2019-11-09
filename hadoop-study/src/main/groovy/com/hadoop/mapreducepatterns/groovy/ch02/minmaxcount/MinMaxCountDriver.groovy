@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount;
 
+import groovy.transform.TypeChecked;
+
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
@@ -25,6 +27,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
  * @author cuckoo03
  *
  */
+@TypeChecked
 public class MinMaxCountDriver {
 	public static void main(String[] args) throws IOException,
 	ClassNotFoundException, InterruptedException {

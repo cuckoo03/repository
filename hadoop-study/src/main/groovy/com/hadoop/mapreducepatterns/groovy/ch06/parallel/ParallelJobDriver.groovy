@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch06.parallel
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.DoubleWritable
@@ -21,6 +23,7 @@ import com.hadoop.mapreducepatterns.groovy.ch06.parallel.ParallelJobDriver.Avera
  * @author cuckoo03
  *
  */
+@TypeChecked
 class ParallelJobDriver {
 	public static class AverageReputationMapper extends Mapper<LongWritable,
 	Text, Text, DoubleWritable> {
@@ -55,7 +58,7 @@ class ParallelJobDriver {
 			context.write(key, outvalue)
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

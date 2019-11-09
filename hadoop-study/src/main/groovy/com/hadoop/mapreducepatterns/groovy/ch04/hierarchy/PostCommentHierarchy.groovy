@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch04.hierarchy
 
+import groovy.transform.TypeChecked;
+
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.OutputKeys
@@ -36,6 +38,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class PostCommentHierarchy {
 	static class PostMapper extends Mapper<LongWritable, Text, Text, Text> {
 		private Text outkey = new Text()
@@ -129,7 +132,7 @@ class PostCommentHierarchy {
 		private void copyAttributesToElements(NamedNodeMap attributes,
 				Element element) {
 			for (int i = 0; i < attributes.getLength(); i++) {
-				Attr toCopy = attributes.item(i)
+				Attr toCopy = (Attr) attributes.item(i)
 				element.setAttribute(toCopy.getName(), toCopy.getValue())
 			}
 		}
@@ -145,7 +148,7 @@ class PostCommentHierarchy {
 		}
 	}
 
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();

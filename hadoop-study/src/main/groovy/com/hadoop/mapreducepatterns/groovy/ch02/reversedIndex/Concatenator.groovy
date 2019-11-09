@@ -1,9 +1,12 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.reversedIndex
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Reducer
 import org.apache.hadoop.mapreduce.Reducer.Context
 
+@TypeChecked
 class Concatenator extends Reducer <Text, Text, Text, Text>{
 	private Text result = new Text()
 	@Override

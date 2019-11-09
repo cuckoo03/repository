@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch05.replicatedjoin
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.filecache.DistributedCache
 import org.apache.hadoop.fs.FileSystem
@@ -27,6 +29,7 @@ import com.jcraft.jsch.UserInfo;
  * @author cuckoo03
  *
  */
+@TypeChecked
 class ReplicatedJoinDriver {
 	public static class ReplicatedJoinMapper extends Mapper<LongWritable, Text,
 	Text, Text> {
@@ -61,7 +64,7 @@ class ReplicatedJoinDriver {
 						String userId = parsed.get("Id");
 						// 사용자 ID와 레코드로 맵 자료 구조 구성
 //						userIdToInfo.put(userId, line)
-						userIdToInfo.put(userId, "userId:$userId")
+						userIdToInfo.put(userId, userId)
 
 						joinType = context.getConfiguration().get("join.type")
 					}
@@ -89,7 +92,7 @@ class ReplicatedJoinDriver {
 		}
 	}
 
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();

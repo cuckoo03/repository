@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch04.hierarchy
 
+import groovy.transform.TypeChecked;
+
 import java.text.SimpleDateFormat
 
 import org.apache.hadoop.conf.Configurable
@@ -26,6 +28,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class PartitionedUsers {
 	public static class LastAccessDataMapper extends Mapper<LongWritable, Text,
 	IntWritable, Text> {
@@ -96,7 +99,7 @@ class PartitionedUsers {
 			}
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

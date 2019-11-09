@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.minmaxcount;
 
+import groovy.transform.TypeChecked;
+
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -10,6 +12,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context
 
 import com.hadoop.mapreducepatterns.MRDPUtils
 
+@TypeChecked
 public class MinMaxCountMapper extends Mapper<LongWritable, Text, Text, MinMaxCountTuple> {
 	private Text outUserId = new Text();
 	private MinMaxCountTuple outTuple = new MinMaxCountTuple();

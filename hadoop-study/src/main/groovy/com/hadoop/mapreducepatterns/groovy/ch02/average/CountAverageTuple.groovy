@@ -1,11 +1,15 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.average
 
+import groovy.transform.TypeChecked;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.hadoop.io.Writable
 import org.apache.hadoop.io.WritableUtils;
+
+@TypeChecked
 class CountAverageTuple implements Writable {
 	float count = 0f
 	float average = 0f

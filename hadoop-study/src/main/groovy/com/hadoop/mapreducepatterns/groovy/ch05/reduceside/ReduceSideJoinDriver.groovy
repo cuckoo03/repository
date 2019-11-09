@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch05.reduceside
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.fs.FileSystem
@@ -21,6 +23,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class ReduceSideJoinDriver {
 	public static class UserJoinMapper extends Mapper<LongWritable, Text, Text,
 	Text> {
@@ -156,7 +159,7 @@ class ReduceSideJoinDriver {
 		}
 	}
 
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

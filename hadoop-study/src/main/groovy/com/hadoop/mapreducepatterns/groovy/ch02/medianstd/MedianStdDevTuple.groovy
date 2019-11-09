@@ -1,7 +1,10 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.medianstd
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.io.Writable
 
+@TypeChecked
 class MedianStdDevTuple implements Writable {
 	float median = 0
 	float stddev = 0f

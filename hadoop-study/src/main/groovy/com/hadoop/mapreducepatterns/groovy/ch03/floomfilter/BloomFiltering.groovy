@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.floomfilter
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileSystem
@@ -16,8 +18,9 @@ import org.apache.hadoop.util.GenericOptionsParser
  * @author cuckoo03
  *
  */
+@TypeChecked
 class BloomFiltering {
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

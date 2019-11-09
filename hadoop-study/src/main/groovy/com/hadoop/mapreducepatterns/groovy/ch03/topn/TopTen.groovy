@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.topn
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem
@@ -24,6 +26,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class TopTen{
 	public static class TopTenMapper extends Mapper<LongWritable, Text, NullWritable,
 	Text> {
@@ -92,7 +95,7 @@ class TopTen{
 			println "record size:" + repToRecordMap.values().size()
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

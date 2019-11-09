@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.average
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.IntWritable
@@ -22,8 +24,9 @@ import org.apache.hadoop.util.GenericOptionsParser
  * @author cuckoo03
  *
  */
+@TypeChecked
 class AverageCount {
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.reversedIndex
 
+import groovy.transform.TypeChecked;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.hadoop.io.LongWritable
 import org.apache.hadoop.io.Text
@@ -7,6 +9,8 @@ import org.apache.hadoop.mapreduce.Mapper
 import org.apache.hadoop.mapreduce.Mapper.Context
 
 import com.hadoop.mapreducepatterns.MRDPUtils
+
+@TypeChecked
 class WikipediaExtractor extends Mapper<LongWritable, Text, Text, Text>{
 	private Text link = new Text()
 	private Text outkey = new Text()

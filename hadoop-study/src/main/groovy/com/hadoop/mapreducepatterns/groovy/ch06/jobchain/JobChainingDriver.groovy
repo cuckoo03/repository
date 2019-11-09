@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch06.jobchain
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.filecache.DistributedCache
 import org.apache.hadoop.fs.FileStatus
@@ -32,6 +34,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class JobChainingDriver {
 	public static final String AVERAGE_CALC_GROUP = "AverageCalculation"
 	public static final String MULTIPLE_OUTPUTS_ABOVE_NAME = "aboveavg"
@@ -70,7 +73,7 @@ class JobChainingDriver {
 
 			int sum = 0
 			values.each { value ->
-				sum += value.get()
+				sum += value.get().toInteger()
 			}
 
 			outvalue.set(sum)
@@ -165,7 +168,7 @@ class JobChainingDriver {
 		}
 	}
 
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		if (args.length != 3) {
 			println "Usage: JobChaining <posts> <users> <out>"

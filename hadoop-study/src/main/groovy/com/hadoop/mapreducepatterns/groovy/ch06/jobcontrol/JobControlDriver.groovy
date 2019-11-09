@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch06.jobcontrol
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileStatus
@@ -31,8 +33,9 @@ import com.hadoop.mapreducepatterns.groovy.ch06.parallel.ParallelJobDriver.Avera
  * @author cuckoo03
  *
  */
+@TypeChecked
 class JobControlDriver {
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 
 		String[] otherArgs = new GenericOptionsParser(conf, args)

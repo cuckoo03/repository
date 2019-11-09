@@ -1,9 +1,12 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.average
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.io.IntWritable
 import org.apache.hadoop.mapreduce.Reducer
 import org.apache.hadoop.mapreduce.Reducer.Context
 
+@TypeChecked
 class AverageReducer extends Reducer<IntWritable, CountAverageTuple,
 IntWritable , CountAverageTuple>{
 	private CountAverageTuple result = new CountAverageTuple()

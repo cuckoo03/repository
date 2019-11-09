@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.counter
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.io.LongWritable
 import org.apache.hadoop.io.NullWritable
 import org.apache.hadoop.io.Text
@@ -8,6 +10,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context
 
 import com.hadoop.mapreducepatterns.MRDPUtils
 
+@TypeChecked
 class CountNumUsersByStateMapper extends Mapper<LongWritable, Text,
 NullWritable, NullWritable> {
 	public static final String STATE_COUNTER_GROUP = "State"

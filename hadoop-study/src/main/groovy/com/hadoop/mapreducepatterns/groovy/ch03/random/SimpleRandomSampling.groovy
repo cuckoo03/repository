@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.random
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.LongWritable
@@ -17,6 +19,7 @@ import org.apache.hadoop.util.GenericOptionsParser
  * @author cuckoo03
  *
  */
+@TypeChecked
 class SimpleRandomSampling {
 	public static class SRSMapper extends Mapper<LongWritable, Text,
 	NullWritable, Text> {
@@ -35,7 +38,7 @@ class SimpleRandomSampling {
 			}
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();

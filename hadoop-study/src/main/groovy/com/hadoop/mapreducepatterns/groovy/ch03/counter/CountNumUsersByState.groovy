@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.counter
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
@@ -9,8 +11,9 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.util.GenericOptionsParser
 
+@TypeChecked
 class CountNumUsersByState {
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch04.totalordersort
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.FileSystem
 import org.apache.hadoop.fs.Path
@@ -26,6 +28,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class TotalOrderSorting {
 	public static class LastAccessDateMapper extends Mapper<LongWritable, Text, 
 	Text, Text> {
@@ -53,7 +56,7 @@ class TotalOrderSorting {
 			}
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration()
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs()

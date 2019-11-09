@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.distinct
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.LongWritable
@@ -22,6 +24,7 @@ import com.hadoop.mapreducepatterns.MRDPUtils
  * @author cuckoo03
  *
  */
+@TypeChecked
 class DistinctUser {
 	public static class DistinctUserMapper extends Mapper<LongWritable, Text,
 	LongWritable, NullWritable> {
@@ -47,7 +50,7 @@ class DistinctUser {
 			context.write(key, NullWritable.get())
 		}
 	}
-	static main(args) {
+	static main(String[] args) {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();

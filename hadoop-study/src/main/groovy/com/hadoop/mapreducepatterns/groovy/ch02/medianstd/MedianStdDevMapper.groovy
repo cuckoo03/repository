@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.medianstd
 
+import groovy.transform.TypeChecked;
+
 import java.text.SimpleDateFormat
 
 import org.apache.hadoop.io.IntWritable
@@ -10,6 +12,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context
 
 import com.hadoop.mapreducepatterns.MRDPUtils;
 
+@TypeChecked
 class MedianStdDevMapper extends Mapper<LongWritable, Text, IntWritable,
 IntWritable>{
 	private IntWritable outHour = new IntWritable()

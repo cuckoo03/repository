@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch02.average
 
+import groovy.transform.TypeChecked;
+
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -11,6 +13,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context
 
 import com.hadoop.mapreducepatterns.MRDPUtils
 
+@TypeChecked
 class AverageMapper extends Mapper<LongWritable, Text, IntWritable, CountAverageTuple> {
 	private IntWritable outHour = new IntWritable()
 	private CountAverageTuple outCountAverage = new CountAverageTuple()

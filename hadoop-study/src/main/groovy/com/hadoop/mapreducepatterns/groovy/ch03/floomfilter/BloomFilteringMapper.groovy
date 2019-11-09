@@ -1,5 +1,7 @@
 package com.hadoop.mapreducepatterns.groovy.ch03.floomfilter
 
+import groovy.transform.TypeChecked;
+
 import org.apache.hadoop.filecache.DistributedCache
 import org.apache.hadoop.io.LongWritable
 import org.apache.hadoop.io.NullWritable
@@ -12,6 +14,7 @@ import org.apache.hadoop.fs.FileSystem
 
 import com.hadoop.mapreducepatterns.MRDPUtils
 
+@TypeChecked
 class BloomFilteringMapper extends Mapper <LongWritable, Text, Text,
 NullWritable>{
 	private BloomFilter filter = new BloomFilter()
