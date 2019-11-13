@@ -6,13 +6,10 @@ import java.util.List;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mrunit.PipelineMapReduceDriver;
 import org.apache.hadoop.mrunit.mapreduce.MapDriver;
 import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
-import org.apache.hadoop.mrunit.types.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,8 +33,8 @@ public class MRUnitTest {
 		mapReduceDriver.setMapper(m);
 		mapReduceDriver.setReducer(r);
 
-		pipeMRDriver = new PipelineMapReduceDriver<>();
 		// pipelineMapReduceDriver는 새 맵리듀스 API를 모두 지원하지 않는다.
+//		pipeMRDriver = new PipelineMapReduceDriver<>();
 //		pipeMRDriver.addMapReduce(new Pair<Mapper, Reducer>(m, r));
 	}
 
