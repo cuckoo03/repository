@@ -54,7 +54,7 @@ class ParallelJobDriver {
 				++count
 			}
 
-			outvalue.set(sum / count)
+			outvalue.set((sum / count).toDouble())
 			context.write(key, outvalue)
 		}
 	}
