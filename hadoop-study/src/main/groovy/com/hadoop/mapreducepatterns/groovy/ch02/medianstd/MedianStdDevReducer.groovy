@@ -38,7 +38,7 @@ MedianStdDevTuple> {
 			result.median = d.toFloat()
 		} else {
 		// 홀수 값이면 가운데 값을 중앙값으로 설정
-			result.median = commentLengths.get((int) count / 2)
+			result.median = commentLengths.get(((int) count / 2).toInteger())
 		}
 
 		// 표준편차를 계산
@@ -48,7 +48,7 @@ MedianStdDevTuple> {
 			sumOfSquares += (f - mean) * (f - mean)
 		}
 
-		result.stddev = (float) Math.sqrt(sumOfSquares / (count - 1))
+		result.stddev = (float) Math.sqrt((sumOfSquares / (count - 1)).toDouble())
 		context.write(key, result)
 	}
 }
