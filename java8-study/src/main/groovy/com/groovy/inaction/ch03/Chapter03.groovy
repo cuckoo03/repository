@@ -10,7 +10,7 @@ import com.java.inaction.ch02.Apple
 @TypeChecked
 class Chapter03 {
 	static main(args) {
-		def c = { Apple a1, Apple a2 -> a1.compareTo(a2) }
+		def c = { Apple a1, Apple a2 -> a1.compareTo(a2) } as Function<Apple, Apple, Integer>
 		
 		def str = Arrays.asList("a", "b")
 		str.sort({a1, a2 -> a1.compareTo(a2)})

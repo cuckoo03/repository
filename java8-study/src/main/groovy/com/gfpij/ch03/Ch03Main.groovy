@@ -23,17 +23,17 @@ class Ch03Main {
 		.forEach(System.out.&println)
 		str.chars().filter(Character.&isDigit)
 				.forEach(IterateString.&printChar)
-		final List<Person> people = Arrays.asList(new Person("a", 1),
+		final def people = Arrays.asList(new Person("a", 1),
 				new Person("b", 3), new Person("c", 2));
-		List<Person> ascAge = people.stream().sorted(Person.&ageDiff)
+		def ascAge = people.stream().sorted(Person.&ageDiff)
 				.collect(Collectors.toList());
 		Comparator<Person> compareAsc = { Person p1, Person p2 ->
 			p1.ageDiff(p2)
 		};
 		def compareAsc2 = { Person p1, Person p2 ->
 			p1.ageDiff(p2)
-		};
-		Comparator<Person> compareDesc = compareAsc.reversed();
+		} as Comparator<Person>;
+		def compareDesc = compareAsc.reversed() as Comparator<Person>;
 		System.out.println(people.stream().sorted(compareDesc)
 				.collect(Collectors.toList()));
 		people.stream().min(Person.&ageDiff).ifPresent(System.out.&println);
@@ -41,7 +41,7 @@ class Ch03Main {
 				.sorted{ Person p1, Person p2 ->
 					p1.getName().compareTo(p2.getName())
 				};
-		final Function<Person, String> byName = { Person p -> p.getName() };
+		final def byName = { Person p -> p.getName() } as Function<Person, String>;
 
 		people.stream().sorted(Comparator.comparing(byName));
 	}
