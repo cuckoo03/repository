@@ -9,6 +9,11 @@ public class Person {
 		this.age = age;
 	}
 
+	/**
+	 * ageDiff
+	 * @param other
+	 * @return
+	 */
 	public int ageDiff(final Person other) {
 		return age - other.age;
 	}

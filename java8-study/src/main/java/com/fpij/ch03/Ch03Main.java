@@ -1,12 +1,11 @@
 package com.fpij.ch03;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import com.fpij.ch03.IterateString;
 
 public class Ch03Main {
 	public static void main(String[] args) {
@@ -34,5 +33,7 @@ public class Ch03Main {
 		final Function<Person, String> byName = p -> p.getName();
 
 		people.stream().sorted(Comparator.comparing(byName));
+		
+		new File(".").listFiles(File::isHidden);
 	}
 }
