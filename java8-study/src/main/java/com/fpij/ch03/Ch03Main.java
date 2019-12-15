@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.gfpij.ch04.Asset;
+
 public class Ch03Main {
 	public static void main(String[] args) {
 		final String str = "w00t";
