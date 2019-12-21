@@ -9,7 +9,6 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 class Constants {
-	def static final String CAMBRIA_NAME = "cambria suites hayden"
 	def static final String SC1_NAME = "superCol1"
 	def static final String UTF8 = "UTF8"
 	def static final String KEYSPACE = "Hotelier"

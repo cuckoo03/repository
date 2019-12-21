@@ -13,7 +13,7 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 class Connector {
-	private static final String HOST = "220.230.124.211"
+	private static final String HOST = "cassandra.ip"
 	private TTransport tr = new TSocket(HOST, 9160)
 
 	def Cassandra.Client connect() throws TTransportException, TException,
