@@ -9,6 +9,5 @@ import groovy.transform.TypeChecked
 @Immutable
 class POI {
 	private String name
-	private String desc
-	private String phone
+	private String val
 }

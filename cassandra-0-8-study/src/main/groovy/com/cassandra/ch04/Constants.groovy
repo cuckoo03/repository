@@ -8,13 +8,9 @@ import groovy.transform.ToString
 import groovy.transform.TypeChecked
 
 @TypeChecked
-@ToString
-@Immutable
 class Constants {
 	def static final String CAMBRIA_NAME = "cambria suites hayden"
-	def static final String CLARION_NAME = "clarion scottsdale peek"
-	def static final String W_NAME = "the w sf"
-	def static final String WALDORF_NAME = "the waldorf=astoria"
+	def static final String SC1_NAME = "superCol1"
 	def static final String UTF8 = "UTF8"
 	def static final String KEYSPACE = "Hotelier"
 	def static final ConsistencyLevel CL = ConsistencyLevel.ONE
