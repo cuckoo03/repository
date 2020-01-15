@@ -15,15 +15,13 @@ public class WordCount {
 	private static final Pattern SPACE = Pattern.compile(" ");
 
 	public static void main(String[] args) {
-		SparkConf conf = new SparkConf().setAppName("wordCount");
+		SparkConf conf = new SparkConf().setAppName("wordCount").setMaster("local");
 		JavaSparkContext sc = new JavaSparkContext(conf);
-		String logFile = "/usr/local/spark/README.md";
+		String logFile = "README.md";
 		JavaRDD<String> lines = sc.textFile(logFile);
 
-		JavaRDD<String> words = lines
-				.flatMap(s -> Arrays.asList(SPACE.split(s)));
-		JavaPairRDD<String, Integer> ones = words.mapToPair(s -> new Tuple2<>(
-				s, 1));
+		JavaRDD<String> words = lines.flatMap(s -> Arrays.asList(SPACE.split(s)));
+		JavaPairRDD<String, Integer> ones = words.mapToPair(s -> new Tuple2<>(s, 1));
 		JavaPairRDD<String, Integer> counts = ones
 				.reduceByKey((int1, int2) -> int1 + int2);
 		List<Tuple2<String, Integer>> output = counts.collect();
