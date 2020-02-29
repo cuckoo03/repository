@@ -9,7 +9,7 @@ import groovy.transform.TypeChecked
 class Producer {
 	static void main(args) {
 		def props = new Properties()
-		props.put(KAFKA_CONSTANTS.BOOTSTRAP_SERVERS, "es.ip:9092")
+		props.put(KAFKA_CONSTANTS.BOOTSTRAP_SERVERS, "220.230.113.172:9092")
 		props.put(KAFKA_CONSTANTS.KEY_SERIALIZER, 
 			KAFKA_CONSTANTS.STRING_SERIALIZER)
 		props.put(KAFKA_CONSTANTS.VALUE_SERIALIZER, 
@@ -34,7 +34,7 @@ class Producer {
 		
 		// async style
 		try {
-			producer.send(new ProducerRecord<String, String>("mytopic3", "send"),
+			producer.send(new ProducerRecord<String, String>("mytopic4", "send"),
 					new AsyncCallback())
 		} catch (Exception e) {
 			e.printStackTrace()

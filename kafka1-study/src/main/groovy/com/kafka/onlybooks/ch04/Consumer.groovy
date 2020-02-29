@@ -10,7 +10,7 @@ import groovy.transform.TypeChecked
 class Consumer {
 	static void main(args) {
 		def props = new Properties();
-		props.put(KAFKA_CONSTANTS.BOOTSTRAP_SERVERS, "220.230.124.211:9092");
+		props.put(KAFKA_CONSTANTS.BOOTSTRAP_SERVERS, "220.230.113.172:9092");
 		props.put(KAFKA_CONSTANTS.GROUP_ID, "kafka");
 		props.put(KAFKA_CONSTANTS.ENABLE_AUTO_COMMIT, "true");
 		props.put(KAFKA_CONSTANTS.AUTO_OFFSET_RESET, "latest");
@@ -20,7 +20,7 @@ class Consumer {
 				KAFKA_CONSTANTS.STRING_DESERIALIZER);
 		
 		def consumer = new KafkaConsumer<>(props);
-		consumer.subscribe(Arrays.asList("mytopic0"));
+		consumer.subscribe(Arrays.asList("mytopic4"));
 		try {
 			while (true) {
 				def records = consumer.poll(100);
