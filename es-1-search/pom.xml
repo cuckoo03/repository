@@ -169,10 +169,8 @@
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>odjbc5_g</artifactId>
 			<version>11.2.0.4</version>
-			<!-- 
 			<systemPath>${project.basedir}/lib/odjbc5_g-11.2.0.4.jar</systemPath>
 			<scope>system</scope>
-			 -->
 		</dependency>
 		<dependency>
 			<groupId>com.tapacross.sns.analyzer</groupId>

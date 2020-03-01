@@ -60,6 +60,7 @@ class MyTokenizer extends Tokenizer {
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
+		def containsSpace = false;
 		while (true) {
 			if (bufferIndex >= dataLen) {
 				dataLen = input2.read(ioBuffer);
@@ -81,9 +82,10 @@ class MyTokenizer extends Tokenizer {
 					start = offset + bufferIndex - 1;
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
-				if (Character.isWhitespace(c)) {
+				if (Character.isWhitespace(c) && (!containsSpace)) {
 					continue;
 				}
+//				printCode(c)
 				buffer[length++] = (c); // buffer it, normalized
 
 				// 반복음절로 인해 문장은 남아있지만 형태소토큰이 더이상 없을경우 메서드를 종료한다
@@ -94,11 +96,32 @@ class MyTokenizer extends Tokenizer {
 					
 				word = word + c
 				String token = tokens[tokenIndex]
+				// 품사가 SY인 문자중에 '와 같은 특수문자가 들어올 경우 입력음절과 형태소분석기에서 반환된 결과가 달라
+				// 문자열 동등 비교를 할 수 없으므로 문자열값이 다르지만 SY품사이고 한음절인 경우 하나의 텀으로 색인한다
+				// (ex ../SY @@/SY ^^/SY **/XX ~~/SY ;;/SY ///SY ??/SY __/SY) 
+				if ((word.size() == token.size()) && (pos[tokenIndex] == "SY")) {
+					word = ""
+					setBlankBuffer(buffer)
+					pushBufferChar(buffer, token)
+					println "buffer:" + buffer.toString() + ", length:${buffer.size()}"
+					break;
+				}
+				// http, https url이 들어올경우 공백이 들어올 날때까지 기다렸다가 토큰을 버린다.
+				if (word == "http://" || word == "https://") {
+					containsSpace = true
+					continue
+				}
+				if ((word.contains("http://") || word.contains("https://")) && (word.indexOf(" ") == word.size() - 1)) {
+					containsSpace = false
+					word = ""
+					setBlankBuffer(buffer)
+					continue
+				}
 				if (word == token) {
 					word = ""
 					setBlankBuffer(buffer)
 					pushBufferChar(buffer, token)
-					println "buffer:" + buffer.toString()
+					println "buffer:" + buffer.toString() + ", length:${buffer.size()}"
 					break;
 				}
 				if (length == MAX_WORD_LEN) // buffer overflow!
@@ -123,6 +146,18 @@ class MyTokenizer extends Tokenizer {
 //		return !Character.isWhitespace(c);
 		return true;
 	}
+	private char printCode(char c) {
+		println "c value:"+c.charValue()
+		println "c isDigit:"+Character.isDigit(c)
+		println "c type:"+Character.getType(c)
+		println "c hash:"+Character.hashCode(c)
+		println "c isDefined:"+Character.isDefined(c)
+		println "c isLetter:"+Character.isLetter(c)
+		println "c isJavaLetterOrDigit:"+Character.isJavaLetterOrDigit(c)
+		println "c isJavaIdentifierPart:"+Character.isJavaIdentifierPart(c)
+		println "c isUnicodeIdentifiederPart:"+Character.isUnicodeIdentifierPart(c)
+	}
+	
 	// reset->increemnttoken->end->close
 	@Override
 	public final void end() throws IOException {

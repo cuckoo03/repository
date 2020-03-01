@@ -31,18 +31,18 @@ import java.text.SimpleDateFormat
 class ManageIndexMain {
 	private Client client
 	
-	private final String TABLE_NAME = "tb_article_search_twitter_1908"
-	private static final String INDEX_NAME = "twitter-20190101"
+//	private final String TABLE_NAME = "tb_article_search_twitter_1908"
+	private static final String INDEX_NAME = "media-20200201"
 	private static final String TYPE_NAME = "article"
 	private final String FIELD1_NAME = "articleId"
 	private final String FIELD2_NAME = "title"
 	private final String FIELD3_NAME = "body"
 	private final String FIELD4_NAME = "createDate"
-	private final String ELASTIC_SEARCH_IP = "es.ip"
+	private final String ELASTIC_SEARCH_IP = "broker.ip"
 	private final int ELASTIC_SEARCH_NATIVE_PORT = 9300
 	private final int ELASTIC_SEARCH_REST_PORT = 9200
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
-	private final String CLUSTER_NAME = "elasticsearch"
+	private final String CLUSTER_NAME = "tapa-es"
 	private final String PROPERTIES_FIELD_NAME = "properties"
 	private final String TYPE_FIELD_NAME = "type"
 	private final String FORMAT_FIELD_NAME = "format"
@@ -98,7 +98,7 @@ class ManageIndexMain {
             }
         }
       },
-      "number_of_shards" : 1,
+      "number_of_shards" : 5,
       "number_of_replicas" : 1
 	  },
         "mappings":{
@@ -170,16 +170,17 @@ class ManageIndexMain {
 		httpClient.getConnectionManager().shutdown();
 	}
 	def void createDailyIndexes() {
+		def channel = "media"
 		def indexName = ""
 		def cal = Calendar.instance
-		cal.set(Calendar.YEAR, 2019)
-		cal.set(Calendar.MONTH, 9)
+		cal.set(Calendar.YEAR, 2020)
+		cal.set(Calendar.MONTH, 1)
 		cal.set(Calendar.DATE, 1)
 		def sdf = new SimpleDateFormat("yyyyMMdd")
-		while (cal.get(Calendar.MONTH) < 9+1) {
+		while (cal.get(Calendar.MONTH) < 2) {
 			def formatted = sdf.format(cal.time)
-			deleteIndex("twitter-$formatted")
-			createIndexRest("twitter-$formatted")
+			deleteIndex("$channel$formatted")
+			createIndexRest("$channel-$formatted")
 			cal.add(Calendar.DATE, + 1)
 		}
 	}
@@ -190,9 +191,9 @@ class ManageIndexMain {
 	void deleteIndex(String indexName) {
 		if (indexExists(indexName)) {
 			client.admin().indices().prepareDelete(indexName).execute().actionGet()
-			println "index delete success."
+			println "$indexName index delete success."
 		} else {
-			println "not found index."
+			println "$indexName index not found."
 		}
 	}
 	void putMapping(String indexName, String typeName) {

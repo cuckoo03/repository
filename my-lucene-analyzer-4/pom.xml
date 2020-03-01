@@ -108,10 +108,8 @@
 			<groupId>com.tapacross</groupId>
 			<artifactId>sma2-core</artifactId>
 			<version>2.0</version>
-			<!-- 
 			<systemPath>${project.basedir}/lib/sma2-core-2.0.jar</systemPath>
 			<scope>system</scope>
-			 -->
 		</dependency>
 		<dependency>
 			<groupId>com.muhayu</groupId>

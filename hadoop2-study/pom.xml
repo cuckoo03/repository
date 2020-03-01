@@ -178,8 +178,10 @@
 								<taskdef name="scp"
 									classname="org.apache.tools.ant.taskdefs.optional.ssh.Scp"
 									classpathref="maven.dependency.classpath" />
-								<scp file="target/${project.artifactId}-${project.version}.jar"
-									todir="cuckoo03:12341234@192.168.1.101:/home/cuckoo03/" trust="true" />
+								<copy file="target/${project.artifactId}-${project.version}.jar"
+									tofile=target/${project.artifactId}-${project.version}.zip/>
+								<scp file="target/${project.artifactId}-${project.version}.zip"
+									todir="trendup:tlawkd!2016@121.254.177.151:/home/trendup/" trust="true" />
 							</tasks>
 						</configuration>
 					</execution>

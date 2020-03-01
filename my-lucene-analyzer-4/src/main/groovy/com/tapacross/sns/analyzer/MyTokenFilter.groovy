@@ -34,7 +34,14 @@ class MyTokenFilter extends FilteringTokenFilter {
 	/** Override this method and return if the current input token should be returned by {@link #incrementToken}. */
 	@Override
 	protected boolean accept() throws IOException {
-		return true 
+		def type = typeAtt.type
+		if (type == "PP") {
+			return false
+		}
+		if (type == "SY") {
+			return false
+		}
+		return true
 	}
 
 	@Override

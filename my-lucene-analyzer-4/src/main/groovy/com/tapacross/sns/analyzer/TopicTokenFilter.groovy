@@ -40,7 +40,7 @@ class TopicTokenFilter extends FilteringTokenFilter {
 		if (type == "PP") {
 			return false
 		}
-		if (termAtt.size() == 1 && type == "SY") {
+		if (type == "SY") {
 			return false
 		}
 		return true 

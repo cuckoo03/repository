@@ -31,13 +31,14 @@ class DocumentInserter {
 	private final String ELASTIC_SEARCH_IP = "broker.ip"
 	private final int ELASTIC_SEARCH_PORT = 9300
 	private final String CLUSTER_NAME_FIELD = "cluster.name"
-	private final String CLUSTER_NAME = "elasticsearch"
+	private final String CLUSTER_NAME = "tapa-es"
 	private final String PROPERTIES_FIELD_NAME = "properties"
 	private final String TYPE_FIELD_NAME = "type"
 	private ApplicationContext context;
 	int sequence = 0
-	private String searchDate
+	private String searchDate //YYMM
 	private String channel
+	private int threadCount = 0
 	
 	@Autowired
 	private TapacrossDao dao
@@ -50,6 +51,7 @@ class DocumentInserter {
 		sequence = args[0].toInteger()
 		channel = args[1]
 		searchDate = args[2]
+		threadCount = args[3].toInteger()
 		
 		this.context = new GenericXmlApplicationContext(
 			"classpath:spring/application-context.xml");
@@ -59,6 +61,7 @@ class DocumentInserter {
 		jobStart = System.currentTimeMillis()
 		println "start add documents"
 		
+		
 		createThreads()
 		
 		sleep(1000 * 60 * 60 * 24)
@@ -67,7 +70,7 @@ class DocumentInserter {
 	
 	
 	void createThreads() {
-		4.times {
+		threadCount.times {
 			Thread.start {
 				while (true) {
 					addBulkDocuments("${TABLE_NAME}_${channel}_$searchDate", TYPE_NAME)
@@ -99,9 +102,12 @@ class DocumentInserter {
 			end = makeSequence(sequence)
 			sequence = end
 		}
-		def dest = 200000000
+		def dest = 10000000
 		if (start >= dest) {
-			println "dest:$start"
+			println "destion seq=$start"
+			println "end add document. thread:$threadCount, elasped:${(System.currentTimeMillis() - jobStart) / 1000}s."
+			println "wait for inserting 60 secs."
+			sleep(60000)
 			System.exit(1)
 		}
 		
@@ -110,7 +116,7 @@ class DocumentInserter {
 			def bulker = client.prepareBulk()
 			def result = dao.selectArticles(start, end, tableName)
 			result.each { TableEntity it ->
-				def articleIndexName = "twitter-" + it.createDate.substring(0, 8)
+				def articleIndexName = "$channel-" + it.createDate.substring(0, 8)
 				def ir = client.prepareIndex(articleIndexName, typeName, it.seq.toString())
 				.setSource(
 					TableField.FIELD1_NAME, it.articleId,
@@ -143,12 +149,11 @@ class DocumentInserter {
 					TableField.FIELD28_NAME, 0,
 					TableField.FIELD29_NAME, it.body,
 					TableField.FIELD30_NAME, it.body,
-					TableField.FIELD31_NAME, it.body 
+					TableField.FIELD31_NAME, it.body
 				)
 				bulker.add(ir)
 			}
 			bulker.execute().actionGet()
-			
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
 			println "add $tableName, start:$start, end:$end, elapsed:$elasped, tot elasped:${(System.currentTimeMillis() - jobStart) / 1000}"
 //			start = end + 1
