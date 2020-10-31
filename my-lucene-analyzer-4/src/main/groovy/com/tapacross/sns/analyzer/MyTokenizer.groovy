@@ -1,21 +1,16 @@
 package com.tapacross.sns.analyzer
-import java.io.IOException
-import java.io.Reader
-
-import java.util.concurrent.atomic.AtomicInteger
+import java.util.regex.Pattern
 
 import org.apache.lucene.analysis.Tokenizer
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute
 import org.apache.lucene.analysis.tokenattributes.PayloadAttribute
-import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute
 import org.apache.lucene.util.BytesRef
+
 import com.tapacross.ise.MorphemeResult
 import com.tapacross.service.AdminDataManager
 
-import groovy.json.internal.CharacterSource
-import groovy.sql.ResultSetMetaDataWrapper
 import groovy.transform.TypeChecked
 
 
@@ -54,9 +49,9 @@ class MyTokenizer extends Tokenizer {
 	@Override
 	public final boolean incrementToken() throws IOException {
 		clearAttributes();
-		System.out.println("incrementToken");
+//		System.out.println("incrementToken");
 		String word = "";
-//		def word2 = ""
+		boolean skipUnknownChar = false
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
@@ -82,12 +77,24 @@ class MyTokenizer extends Tokenizer {
 					start = offset + bufferIndex - 1;
 				else if (length == buffer.length)
 					buffer = termAtt.resizeBuffer(1 + length);
+					
+//				printCode(c)
+				c = replaceCode(c)
+				if (Character.isWhitespace(c) && skipUnknownChar) {
+					skipUnknownChar = false
+					tokenIndex++
+					setBlankBuffer(buffer)
+				}
 				if (Character.isWhitespace(c) && (!containsSpace)) {
 					continue;
 				}
-//				printCode(c)
-				buffer[length++] = (c); // buffer it, normalized
+				buffer[length++] = normalize(c); // buffer it, normalized
 
+				if (isUnknownChar(c) || skipUnknownChar) {
+					skipUnknownChar = true
+					continue
+				}
+				
 				// 반복음절로 인해 문장은 남아있지만 형태소토큰이 더이상 없을경우 메서드를 종료한다
 				// ex)ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 				// ㅋㅋㅋ/SY불치병/NN입니다/VVㅋㅋㅋ/NNㅋㅋ/NNㅋㅋㅋㅋ/IC
@@ -117,7 +124,7 @@ class MyTokenizer extends Tokenizer {
 					setBlankBuffer(buffer)
 					continue
 				}
-				if (word == token) {
+				if (word.contains(token)) {
 					word = ""
 					setBlankBuffer(buffer)
 					pushBufferChar(buffer, token)
@@ -142,12 +149,27 @@ class MyTokenizer extends Tokenizer {
 		tokenIndex++
 		return true;
 	}
+	private boolean isUnknownChar(char c) {
+		// hashcode 65535(FULLWIDTH LATIN SMALL LETTER M)과 같이 특수문자는
+		// 치환하기 어려우므로 무시하도록 처리를 해야한다
+		if (c.hashCode() == 65357)
+			return true
+		if (c.getType(c) == 2)
+			return true
+		def p = Pattern.compile("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]")
+		def m = p.matcher(c.toString())
+		if (m.find())
+			return true
+
+		return false
+	}
 	protected boolean isTokenChar(char c) {
 //		return !Character.isWhitespace(c);
 		return true;
 	}
-	private char printCode(char c) {
+	private void printCode(char c) {
 		println "c value:"+c.charValue()
+		println "c isWhitespace:"+Character.isWhitespace(c)
 		println "c isDigit:"+Character.isDigit(c)
 		println "c type:"+Character.getType(c)
 		println "c hash:"+Character.hashCode(c)
@@ -195,13 +217,17 @@ class MyTokenizer extends Tokenizer {
 		String text = new String(buffer, 0, charsRead);
 		return text;
 	}
-	private char normalize1(char c) {
+	private char normalize(char c) {
 		if (c.isDigit(c))
 			return c;
 		if (c.isLetter(c))
 			return c.toLowerCase();
-		
 		return c;
+	}
+	private char replaceCode(char c) {
+		if (c.hashCode() == 160)
+			return (char) ' '
+		return c
 	}
 	private void setBlankBuffer(char[] buffer) {
 		for (def i = 0; i < buffer.size(); i++) {
