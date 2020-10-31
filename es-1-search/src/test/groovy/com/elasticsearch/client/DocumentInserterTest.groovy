@@ -13,7 +13,7 @@ class DocumentInserterTest {
 		args[0] = 0
 		args[1] = "media"
 		args[2] = "2002"
-		args[3] = 4
+		args[3] = 1
 		documentInserter.main(args)
 		// 4thread 281 sec(twitter일경우)
 		// 8thread 159 sec(twitter일경우)

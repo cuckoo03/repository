@@ -1,6 +1,7 @@
 package com.elasticsearch.client
 
 import java.text.SimpleDateFormat
+import java.util.List
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.sql.rowset.Joinable
@@ -62,7 +63,9 @@ class DocumentInserter {
 		println "start add documents"
 		
 		
-		createThreads()
+//		createThreads()
+		
+		addBulkDocuments("${TABLE_NAME}_${channel}_$searchDate", TYPE_NAME)
 		
 		sleep(1000 * 60 * 60 * 24)
 		println "end add document. elasped:${(System.currentTimeMillis() - jobStart) / 1000}s."
@@ -113,69 +116,101 @@ class DocumentInserter {
 		
 		if (start < dest) {
 			def startTime = System.currentTimeMillis()
-			def bulker = client.prepareBulk()
 			def result = dao.selectArticles(start, end, tableName)
 			result.each { TableEntity it ->
 				def articleIndexName = "$channel-" + it.createDate.substring(0, 8)
-				def ir = client.prepareIndex(articleIndexName, typeName, it.seq.toString())
-				.setSource(
-					TableField.FIELD1_NAME, it.articleId,
-					TableField.FIELD2_NAME, it.contentId, 
-					TableField.FIELD3_NAME, it.siteId,
-					TableField.FIELD4_NAME, it.writerId,
-					TableField.FIELD5_NAME, it.title,
-					TableField.FIELD6_NAME, it.body,
-					TableField.FIELD7_NAME, it.rt,
-					TableField.FIELD8_NAME, it.replyId,
-					TableField.FIELD9_NAME, it.replyWriterId,
-					TableField.FIELD10_NAME, it.re,
-					TableField.FIELD11_NAME, it.address,
-					TableField.FIELD12_NAME, it.address2,
-					TableField.FIELD13_NAME, it.createDate,
-					TableField.FIELD14_NAME, it.siteType,
-					TableField.FIELD15_NAME, it.viaUrl,
-					TableField.FIELD16_NAME, it.url,
-					TableField.FIELD17_NAME, it.rtCount,
-					TableField.FIELD18_NAME, it.followerCount,
-					TableField.FIELD19_NAME, it.siteName,
-					TableField.FIELD20_NAME, it.picture,
-					TableField.FIELD21_NAME, it.screenName,
-					TableField.FIELD22_NAME, it.siteCategory,
-					TableField.FIELD23_NAME, it.siteSubType,
-					TableField.FIELD24_NAME, it.hitCount,
-					TableField.FIELD25_NAME, it.commentCount,
-					TableField.FIELD26_NAME, it.likeCount,
-					TableField.FIELD27_NAME, "C",
-					TableField.FIELD28_NAME, 0,
-					TableField.FIELD29_NAME, it.body,
-					TableField.FIELD30_NAME, it.body,
-					TableField.FIELD31_NAME, it.body
-				)
-				bulker.add(ir)
+				addDocument(articleIndexName, typeName, it.seq, 
+					it.articleId, it.title, it.body,
+					it.createDate,
+					it.body, it.body, it.body)
 			}
-			bulker.execute().actionGet()
 			def elasped = (System.currentTimeMillis() - startTime) / 1000
 			println "add $tableName, start:$start, end:$end, elapsed:$elasped, tot elasped:${(System.currentTimeMillis() - jobStart) / 1000}"
-//			start = end + 1
-//			end = end + fetch
+			println ""
 		}
 	}
 	
-	void addDocument(String indexName, String typeName, int seq, String articleId, String title, String body, 
+	void addDocument(String indexName, String typeName, long seq, 
+		long articleId, String title, String body, 
 		String createDate, String topic, String sentiment, String occasion) {
 		def ir = client.prepareIndex(indexName, typeName, seq.toString())
 				.setSource(
 					TableField.FIELD1_NAME, articleId,
-					TableField.FIELD2_NAME, title, 
-					TableField.FIELD3_NAME, body,
-					TableField.FIELD4_NAME, createDate,
-					TableField.FIELD5_NAME, topic,
-					TableField.FIELD6_NAME, sentiment,
-					TableField.FIELD7_NAME, occasion
+					TableField.FIELD2_NAME, null,
+					TableField.FIELD3_NAME, null,
+					TableField.FIELD4_NAME, null,
+					TableField.FIELD5_NAME, title,
+					TableField.FIELD6_NAME, body,
+					TableField.FIELD7_NAME, null,
+					TableField.FIELD8_NAME, null,
+					TableField.FIELD9_NAME, null,
+					TableField.FIELD10_NAME, null,
+					TableField.FIELD11_NAME, null,
+					TableField.FIELD12_NAME, null,
+					TableField.FIELD13_NAME, createDate,
+					TableField.FIELD14_NAME, null,
+					TableField.FIELD15_NAME, null,
+					TableField.FIELD16_NAME, null,
+					TableField.FIELD17_NAME, null,
+					TableField.FIELD18_NAME, null,
+					TableField.FIELD19_NAME, null,
+					TableField.FIELD20_NAME, null,
+					TableField.FIELD21_NAME, null,
+					TableField.FIELD22_NAME, null,
+					TableField.FIELD23_NAME, null,
+					TableField.FIELD24_NAME, null,
+					TableField.FIELD25_NAME, null,
+					TableField.FIELD26_NAME, null,
+					TableField.FIELD27_NAME, "C",
+					TableField.FIELD28_NAME, 0,
+					TableField.FIELD29_NAME, body,
+					TableField.FIELD30_NAME, body,
+					TableField.FIELD31_NAME, body
 				).execute().actionGet()
-		println "version=$ir.version"
 		def gr = client.prepareGet(indexName, typeName, seq.toString()).execute().actionGet()
-		println gr.source
+		println "version=$ir.version" + ", id=" + gr.source
+	}
+	void addDocuments(Client client, List<TableEntity> result, String typeName) {
+		def bulker = client.prepareBulk()
+		result.each { TableEntity it ->
+			def articleIndexName = "$channel-" + it.createDate.substring(0, 8)
+			def ir = client.prepareIndex(articleIndexName, typeName, it.seq.toString())
+			.setSource(
+				TableField.FIELD1_NAME, it.articleId,
+				TableField.FIELD2_NAME, it.contentId,
+				TableField.FIELD3_NAME, it.siteId,
+				TableField.FIELD4_NAME, it.writerId,
+				TableField.FIELD5_NAME, it.title,
+				TableField.FIELD6_NAME, it.body,
+				TableField.FIELD7_NAME, it.rt,
+				TableField.FIELD8_NAME, it.replyId,
+				TableField.FIELD9_NAME, it.replyWriterId,
+				TableField.FIELD10_NAME, it.re,
+				TableField.FIELD11_NAME, it.address,
+				TableField.FIELD12_NAME, it.address2,
+				TableField.FIELD13_NAME, it.createDate,
+				TableField.FIELD14_NAME, it.siteType,
+				TableField.FIELD15_NAME, it.viaUrl,
+				TableField.FIELD16_NAME, it.url,
+				TableField.FIELD17_NAME, it.rtCount,
+				TableField.FIELD18_NAME, it.followerCount,
+				TableField.FIELD19_NAME, it.siteName,
+				TableField.FIELD20_NAME, it.picture,
+				TableField.FIELD21_NAME, it.screenName,
+				TableField.FIELD22_NAME, it.siteCategory,
+				TableField.FIELD23_NAME, it.siteSubType,
+				TableField.FIELD24_NAME, it.hitCount,
+				TableField.FIELD25_NAME, it.commentCount,
+				TableField.FIELD26_NAME, it.likeCount,
+				TableField.FIELD27_NAME, "C",
+				TableField.FIELD28_NAME, 0,
+				TableField.FIELD29_NAME, it.body,
+				TableField.FIELD30_NAME, it.body,
+				TableField.FIELD31_NAME, it.body
+			)
+			bulker.add(ir)
+		}
+		bulker.execute().actionGet()
 	}
 	static void main(args) {
 		def insert = new DocumentInserter()
