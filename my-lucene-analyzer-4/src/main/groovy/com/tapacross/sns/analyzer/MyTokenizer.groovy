@@ -29,15 +29,15 @@ import groovy.transform.TypeChecked
  */
 @TypeChecked
 class MyTokenizer extends Tokenizer {
-	private int offset, bufferIndex = 0, dataLen = 0, tokenIndex = 0;
+	private int offset, bufferIndex = 0, dataLen = 0, tokenIndex = 0, byteIndex = 0;
 	private static final int MAX_WORD_LEN = 255;
 	private static final int IO_BUFFER_SIZE = 4096;
 	private char[] ioBuffer = new char[IO_BUFFER_SIZE];
 	
 	private AdminDataManager adm = new AdminDataManager();
-	private String[] tokens;
-	private String[] pos;
-//	private String s;
+	private String[] morphTokens;
+	private String[] morphPos;
+	private int[] morphByteOffset;
 	
 	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
@@ -53,14 +53,11 @@ class MyTokenizer extends Tokenizer {
 	}
 	@Override
 	public final boolean incrementToken() throws IOException {
-		clearAttributes();
 		System.out.println("incrementToken");
-		String word = "";
-//		def word2 = ""
+		clearAttributes();
 		int length = 0;
 		int start = bufferIndex;
 		char[] buffer = termAtt.buffer();
-		def containsSpace = false;
 		while (true) {
 			if (bufferIndex >= dataLen) {
 				dataLen = input2.read(ioBuffer);
@@ -77,66 +74,58 @@ class MyTokenizer extends Tokenizer {
 
 			final char c = ioBuffer[bufferIndex++];
 
+			if (morphByteOffset == null || morphByteOffset == 0) {
+				println "token not found. exit."
+				return
+			}
+			
 			if (isTokenChar(c)) { // if it's a token char
-				if (length == 0) // start of token
+				// tokenize complete. exit tokenizing
+				if (tokenIndex == morphByteOffset.size()) {
+					return
+				}
+				
+				// init current token
+				if (byteIndex == morphByteOffset[tokenIndex]) {
 					start = offset + bufferIndex - 1;
-				else if (length == buffer.length)
-					buffer = termAtt.resizeBuffer(1 + length);
-				if (Character.isWhitespace(c) && (!containsSpace)) {
-					continue;
 				}
-//				printCode(c)
+				
 				buffer[length++] = (c); // buffer it, normalized
-
-				// 반복음절로 인해 문장은 남아있지만 형태소토큰이 더이상 없을경우 메서드를 종료한다
-				// ex)ㅋㅋㅋ불치병입니다ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-				// ㅋㅋㅋ/SY불치병/NN입니다/VVㅋㅋㅋ/NNㅋㅋ/NNㅋㅋㅋㅋ/IC
-				if (tokenIndex == tokens.size())
-					return false
-					
-				word = word + c
-				String token = tokens[tokenIndex]
-				// 품사가 SY인 문자중에 '와 같은 특수문자가 들어올 경우 입력음절과 형태소분석기에서 반환된 결과가 달라
-				// 문자열 동등 비교를 할 수 없으므로 문자열값이 다르지만 SY품사이고 한음절인 경우 하나의 텀으로 색인한다
-				// (ex ../SY @@/SY ^^/SY **/XX ~~/SY ;;/SY ///SY ??/SY __/SY) 
-				if ((word.size() == token.size()) && (pos[tokenIndex] == "SY")) {
-					word = ""
+				
+				// increase byte index per character
+				def b = new String(c)
+				byteIndex += b.getBytes().size()
+				 
+				def tokenByteSize = morphTokens[tokenIndex].getBytes().size()
+				// 토큰을 다 읽었다면 버퍼로 쓴다.
+				if (byteIndex == morphByteOffset[tokenIndex] + tokenByteSize) {
 					setBlankBuffer(buffer)
-					pushBufferChar(buffer, token)
-					println "buffer:" + buffer.toString() + ", length:${buffer.size()}"
-					break;
+					pushBufferChar(buffer, morphTokens[tokenIndex])
+					length = morphTokens[tokenIndex].length()
+					break
 				}
-				// http, https url이 들어올경우 공백이 들어올 날때까지 기다렸다가 토큰을 버린다.
-				if (word == "http://" || word == "https://") {
-					containsSpace = true
-					continue
-				}
-				if ((word.contains("http://") || word.contains("https://")) && (word.indexOf(" ") == word.size() - 1)) {
-					containsSpace = false
-					word = ""
+				// 분석기에서 제외된 토큰이 있다면 바이트 인덱스를 건너띄고 토큰의 오프셋부터 버퍼에 쓴다.
+				if (byteIndex > morphByteOffset[tokenIndex] + tokenByteSize) {
 					setBlankBuffer(buffer)
-					continue
+					pushBufferChar(buffer, morphTokens[tokenIndex])
+					length = morphTokens[tokenIndex].length()
+					break
 				}
-				if (word == token) {
-					word = ""
-					setBlankBuffer(buffer)
-					pushBufferChar(buffer, token)
-					println "buffer:" + buffer.toString() + ", length:${buffer.size()}"
-					break;
+				if (byteIndex > morphByteOffset[tokenIndex]) {
+//					start = offset + bufferIndex - 1;
 				}
+				
 				if (length == MAX_WORD_LEN) // buffer overflow!
 					break;
-
 			} else if (length > 0) {// at non-Letter w/ chars
 				break; // return 'em
-			} else {
 			}
 		}
 		termAtt.setEmpty()
 		termAtt.setLength(length);
 		offsetAtt.setOffset(correctOffset(start), correctOffset(start + length));
-		typeAtt.setType(pos[tokenIndex]);
-		def bytesRef = new BytesRef(pos[tokenIndex].getBytes("UTF-8"));
+		typeAtt.setType(morphPos[tokenIndex]);
+		def bytesRef = new BytesRef(morphPos[tokenIndex].getBytes("UTF-8"));
 		payloadAtt.setPayload(bytesRef)
 //		posIncrAtt.setPositionIncrement(tokenIndex)
 		tokenIndex++
@@ -179,8 +168,9 @@ class MyTokenizer extends Tokenizer {
 			
 			MorphemeResult result = new MorphemeResult();
 			result = adm.getMorpheme(s);
-			tokens = result.getToken();
-			pos = result.getSynaxTag();
+			morphTokens = result.getToken();
+			morphPos = result.getSynaxTag();
+			morphByteOffset = result.getByteOffset();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
