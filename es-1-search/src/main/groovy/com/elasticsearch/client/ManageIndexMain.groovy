@@ -18,6 +18,7 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress
 import org.elasticsearch.common.xcontent.json.JsonXContent
 import org.elasticsearch.index.query.QueryBuilders
 
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovy.transform.TypeChecked
 import java.text.SimpleDateFormat
@@ -177,7 +178,7 @@ class ManageIndexMain {
 		cal.set(Calendar.MONTH, 1)
 		cal.set(Calendar.DATE, 1)
 		def sdf = new SimpleDateFormat("yyyyMMdd")
-		while (cal.get(Calendar.MONTH) < 2) {
+		while (cal.get(Calendar.DATE) < 2) {
 			def formatted = sdf.format(cal.time)
 			deleteIndex("$channel$formatted")
 			createIndexRest("$channel-$formatted")
@@ -324,6 +325,35 @@ class ManageIndexMain {
 			.execute().actionGet()
 		println response
 	}
+	def void showTermVectorRest(String indexName, String typeName, String id) {
+		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$indexName/$typeName/$id/_termvector?fields=body&pretty=true"
+		println data
+		def result = new URL(data).getText()
+		
+		def json = new JsonSlurper().parseText(result)
+		if (!result.contains("body"))
+			return
+		
+		json["term_vectors"]["body"]["terms"].each {
+			def keySize = (it["key"] as String).size()
+			if (keySize > 10) {
+				println "docId:$id, term:${it['key']}"
+//				showDocumentRest(indexName, typeName, id)
+				sleep(500)
+			}
+		}
+	}
+	def void showTermVectorsRest(String indexName, String typeName) {
+		1.step(1000, 1, {
+			showTermVectorRest(indexName, typeName, it.toString())
+		})
+	}
+	def void showDocumentRest(String indexName, String typeName, String id) {
+		def data = "http://$ELASTIC_SEARCH_IP:$ELASTIC_SEARCH_REST_PORT/$indexName/$typeName/$id/?fields=body&pretty=true"
+		println data
+		def result = new URL(data).getText()
+		println result
+	}
 	static void main(args) {
 		def main = new ManageIndexMain()
 		main.createClient()
@@ -344,6 +374,10 @@ class ManageIndexMain {
 //		main.deletePercolator(INDEX_NAME, "p1")
 //		main.createPercolate(INDEX_NAME, "p1")
 		
+//		main.crateDocument()
 //		main.deleteDocuments(INDEX_NAME, TYPE_NAME)
+//		main.showTermVectorRest(INDEX_NAME, TYPE_NAME, "1")
+		main.showTermVectorsRest(INDEX_NAME, TYPE_NAME)
+//		main.showDocumentRest(INDEX_NAME, TYPE_NAME, "1")
 	}
 }
