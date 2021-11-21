@@ -43,19 +43,19 @@
 		    <version>${spark.version}</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+		<!-- dependency by scp deploy -->
 		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>jdk.tools</artifactId>
-					<groupId>jdk.tools</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-jsch</artifactId>
+			<version>1.9.1</version>
 		</dependency>
+		<!-- dependency by scp deploy -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.50</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -150,6 +150,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
@@ -160,6 +161,8 @@
 					</archive>
 				</configuration>
 			</plugin>
+			 -->
+			<!-- 
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -180,6 +183,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 			<!-- 
 		      <plugin>
 		          <groupId>net.alchim31.maven</groupId>

@@ -12,7 +12,8 @@ object SessionApp {
     val sc = spark.sparkContext
 
     println(System.getenv)
-    def jsonFile = "2015-03-01-0.json"
+    def jsonFile = "C:/Users/cucko/git/repository/spark2-study/2015-03-01-0.json"
+    
     def ghLog = spark.read.json(jsonFile)
     println("ghlog:" + ghLog.count)
 
@@ -23,5 +24,7 @@ object SessionApp {
     
     val grouped = pushes.groupBy("actor.login").count
     grouped.show(5)
+    
+    val logData = sc.textFile("README.md").filter(line => line.contains("a"))
   }
 }
