@@ -16,6 +16,8 @@ class LoadData {
 		loadCSV(sc)
 	}
 	def static void loadCSV(JavaSparkContext sc) {
-		def input = sc.textFile("csvfil.csv")
+		def input = sc.textFile("csvfile.csv")
+		println input
+		println input.count()
 	}
 }

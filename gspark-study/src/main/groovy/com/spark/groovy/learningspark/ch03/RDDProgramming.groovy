@@ -40,8 +40,7 @@ class RDDProgramming {
 	def static void flatMap(JavaSparkContext sc) {
 		println "flatmap"
 		def lines = sc.parallelize(Arrays.asList("1", "2"))
-		def words = lines.flatMap({ 
-			String s -> Arrays.asList(s.split(" ")) } as FlatMapFunction<String, Integer>)
+		def words = lines.flatMap({ String s -> Arrays.asList(s.split(" ")) })
 		words.first()
 	}
 	def static void distinct(JavaSparkContext sc) {
@@ -62,37 +61,36 @@ class RDDProgramming {
 		println "reduceByKey"
 		def list1 = sc.parallelize(["1", "2"])
 		def pairs = list1.map({ x -> [x.split(" ")[0], 10] })
-		def mapToPairs = list1.mapToPair(
-			{new Tuple2(it as String, 1)} as PairFunction<String, String, Integer>)
-		def count = mapToPairs.reduceByKey({Integer i1, Integer i2 -> i1 + i2} as Function2)
+		def mapToPairs = list1.mapToPair({new Tuple2(it as String, 1)})
+		def count = mapToPairs.reduceByKey({Integer i1, Integer i2 -> i1 + i2})
 		count.collect().forEach(System.&println)
 	}
 	def static void groupByKey(JavaSparkContext sc) {
 		println "groupByKey"
 		def list1 = sc.parallelize(["1", "2"])
-		def pairs = list1.mapToPair({new Tuple2(it as String, 1)} as PairFunction<String, String, Integer>)
+		def pairs = list1.mapToPair({new Tuple2(it as String, 1)})
 		pairs.groupByKey().collect().forEach(System.&println)
 	}
 	def static void mapValues(JavaSparkContext sc) {
 		println "mapValues"
 		def list1 = sc.parallelize(["1", "2"])
-		def pairs = list1.mapToPair({new Tuple2(it as String, 1)} as PairFunction<String, String, Integer>)
-		def values = pairs.mapValues({ Integer x -> x + 10 } as Function)
+		def pairs = list1.mapToPair({new Tuple2(it as String, 1)})
+		def values = pairs.mapValues({ Integer x -> x + 10 })
 		values.collect().forEach(System.&println)
 	}
 	def static void filterPair(JavaSparkContext sc) {
 		println "filterPair"
 		def list1 = sc.parallelize(["1", "2"])
-		def pairs = list1.mapToPair({new Tuple2(it as String, 1)} as PairFunction<String, String, Integer>)
-		def values = pairs.filter({Tuple2<String, Integer> t -> t._1 == "2"} as Function)
+		def pairs = list1.mapToPair({new Tuple2(it as String, 1)})
+		def values = pairs.filter({Tuple2<String, Integer> t -> t._1 == "2"})
 		values.collect().forEach(System.&println)
 	}
 	def static void join(JavaSparkContext sc) {
 		println "join"
 		def list1 = sc.parallelize(["1", "2"])
 		def list2 = sc.parallelize(["2", "3"])
-		def pairs = list1.mapToPair({new Tuple2(it as String, 11)} as PairFunction<String, String, Integer>)
-		def pairs2 = list2.mapToPair({new Tuple2(it as String, 111)} as PairFunction<String, String, Integer>)
+		def pairs = list1.mapToPair({new Tuple2(it as String, 11)})
+		def pairs2 = list2.mapToPair({new Tuple2(it as String, 111)})
 		
 		println "join countByKey"
 		pairs.join(pairs2).countByKey().forEach(System.&println)

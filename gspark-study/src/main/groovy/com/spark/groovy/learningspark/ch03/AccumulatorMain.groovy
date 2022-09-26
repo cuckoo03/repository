@@ -17,6 +17,7 @@ class AccumulatorMain {
 		
 		accumulate(sc)
 	}
+	
 	// 파일에서 빈줄 횟수 세기
 	def static void accumulate(JavaSparkContext sc) {
 		def Accumulator<Integer> acc = sc.accumulator(0)
@@ -25,8 +26,14 @@ class AccumulatorMain {
 		def numBlankLine = lines.flatMap({String line -> 
 			if (line == "")
 				acc.add(1)
-			return Arrays.asList(line.split(" "))
-		} as FlatMapFunction)
+			Arrays.asList(line.split(" "))
+		})
+		
+		def dir = new File("output.dir")
+		if (dir.exists()) {
+			println "dir is exist."
+			return
+		} 
 		numBlankLine.saveAsTextFile("output.dir")
 		println acc.value()
 	}
